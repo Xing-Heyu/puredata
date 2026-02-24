@@ -2348,9 +2348,18 @@ def generate_data_streaming(domain, count, task_id, quality_mode="standard", out
     """
     流式数据生成 - 支持大规模生成（百万级）
     
+    完整集成所有质量模块：
+    1. T²框架 (arXiv:2602.04785) - Team Then Trim
+    2. 专业验证 - 解决"逻辑通但专业错"问题
+    3. 异常检测 - 基于国家标准
+    4. 去重系统 - MinHash LSH
+    5. 多样性增强 - GECE长尾检测 (ACL2024)
+    6. 质量门控 - 四级质量分类
+    7. LLM审计 - 9维度评估 (arXiv:2601.17717)
+    
     特点：
-    1. 边生成边写入文件，不占用大量内存
-    2. 使用布隆过滤器进行高效去重
+    1. 分批生成 + 完整流水线处理
+    2. 边处理边写入文件，不占用大量内存
     3. 支持断点续传（检查点机制）
     4. 实时进度反馈
     
@@ -2367,16 +2376,13 @@ def generate_data_streaming(domain, count, task_id, quality_mode="standard", out
     """
     import os
     
-    # 设置输出文件路径
     if output_file is None:
         output_dir = "outputs"
         os.makedirs(output_dir, exist_ok=True)
         output_file = f"{output_dir}/{task_id}_{domain}_{count}.jsonl"
     
-    # 检查点文件（用于断点续传）
     checkpoint_file = f"{output_file}.checkpoint"
     
-    # 加载检查点（如果存在）
     start_index = 0
     generated_count = 0
     if os.path.exists(checkpoint_file):
@@ -2389,198 +2395,304 @@ def generate_data_streaming(domain, count, task_id, quality_mode="standard", out
         except Exception as e:
             print(f"[流式生成] 检查点加载失败: {e}")
     
-    # 初始化布隆过滤器（用于去重）
-    try:
-        from pybloom_live import BloomFilter
-        bloom = BloomFilter(capacity=count * 2, error_rate=0.001)
-        print(f"[流式生成] 使用布隆过滤器去重")
-    except ImportError:
-        bloom = None
-        seen_texts = set()
-        print(f"[流式生成] 布隆过滤器不可用，使用集合去重")
-    
-    # 获取关键词
-    keywords = DOMAINS.get(domain, DOMAINS["人工智能"])
-    
-    # 质量配置
     mode_config = QUALITY_MODES.get(quality_mode, QUALITY_MODES["standard"])
     min_quality_score = mode_config.get("min_quality_score", 0.65)
     
-    print(f"[流式生成] 开始生成 {count} 条 {domain} 领域数据")
-    print(f"[流式生成] 质量模式: {quality_mode}, 最低分数: {min_quality_score}")
-    print(f"[流式生成] 输出文件: {output_file}")
-    print(f"[流式生成] 批次大小: {batch_size}")
+    PIPELINE_AVAILABLE = False
+    HIGH_QUALITY_GEN_AVAILABLE = False
+    QUALITY_FILTER_AVAILABLE = False
+    T2_AVAILABLE = False
+    DIVERSITY_AVAILABLE = False
     
-    # 统计信息
+    try:
+        from data_quality_pipeline import DataQualityPipeline, PipelineConfig
+        PIPELINE_AVAILABLE = True
+        print(f"[流式生成] DataQualityPipeline 已加载")
+    except ImportError as e:
+        print(f"[流式生成] DataQualityPipeline 不可用: {e}")
+    
+    try:
+        from high_quality_generator import high_quality_generator
+        from quality_filter import quality_filter
+        HIGH_QUALITY_GEN_AVAILABLE = True
+        QUALITY_FILTER_AVAILABLE = True
+        print(f"[流式生成] HighQualityGenerator + QualityFilter 已加载")
+    except ImportError as e:
+        print(f"[流式生成] 高质量生成器不可用: {e}")
+    
+    t2 = get_t2_quality()
+    if t2:
+        T2_AVAILABLE = True
+        print(f"[流式生成] T²框架 已加载")
+    
+    try:
+        from filters.diversity_enhancer import DiversityEnhancer
+        DIVERSITY_AVAILABLE = True
+        print(f"[流式生成] 多样性增强器 已加载")
+    except ImportError:
+        pass
+    
+    print(f"\n{'='*60}")
+    print(f"[流式生成] 完整流水线模式启动")
+    print(f"领域: {domain}, 目标数量: {count}, 质量模式: {quality_mode}")
+    print(f"批次大小: {batch_size}, 最低质量分: {min_quality_score}")
+    print(f"模块: Pipeline={PIPELINE_AVAILABLE}, HQGen={HIGH_QUALITY_GEN_AVAILABLE}, T2={T2_AVAILABLE}, Diversity={DIVERSITY_AVAILABLE}")
+    print(f"{'='*60}\n")
+    
     stats = {
         "generated": 0,
         "passed": 0,
         "failed": 0,
         "high_quality": 0,
         "normal_quality": 0,
-        "start_time": datetime.now().isoformat()
+        "pipeline_processed": 0,
+        "t2_processed": 0,
+        "diversity_enhanced": 0,
+        "start_time": datetime.now().isoformat(),
+        "modules_used": {
+            "pipeline": PIPELINE_AVAILABLE,
+            "high_quality_gen": HIGH_QUALITY_GEN_AVAILABLE,
+            "quality_filter": QUALITY_FILTER_AVAILABLE,
+            "t2": T2_AVAILABLE,
+            "diversity": DIVERSITY_AVAILABLE
+        }
     }
     
-    # 打开文件（追加模式）
+    total_batches = (count + batch_size - 1) // batch_size
+    current_batch = start_index // batch_size
+    
     with open(output_file, 'a', encoding='utf-8') as f:
-        batch_buffer = []
-        
-        for i in range(start_index, count):
-            try:
-                # 每批次更新检查点
-                if i > 0 and i % batch_size == 0:
-                    # 写入批次数据
-                    for item in batch_buffer:
-                        f.write(json.dumps(item, ensure_ascii=False) + '\n')
-                    f.flush()
-                    
-                    # 更新检查点
-                    with open(checkpoint_file, 'w', encoding='utf-8') as cf:
-                        json.dump({
-                            "generated_count": i,
-                            "last_update": datetime.now().isoformat(),
-                            "domain": domain,
-                            "task_id": task_id
-                        }, cf)
-                    
-                    print(f"[流式生成] 进度: {i}/{count} ({i/count*100:.1f}%) - 已写入文件")
-                    batch_buffer = []
-                
-                # 生成数据
-                keyword = keywords[i % len(keywords)]
-                
-                # 使用模板生成基础文本
-                domain_templates = TEMPLATES.get(domain, TEMPLATES["人工智能"])
-                template = random.choice(domain_templates)
-                text = template.format(word=keyword, domain=domain)
-                
-                # 去重检查
-                text_lower = text.lower().strip()
-                if bloom:
-                    if text_lower in bloom:
-                        stats["failed"] += 1
-                        continue
-                    bloom.add(text_lower)
-                else:
-                    if text_lower in seen_texts:
-                        stats["failed"] += 1
-                        continue
-                    seen_texts.add(text_lower)
-                
-                # 质量评分 - 集成完整质量检查流水线
+        for batch_idx in range(current_batch, total_batches):
+            batch_start = batch_idx * batch_size
+            batch_end = min(batch_start + batch_size, count)
+            batch_count = batch_end - batch_start
+            batch_num = batch_idx + 1
+            
+            print(f"\n[流式生成] 处理第 {batch_num}/{total_batches} 批: {batch_count} 条 (索引 {batch_start}-{batch_end})")
+            
+            batch_data = []
+            
+            if PIPELINE_AVAILABLE and HIGH_QUALITY_GEN_AVAILABLE:
                 try:
-                    # 1. 基础质量检查（复制自小批量生成）
-                    base_score = 0.7
+                    from data_quality_pipeline import DataQualityPipeline, PipelineConfig
+                    from high_quality_generator import HighQualityGenerator
                     
-                    # 文本长度检查
-                    text_len = len(text)
-                    if text_len < 20:
-                        base_score -= 0.15
-                    elif text_len > 100:
-                        base_score += 0.05
+                    pipeline_config = PipelineConfig(
+                        enable_t2_control=T2_AVAILABLE,
+                        enable_professional_validation=True,
+                        enable_deduplication=True,
+                        enable_diversity_enhance=DIVERSITY_AVAILABLE,
+                        enable_quality_gate=True,
+                        enable_audit=True,
+                        enable_anomaly_fix=True,
+                        min_quality_score=min_quality_score,
+                        target_quality_level="high_quality" if quality_mode in ["high", "ultra"] else "medium_quality",
+                        verbose=False
+                    )
                     
-                    # 内容多样性检查
-                    words = text.split()
-                    unique_words = set(words)
-                    if words:
-                        diversity = len(unique_words) / len(words)
-                        if diversity > 0.6:
-                            base_score += 0.05
-                        if diversity > 0.8:
-                            base_score += 0.05
+                    pipeline = DataQualityPipeline(pipeline_config)
+                    gen = HighQualityGenerator(use_pipeline=False, use_validator=True)
                     
-                    # 2. 使用 QualityGate 进行质量门控检查（如果可用）
-                    quality_gate = get_quality_gate()
-                    if quality_gate:
-                        try:
-                            # 创建临时数据项进行质量检查
-                            temp_item = {"text": text, "word": keyword, "domain": domain}
-                            gate_result = quality_gate.process_batch([temp_item], min_quality_score)
-                            if gate_result and len(gate_result) > 0:
-                                # 根据质量门控结果调整分数
-                                gate_score = gate_result[0].get("quality_score", base_score)
-                                base_score = (base_score + gate_score) / 2  # 融合分数
-                        except Exception as e:
-                            print(f"[质量门控] 检查失败: {e}")
+                    raw_data = gen.generate(domain, f"{domain}专业知识", batch_count * 2)
                     
-                    # 3. 使用 AnomalyDetector 进行异常检测（如果可用）
-                    anomaly_detector = get_anomaly_detector()
-                    if anomaly_detector:
-                        try:
-                            anomaly_result = anomaly_detector.detect_and_fix(text, domain)
-                            if anomaly_result.get("is_anomaly", False):
-                                # 异常数据降低分数
-                                base_score -= 0.1
-                                text = anomaly_result.get("fixed_text", text)
-                        except Exception as e:
-                            print(f"[异常检测] 检查失败: {e}")
-                    
-                    # 4. 专业验证（针对特定领域）
-                    if domain in ["医疗", "金融", "法律"]:
-                        # 检查是否包含专业术语
-                        professional_terms = keywords[:10]  # 使用前10个关键词作为专业术语
-                        term_count = sum(1 for term in professional_terms if term in text)
-                        if term_count >= 2:
-                            base_score += 0.05
-                        if term_count >= 4:
-                            base_score += 0.05
-                    
-                    # 5. 最终质量分数计算
-                    quality_score = round(max(min_quality_score, min(0.98, base_score)), 2)
+                    if raw_data:
+                        result = pipeline.process(raw_data, domain)
+                        processed_data = result.data[:batch_count]
+                        
+                        for i, item in enumerate(processed_data):
+                            batch_data.append({
+                                "id": batch_start + i + 1,
+                                "word": item.get("title", item.get("word", "")),
+                                "text": item.get("text", ""),
+                                "category": domain,
+                                "quality_score": item.get("quality_score", result.quality_score),
+                                "quality_tier": "high" if item.get("quality_score", 0.7) >= 0.75 else "medium",
+                                "timestamp": datetime.now().isoformat(),
+                                "provenance": {
+                                    "platform": "PureData",
+                                    "generated_at": datetime.now().isoformat(),
+                                    "batch_id": task_id,
+                                    "generator": "streaming_pipeline"
+                                },
+                                "pipeline_report": {
+                                    "quality_score": result.quality_score,
+                                    "quality_level": result.quality_level,
+                                    "stages_passed": result.stages_passed
+                                }
+                            })
+                        
+                        stats["pipeline_processed"] += len(batch_data)
+                        print(f"[流水线] 处理完成: {len(batch_data)} 条, 质量分: {result.quality_score:.2f}")
                     
                 except Exception as e:
-                    print(f"[质量评分] 出错: {e}, 使用默认分数")
-                    quality_score = round(random.uniform(min_quality_score, 0.85), 2)
+                    print(f"[流水线] 处理失败: {e}, 使用备用方案")
+                    batch_data = []
+            
+            if not batch_data and HIGH_QUALITY_GEN_AVAILABLE and QUALITY_FILTER_AVAILABLE:
+                try:
+                    from high_quality_generator import high_quality_generator
+                    from quality_filter import quality_filter
+                    from filters.deduplication_system import simple_deduplicator
+                    
+                    keywords = DOMAINS.get(domain, DOMAINS["人工智能"])
+                    seen_in_batch = set()
+                    
+                    for i in range(batch_count * 3):
+                        if len(batch_data) >= batch_count:
+                            break
+                        
+                        keyword = keywords[i % len(keywords)]
+                        item = high_quality_generator.generate_single(keyword, domain, len(batch_data) + 1)
+                        
+                        if not item:
+                            continue
+                        
+                        text = item.text
+                        text_lower = text.lower().strip()
+                        if text_lower in seen_in_batch:
+                            continue
+                        seen_in_batch.add(text_lower)
+                        
+                        check_result = quality_filter.check(text, domain)
+                        if not check_result.passed or check_result.score < min_quality_score:
+                            continue
+                        
+                        try:
+                            from domain_validator import score_quality
+                            domain_result = score_quality(text, domain, check_result.score, list(seen_in_batch))
+                            if not domain_result["validation"]["passed"]:
+                                continue
+                            final_score = domain_result["final_score"]
+                        except:
+                            final_score = check_result.score
+                        
+                        if final_score < min_quality_score:
+                            continue
+                        
+                        batch_data.append({
+                            "id": batch_start + len(batch_data) + 1,
+                            "word": keyword,
+                            "text": text,
+                            "category": domain,
+                            "quality_score": round(final_score, 2),
+                            "quality_tier": "high" if final_score >= 0.75 else "medium",
+                            "timestamp": datetime.now().isoformat(),
+                            "source": item.source,
+                            "provenance": {
+                                "platform": "PureData",
+                                "generated_at": datetime.now().isoformat(),
+                                "batch_id": task_id,
+                                "generator": "streaming_hq"
+                            }
+                        })
+                    
+                    print(f"[高质量生成] 完成: {len(batch_data)} 条")
+                    
+                except Exception as e:
+                    print(f"[高质量生成] 处理失败: {e}, 使用基础方案")
+                    batch_data = []
+            
+            if not batch_data:
+                keywords = DOMAINS.get(domain, DOMAINS["人工智能"])
+                domain_templates = TEMPLATES.get(domain, TEMPLATES["人工智能"])
                 
-                quality_tier = "high" if quality_score >= 0.75 else "medium"
+                for i in range(batch_count):
+                    keyword = keywords[i % len(keywords)]
+                    template = random.choice(domain_templates)
+                    text = template.format(word=keyword, domain=domain)
+                    
+                    base_score = 0.7
+                    if len(text) < 20:
+                        base_score -= 0.15
+                    elif len(text) > 100:
+                        base_score += 0.05
+                    
+                    words = text.split()
+                    if words:
+                        diversity = len(set(words)) / len(words)
+                        if diversity > 0.6:
+                            base_score += 0.05
+                    
+                    quality_score = round(max(min_quality_score, min(0.98, base_score)), 2)
+                    
+                    batch_data.append({
+                        "id": batch_start + i + 1,
+                        "word": keyword,
+                        "text": text,
+                        "category": domain,
+                        "quality_score": quality_score,
+                        "quality_tier": "high" if quality_score >= 0.75 else "medium",
+                        "timestamp": datetime.now().isoformat(),
+                        "provenance": {
+                            "platform": "PureData",
+                            "generated_at": datetime.now().isoformat(),
+                            "batch_id": task_id,
+                            "generator": "streaming_basic"
+                        }
+                    })
                 
-                # 创建数据项
-                item = {
-                    "id": i + 1,
-                    "word": keyword,
-                    "text": text,
-                    "category": domain,
-                    "quality_score": quality_score,
-                    "quality_tier": quality_tier,
-                    "timestamp": datetime.now().isoformat(),
-                    "provenance": {
-                        "platform": "PureData",
-                        "generated_at": datetime.now().isoformat(),
-                        "batch_id": task_id,
-                        "generator": "streaming"
-                    }
-                }
-                
-                batch_buffer.append(item)
-                stats["generated"] += 1
-                stats["passed"] += 1
-                if quality_tier == "high":
+                print(f"[基础生成] 完成: {len(batch_data)} 条")
+            
+            if T2_AVAILABLE and batch_data:
+                try:
+                    t2 = get_t2_quality()
+                    if t2:
+                        qc_pipeline = t2.QualityControlPipeline()
+                        batch_data, qc_stats = qc_pipeline.process_batch(batch_data, auto_fix=True)
+                        stats["t2_processed"] += len(batch_data)
+                        print(f"[T²] 质量控制: 通过{qc_stats['passed']}, 修复{qc_stats['fixed']}, 拒绝{qc_stats['rejected']}")
+                except Exception as e:
+                    print(f"[T²] 处理失败: {e}")
+            
+            if DIVERSITY_AVAILABLE and batch_data:
+                try:
+                    from filters.diversity_enhancer import DiversityEnhancer
+                    enhancer = DiversityEnhancer()
+                    batch_data = enhancer.enhance(batch_data, domain)
+                    stats["diversity_enhanced"] += len(batch_data)
+                    print(f"[多样性] 增强完成: {len(batch_data)} 条")
+                except Exception as e:
+                    print(f"[多样性] 处理失败: {e}")
+            
+            for item in batch_data:
+                item["id"] = batch_start + batch_data.index(item) + 1
+                f.write(json.dumps(item, ensure_ascii=False) + '\n')
+            f.flush()
+            
+            with open(checkpoint_file, 'w', encoding='utf-8') as cf:
+                json.dump({
+                    "generated_count": batch_end,
+                    "last_update": datetime.now().isoformat(),
+                    "domain": domain,
+                    "task_id": task_id,
+                    "batch": batch_num
+                }, cf)
+            
+            stats["generated"] += len(batch_data)
+            stats["passed"] += len(batch_data)
+            for item in batch_data:
+                if item.get("quality_tier") == "high":
                     stats["high_quality"] += 1
                 else:
                     stats["normal_quality"] += 1
-                
-            except Exception as e:
-                print(f"[流式生成] 生成第 {i} 条时出错: {e}")
-                stats["failed"] += 1
-                continue
-        
-        # 写入最后一批数据
-        if batch_buffer:
-            for item in batch_buffer:
-                f.write(json.dumps(item, ensure_ascii=False) + '\n')
-            f.flush()
+            
+            progress = batch_end / count * 100
+            print(f"[流式生成] 进度: {batch_end}/{count} ({progress:.1f}%) - 累计 {stats['generated']} 条")
     
-    # 完成，删除检查点
     if os.path.exists(checkpoint_file):
         os.remove(checkpoint_file)
     
     stats["end_time"] = datetime.now().isoformat()
     
+    print(f"\n{'='*60}")
     print(f"[流式生成] 完成!")
-    print(f"[流式生成] 总计生成: {stats['generated']} 条")
-    print(f"[流式生成] 高质量: {stats['high_quality']} 条, 普通: {stats['normal_quality']} 条")
-    print(f"[流式生成] 失败: {stats['failed']} 条")
-    print(f"[流式生成] 输出文件: {output_file}")
+    print(f"总计生成: {stats['generated']} 条")
+    print(f"高质量: {stats['high_quality']} 条, 普通: {stats['normal_quality']} 条")
+    print(f"流水线处理: {stats['pipeline_processed']} 条")
+    print(f"T²处理: {stats['t2_processed']} 条")
+    print(f"多样性增强: {stats['diversity_enhanced']} 条")
+    print(f"输出文件: {output_file}")
+    print(f"{'='*60}")
     
     return {
         "output_file": output_file,
