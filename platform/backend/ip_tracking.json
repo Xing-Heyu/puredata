@@ -59,6 +59,11 @@
         "username": "test_tourism_user",
         "email": "test_tourism@test.com",
         "timestamp": "2026-02-22T14:17:03.251333"
+      },
+      {
+        "username": "test_user_1771939301",
+        "email": "test_user_1771939301@test.com",
+        "timestamp": "2026-02-24T21:21:43.309892"
       }
     ],
     "login_attempts": [
@@ -429,6 +434,6 @@
       }
     ],
     "suspicious_score": 8,
-    "last_activity": "2026-02-22T14:27:19.915457"
+    "last_activity": "2026-02-24T21:21:43.309888"
   }
 }

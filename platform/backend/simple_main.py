@@ -23,6 +23,21 @@ import sys
 import time
 from collections import defaultdict
 
+# ============ 日志文件配置 ============
+import logging
+logging.basicConfig(
+    level=logging.DEBUG,
+    format='%(asctime)s [%(levelname)s] %(message)s',
+    handlers=[
+        logging.FileHandler('server_debug.log', mode='w', encoding='utf-8'),
+        logging.StreamHandler(sys.stdout)
+    ]
+)
+logger = logging.getLogger(__name__)
+logger.info("="*60)
+logger.info("服务器启动 - 日志系统初始化完成")
+logger.info("="*60)
+
 # ============ 路由模块导入 ============
 try:
     from routes import handle_all_routes, handle_all_get_routes, handle_all_post_routes
@@ -2375,6 +2390,7 @@ class Handler(BaseHTTPRequestHandler):
         self.end_headers()
     
     def do_GET(self):
+        global stats
         path = unquote(urlparse(self.path).path)
         client_ip = self._get_client_ip()
         
@@ -2748,18 +2764,18 @@ class Handler(BaseHTTPRequestHandler):
             self._send_json(404, {"error": "未找到"})
     
     def do_POST(self):
-        global tasks
+        global tasks, stats
         path = urlparse(self.path).path
         client_ip = self._get_client_ip()
         
-        print(f"[DEBUG] do_POST: path={path}")
+        logger.info(f"[do_POST] path={path}, client_ip={client_ip}")
         
         try:
             length = int(self.headers.get('Content-Length', 0))
             body = json.loads(self.rfile.read(length).decode('utf-8')) if length > 0 else {}
-            print(f"[DEBUG] do_POST: body={body}")
+            logger.info(f"[do_POST] body={body}")
         except Exception as e:
-            print(f"[ERROR] do_POST 解析body失败: {e}")
+            logger.error(f"[do_POST] 解析body失败: {e}")
             body = {}
         
         if ROUTES_AVAILABLE:

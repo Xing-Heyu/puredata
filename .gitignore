@@ -65,3 +65,26 @@ Thumbs.db
 .pytest_cache/
 .coverage
 htmlcov/
+test_*.py
+server_debug.log
+
+# Runtime data
+*.json
+*.jsonl
+*.json.gz
+backups/
+outputs/
+ip_tracking.json
+email_verifications.json
+otp_codes.json
+sessions.json
+users.json
+admin_sessions.json
+task_queue.json
+task_states.json
+api_stats.json
+api_cost.json
+api_cache.json
+operation_logs.json
+audit_logs.jsonl
+checkpoints/

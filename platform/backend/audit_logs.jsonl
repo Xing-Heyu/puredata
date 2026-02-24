@@ -74,3 +74,4 @@
 {"id": "bea30b73c9544da9", "timestamp": "2026-02-24T17:01:34.156185", "action": "generate", "user_id": "test_flow_user", "ip": "127.0.0.1", "details": {"domain": "金融", "count": 20, "mode": "clean"}, "result": "success", "risk_level": "low"}
 {"id": "7b29983207342fe3", "timestamp": "2026-02-24T18:34:27.229749", "action": "generate", "user_id": null, "ip": "127.0.0.1", "details": {"domain": "医疗", "count": 30, "mode": "clean"}, "result": "success", "risk_level": "low"}
 {"id": "d19096e9ad2e828f", "timestamp": "2026-02-24T18:35:53.657640", "action": "generate", "user_id": null, "ip": "127.0.0.1", "details": {"domain": "医疗", "count": 30, "mode": "clean"}, "result": "success", "risk_level": "low"}
+{"id": "5ce4d4ebf7e46ef4", "timestamp": "2026-02-24T21:21:47.516306", "action": "generate", "user_id": "test_user_1771939301", "ip": "127.0.0.1", "details": {"domain": "金融", "count": 10, "mode": "clean"}, "result": "success", "risk_level": "low"}

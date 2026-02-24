@@ -523,5 +523,20 @@
     "timestamp": "2026-02-22T23:09:23.653822",
     "status": "success",
     "extra": null
+  },
+  {
+    "log_id": "0472249f-bb8",
+    "user_id": "test_user_1771939301",
+    "username": "test_user_1771939301",
+    "action": "generate",
+    "details": {
+      "domain": "金融",
+      "count": 9
+    },
+    "ip_address": "system",
+    "user_agent": "unknown",
+    "timestamp": "2026-02-24T21:21:47.964297",
+    "status": "success",
+    "extra": null
   }
 ]
