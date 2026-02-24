@@ -297,4 +297,139 @@ def handle_generate_routes(handler, path, method, body, context):
             handler._send_json(200, {"success": True, "task": tasks[task_id]})
             return True
     
+    elif path.startswith('/download/'):
+        """下载生成结果，支持多种格式"""
+        if method != 'GET':
+            handler._send_json(405, {"success": False, "error": "Method not allowed"})
+            return True
+        
+        try:
+            # 解析路径：/download/{task_id}.{format}
+            path_parts = path.replace('/download/', '').split('.')
+            task_id = path_parts[0]
+            format_type = path_parts[1] if len(path_parts) > 1 else 'json'
+            
+            if task_id not in tasks:
+                handler._send_json(404, {"success": False, "error": "任务不存在"})
+                return True
+            
+            task = tasks[task_id]
+            if task.get('status') != 'completed':
+                handler._send_json(400, {"success": False, "error": "任务尚未完成"})
+                return True
+            
+            data = task.get('data', [])
+            if not data:
+                handler._send_json(404, {"success": False, "error": "无数据可下载"})
+                return True
+            
+            # 导入格式转换器
+            try:
+                from datagenpro.converters.ai_format_converter import AITrainingFormatConverter
+                converter_available = True
+            except ImportError:
+                converter_available = False
+            
+            # 根据格式类型转换数据
+            format_type = format_type.lower()
+            
+            if format_type == 'json':
+                content = json.dumps(data, ensure_ascii=False, indent=2)
+                content_type = 'application/json'
+                filename = f'{task_id}.json'
+            
+            elif format_type == 'jsonl':
+                lines = [json.dumps(item, ensure_ascii=False) for item in data]
+                content = '\n'.join(lines)
+                content_type = 'application/jsonlines'
+                filename = f'{task_id}.jsonl'
+            
+            elif format_type == 'csv':
+                if converter_available:
+                    content = AITrainingFormatConverter.to_csv_format(data)
+                else:
+                    # 简单CSV实现
+                    import csv
+                    import io
+                    output = io.StringIO()
+                    if data:
+                        writer = csv.DictWriter(output, fieldnames=data[0].keys())
+                        writer.writeheader()
+                        writer.writerows(data)
+                    content = output.getvalue()
+                content_type = 'text/csv'
+                filename = f'{task_id}.csv'
+            
+            elif format_type == 'tsv':
+                if converter_available:
+                    content = AITrainingFormatConverter.to_csv_format(data, delimiter='\t')
+                else:
+                    import csv
+                    import io
+                    output = io.StringIO()
+                    if data:
+                        writer = csv.DictWriter(output, fieldnames=data[0].keys(), delimiter='\t')
+                        writer.writeheader()
+                        writer.writerows(data)
+                    content = output.getvalue()
+                content_type = 'text/tab-separated-values'
+                filename = f'{task_id}.tsv'
+            
+            elif format_type == 'xml':
+                if converter_available:
+                    content = AITrainingFormatConverter.to_xml_format(data)
+                else:
+                    # 简单XML实现
+                    xml_lines = ['<?xml version="1.0" encoding="UTF-8"?>', '<dataset>']
+                    for i, item in enumerate(data, 1):
+                        xml_lines.append(f'  <item id="{i}">')
+                        for key, value in item.items():
+                            xml_lines.append(f'    <{key}>{str(value).replace("<", "&lt;").replace(">", "&gt;")}</{key}>')
+                        xml_lines.append('  </item>')
+                    xml_lines.append('</dataset>')
+                    content = '\n'.join(xml_lines)
+                content_type = 'application/xml'
+                filename = f'{task_id}.xml'
+            
+            elif format_type == 'yaml' or format_type == 'yml':
+                if converter_available:
+                    content = AITrainingFormatConverter.to_yaml_format(data)
+                else:
+                    # 简单YAML实现
+                    yaml_lines = []
+                    for i, item in enumerate(data, 1):
+                        yaml_lines.append(f'- item_{i}:')
+                        for key, value in item.items():
+                            yaml_lines.append(f'  {key}: {value}')
+                        yaml_lines.append('')
+                    content = '\n'.join(yaml_lines)
+                content_type = 'application/yaml'
+                filename = f'{task_id}.yaml'
+            
+            elif format_type in ['parquet', 'excel', 'xlsx']:
+                # 二进制格式需要特殊处理
+                handler._send_json(400, {"success": False, "error": f"{format_type}格式请使用API端点或安装pandas后重试"})
+                return True
+            
+            else:
+                handler._send_json(400, {"success": False, "error": f"不支持的格式: {format_type}"})
+                return True
+            
+            # 发送文件
+            handler.send_response(200)
+            handler.send_header('Content-Type', content_type)
+            handler.send_header('Content-Disposition', f'attachment; filename="{filename}"')
+            handler.send_header('Content-Length', len(content.encode('utf-8')))
+            handler.send_header('Access-Control-Allow-Origin', '*')
+            handler.end_headers()
+            handler.wfile.write(content.encode('utf-8'))
+            
+        except Exception as e:
+            print(f"[下载] 错误: {e}")
+            import traceback
+            traceback.print_exc()
+            handler._send_json(500, {"success": False, "error": str(e)})
+        
+        return True
+    
     return None

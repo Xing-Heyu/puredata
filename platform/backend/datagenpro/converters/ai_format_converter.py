@@ -291,6 +291,245 @@ class AITrainingFormatConverter:
             "conversation": len(conversation),
             "sharegpt": len(sharegpt)
         }
+    
+    @staticmethod
+    def to_xml_format(data, root_name="dataset", item_name="item"):
+        """
+        转换为XML格式
+        适用于：传统NLP工具、XML数据处理系统
+        """
+        xml_lines = [f'<?xml version="1.0" encoding="UTF-8"?>']
+        xml_lines.append(f'<{root_name}>')
+        
+        for i, item in enumerate(data, 1):
+            xml_lines.append(f'  <{item_name} id="{i}">')
+            
+            # 递归处理字典
+            def dict_to_xml(d, indent=4):
+                lines = []
+                for key, value in d.items():
+                    tag = str(key).replace(' ', '_').replace('-', '_')
+                    if isinstance(value, dict):
+                        lines.append(' ' * indent + f'<{tag}>')
+                        lines.extend(dict_to_xml(value, indent + 2))
+                        lines.append(' ' * indent + f'</{tag}>')
+                    elif isinstance(value, list):
+                        lines.append(' ' * indent + f'<{tag}>')
+                        for v in value:
+                            if isinstance(v, dict):
+                                lines.extend(dict_to_xml(v, indent + 2))
+                            else:
+                                lines.append(' ' * (indent + 2) + f'<item>{escape_xml(str(v))}</item>')
+                        lines.append(' ' * indent + f'</{tag}>')
+                    else:
+                        lines.append(' ' * indent + f'<{tag}>{escape_xml(str(value))}</{tag}>')
+                return lines
+            
+            xml_lines.extend(dict_to_xml(item))
+            xml_lines.append(f'  </{item_name}>')
+        
+        xml_lines.append(f'</{root_name}>')
+        return '\n'.join(xml_lines)
+    
+    @staticmethod
+    def to_yaml_format(data):
+        """
+        转换为YAML格式
+        适用于：配置文件、人类可读的数据交换
+        """
+        yaml_lines = []
+        
+        for i, item in enumerate(data, 1):
+            yaml_lines.append(f'- item_{i}:')
+            
+            def dict_to_yaml(d, indent=2):
+                lines = []
+                for key, value in d.items():
+                    if isinstance(value, dict):
+                        lines.append(' ' * indent + f'{key}:')
+                        lines.extend(dict_to_yaml(value, indent + 2))
+                    elif isinstance(value, list):
+                        lines.append(' ' * indent + f'{key}:')
+                        for v in value:
+                            if isinstance(v, dict):
+                                lines.append(' ' * (indent + 2) + '-')
+                                lines.extend(dict_to_yaml(v, indent + 4))
+                            else:
+                                lines.append(' ' * (indent + 2) + f'- {escape_yaml(str(v))}')
+                    else:
+                        lines.append(' ' * indent + f'{key}: {escape_yaml(str(value))}')
+                return lines
+            
+            yaml_lines.extend(dict_to_yaml(item))
+            yaml_lines.append('')  # 空行分隔
+        
+        return '\n'.join(yaml_lines)
+    
+    @staticmethod
+    def to_csv_format(data, delimiter=',', include_header=True):
+        """
+        转换为CSV格式
+        适用于：表格处理、Excel导入、数据分析
+        """
+        if not data:
+            return ''
+        
+        import csv
+        import io
+        
+        # 获取所有可能的字段
+        all_fields = set()
+        for item in data:
+            all_fields.update(item.keys())
+        all_fields = sorted(all_fields)
+        
+        output = io.StringIO()
+        writer = csv.DictWriter(output, fieldnames=all_fields, delimiter=delimiter, 
+                                extrasaction='ignore', quoting=csv.QUOTE_MINIMAL)
+        
+        if include_header:
+            writer.writeheader()
+        
+        for item in data:
+            # 处理嵌套字典，将其转换为JSON字符串
+            flat_item = {}
+            for key, value in item.items():
+                if isinstance(value, (dict, list)):
+                    flat_item[key] = json.dumps(value, ensure_ascii=False)
+                else:
+                    flat_item[key] = value
+            writer.writerow(flat_item)
+        
+        return output.getvalue()
+    
+    @staticmethod
+    def to_parquet_format(data, output_path):
+        """
+        转换为Parquet格式
+        适用于：大数据处理、Pandas分析、列式存储
+        注意：需要安装 pandas 和 pyarrow
+        """
+        try:
+            import pandas as pd
+            
+            # 将数据转换为DataFrame
+            df = pd.json_normalize(data, sep='_')
+            
+            # 保存为Parquet
+            df.to_parquet(output_path, index=False, compression='snappy')
+            
+            return {"success": True, "path": output_path, "rows": len(df), "columns": len(df.columns)}
+        except ImportError:
+            return {"success": False, "error": "缺少依赖：请安装 pandas 和 pyarrow (pip install pandas pyarrow)"}
+        except Exception as e:
+            return {"success": False, "error": str(e)}
+    
+    @staticmethod
+    def to_excel_format(data, output_path, sheet_name='Data'):
+        """
+        转换为Excel格式
+        适用于：商务报表、人工审核、Excel分析
+        注意：需要安装 openpyxl
+        """
+        try:
+            import pandas as pd
+            
+            # 将数据转换为DataFrame
+            df = pd.json_normalize(data, sep='_')
+            
+            # 保存为Excel
+            df.to_excel(output_path, sheet_name=sheet_name, index=False, engine='openpyxl')
+            
+            return {"success": True, "path": output_path, "rows": len(df), "columns": len(df.columns)}
+        except ImportError:
+            return {"success": False, "error": "缺少依赖：请安装 pandas 和 openpyxl (pip install pandas openpyxl)"}
+        except Exception as e:
+            return {"success": False, "error": str(e)}
+    
+    @staticmethod
+    def convert_to_format(data, format_type, output_path=None, **kwargs):
+        """
+        统一格式转换接口
+        
+        Args:
+            data: 原始数据列表
+            format_type: 目标格式 (json, jsonl, xml, yaml, csv, parquet, excel, pretrain, instruction, conversation, sharegpt)
+            output_path: 输出文件路径（对于parquet和excel需要）
+            **kwargs: 其他参数
+        
+        Returns:
+            转换后的数据或保存结果
+        """
+        format_type = format_type.lower()
+        
+        if format_type == 'json':
+            return json.dumps(data, ensure_ascii=False, indent=2)
+        
+        elif format_type == 'jsonl':
+            lines = [json.dumps(item, ensure_ascii=False) for item in data]
+            return '\n'.join(lines)
+        
+        elif format_type == 'xml':
+            root_name = kwargs.get('root_name', 'dataset')
+            item_name = kwargs.get('item_name', 'item')
+            return AITrainingFormatConverter.to_xml_format(data, root_name, item_name)
+        
+        elif format_type == 'yaml':
+            return AITrainingFormatConverter.to_yaml_format(data)
+        
+        elif format_type == 'csv':
+            delimiter = kwargs.get('delimiter', ',')
+            include_header = kwargs.get('include_header', True)
+            return AITrainingFormatConverter.to_csv_format(data, delimiter, include_header)
+        
+        elif format_type == 'tsv':
+            return AITrainingFormatConverter.to_csv_format(data, delimiter='\t', include_header=True)
+        
+        elif format_type == 'parquet':
+            if not output_path:
+                return {"success": False, "error": "parquet格式需要提供output_path参数"}
+            return AITrainingFormatConverter.to_parquet_format(data, output_path)
+        
+        elif format_type == 'excel' or format_type == 'xlsx':
+            if not output_path:
+                return {"success": False, "error": "excel格式需要提供output_path参数"}
+            sheet_name = kwargs.get('sheet_name', 'Data')
+            return AITrainingFormatConverter.to_excel_format(data, output_path, sheet_name)
+        
+        elif format_type == 'pretrain':
+            return AITrainingFormatConverter.to_pretrain_format(data)
+        
+        elif format_type == 'instruction':
+            return AITrainingFormatConverter.to_instruction_format(data)
+        
+        elif format_type == 'conversation':
+            return AITrainingFormatConverter.to_conversation_format(data)
+        
+        elif format_type == 'sharegpt':
+            return AITrainingFormatConverter.to_sharegpt_format(data)
+        
+        else:
+            return {"success": False, "error": f"不支持的格式: {format_type}"}
+
+
+def escape_xml(text):
+    """XML特殊字符转义"""
+    return (text
+            .replace('&', '&amp;')
+            .replace('<', '&lt;')
+            .replace('>', '&gt;')
+            .replace('"', '&quot;')
+            .replace("'", '&apos;'))
+
+
+def escape_yaml(text):
+    """YAML特殊字符转义"""
+    # 如果包含特殊字符，用引号包裹
+    if any(c in text for c in [':', '#', '{', '}', '[', ']', ',', '&', '*', '?', '|', '-', '<', '>', '=', '!', '%', '@', '`', '"', "'"]):
+        # 处理双引号
+        text = text.replace('"', '\\"')
+        return f'"{text}"'
+    return text
 
 
 ai_format_converter = AIFormatConverter()
