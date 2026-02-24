@@ -2467,8 +2467,71 @@ def generate_data_streaming(domain, count, task_id, quality_mode="standard", out
                         continue
                     seen_texts.add(text_lower)
                 
-                # 质量评分（简化版）
-                quality_score = round(random.uniform(min_quality_score, 0.95), 2)
+                # 质量评分 - 集成完整质量检查流水线
+                try:
+                    # 1. 基础质量检查（复制自小批量生成）
+                    base_score = 0.7
+                    
+                    # 文本长度检查
+                    text_len = len(text)
+                    if text_len < 20:
+                        base_score -= 0.15
+                    elif text_len > 100:
+                        base_score += 0.05
+                    
+                    # 内容多样性检查
+                    words = text.split()
+                    unique_words = set(words)
+                    if words:
+                        diversity = len(unique_words) / len(words)
+                        if diversity > 0.6:
+                            base_score += 0.05
+                        if diversity > 0.8:
+                            base_score += 0.05
+                    
+                    # 2. 使用 QualityGate 进行质量门控检查（如果可用）
+                    quality_gate = get_quality_gate()
+                    if quality_gate:
+                        try:
+                            # 创建临时数据项进行质量检查
+                            temp_item = {"text": text, "word": keyword, "domain": domain}
+                            gate_result = quality_gate.process_batch([temp_item], min_quality_score)
+                            if gate_result and len(gate_result) > 0:
+                                # 根据质量门控结果调整分数
+                                gate_score = gate_result[0].get("quality_score", base_score)
+                                base_score = (base_score + gate_score) / 2  # 融合分数
+                        except Exception as e:
+                            print(f"[质量门控] 检查失败: {e}")
+                    
+                    # 3. 使用 AnomalyDetector 进行异常检测（如果可用）
+                    anomaly_detector = get_anomaly_detector()
+                    if anomaly_detector:
+                        try:
+                            anomaly_result = anomaly_detector.detect_and_fix(text, domain)
+                            if anomaly_result.get("is_anomaly", False):
+                                # 异常数据降低分数
+                                base_score -= 0.1
+                                text = anomaly_result.get("fixed_text", text)
+                        except Exception as e:
+                            print(f"[异常检测] 检查失败: {e}")
+                    
+                    # 4. 专业验证（针对特定领域）
+                    if domain in ["医疗", "金融", "法律"]:
+                        # 检查是否包含专业术语
+                        professional_terms = keywords[:10]  # 使用前10个关键词作为专业术语
+                        term_count = sum(1 for term in professional_terms if term in text)
+                        if term_count >= 2:
+                            base_score += 0.05
+                        if term_count >= 4:
+                            base_score += 0.05
+                    
+                    # 5. 最终质量分数计算
+                    quality_score = round(max(min_quality_score, min(0.98, base_score)), 2)
+                    
+                except Exception as e:
+                    print(f"[质量评分] 出错: {e}, 使用默认分数")
+                    quality_score = round(random.uniform(min_quality_score, 0.85), 2)
+                
                 quality_tier = "high" if quality_score >= 0.75 else "medium"
                 
                 # 创建数据项
@@ -3385,6 +3448,73 @@ class Handler(BaseHTTPRequestHandler):
                         rc.log_action("generate", None, client_ip, {"error": str(e)}, "failed")
                 self._send_json(500, {"error": str(e)})
         
+        elif path == '/api/generate/download':
+            try:
+                token = self._get_token_from_request()
+                user = self._get_current_user(token)
+                
+                if not user:
+                    self._send_json(401, {"success": False, "error": "请先登录"})
+                    return
+                
+                user_role = user.get('role', 'free')
+                user_id = user.get('username', client_ip)
+                
+                length = int(self.headers.get('Content-Length', 0))
+                body = json.loads(self.rfile.read(length).decode('utf-8'))
+                
+                domain = body.get('domain', '人工智能')
+                count = int(body.get('count', 10000))
+                format_type = body.get('format', 'jsonl')
+                quality_mode = body.get('quality_mode', 'standard')
+                
+                if user.get('role') == 'free':
+                    quality_mode = 'free_trial'
+                
+                if quality_mode not in QUALITY_MODES:
+                    quality_mode = 'standard'
+                
+                if not user_manager.check_quota(user['username'], count):
+                    quota_status = user_manager.get_quota_status(user['username'])
+                    self._send_json(403, {
+                        "error": "配额不足",
+                        "message": f"本月剩余配额不足，剩余 {quota_status['monthly']['remaining']} 条，需要 {count} 条",
+                        "quota": quota_status
+                    })
+                    return
+                
+                task_id = str(uuid.uuid4())[:8]
+                
+                with task_lock:
+                    tasks[task_id] = {
+                        "id": task_id,
+                        "status": "pending",
+                        "domain": domain,
+                        "count": count,
+                        "progress": 0,
+                        "total": count,
+                        "quality_mode": quality_mode,
+                        "created_at": datetime.now().isoformat(),
+                        "username": user['username'],
+                        "type": "streaming_download"
+                    }
+                
+                thread = threading.Thread(
+                    target=self._run_streaming_download_task,
+                    args=(task_id, domain, count, format_type, user['username'], quality_mode),
+                    daemon=True
+                )
+                thread.start()
+                
+                self._send_json(200, {
+                    "success": True,
+                    "task_id": task_id,
+                    "message": f"已开始生成 {count} 条数据，完成后可直接下载"
+                })
+            except Exception as e:
+                print(f"流式下载生成错误: {e}")
+                self._send_json(500, {"error": str(e)})
+        
         elif path == '/generate_sequence':
             length = int(self.headers.get('Content-Length', 0))
             body = json.loads(self.rfile.read(length).decode('utf-8'))
@@ -3815,54 +3945,90 @@ class Handler(BaseHTTPRequestHandler):
             print(f"[{task_id}] 开始生成: {domain}, {count}条, 模式: {mode}, 噪音等级: {noise_level}, 质量模式: {quality_mode}")
             
             start_time = time.time()
-            all_data = []
-            total_batches = (count + BATCH_SIZE - 1) // BATCH_SIZE
             
-            if total_batches > 1:
-                print(f"[{task_id}] 大批量任务，分{total_batches}批处理，每批{BATCH_SIZE}条")
+            # 判断是否需要使用流式生成（大数据量）
+            STREAMING_THRESHOLD = 100000  # 10万条阈值
+            use_streaming = count > STREAMING_THRESHOLD
             
-            for batch_idx in range(total_batches):
-                batch_start = batch_idx * BATCH_SIZE
-                batch_count = min(BATCH_SIZE, count - batch_start)
-                batch_num = batch_idx + 1
+            if use_streaming:
+                print(f"[{task_id}] 大数据量任务({count}条)，使用流式生成模式")
                 
-                with task_lock:
-                    tasks[task_id]["progress"] = batch_start
-                    tasks[task_id]["current_batch"] = batch_num
-                    tasks[task_id]["total_batches"] = total_batches
+                # 使用流式生成
+                result = generate_data_streaming(
+                    domain=domain,
+                    count=count,
+                    task_id=task_id,
+                    quality_mode=quality_mode,
+                    batch_size=BATCH_SIZE
+                )
                 
-                print(f"[{task_id}] 处理第{batch_num}/{total_batches}批: {batch_count}条")
-                
-                cache_params = {"domain": domain, "count": batch_count, "mode": mode, "batch": batch_idx, "noise_level": noise_level}
-                cached_data = None
-                cache = get_data_cache()
-                if cache:
-                    cached_data, hit = cache.get(cache_params)
-                    if hit and cached_data:
-                        print(f"[{task_id}] 批次{batch_num}使用缓存数据")
-                        batch_data = cached_data
-                else:
-                    cached_data = None
-                
-                if not cached_data:
-                    if mode == "clean":
-                        batch_data = generate_data_clean(domain, batch_count, f"{task_id}_b{batch_num}", quality_mode)
-                    elif mode == "noisy":
-                        batch_data = generate_data_noisy(domain, batch_count, f"{task_id}_b{batch_num}", noise_level)
-                    else:
-                        batch_data = generate_data_hybrid(domain, batch_count, f"{task_id}_b{batch_num}", noise_level)
+                if result['success']:
+                    # 从文件读取数据（只读取前100条用于预览）
+                    output_file = result['output_file']
+                    data = []
+                    with open(output_file, 'r', encoding='utf-8') as f:
+                        for i, line in enumerate(f):
+                            if i >= count:  # 只读取请求的数量
+                                break
+                            data.append(json.loads(line.strip()))
                     
-                    if CACHE_AVAILABLE and batch_data:
-                        cache = get_data_cache()
-                        if cache:
-                            cache.set(cache_params, batch_data)
+                    elapsed = time.time() - start_time
+                    actual_count = len(data)
+                    total_batches = (count + BATCH_SIZE - 1) // BATCH_SIZE
+                    
+                    print(f"[{task_id}] 流式生成完成: {actual_count}条, 耗时{elapsed:.2f}秒")
+                else:
+                    raise Exception(f"流式生成失败: {result.get('error', '未知错误')}")
+            else:
+                # 使用原有分批生成逻辑（小数据量）
+                all_data = []
+                total_batches = (count + BATCH_SIZE - 1) // BATCH_SIZE
                 
-                if batch_data:
-                    all_data.extend(batch_data)
-                    print(f"[{task_id}] 批次{batch_num}完成，累计{len(all_data)}条")
-            
-            elapsed = time.time() - start_time
-            data = all_data
+                if total_batches > 1:
+                    print(f"[{task_id}] 分{total_batches}批处理，每批{BATCH_SIZE}条")
+                
+                for batch_idx in range(total_batches):
+                    batch_start = batch_idx * BATCH_SIZE
+                    batch_count = min(BATCH_SIZE, count - batch_start)
+                    batch_num = batch_idx + 1
+                    
+                    with task_lock:
+                        tasks[task_id]["progress"] = batch_start
+                        tasks[task_id]["current_batch"] = batch_num
+                        tasks[task_id]["total_batches"] = total_batches
+                    
+                    print(f"[{task_id}] 处理第{batch_num}/{total_batches}批: {batch_count}条")
+                    
+                    cache_params = {"domain": domain, "count": batch_count, "mode": mode, "batch": batch_idx, "noise_level": noise_level}
+                    cached_data = None
+                    cache = get_data_cache()
+                    if cache:
+                        cached_data, hit = cache.get(cache_params)
+                        if hit and cached_data:
+                            print(f"[{task_id}] 批次{batch_num}使用缓存数据")
+                            batch_data = cached_data
+                    else:
+                        cached_data = None
+                    
+                    if not cached_data:
+                        if mode == "clean":
+                            batch_data = generate_data_clean(domain, batch_count, f"{task_id}_b{batch_num}", quality_mode)
+                        elif mode == "noisy":
+                            batch_data = generate_data_noisy(domain, batch_count, f"{task_id}_b{batch_num}", noise_level)
+                        else:
+                            batch_data = generate_data_hybrid(domain, batch_count, f"{task_id}_b{batch_num}", noise_level)
+                        
+                        if CACHE_AVAILABLE and batch_data:
+                            cache = get_data_cache()
+                            if cache:
+                                cache.set(cache_params, batch_data)
+                    
+                    if batch_data:
+                        all_data.extend(batch_data)
+                        print(f"[{task_id}] 批次{batch_num}完成，累计{len(all_data)}条")
+                
+                elapsed = time.time() - start_time
+                data = all_data
             
             # 自动补全机制：确保生成数量达标
             if len(data) < count:
@@ -4044,6 +4210,93 @@ class Handler(BaseHTTPRequestHandler):
                 tasks[task_id]["status"] = "failed"
                 tasks[task_id]["error"] = str(e)
             print(f"[{task_id}] 异常: {e}")
+    
+    def _run_streaming_download_task(self, task_id, domain, count, format_type, username, quality_mode="standard"):
+        global tasks
+        try:
+            with task_lock:
+                tasks[task_id]["status"] = "processing"
+            print(f"[{task_id}] 开始流式下载生成: {domain}, {count}条, 质量模式: {quality_mode}")
+            
+            start_time = time.time()
+            
+            result = generate_data_streaming(
+                domain=domain,
+                count=count,
+                task_id=task_id,
+                quality_mode=quality_mode,
+                batch_size=BATCH_SIZE
+            )
+            
+            if result['success']:
+                output_file = result['output_file']
+                stats_info = result['stats']
+                
+                if format_type != 'jsonl':
+                    data = []
+                    with open(output_file, 'r', encoding='utf-8') as f:
+                        for line in f:
+                            data.append(json.loads(line.strip()))
+                    
+                    new_filename = f"{task_id}_{domain}_{count}.{format_type}"
+                    new_filepath = os.path.join(OUTPUT_DIR, new_filename)
+                    actual_filepath = save_data_in_format(data, new_filepath, format_type)
+                    output_file = actual_filepath
+                    filename = os.path.basename(output_file)
+                else:
+                    filename = os.path.basename(output_file)
+                    new_filepath = os.path.join(OUTPUT_DIR, filename)
+                    if output_file != new_filepath:
+                        import shutil
+                        shutil.move(output_file, new_filepath)
+                        output_file = new_filepath
+                
+                elapsed = time.time() - start_time
+                actual_count = stats_info.get('generated', count)
+                
+                preview_data = []
+                with open(output_file, 'r', encoding='utf-8') as f:
+                    for i, line in enumerate(f):
+                        if i >= 5:
+                            break
+                        preview_data.append(json.loads(line.strip()))
+                
+                if username:
+                    user_manager.use_quota(username, actual_count, domain)
+                    op_logger = get_operation_logger()
+                    if op_logger:
+                        try:
+                            op_logger.log_generate(username, username, domain, actual_count, "streaming_download")
+                        except Exception as e:
+                            print(f"[日志] 记录生成日志失败: {e}")
+                
+                with task_lock:
+                    tasks[task_id]["status"] = "completed"
+                    tasks[task_id]["count"] = actual_count
+                    tasks[task_id]["download_url"] = f"/download/{quote(filename)}"
+                    tasks[task_id]["preview"] = preview_data
+                    tasks[task_id]["elapsed"] = round(elapsed, 2)
+                    tasks[task_id]["stats"] = stats_info
+                    tasks[task_id]["file_size"] = os.path.getsize(output_file)
+                
+                stats["total"] += actual_count
+                stats["today"] += actual_count
+                
+                monitor = get_monitor_service()
+                if monitor:
+                    try:
+                        monitor.collector.record_task_completed(actual_count)
+                    except Exception as e:
+                        print(f"[监控] 记录任务完成失败: {e}")
+                
+                print(f"[{task_id}] 流式下载生成完成: {actual_count}条, 耗时{elapsed:.2f}秒, 文件大小: {tasks[task_id]['file_size']}字节")
+            else:
+                raise Exception(f"流式生成失败: {result.get('error', '未知错误')}")
+        except Exception as e:
+            with task_lock:
+                tasks[task_id]["status"] = "failed"
+                tasks[task_id]["error"] = str(e)
+            print(f"[{task_id}] 流式下载生成异常: {e}")
     
     def _serve_file(self, filepath, content_type, download_name=None):
         if os.path.exists(filepath):

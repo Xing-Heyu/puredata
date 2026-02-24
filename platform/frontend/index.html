@@ -1508,9 +1508,12 @@
                         <div class="card-body">
                             <div class="form-group">
                                 <label class="form-label">生成数量</label>
-                                <input type="number" class="form-input" v-model="count" min="1" max="500000" placeholder="输入数量（最大50万）">
-                                <div v-if="count > 10000" style="font-size: 12px; color: var(--primary); margin-top: 4px;">
+                                <input type="number" class="form-input" v-model="count" min="1" max="10000000" placeholder="输入数量（最大1000万）">
+                                <div v-if="count > 10000 && count <= 500000" style="font-size: 12px; color: var(--primary); margin-top: 4px;">
                                     📦 大批量任务将自动分批处理（每批1万条）
+                                </div>
+                                <div v-if="count > 500000" style="font-size: 12px; color: var(--warning); margin-top: 4px;">
+                                    🚀 超大批量任务将使用流式生成，完成后直接下载文件
                                 </div>
                             </div>
                             
@@ -2622,6 +2625,7 @@
                     taskBatches: 1,
                     currentBatch: 0,
                     taskElapsed: 0,
+                    isStreamingDownload: false,
                     preview: [],
                     downloadUrl: '',
                     actualCount: 0,
@@ -2985,17 +2989,33 @@
                     this.preview = [];
                     try {
                         const token = localStorage.getItem('user_token');
-                        const res = await axios.post('/generate', { 
-                            domain: this.selectedDomain, 
-                            count: this.count, 
-                            format: this.format, 
-                            mode: this.mode,
-                            noise_level: parseInt(this.noiseLevel),
-                            quality_mode: this.qualityMode
-                        }, {
-                            headers: { 'Authorization': 'Bearer ' + token }
-                        });
-                        this.taskId = res.data.task_id;
+                        
+                        if (this.count > 500000) {
+                            const res = await axios.post('/api/generate/download', { 
+                                domain: this.selectedDomain, 
+                                count: this.count, 
+                                format: this.format,
+                                quality_mode: this.qualityMode
+                            }, {
+                                headers: { 'Authorization': 'Bearer ' + token }
+                            });
+                            this.taskId = res.data.task_id;
+                            this.isStreamingDownload = true;
+                            this.showToast('success', '任务已创建', `正在生成 ${this.count.toLocaleString()} 条数据，完成后可直接下载`);
+                        } else {
+                            const res = await axios.post('/generate', { 
+                                domain: this.selectedDomain, 
+                                count: this.count, 
+                                format: this.format, 
+                                mode: this.mode,
+                                noise_level: parseInt(this.noiseLevel),
+                                quality_mode: this.qualityMode
+                            }, {
+                                headers: { 'Authorization': 'Bearer ' + token }
+                            });
+                            this.taskId = res.data.task_id;
+                            this.isStreamingDownload = false;
+                        }
                         this.pollTask();
                     } catch (e) {
                         this.generating = false;
