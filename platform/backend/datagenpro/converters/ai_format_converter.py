@@ -1,0 +1,296 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+AI格式转换器
+支持：预训练、指令微调、对话、ShareGPT格式、行为序列格式
+
+合并自：
+- ai_format_converter.py（根目录完整版）
+- datagenpro/converters/ai_format_converter.py（基础版）
+"""
+
+import json
+import os
+import random
+from datetime import datetime
+
+
+class AIFormatConverter:
+    """AI格式转换器 - 基础版接口"""
+    
+    @staticmethod
+    def to_pretrain(data):
+        """转换为预训练格式"""
+        return AITrainingFormatConverter.to_pretrain_format(data)
+    
+    @staticmethod
+    def to_instruction(data):
+        """转换为指令微调格式"""
+        return AITrainingFormatConverter.to_instruction_format(data)
+    
+    @staticmethod
+    def to_conversation(data):
+        """转换为对话格式"""
+        return AITrainingFormatConverter.to_conversation_format(data)
+    
+    @staticmethod
+    def to_sharegpt(data):
+        """转换为ShareGPT格式"""
+        return AITrainingFormatConverter.to_sharegpt_format(data)
+
+
+class AITrainingFormatConverter:
+    """AI训练数据格式转换器 - 完整版"""
+    
+    @staticmethod
+    def to_pretrain_format(data, min_length=100):
+        """
+        转换为预训练格式
+        适用于：GPT、LLaMA等基座模型预训练
+        """
+        results = []
+        
+        for item in data:
+            text = item.get("text", "")
+            word = item.get("word", "")
+            category = item.get("category", "")
+            
+            extended_text = f"""
+{category}领域知识：
+
+{word}的定义：
+{text}
+
+相关概念：
+在{category}领域中，{word}是一个重要的概念。理解{word}对于掌握{category}的核心知识至关重要。
+
+应用场景：
+{word}在实际应用中有着广泛的用途，包括但不限于：
+1. 学术研究
+2. 工业应用
+3. 技术开发
+
+总结：
+{word}是{category}领域的基础知识，需要深入理解和掌握。
+"""
+            
+            if len(extended_text) >= min_length:
+                results.append({
+                    "text": extended_text.strip(),
+                    "meta": {
+                        "source": item.get("source", "unknown"),
+                        "category": category,
+                        "word": word,
+                        "length": len(extended_text)
+                    }
+                })
+        
+        return results
+    
+    @staticmethod
+    def to_instruction_format(data):
+        """
+        转换为指令微调格式
+        适用于：Alpaca、ChatML等指令微调
+        """
+        results = []
+        
+        instruction_templates = [
+            {
+                "instruction": "请解释以下概念：{word}",
+                "input": "",
+                "output": "{text}"
+            },
+            {
+                "instruction": "什么是{word}？请详细说明。",
+                "input": "",
+                "output": "{text}\n\n{word}是{category}领域的重要概念。"
+            },
+            {
+                "instruction": "在{category}领域中，{word}是什么意思？",
+                "input": "",
+                "output": "{text}"
+            },
+            {
+                "instruction": "请用简单的话解释{word}",
+                "input": "",
+                "output": "简单来说，{text}"
+            },
+            {
+                "instruction": "请举例说明{word}的应用",
+                "input": "{word}是{category}领域的概念",
+                "output": "{text}\n\n例如：在实际项目中，{word}被广泛应用于解决复杂问题，提高系统效率和准确性。"
+            }
+        ]
+        
+        for item in data:
+            template = random.choice(instruction_templates)
+            
+            instruction = template["instruction"].format(
+                word=item.get("word", ""),
+                category=item.get("category", "")
+            )
+            
+            output = template["output"].format(
+                word=item.get("word", ""),
+                text=item.get("text", ""),
+                category=item.get("category", "")
+            )
+            
+            results.append({
+                "instruction": instruction,
+                "input": template["input"].format(
+                    word=item.get("word", ""),
+                    category=item.get("category", "")
+                ),
+                "output": output,
+                "system": f"你是一个{item.get('category', '通用')}领域的专业助手。"
+            })
+        
+        return results
+    
+    @staticmethod
+    def to_conversation_format(data):
+        """
+        转换为对话格式
+        适用于：ChatGPT、Claude等对话模型
+        """
+        results = []
+        
+        for item in data:
+            word = item.get("word", "")
+            text = item.get("text", "")
+            category = item.get("category", "")
+            
+            conversations = [
+                {
+                    "role": "system",
+                    "content": f"你是一个{category}领域的专业助手，请用专业但易懂的方式回答问题。"
+                },
+                {
+                    "role": "user",
+                    "content": f"你好，我想了解{word}是什么？"
+                },
+                {
+                    "role": "assistant",
+                    "content": f"你好！很高兴为你解释{word}。\n\n{text}"
+                },
+                {
+                    "role": "user",
+                    "content": f"能再详细说说{word}的应用吗？"
+                },
+                {
+                    "role": "assistant",
+                    "content": f"当然！{word}在{category}领域有很多重要应用：\n\n1. **学术研究**：{word}是基础研究方向之一\n2. **工业应用**：许多企业使用{word}解决实际问题\n3. **技术开发**：{word}是核心技术栈的重要组成部分\n\n你想了解哪个方面的更多细节？"
+                }
+            ]
+            
+            results.append({
+                "conversations": conversations,
+                "meta": {
+                    "word": word,
+                    "category": category,
+                    "turns": len(conversations) // 2
+                }
+            })
+        
+        return results
+    
+    @staticmethod
+    def to_sharegpt_format(data):
+        """
+        转换为ShareGPT格式
+        适用于：ShareGPT数据集格式
+        """
+        results = []
+        
+        for item in data:
+            word = item.get("word", "")
+            text = item.get("text", "")
+            category = item.get("category", "")
+            
+            results.append({
+                "conversations": [
+                    {
+                        "from": "human",
+                        "value": f"请解释一下{category}领域中的{word}概念"
+                    },
+                    {
+                        "from": "gpt",
+                        "value": f"好的，我来为你详细解释{word}：\n\n{text}\n\n希望这个解释对你有帮助！如果还有疑问，请随时提问。"
+                    }
+                ]
+            })
+        
+        return results
+    
+    @staticmethod
+    def behavior_sequence_to_training_format(sequences):
+        """
+        将行为序列转换为训练格式
+        适用于：用户行为预测、推荐系统训练
+        """
+        results = []
+        
+        user_sequences = {}
+        for item in sequences:
+            user_id = item.get("user_id")
+            if user_id not in user_sequences:
+                user_sequences[user_id] = []
+            user_sequences[user_id].append(item)
+        
+        for user_id, seq in user_sequences.items():
+            if len(seq) < 3:
+                continue
+            
+            for i in range(len(seq) - 2):
+                history = [s["behavior"] for s in seq[:i+1]]
+                next_behavior = seq[i+1]["behavior"]
+                
+                results.append({
+                    "instruction": "根据用户历史行为，预测下一个行为",
+                    "input": f"用户历史行为序列：{' -> '.join(history)}",
+                    "output": f"预测下一个行为：{next_behavior}",
+                    "meta": {
+                        "user_id": user_id,
+                        "sequence_length": len(seq),
+                        "position": i + 1
+                    }
+                })
+        
+        return results
+    
+    @staticmethod
+    def convert_all(data, output_dir):
+        """转换所有格式并保存"""
+        os.makedirs(output_dir, exist_ok=True)
+        
+        pretrain = AITrainingFormatConverter.to_pretrain_format(data)
+        with open(os.path.join(output_dir, "pretrain.jsonl"), "w", encoding="utf-8") as f:
+            for item in pretrain:
+                f.write(json.dumps(item, ensure_ascii=False) + "\n")
+        
+        instruction = AITrainingFormatConverter.to_instruction_format(data)
+        with open(os.path.join(output_dir, "instruction.jsonl"), "w", encoding="utf-8") as f:
+            for item in instruction:
+                f.write(json.dumps(item, ensure_ascii=False) + "\n")
+        
+        conversation = AITrainingFormatConverter.to_conversation_format(data)
+        with open(os.path.join(output_dir, "conversation.jsonl"), "w", encoding="utf-8") as f:
+            for item in conversation:
+                f.write(json.dumps(item, ensure_ascii=False) + "\n")
+        
+        sharegpt = AITrainingFormatConverter.to_sharegpt_format(data)
+        with open(os.path.join(output_dir, "sharegpt.jsonl"), "w", encoding="utf-8") as f:
+            for item in sharegpt:
+                f.write(json.dumps(item, ensure_ascii=False) + "\n")
+        
+        return {
+            "pretrain": len(pretrain),
+            "instruction": len(instruction),
+            "conversation": len(conversation),
+            "sharegpt": len(sharegpt)
+        }
+
+
+ai_format_converter = AIFormatConverter()

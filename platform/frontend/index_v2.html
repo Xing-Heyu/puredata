@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DataGen Pro - AI数据生成平台</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-height: 100vh; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+        .header { text-align: center; color: white; padding: 40px 0; }
+        .header h1 { font-size: 2.5em; margin-bottom: 10px; }
+        .header p { opacity: 0.9; }
+        .card { background: white; border-radius: 16px; padding: 24px; margin-bottom: 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.1); }
+        .tabs { display: flex; gap: 10px; margin-bottom: 20px; }
+        .tab { padding: 12px 24px; border: none; background: #f0f0f0; border-radius: 8px; cursor: pointer; font-size: 14px; transition: all 0.3s; }
+        .tab.active { background: #667eea; color: white; }
+        .tab:hover { background: #667eea; color: white; }
+        .form-group { margin-bottom: 16px; }
+        .form-group label { display: block; margin-bottom: 8px; font-weight: 500; color: #333; }
+        .form-group select, .form-group input { width: 100%; padding: 12px; border: 2px solid #e0e0e0; border-radius: 8px; font-size: 14px; transition: border-color 0.3s; }
+        .form-group select:focus, .form-group input:focus { border-color: #667eea; outline: none; }
+        .btn { padding: 14px 28px; border: none; border-radius: 8px; cursor: pointer; font-size: 16px; font-weight: 600; transition: all 0.3s; }
+        .btn-primary { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 5px 20px rgba(102,126,234,0.4); }
+        .btn-secondary { background: #f0f0f0; color: #333; }
+        .progress-bar { height: 8px; background: #e0e0e0; border-radius: 4px; overflow: hidden; margin: 16px 0; }
+        .progress-fill { height: 100%; background: linear-gradient(90deg, #667eea, #764ba2); transition: width 0.3s; }
+        .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 20px; }
+        .stat-card { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 20px; border-radius: 12px; text-align: center; }
+        .stat-card h3 { font-size: 2em; margin-bottom: 8px; }
+        .stat-card p { opacity: 0.9; font-size: 14px; }
+        .preview { background: #f8f9fa; border-radius: 8px; padding: 16px; max-height: 300px; overflow-y: auto; }
+        .preview pre { white-space: pre-wrap; word-break: break-all; font-size: 12px; }
+        .quality-selector { display: flex; gap: 8px; flex-wrap: wrap; }
+        .quality-option { padding: 8px 16px; border: 2px solid #e0e0e0; border-radius: 20px; cursor: pointer; transition: all 0.3s; font-size: 13px; }
+        .quality-option.selected { border-color: #667eea; background: #667eea; color: white; }
+        .format-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+        .format-card { border: 2px solid #e0e0e0; border-radius: 12px; padding: 16px; cursor: pointer; transition: all 0.3s; }
+        .format-card:hover { border-color: #667eea; }
+        .format-card.selected { border-color: #667eea; background: #f0f4ff; }
+        .format-card h4 { margin-bottom: 8px; }
+        .format-card p { font-size: 12px; color: #666; }
+        .hidden { display: none; }
+        .toast { position: fixed; bottom: 20px; right: 20px; background: #333; color: white; padding: 16px 24px; border-radius: 8px; opacity: 0; transition: opacity 0.3s; }
+        .toast.show { opacity: 1; }
+        @media (max-width: 768px) { .stats { grid-template-columns: repeat(2, 1fr); } .format-grid { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🚀 DataGen Pro</h1>
+            <p>AI训练数据生成平台 - 从生成到可用，一站式解决</p>
+        </div>
+        
+        <div class="stats">
+            <div class="stat-card">
+                <h3 id="statTotal">0</h3>
+                <p>总生成数据</p>
+            </div>
+            <div class="stat-card">
+                <h3 id="statToday">0</h3>
+                <p>今日生成</p>
+            </div>
+            <div class="stat-card">
+                <h3 id="statTasks">0</h3>
+                <p>运行任务</p>
+            </div>
+            <div class="stat-card">
+                <h3 id="statFormats">4</h3>
+                <p>支持格式</p>
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="tabs">
+                <button class="tab active" onclick="switchTab('basic')">基础生成</button>
+                <button class="tab" onclick="switchTab('sequence')">行为序列</button>
+                <button class="tab" onclick="switchTab('ai')">AI格式</button>
+                <button class="tab" onclick="switchTab('template')">模板管理</button>
+            </div>
+            
+            <div id="tabBasic" class="tab-content">
+                <div class="form-group">
+                    <label>选择领域</label>
+                    <select id="domain">
+                        <option value="人工智能">人工智能</option>
+                        <option value="医疗">医疗</option>
+                        <option value="金融">金融</option>
+                        <option value="劳动合同">劳动合同</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>生成数量</label>
+                    <input type="number" id="count" value="100" min="10" max="10000">
+                </div>
+                <div class="form-group">
+                    <label>数据质量</label>
+                    <div class="quality-selector">
+                        <div class="quality-option selected" data-quality="clean" onclick="selectQuality(this)">干净数据</div>
+                        <div class="quality-option" data-quality="normal" onclick="selectQuality(this)">正常数据</div>
+                        <div class="quality-option" data-quality="noisy" onclick="selectQuality(this)">噪声数据</div>
+                        <div class="quality-option" data-quality="chaotic" onclick="selectQuality(this)">混沌数据</div>
+                    </div>
+                </div>
+                <button class="btn btn-primary" onclick="generateBasic()" style="width: 100%;">开始生成</button>
+            </div>
+            
+            <div id="tabSequence" class="tab-content hidden">
+                <div class="form-group">
+                    <label>行为领域</label>
+                    <select id="seqDomain">
+                        <option value="电商">电商购物</option>
+                        <option value="医疗">在线医疗</option>
+                        <option value="社交">社交互动</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>用户数量</label>
+                    <input type="number" id="userCount" value="100" min="10" max="10000">
+                </div>
+                <div class="form-group">
+                    <label>平均序列长度</label>
+                    <input type="number" id="avgLength" value="10" min="3" max="50">
+                </div>
+                <button class="btn btn-primary" onclick="generateSequence()" style="width: 100%;">生成行为序列</button>
+            </div>
+            
+            <div id="tabAI" class="tab-content hidden">
+                <div class="form-group">
+                    <label>选择AI训练格式</label>
+                    <div class="format-grid">
+                        <div class="format-card selected" data-format="instruction" onclick="selectFormat(this)">
+                            <h4>📝 指令微调</h4>
+                            <p>Alpaca/ChatML格式，适合指令跟随训练</p>
+                        </div>
+                        <div class="format-card" data-format="conversation" onclick="selectFormat(this)">
+                            <h4>💬 对话格式</h4>
+                            <p>ChatGPT格式，适合对话模型训练</p>
+                        </div>
+                        <div class="format-card" data-format="pretrain" onclick="selectFormat(this)">
+                            <h4>📚 预训练</h4>
+                            <p>GPT/LLaMA格式，适合基座模型预训练</p>
+                        </div>
+                        <div class="format-card" data-format="sharegpt" onclick="selectFormat(this)">
+                            <h4>🔄 ShareGPT</h4>
+                            <p>ShareGPT数据集格式</p>
+                        </div>
+                    </div>
+                </div>
+                <button class="btn btn-primary" onclick="generateAI()" style="width: 100%;">生成AI数据</button>
+            </div>
+            
+            <div id="tabTemplate" class="tab-content hidden">
+                <div class="form-group">
+                    <label>快速创建模板</label>
+                    <input type="text" id="newDomain" placeholder="输入新领域名称，如：奶茶店">
+                </div>
+                <div class="form-group">
+                    <label>行为列表（逗号分隔）</label>
+                    <input type="text" id="behaviors" placeholder="进店, 点单, 支付, 取餐, 评价">
+                </div>
+                <button class="btn btn-primary" onclick="createTemplate()" style="width: 100%;">创建模板</button>
+            </div>
+        </div>
+        
+        <div class="card" id="progressCard" style="display: none;">
+            <h3 style="margin-bottom: 16px;">生成进度</h3>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill" style="width: 0%"></div>
+            </div>
+            <p id="progressText" style="text-align: center; color: #666;">准备中...</p>
+        </div>
+        
+        <div class="card" id="previewCard" style="display: none;">
+            <h3 style="margin-bottom: 16px;">数据预览</h3>
+            <div class="preview">
+                <pre id="previewContent"></pre>
+            </div>
+            <div style="margin-top: 16px; display: flex; gap: 12px;">
+                <button class="btn btn-secondary" onclick="copyData()">复制数据</button>
+                <button class="btn btn-primary" onclick="downloadData()">下载文件</button>
+            </div>
+        </div>
+    </div>
+    
+    <div class="toast" id="toast"></div>
+    
+    <script>
+        const API_BASE = 'http://localhost:8000';
+        let currentTaskId = null;
+        let currentQuality = 'clean';
+        let currentFormat = 'instruction';
+        let currentData = null;
+        
+        function switchTab(tab) {
+            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(t => t.classList.add('hidden'));
+            event.target.classList.add('active');
+            document.getElementById('tab' + tab.charAt(0).toUpperCase() + tab.slice(1)).classList.remove('hidden');
+        }
+        
+        function selectQuality(el) {
+            document.querySelectorAll('.quality-option').forEach(t => t.classList.remove('selected'));
+            el.classList.add('selected');
+            currentQuality = el.dataset.quality;
+        }
+        
+        function selectFormat(el) {
+            document.querySelectorAll('.format-card').forEach(t => t.classList.remove('selected'));
+            el.classList.add('selected');
+            currentFormat = el.dataset.format;
+        }
+        
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            toast.textContent = msg;
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 3000);
+        }
+        
+        async function fetchAPI(url, options = {}) {
+            try {
+                const resp = await fetch(API_BASE + url, options);
+                return await resp.json();
+            } catch (e) {
+                showToast('API连接失败，请确保服务已启动');
+                throw e;
+            }
+        }
+        
+        async function generateBasic() {
+            const domain = document.getElementById('domain').value;
+            const count = document.getElementById('count').value;
+            
+            showProgress();
+            const result = await fetchAPI('/generate', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({domain, count: parseInt(count), mode: 'hybrid'})
+            });
+            
+            currentTaskId = result.task_id;
+            pollTask();
+        }
+        
+        async function generateSequence() {
+            const domain = document.getElementById('seqDomain').value;
+            const userCount = document.getElementById('userCount').value;
+            const avgLength = document.getElementById('avgLength').value;
+            
+            showProgress();
+            const result = await fetchAPI('/generate_sequence', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({domain, user_count: parseInt(userCount), avg_length: parseInt(avgLength)})
+            });
+            
+            currentTaskId = result.task_id;
+            pollTask();
+        }
+        
+        async function generateAI() {
+            showToast('AI格式生成需要先有基础数据');
+        }
+        
+        async function createTemplate() {
+            const domain = document.getElementById('newDomain').value;
+            const behaviors = document.getElementById('behaviors').value.split(',').map(s => s.trim());
+            
+            if (!domain || behaviors.length < 2) {
+                showToast('请填写完整信息');
+                return;
+            }
+            
+            showToast('模板创建成功: ' + domain);
+        }
+        
+        function showProgress() {
+            document.getElementById('progressCard').style.display = 'block';
+            document.getElementById('previewCard').style.display = 'none';
+            document.getElementById('progressFill').style.width = '0%';
+            document.getElementById('progressText').textContent = '准备中...';
+        }
+        
+        async function pollTask() {
+            if (!currentTaskId) return;
+            
+            const task = await fetchAPI('/task/' + currentTaskId);
+            
+            if (task.status === 'processing') {
+                const progress = Math.round((task.progress || 0) / (task.total || 100) * 100);
+                document.getElementById('progressFill').style.width = progress + '%';
+                document.getElementById('progressText').textContent = `生成中... ${task.progress || 0}/${task.total || 100}`;
+                setTimeout(pollTask, 500);
+            } else if (task.status === 'completed') {
+                document.getElementById('progressFill').style.width = '100%';
+                document.getElementById('progressText').textContent = `完成！共 ${task.count} 条数据`;
+                currentData = task.preview;
+                showPreview(task);
+                showToast('生成完成！');
+            } else if (task.status === 'failed') {
+                document.getElementById('progressText').textContent = '生成失败: ' + (task.error || '未知错误');
+                showToast('生成失败');
+            }
+        }
+        
+        function showPreview(task) {
+            document.getElementById('previewCard').style.display = 'block';
+            document.getElementById('previewContent').textContent = JSON.stringify(task.preview || [], null, 2);
+        }
+        
+        function copyData() {
+            if (currentData) {
+                navigator.clipboard.writeText(JSON.stringify(currentData, null, 2));
+                showToast('已复制到剪贴板');
+            }
+        }
+        
+        function downloadData() {
+            if (currentTaskId) {
+                window.location.href = API_BASE + '/download/' + currentTaskId + '_' + document.getElementById('domain').value + '_' + document.getElementById('count').value + '.json';
+            }
+        }
+        
+        async function loadStats() {
+            try {
+                const stats = await fetchAPI('/stats');
+                document.getElementById('statTotal').textContent = stats.total || 0;
+                document.getElementById('statToday').textContent = stats.today || 0;
+            } catch (e) {}
+        }
+        
+        loadStats();
+    </script>
+</body>
+</html>

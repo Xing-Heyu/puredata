@@ -1,0 +1,219 @@
+#!/usr/bin/env python3
+"""生成质量对比示例数据"""
+import sys
+import os
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+
+import json
+from datetime import datetime
+
+print("="*60)
+print("生成质量对比示例数据")
+print("="*60)
+
+# 质量示例数据
+QUALITY_EXAMPLES = {
+    "ultra": {
+        "name": "最高质量",
+        "name_en": "Ultra",
+        "description": "专家级审核，学术级质量",
+        "color": "#10b981",
+        "price_multiplier": "3x",
+        "data": [
+            {
+                "id": 1,
+                "word": "深度学习",
+                "text": "深度学习是机器学习的一个子领域，通过构建多层神经网络来学习数据的层次化表示。其核心原理是利用反向传播算法和梯度下降优化方法，自动提取数据中的高级特征。深度学习在图像识别、语音处理、自然语言理解等领域取得了突破性进展，代表性模型包括卷积神经网络(CNN)、循环神经网络(RNN)和Transformer架构。深度学习的成功得益于大规模数据集、强大的计算能力和创新的算法设计。",
+                "quality_score": 0.98,
+                "features": ["学术级定义", "完整技术原理", "应用场景说明", "代表性模型列举"]
+            },
+            {
+                "id": 2,
+                "word": "劳动合同",
+                "text": "劳动合同是劳动者与用人单位确立劳动关系、明确双方权利义务的书面协议。根据《劳动合同法》第十条规定，建立劳动关系应当订立书面劳动合同。劳动合同应当具备以下条款：工作内容和工作地点、工作时间和休息休假、劳动报酬、社会保险、劳动保护和职业危害防护等。劳动合同分为固定期限劳动合同、无固定期限劳动合同和以完成一定工作任务为期限的劳动合同三种类型。",
+                "quality_score": 0.96,
+                "features": ["法条引用", "必备条款列举", "分类说明", "法律依据完整"]
+            },
+            {
+                "id": 3,
+                "word": "股票",
+                "text": "股票是股份公司发行的所有权凭证，代表股东对公司的部分所有权。股票持有者享有公司经营决策的参与权、利润分配权和剩余财产分配权。股票按股东权利可分为普通股和优先股，按上市地点可分为A股、B股、H股等。股票价格受公司业绩、行业发展、宏观经济、市场情绪等多重因素影响。投资股票需要了解基本面分析、技术分析等方法，并充分认识投资风险。",
+                "quality_score": 0.95,
+                "features": ["概念完整", "权利说明", "分类清晰", "风险提示"]
+            }
+        ]
+    },
+    "high": {
+        "name": "高质量",
+        "name_en": "High",
+        "description": "专业级内容，准确可靠",
+        "color": "#3b82f6",
+        "price_multiplier": "2x",
+        "data": [
+            {
+                "id": 1,
+                "word": "机器学习",
+                "text": "机器学习是人工智能的核心分支，通过算法让计算机从数据中学习规律，无需显式编程即可完成预测和决策任务。主要方法包括监督学习、无监督学习和强化学习。机器学习广泛应用于图像识别、语音识别、推荐系统、自然语言处理等领域。",
+                "quality_score": 0.88,
+                "features": ["定义准确", "方法分类", "应用列举"]
+            },
+            {
+                "id": 2,
+                "word": "试用期",
+                "text": "试用期是用人单位和劳动者相互考察的期限。根据劳动合同法规定，试用期最长不得超过六个月，试用期工资不得低于转正后工资的80%。在试用期内，双方都可以依法解除劳动合同。",
+                "quality_score": 0.85,
+                "features": ["定义清晰", "法律规定", "权益说明"]
+            },
+            {
+                "id": 3,
+                "word": "基金",
+                "text": "基金是一种集合投资工具，由专业管理人运作，投资者按份额享有收益。主要类型包括股票型基金、债券型基金、混合型基金、货币市场基金等。基金投资具有分散风险、专业管理、流动性强等优点。",
+                "quality_score": 0.86,
+                "features": ["概念准确", "类型列举", "优点说明"]
+            }
+        ]
+    },
+    "medium": {
+        "name": "中质量",
+        "name_en": "Medium",
+        "description": "基础级内容，满足一般需求",
+        "color": "#f59e0b",
+        "price_multiplier": "1x",
+        "data": [
+            {
+                "id": 1,
+                "word": "神经网络",
+                "text": "神经网络是模拟生物神经系统的计算模型，由大量互联的节点组成。深度神经网络能够学习复杂的非线性映射关系，在图像处理和语音识别领域表现优异。",
+                "quality_score": 0.72,
+                "features": ["基本定义", "简单说明"]
+            },
+            {
+                "id": 2,
+                "word": "加班费",
+                "text": "加班费是劳动者在法定工作时间之外工作获得的报酬。平日加班支付150%工资，休息日加班支付200%工资，法定节假日加班支付300%工资。",
+                "quality_score": 0.75,
+                "features": ["定义正确", "标准列举"]
+            },
+            {
+                "id": 3,
+                "word": "保险",
+                "text": "保险是一种风险转移机制，投保人支付保费，保险人承担约定风险造成的经济损失。主要类型有人寿保险、财产保险、健康保险等。",
+                "quality_score": 0.73,
+                "features": ["概念说明", "类型列举"]
+            }
+        ]
+    },
+    "low": {
+        "name": "低质量",
+        "name_en": "Low",
+        "description": "基础内容，适合测试场景",
+        "color": "#ef4444",
+        "price_multiplier": "0.5x",
+        "data": [
+            {
+                "id": 1,
+                "word": "AI",
+                "text": "AI就是人工智能，可以让机器像人一样思考。",
+                "quality_score": 0.45,
+                "features": ["简单描述"]
+            },
+            {
+                "id": 2,
+                "word": "工资",
+                "text": "工资就是干活拿钱。",
+                "quality_score": 0.38,
+                "features": ["过于简单"]
+            },
+            {
+                "id": 3,
+                "word": "理财",
+                "text": "理财就是管理钱财。",
+                "quality_score": 0.42,
+                "features": ["缺乏细节"]
+            }
+        ]
+    }
+}
+
+# 质量对比说明
+QUALITY_COMPARISON = {
+    "title": "质量等级对比",
+    "subtitle": "选择适合您需求的数据质量",
+    "comparison_table": [
+        {
+            "feature": "内容深度",
+            "ultra": "学术级完整定义",
+            "high": "专业级详细说明",
+            "medium": "基础级概念介绍",
+            "low": "简单描述"
+        },
+        {
+            "feature": "专业审核",
+            "ultra": "✅ 专家级审核",
+            "high": "✅ 专业审核",
+            "medium": "⚠️ 基础审核",
+            "low": "❌ 无审核"
+        },
+        {
+            "feature": "数据准确性",
+            "ultra": "99%+",
+            "high": "95%+",
+            "medium": "85%+",
+            "low": "70%+"
+        },
+        {
+            "feature": "适用场景",
+            "ultra": "学术论文、商业决策",
+            "high": "模型训练、知识库",
+            "medium": "数据增强、测试",
+            "low": "压力测试、鲁棒性"
+        },
+        {
+            "feature": "推荐指数",
+            "ultra": "⭐⭐⭐⭐⭐",
+            "high": "⭐⭐⭐⭐",
+            "medium": "⭐⭐⭐",
+            "low": "⭐⭐"
+        }
+    ],
+    "value_proposition": [
+        {
+            "quality": "ultra",
+            "title": "为什么选择最高质量？",
+            "reasons": [
+                "学术研究必备：符合论文引用标准",
+                "商业决策可靠：专家级内容保障",
+                "节省审核成本：无需二次人工审核",
+                "提升品牌形象：专业内容展示实力"
+            ]
+        },
+        {
+            "quality": "high",
+            "title": "为什么选择高质量？",
+            "reasons": [
+                "模型训练首选：高质量数据提升模型效果",
+                "知识库建设：专业内容增强用户体验",
+                "性价比最优：质量与价格的完美平衡",
+                "广泛适用：满足大多数商业场景需求"
+            ]
+        }
+    ]
+}
+
+# 保存到文件
+output = {
+    "generated_at": datetime.now().isoformat(),
+    "quality_examples": QUALITY_EXAMPLES,
+    "quality_comparison": QUALITY_COMPARISON
+}
+
+output_file = "quality_showcase.json"
+with open(output_file, 'w', encoding='utf-8') as f:
+    json.dump(output, f, ensure_ascii=False, indent=2)
+
+print(f"[OK] 已生成质量示例数据: {output_file}")
+print(f"    - 最高质量: {len(QUALITY_EXAMPLES['ultra']['data'])} 条")
+print(f"    - 高质量: {len(QUALITY_EXAMPLES['high']['data'])} 条")
+print(f"    - 中质量: {len(QUALITY_EXAMPLES['medium']['data'])} 条")
+print(f"    - 低质量: {len(QUALITY_EXAMPLES['low']['data'])} 条")
+print("="*60)

@@ -1,0 +1,14 @@
+{
+  "name": "电商",
+  "description": "电商领域数据，包含商品、订单、支付、物流等相关术语",
+  "keywords": ["商品", "订单", "支付", "物流", "库存", "促销", "用户", "评价", "退款", "优惠券"],
+  "output_format": "json",
+  "template": {
+    "id": "{{id}}",
+    "term": "{{term}}",
+    "definition": "{{definition}}",
+    "category": "{{category}}",
+    "domain": "电商",
+    "generated_at": "{{generated_at}}"
+  }
+}

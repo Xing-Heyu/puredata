@@ -1,0 +1,581 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "PureData API",
+    "description": "AI训练数据生成平台 - 高性能数据生成服务\n\n## 核心功能\n- **多领域数据生成**：人工智能、医疗、金融、劳动合同、法律、教育、电商、科技\n- **质量门控系统**：高质量(≥0.85)、中等质量(0.70-0.85)、低质量(<0.70)\n- **智能去重**：MinHash近似去重\n- **数据血缘追溯**：完整的数据来源追踪\n- **异常检测**：自动检测和修复数据异常\n- **Calibrated Mixup增强**：提升低分样本质量\n\n## 认证方式\n- 用户认证：Bearer Token 或 Cookie\n- 管理员认证：独立的Token系统\n\n## 成本说明\n- 知识库数据：免费\n- API生成数据：约0.3元/百万token（qwen-turbo）",
+    "version": "2.1.0",
+    "contact": {
+      "name": "PureData Team",
+      "email": "support@puredata.ai"
+    },
+    "license": {
+      "name": "Commercial License",
+      "url": "https://puredata.ai/license"
+    }
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8000",
+      "description": "本地开发服务器"
+    },
+    {
+      "url": "https://api.puredata.ai",
+      "description": "生产服务器"
+    }
+  ],
+  "tags": [
+    {"name": "认证", "description": "用户和管理员认证接口"},
+    {"name": "数据生成", "description": "核心数据生成接口"},
+    {"name": "质量管理", "description": "质量门控和评估接口"},
+    {"name": "用户管理", "description": "管理员用户管理接口"},
+    {"name": "系统", "description": "系统状态和配置接口"}
+  ],
+  "paths": {
+    "/health": {
+      "get": {
+        "tags": ["系统"],
+        "summary": "健康检查",
+        "description": "检查服务是否正常运行",
+        "responses": {
+          "200": {
+            "description": "服务正常",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {"type": "string", "example": "ok"},
+                    "version": {"type": "string", "example": "2.1.0"},
+                    "uptime": {"type": "integer", "description": "运行时间(秒)"}
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/domains": {
+      "get": {
+        "tags": ["系统"],
+        "summary": "获取支持的数据领域",
+        "description": "返回所有支持的数据生成领域及其关键词数量",
+        "responses": {
+          "200": {
+            "description": "成功返回领域列表",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "domains": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "name": {"type": "string", "example": "人工智能"},
+                          "keywords": {"type": "integer", "example": 49}
+                        }
+                      }
+                    },
+                    "total_keywords": {"type": "integer", "example": 322}
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/stats": {
+      "get": {
+        "tags": ["系统"],
+        "summary": "获取统计数据",
+        "description": "返回平台数据生成统计信息",
+        "responses": {
+          "200": {
+            "description": "成功返回统计数据",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "total_data": {"type": "integer", "description": "总生成数据量"},
+                    "today_data": {"type": "integer", "description": "今日生成数据量"},
+                    "quality_distribution": {
+                      "type": "object",
+                      "properties": {
+                        "high_quality": {"type": "integer"},
+                        "medium_quality": {"type": "integer"},
+                        "low_quality": {"type": "integer"}
+                      }
+                    },
+                    "api_cost": {
+                      "type": "object",
+                      "properties": {
+                        "total_tokens": {"type": "integer"},
+                        "total_cost": {"type": "number", "description": "总成本(元)"}
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/quality_modes": {
+      "get": {
+        "tags": ["质量管理"],
+        "summary": "获取质量模式列表",
+        "description": "返回所有可用的质量生成模式",
+        "responses": {
+          "200": {
+            "description": "成功返回质量模式",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "modes": {
+                      "type": "object",
+                      "properties": {
+                        "high_quality": {
+                          "type": "object",
+                          "properties": {
+                            "min_score": {"type": "number", "example": 0.85},
+                            "description": {"type": "string"}
+                          }
+                        },
+                        "medium_quality": {
+                          "type": "object",
+                          "properties": {
+                            "min_score": {"type": "number", "example": 0.70},
+                            "max_score": {"type": "number", "example": 0.85},
+                            "description": {"type": "string"}
+                          }
+                        },
+                        "low_quality": {
+                          "type": "object",
+                          "properties": {
+                            "max_score": {"type": "number", "example": 0.70},
+                            "description": {"type": "string"}
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/generate": {
+      "post": {
+        "tags": ["数据生成"],
+        "summary": "生成数据",
+        "description": "生成指定领域和数量的数据",
+        "security": [{"bearerAuth": []}],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["domain", "count"],
+                "properties": {
+                  "domain": {
+                    "type": "string",
+                    "enum": ["人工智能", "医疗", "金融", "劳动合同", "法律", "教育", "电商", "科技"],
+                    "example": "人工智能"
+                  },
+                  "count": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 100000,
+                    "example": 100
+                  },
+                  "quality_level": {
+                    "type": "string",
+                    "enum": ["high_quality", "medium_quality", "low_quality"],
+                    "default": "high_quality",
+                    "description": "质量等级：high_quality(≥0.85), medium_quality(0.70-0.85), low_quality(<0.70)"
+                  },
+                  "format": {
+                    "type": "string",
+                    "enum": ["json", "jsonl", "csv"],
+                    "default": "json"
+                  },
+                  "use_api": {
+                    "type": "boolean",
+                    "default": false,
+                    "description": "是否使用API生成（付费）"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "生成任务已创建",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {"type": "boolean"},
+                    "task_id": {"type": "string", "example": "abc123"},
+                    "message": {"type": "string"}
+                  }
+                }
+              }
+            }
+          },
+          "401": {"description": "未授权"},
+          "400": {"description": "参数错误"}
+        }
+      }
+    },
+    "/task/{task_id}": {
+      "get": {
+        "tags": ["数据生成"],
+        "summary": "获取任务状态",
+        "description": "查询数据生成任务的状态和进度",
+        "security": [{"bearerAuth": []}],
+        "parameters": [
+          {
+            "name": "task_id",
+            "in": "path",
+            "required": true,
+            "schema": {"type": "string"}
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "任务状态",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "task_id": {"type": "string"},
+                    "status": {"type": "string", "enum": ["pending", "processing", "completed", "failed"]},
+                    "progress": {"type": "integer", "minimum": 0, "maximum": 100},
+                    "filename": {"type": "string"},
+                    "count": {"type": "integer"},
+                    "quality_stats": {
+                      "type": "object",
+                      "properties": {
+                        "avg_score": {"type": "number"},
+                        "high_quality_count": {"type": "integer"},
+                        "medium_quality_count": {"type": "integer"},
+                        "low_quality_count": {"type": "integer"}
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/download/{filename}": {
+      "get": {
+        "tags": ["数据生成"],
+        "summary": "下载生成的数据",
+        "description": "下载已生成的数据文件",
+        "security": [{"bearerAuth": []}],
+        "parameters": [
+          {
+            "name": "filename",
+            "in": "path",
+            "required": true,
+            "schema": {"type": "string"}
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "数据文件",
+            "content": {
+              "application/json": {},
+              "application/octet-stream": {}
+            }
+          }
+        }
+      }
+    },
+    "/login": {
+      "post": {
+        "tags": ["认证"],
+        "summary": "用户登录",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["username", "password"],
+                "properties": {
+                  "username": {"type": "string"},
+                  "password": {"type": "string", "format": "password"}
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "登录成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {"type": "boolean"},
+                    "token": {"type": "string"},
+                    "user": {
+                      "type": "object",
+                      "properties": {
+                        "username": {"type": "string"},
+                        "role": {"type": "string"}
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {"description": "用户名或密码错误"}
+        }
+      }
+    },
+    "/register": {
+      "post": {
+        "tags": ["认证"],
+        "summary": "用户注册",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["username", "password", "email"],
+                "properties": {
+                  "username": {"type": "string", "minLength": 3},
+                  "password": {"type": "string", "format": "password", "minLength": 6},
+                  "email": {"type": "string", "format": "email"}
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {"description": "注册成功"},
+          "400": {"description": "用户名已存在"}
+        }
+      }
+    },
+    "/admin/login": {
+      "post": {
+        "tags": ["认证"],
+        "summary": "管理员登录",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["username", "password"],
+                "properties": {
+                  "username": {"type": "string"},
+                  "password": {"type": "string", "format": "password"}
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {"description": "登录成功"},
+          "401": {"description": "认证失败"}
+        }
+      }
+    },
+    "/admin/users": {
+      "get": {
+        "tags": ["用户管理"],
+        "summary": "获取用户列表",
+        "security": [{"adminAuth": []}],
+        "responses": {
+          "200": {
+            "description": "用户列表",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "users": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {"type": "integer"},
+                          "username": {"type": "string"},
+                          "email": {"type": "string"},
+                          "role": {"type": "string"},
+                          "created_at": {"type": "string", "format": "date-time"}
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/knowledge/stats": {
+      "get": {
+        "tags": ["系统"],
+        "summary": "获取知识库统计",
+        "description": "返回知识库关键词统计信息",
+        "responses": {
+          "200": {
+            "description": "知识库统计",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "total_keywords": {"type": "integer", "example": 322},
+                    "domains": {
+                      "type": "object",
+                      "example": {
+                        "金融": 51,
+                        "人工智能": 49,
+                        "医疗": 46,
+                        "劳动合同": 45,
+                        "法律": 41,
+                        "教育": 30,
+                        "电商": 30,
+                        "科技": 30
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/cost/estimate": {
+      "post": {
+        "tags": ["系统"],
+        "summary": "估算生成成本",
+        "description": "估算生成指定数量数据的API调用成本",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["count"],
+                "properties": {
+                  "count": {"type": "integer", "example": 1000000},
+                  "model": {
+                    "type": "string",
+                    "enum": ["qwen-turbo", "qwen-plus", "qwen-max"],
+                    "default": "qwen-turbo"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "成本估算",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "count": {"type": "integer"},
+                    "estimated_tokens": {"type": "integer"},
+                    "estimated_cost": {"type": "number", "description": "预估成本(元)"},
+                    "model": {"type": "string"},
+                    "pricing": {
+                      "type": "object",
+                      "properties": {
+                        "input_per_million": {"type": "number"},
+                        "output_per_million": {"type": "number"}
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "description": "用户JWT Token"
+      },
+      "adminAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "description": "管理员JWT Token"
+      }
+    },
+    "schemas": {
+      "DataItem": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "integer"},
+          "word": {"type": "string", "description": "关键词"},
+          "text": {"type": "string", "description": "生成文本"},
+          "category": {"type": "string", "description": "所属领域"},
+          "quality_score": {"type": "number", "minimum": 0, "maximum": 1},
+          "quality_level": {"type": "string", "enum": ["high_quality", "medium_quality", "low_quality"]},
+          "source": {"type": "string", "description": "数据来源"},
+          "lineage": {
+            "type": "object",
+            "description": "血缘信息",
+            "properties": {
+              "seed_source": {"type": "string"},
+              "transformations": {"type": "array", "items": {"type": "string"}},
+              "chain_hash": {"type": "string"}
+            }
+          }
+        }
+      },
+      "QualityGate": {
+        "type": "object",
+        "properties": {
+          "level": {"type": "string"},
+          "passed": {"type": "boolean"},
+          "reason": {"type": "string"}
+        }
+      },
+      "Error": {
+        "type": "object",
+        "properties": {
+          "error": {"type": "string"},
+          "code": {"type": "integer"}
+        }
+      }
+    }
+  }
+}

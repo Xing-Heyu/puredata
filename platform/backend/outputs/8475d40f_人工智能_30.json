@@ -1,0 +1,1508 @@
+[
+  {
+    "id": 1,
+    "word": "Agent",
+    "text": "呃……对于学习者来说，嗯从专业角度，定义上讲，开始时，根据分析Agent是人工智能的核心技术，应用广泛。接下来， 这就是对Agent的定义。，这涉及到Agent的深入理解 掌握这一点很重要。 这对学习者很有帮助，那问题来了， 接下来， 这就是对Agent的定义。，这涉及到Agent的深入理解 掌握这一点很重要。 这对学习者很有帮助。",
+    "category": "人工智能",
+    "source": "clean",
+    "confidence": 0.97,
+    "quality_score": 0.98,
+    "quality_tier": "high",
+    "human_like_score": 0.94,
+    "timestamp": "2025-02-26T23:43:51.856463",
+    "user_id": "ai_1716",
+    "verified": true,
+    "provenance": {
+      "platform": "PureData",
+      "version": "1.0.0",
+      "generated_at": "2026-02-24T00:13:51.856467",
+      "batch_id": "8475d40f_b1",
+      "mode": "hybrid_clean",
+      "generator": "synthetic",
+      "license": "PureData-Commercial-1.0",
+      "license_url": "https://puredata.ai/license/commercial",
+      "license_terms": {
+        "allowed": [
+          "AI训练",
+          "模型微调",
+          "研究用途",
+          "商业用途",
+          "二次开发"
+        ],
+        "forbidden": [
+          "数据转售",
+          "再分发原始数据",
+          "非法用途"
+        ],
+        "ownership": "数据所有权归PureData所有",
+        "grant": "客户获得永久使用权，可商用",
+        "attribution": "可选注明数据来源: PureData",
+        "disclaimer": {
+          "summary": "本数据由AI生成，仅供参考，不构成专业建议",
+          "data_quality": "卖方保证数据已通过脱敏清洗处理，符合数据安全法规定",
+          "usage_liability": "客户超出授权范围或从事违法犯罪行为，责任自负",
+          "derivative_works": "客户二次加工、衍生开发后的结果，法律责任由客户自负",
+          "law_changes": "因法律法规政策变化导致无法继续使用的，卖方不承担违约责任",
+          "ai_limitation": "AI生成内容可能存在不准确、不完整或过时的信息，请自行验证关键信息",
+          "professional_advice": "医疗/金融/法律领域数据不替代专业建议，请咨询专业人士",
+          "legal_use_only": "数据仅限合法学习、研究、AI训练使用，不得用于任何违法违规行为，否则后果自负"
+        }
+      },
+      "compliance": [
+        "数据安全法",
+        "个人信息保护法",
+        "著作权法",
+        "生成式AI服务管理办法"
+      ]
+    },
+    "_sensitivity_level": "safe"
+  },
+  {
+    "id": 2,
+    "word": "自然语言处理",
+    "text": "从教育角度看，在掌握基础后，所谓开始时，文献研究表明ai笔记: 注: 专宷预测自然语言处理将成为未来的核心趋势。接下来，. 进一步来说，自然语言处理涉及多个层面的内容。从理论基础到实际应用，每个环节都需要深入理解。 这就是对自然语言处理的定义。，这涉及到自然语言处理的专业知识",
+    "category": "人工智能",
+    "source": "noisy",
+    "confidence": 0.7,
+    "quality_score": 0.57,
+    "quality_tier": "medium",
+    "noise_level": 2,
+    "noise_types": [],
+    "timestamp": "2025-06-26T16:18:51.856969",
+    "user_id": "ai_5039",
+    "verified": true,
+    "provenance": {
+      "platform": "PureData",
+      "version": "1.0.0",
+      "generated_at": "2026-02-24T00:13:51.856972",
+      "batch_id": "8475d40f_b1",
+      "mode": "hybrid_noisy",
+      "noise_level": 2,
+      "generator": "synthetic",
+      "license": "PureData-Commercial-1.0",
+      "license_url": "https://puredata.ai/license/commercial",
+      "license_terms": {
+        "allowed": [
+          "AI训练",
+          "模型微调",
+          "研究用途",
+          "商业用途",
+          "二次开发"
+        ],
+        "forbidden": [
+          "数据转售",
+          "再分发原始数据",
+          "非法用途"
+        ],
+        "ownership": "数据所有权归PureData所有",
+        "grant": "客户获得永久使用权，可商用",
+        "attribution": "可选注明数据来源: PureData",
+        "disclaimer": {
+          "summary": "本数据由AI生成，仅供参考，不构成专业建议",
+          "data_quality": "卖方保证数据已通过脱敏清洗处理，符合数据安全法规定",
+          "usage_liability": "客户超出授权范围或从事违法犯罪行为，责任自负",
+          "derivative_works": "客户二次加工、衍生开发后的结果，法律责任由客户自负",
+          "law_changes": "因法律法规政策变化导致无法继续使用的，卖方不承担违约责任",
+          "ai_limitation": "AI生成内容可能存在不准确、不完整或过时的信息，请自行验证关键信息",
+          "professional_advice": "医疗/金融/法律领域数据不替代专业建议，请咨询专业人士",
+          "legal_use_only": "数据仅限合法学习、研究、AI训练使用，不得用于任何违法违规行为，否则后果自负"
+        }
+      },
+      "compliance": [
+        "数据安全法",
+        "个人信息保护法",
+        "著作权法",
+        "生成式AI服务管理办法"
+      ]
+    },
+    "_sensitivity_level": "safe"
+  },
+  {
+    "id": 3,
+    "word": "提示工程",
+    "text": "好问题，提示工程技术发展迅速，应用场景不断扩展，... 。这个你应该能理解吧？",
+    "category": "人工智能",
+    "source": "clean",
+    "confidence": 0.93,
+    "quality_score": 0.9,
+    "quality_tier": "high",
+    "human_like_score": 0.95,
+    "timestamp": "2025-05-22T09:01:51.856531",
+    "user_id": "ai_9162",
+    "verified": true,
+    "provenance": {
+      "platform": "PureData",
+      "version": "1.0.0",
+      "generated_at": "2026-02-24T00:13:51.856534",
+      "batch_id": "8475d40f_b1",
+      "mode": "hybrid_clean",
+      "generator": "synthetic",
+      "license": "PureData-Commercial-1.0",
+      "license_url": "https://puredata.ai/license/commercial",
+      "license_terms": {
+        "allowed": [
+          "AI训练",
+          "模型微调",
+          "研究用途",
+          "商业用途",
+          "二次开发"
+        ],
+        "forbidden": [
+          "数据转售",
+          "再分发原始数据",
+          "非法用途"
+        ],
+        "ownership": "数据所有权归PureData所有",
+        "grant": "客户获得永久使用权，可商用",
+        "attribution": "可选注明数据来源: PureData",
+        "disclaimer": {
+          "summary": "本数据由AI生成，仅供参考，不构成专业建议",
+          "data_quality": "卖方保证数据已通过脱敏清洗处理，符合数据安全法规定",
+          "usage_liability": "客户超出授权范围或从事违法犯罪行为，责任自负",
+          "derivative_works": "客户二次加工、衍生开发后的结果，法律责任由客户自负",
+          "law_changes": "因法律法规政策变化导致无法继续使用的，卖方不承担违约责任",
+          "ai_limitation": "AI生成内容可能存在不准确、不完整或过时的信息，请自行验证关键信息",
+          "professional_advice": "医疗/金融/法律领域数据不替代专业建议，请咨询专业人士",
+          "legal_use_only": "数据仅限合法学习、研究、AI训练使用，不得用于任何违法违规行为，否则后果自负"
+        }
+      },
+      "compliance": [
+        "数据安全法",
+        "个人信息保护法",
+        "著作权法",
+        "生成式AI服务管理办法"
+      ]
+    },
+    "_sensitivity_level": "safe"
+  },
+  {
+    "id": 4,
+    "word": "语音合成",
+    "text": "Q: 什么是语音合成? A: 语音合成在自然语言处理中发挥重要作用。",
+    "category": "人工智能",
+    "source": "structured",
+    "confidence": 0.78,
+    "quality_score": 0.7,
+    "quality_tier": "medium",
+    "timestamp": "2025-04-09T16:35:51.857270",
+    "user_id": "ai_6940",
+    "verified": true,
+    "_sensitivity_level": "safe"
+  },
+  {
+    "id": 5,
+    "word": "强化学习",
+    "text": "在日常生活中，对初学者而言，所谓首先，研究表明关于人工智能: 参考: 现代ai系统中，强化学习的质量直接影响模型性能。接下来，（即是强化学习的基础内容） 希望这个解释对你有帮助。 这对个人很有用。",
+    "category": "人工智能",
+    "source": "noisy",
+    "confidence": 0.56,
+    "quality_score": 0.44,
+    "quality_tier": "medium",
+    "noise_level": 2,
+    "noise_types": [],
+    "timestamp": "2025-08-31T04:44:51.857016",
+    "user_id": "ai_7237",
+    "verified": true,
+    "provenance": {
+      "platform": "PureData",
+      "version": "1.0.0",
+      "generated_at": "2026-02-24T00:13:51.857019",
+      "batch_id": "8475d40f_b1",
+      "mode": "hybrid_noisy",
+      "noise_level": 2,
+      "generator": "synthetic",
+      "license": "PureData-Commercial-1.0",
+      "license_url": "https://puredata.ai/license/commercial",
+      "license_terms": {
+        "allowed": [
+          "AI训练",
+          "模型微调",
+          "研究用途",
+          "商业用途",
+          "二次开发"
+        ],
+        "forbidden": [
+          "数据转售",
+          "再分发原始数据",
+          "非法用途"
+        ],
+        "ownership": "数据所有权归PureData所有",
+        "grant": "客户获得永久使用权，可商用",
+        "attribution": "可选注明数据来源: PureData",
+        "disclaimer": {
+          "summary": "本数据由AI生成，仅供参考，不构成专业建议",
+          "data_quality": "卖方保证数据已通过脱敏清洗处理，符合数据安全法规定",
+          "usage_liability": "客户超出授权范围或从事违法犯罪行为，责任自负",
+          "derivative_works": "客户二次加工、衍生开发后的结果，法律责任由客户自负",
+          "law_changes": "因法律法规政策变化导致无法继续使用的，卖方不承担违约责任",
+          "ai_limitation": "AI生成内容可能存在不准确、不完整或过时的信息，请自行验证关键信息",
+          "professional_advice": "医疗/金融/法律领域数据不替代专业建议，请咨询专业人士",
+          "legal_use_only": "数据仅限合法学习、研究、AI训练使用，不得用于任何违法违规行为，否则后果自负"
+        }
+      },
+      "compliance": [
+        "数据安全法",
+        "个人信息保护法",
+        "著作权法",
+        "生成式AI服务管理办法"
+      ]
+    },
+    "_sensitivity_level": "safe"
+  },
+  {
+    "id": 6,
+    "word": "机器学习",
+    "text": "专家预测机器学习将成为未来的核心趋势。 [补充说明: 该条目关于机器学习]",
+    "category": "人工智能",
+    "source": "clean",
+    "confidence": 0.9,
+    "quality_score": 0.87,
+    "quality_tier": "high",
+    "human_like_score": 0.86,
+    "timestamp": "2025-03-15T21:00:51.856519",
+    "user_id": "user_5291",
+    "verified": true,
+    "provenance": {
+      "platform": "PureData",
+      "version": "1.0.0",
+      "generated_at": "2026-02-24T00:13:51.856521",
+      "batch_id": "8475d40f_b1",
+      "mode": "hybrid_clean",
+      "generator": "synthetic",
+      "license": "PureData-Commercial-1.0",
+      "license_url": "https://puredata.ai/license/commercial",
+      "license_terms": {
+        "allowed": [
+          "AI训练",
+          "模型微调",
+          "研究用途",
+          "商业用途",
+          "二次开发"
+        ],
+        "forbidden": [
+          "数据转售",
+          "再分发原始数据",
+          "非法用途"
+        ],
+        "ownership": "数据所有权归PureData所有",
+        "grant": "客户获得永久使用权，可商用",
+        "attribution": "可选注明数据来源: PureData",
+        "disclaimer": {
+          "summary": "本数据由AI生成，仅供参考，不构成专业建议",
+          "data_quality": "卖方保证数据已通过脱敏清洗处理，符合数据安全法规定",
+          "usage_liability": "客户超出授权范围或从事违法犯罪行为，责任自负",
+          "derivative_works": "客户二次加工、衍生开发后的结果，法律责任由客户自负",
+          "law_changes": "因法律法规政策变化导致无法继续使用的，卖方不承担违约责任",
+          "ai_limitation": "AI生成内容可能存在不准确、不完整或过时的信息，请自行验证关键信息",
+          "professional_advice": "医疗/金融/法律领域数据不替代专业建议，请咨询专业人士",
+          "legal_use_only": "数据仅限合法学习、研究、AI训练使用，不得用于任何违法违规行为，否则后果自负"
+        }
+      },
+      "compliance": [
+        "数据安全法",
+        "个人信息保护法",
+        "著作权法",
+        "生成式AI服务管理办法"
+      ]
+    },
+    "_sensitivity_level": "safe"
+  },
+  {
+    "id": 7,
+    "word": "问答系统",
+    "text": "ai笔记: 通过问答系统，机器可以学习数据规律。",
+    "category": "人工智能",
+    "source": "structured",
+    "confidence": 0.89,
+    "quality_score": 0.89,
+    "quality_tier": "medium",
+    "timestamp": "2025-06-25T00:38:51.857289",
+    "user_id": "bot_4481",
+    "verified": false,
+    "_sensitivity_level": "safe"
+  },
+  {
+    "id": 8,
+    "word": "迁移学习",
+    "text": "重点是， 迁移学习是机器学习的重要研究方向。!，你懂我意思吧？ !。就这样吧。",
+    "category": "人工智能",
+    "source": "clean",
+    "confidence": 0.93,
+    "quality_score": 0.91,
+    "quality_tier": "high",
+    "human_like_score": 0.98,
+    "timestamp": "2026-01-02T08:36:51.856482",
+    "user_id": "admin_7884",
+    "verified": true,
+    "provenance": {
+      "platform": "PureData",
+      "version": "1.0.0",
+      "generated_at": "2026-02-24T00:13:51.856485",
+      "batch_id": "8475d40f_b1",
+      "mode": "hybrid_clean",
+      "generator": "synthetic",
+      "license": "PureData-Commercial-1.0",
+      "license_url": "https://puredata.ai/license/commercial",
+      "license_terms": {
+        "allowed": [
+          "AI训练",
+          "模型微调",
+          "研究用途",
+          "商业用途",
+          "二次开发"
+        ],
+        "forbidden": [
+          "数据转售",
+          "再分发原始数据",
+          "非法用途"
+        ],
+        "ownership": "数据所有权归PureData所有",
+        "grant": "客户获得永久使用权，可商用",
+        "attribution": "可选注明数据来源: PureData",
+        "disclaimer": {
+          "summary": "本数据由AI生成，仅供参考，不构成专业建议",
+          "data_quality": "卖方保证数据已通过脱敏清洗处理，符合数据安全法规定",
+          "usage_liability": "客户超出授权范围或从事违法犯罪行为，责任自负",
+          "derivative_works": "客户二次加工、衍生开发后的结果，法律责任由客户自负",
+          "law_changes": "因法律法规政策变化导致无法继续使用的，卖方不承担违约责任",
+          "ai_limitation": "AI生成内容可能存在不准确、不完整或过时的信息，请自行验证关键信息",
+          "professional_advice": "医疗/金融/法律领域数据不替代专业建议，请咨询专业人士",
+          "legal_use_only": "数据仅限合法学习、研究、AI训练使用，不得用于任何违法违规行为，否则后果自负"
+        }
+      },
+      "compliance": [
+        "数据安全法",
+        "个人信息保护法",
+        "著作权法",
+        "生成式AI服务管理办法"
+      ]
+    },
+    "_sensitivity_level": "safe"
+  },
+  {
+    "id": 9,
+    "word": "机器学习",
+    "text": "技术#1: 💻 基于机器学习的创新解决方案正在重塑行业。 相关研究表明其效果显著。 该领域发展前景广阔。",
+    "category": "人工智能",
+    "source": "noisy",
+    "confidence": 0.65,
+    "quality_score": 0.52,
+    "quality_tier": "medium",
+    "noise_level": 2,
+    "noise_types": [],
+    "timestamp": "2025-08-07T21:19:51.856686",
+    "user_id": "ai_8327",
+    "verified": true,
+    "provenance": {
+      "platform": "PureData",
+      "version": "1.0.0",
+      "generated_at": "2026-02-24T00:13:51.856689",
+      "batch_id": "8475d40f_b1",
+      "mode": "hybrid_noisy",
+      "noise_level": 2,
+      "generator": "synthetic",
+      "license": "PureData-Commercial-1.0",
+      "license_url": "https://puredata.ai/license/commercial",
+      "license_terms": {
+        "allowed": [
+          "AI训练",
+          "模型微调",
+          "研究用途",
+          "商业用途",
+          "二次开发"
+        ],
+        "forbidden": [
+          "数据转售",
+          "再分发原始数据",
+          "非法用途"
+        ],
+        "ownership": "数据所有权归PureData所有",
+        "grant": "客户获得永久使用权，可商用",
+        "attribution": "可选注明数据来源: PureData",
+        "disclaimer": {
+          "summary": "本数据由AI生成，仅供参考，不构成专业建议",
+          "data_quality": "卖方保证数据已通过脱敏清洗处理，符合数据安全法规定",
+          "usage_liability": "客户超出授权范围或从事违法犯罪行为，责任自负",
+          "derivative_works": "客户二次加工、衍生开发后的结果，法律责任由客户自负",
+          "law_changes": "因法律法规政策变化导致无法继续使用的，卖方不承担违约责任",
+          "ai_limitation": "AI生成内容可能存在不准确、不完整或过时的信息，请自行验证关键信息",
+          "professional_advice": "医疗/金融/法律领域数据不替代专业建议，请咨询专业人士",
+          "legal_use_only": "数据仅限合法学习、研究、AI训练使用，不得用于任何违法违规行为，否则后果自负"
+        }
+      },
+      "compliance": [
+        "数据安全法",
+        "个人信息保护法",
+        "著作权法",
+        "生成式AI服务管理办法"
+      ]
+    },
+    "_sensitivity_level": "safe"
+  },
+  {
+    "id": 10,
+    "word": "机器学习",
+    "text": "对企业而言，对初学者而言，从概念上来说，第一步，简单来说【AI知识】→。进而，!（即可以理解为机器学习的入门知识） 希望这个解释对你有帮助。 这具有很大的商业价值。",
+    "category": "人工智能",
+    "source": "noisy",
+    "confidence": 0.66,
+    "quality_score": 0.53,
+    "quality_tier": "medium",
+    "noise_level": 2,
+    "noise_types": [],
+    "timestamp": "2025-03-13T05:38:51.856925",
+    "user_id": "user_1617",
+    "verified": true,
+    "provenance": {
+      "platform": "PureData",
+      "version": "1.0.0",
+      "generated_at": "2026-02-24T00:13:51.856928",
+      "batch_id": "8475d40f_b1",
+      "mode": "hybrid_noisy",
+      "noise_level": 2,
+      "generator": "synthetic",
+      "license": "PureData-Commercial-1.0",
+      "license_url": "https://puredata.ai/license/commercial",
+      "license_terms": {
+        "allowed": [
+          "AI训练",
+          "模型微调",
+          "研究用途",
+          "商业用途",
+          "二次开发"
+        ],
+        "forbidden": [
+          "数据转售",
+          "再分发原始数据",
+          "非法用途"
+        ],
+        "ownership": "数据所有权归PureData所有",
+        "grant": "客户获得永久使用权，可商用",
+        "attribution": "可选注明数据来源: PureData",
+        "disclaimer": {
+          "summary": "本数据由AI生成，仅供参考，不构成专业建议",
+          "data_quality": "卖方保证数据已通过脱敏清洗处理，符合数据安全法规定",
+          "usage_liability": "客户超出授权范围或从事违法犯罪行为，责任自负",
+          "derivative_works": "客户二次加工、衍生开发后的结果，法律责任由客户自负",
+          "law_changes": "因法律法规政策变化导致无法继续使用的，卖方不承担违约责任",
+          "ai_limitation": "AI生成内容可能存在不准确、不完整或过时的信息，请自行验证关键信息",
+          "professional_advice": "医疗/金融/法律领域数据不替代专业建议，请咨询专业人士",
+          "legal_use_only": "数据仅限合法学习、研究、AI训练使用，不得用于任何违法违规行为，否则后果自负"
+        }
+      },
+      "compliance": [
+        "数据安全法",
+        "个人信息保护法",
+        "著作权法",
+        "生成式AI服务管理办法"
+      ]
+    },
+    "_sensitivity_level": "safe"
+  },
+  {
+    "id": 11,
+    "word": "机器学习",
+    "text": "技术#6: 🧠 机器学习技术发展迅速，应用场景不断扩展。 相关研究表明其效果显著。 这一技术已广泛应用于实际场景。 该领域发展前景广阔。 这一技术已广泛应用于实际场景。 实践证明其具有重要价值。 该领域发展前景广阔。 实践证明其具有重要价值。 实践证明其具有重要价值。 业内专家对此给予高度评价。",
+    "category": "人工智能",
+    "source": "noisy",
+    "confidence": 0.71,
+    "quality_score": 0.65,
+    "quality_tier": "medium",
+    "noise_level": 2,
+    "noise_types": [],
+    "timestamp": "2025-05-03T23:54:51.856880",
+    "user_id": "bot_3169",
+    "verified": true,
+    "provenance": {
+      "platform": "PureData",
+      "version": "1.0.0",
+      "generated_at": "2026-02-24T00:13:51.856882",
+      "batch_id": "8475d40f_b1",
+      "mode": "hybrid_noisy",
+      "noise_level": 2,
+      "generator": "synthetic",
+      "license": "PureData-Commercial-1.0",
+      "license_url": "https://puredata.ai/license/commercial",
+      "license_terms": {
+        "allowed": [
+          "AI训练",
+          "模型微调",
+          "研究用途",
+          "商业用途",
+          "二次开发"
+        ],
+        "forbidden": [
+          "数据转售",
+          "再分发原始数据",
+          "非法用途"
+        ],
+        "ownership": "数据所有权归PureData所有",
+        "grant": "客户获得永久使用权，可商用",
+        "attribution": "可选注明数据来源: PureData",
+        "disclaimer": {
+          "summary": "本数据由AI生成，仅供参考，不构成专业建议",
+          "data_quality": "卖方保证数据已通过脱敏清洗处理，符合数据安全法规定",
+          "usage_liability": "客户超出授权范围或从事违法犯罪行为，责任自负",
+          "derivative_works": "客户二次加工、衍生开发后的结果，法律责任由客户自负",
+          "law_changes": "因法律法规政策变化导致无法继续使用的，卖方不承担违约责任",
+          "ai_limitation": "AI生成内容可能存在不准确、不完整或过时的信息，请自行验证关键信息",
+          "professional_advice": "医疗/金融/法律领域数据不替代专业建议，请咨询专业人士",
+          "legal_use_only": "数据仅限合法学习、研究、AI训练使用，不得用于任何违法违规行为，否则后果自负"
+        }
+      },
+      "compliance": [
+        "数据安全法",
+        "个人信息保护法",
+        "著作权法",
+        "生成式AI服务管理办法"
+      ]
+    },
+    "_sensitivity_level": "safe"
+  },
+  {
+    "id": 12,
+    "word": "特征工程",
+    "text": "技术参考: → 现代ai系统中，特征工程的质量直接影响模型性能。. 相关研究表明其效果显著。 业内专家对此给予高度评价。",
+    "category": "人工智能",
+    "source": "noisy",
+    "confidence": 0.65,
+    "quality_score": 0.59,
+    "quality_tier": "medium",
+    "noise_level": 2,
+    "noise_types": [],
+    "timestamp": "2025-10-24T16:06:51.857045",
+    "user_id": "expert_3894",
+    "verified": true,
+    "provenance": {
+      "platform": "PureData",
+      "version": "1.0.0",
+      "generated_at": "2026-02-24T00:13:51.857047",
+      "batch_id": "8475d40f_b1",
+      "mode": "hybrid_noisy",
+      "noise_level": 2,
+      "generator": "synthetic",
+      "license": "PureData-Commercial-1.0",
+      "license_url": "https://puredata.ai/license/commercial",
+      "license_terms": {
+        "allowed": [
+          "AI训练",
+          "模型微调",
+          "研究用途",
+          "商业用途",
+          "二次开发"
+        ],
+        "forbidden": [
+          "数据转售",
+          "再分发原始数据",
+          "非法用途"
+        ],
+        "ownership": "数据所有权归PureData所有",
+        "grant": "客户获得永久使用权，可商用",
+        "attribution": "可选注明数据来源: PureData",
+        "disclaimer": {
+          "summary": "本数据由AI生成，仅供参考，不构成专业建议",
+          "data_quality": "卖方保证数据已通过脱敏清洗处理，符合数据安全法规定",
+          "usage_liability": "客户超出授权范围或从事违法犯罪行为，责任自负",
+          "derivative_works": "客户二次加工、衍生开发后的结果，法律责任由客户自负",
+          "law_changes": "因法律法规政策变化导致无法继续使用的，卖方不承担违约责任",
+          "ai_limitation": "AI生成内容可能存在不准确、不完整或过时的信息，请自行验证关键信息",
+          "professional_advice": "医疗/金融/法律领域数据不替代专业建议，请咨询专业人士",
+          "legal_use_only": "数据仅限合法学习、研究、AI训练使用，不得用于任何违法违规行为，否则后果自负"
+        }
+      },
+      "compliance": [
+        "数据安全法",
+        "个人信息保护法",
+        "著作权法",
+        "生成式AI服务管理办法"
+      ]
+    },
+    "_sensitivity_level": "safe"
+  },
+  {
+    "id": 13,
+    "word": "机器学习",
+    "text": "【人工智能】🧠 机器学习技术发展迅速，应用场景不断扩展。 该领域发展前景广阔。",
+    "category": "人工智能",
+    "source": "noisy",
+    "confidence": 0.76,
+    "quality_score": 0.7,
+    "quality_tier": "medium",
+    "noise_level": 2,
+    "noise_types": [],
+    "timestamp": "2025-11-17T19:04:51.857072",
+    "user_id": "user_9142",
+    "verified": true,
+    "provenance": {
+      "platform": "PureData",
+      "version": "1.0.0",
+      "generated_at": "2026-02-24T00:13:51.857074",
+      "batch_id": "8475d40f_b1",
+      "mode": "hybrid_noisy",
+      "noise_level": 2,
+      "generator": "synthetic",
+      "license": "PureData-Commercial-1.0",
+      "license_url": "https://puredata.ai/license/commercial",
+      "license_terms": {
+        "allowed": [
+          "AI训练",
+          "模型微调",
+          "研究用途",
+          "商业用途",
+          "二次开发"
+        ],
+        "forbidden": [
+          "数据转售",
+          "再分发原始数据",
+          "非法用途"
+        ],
+        "ownership": "数据所有权归PureData所有",
+        "grant": "客户获得永久使用权，可商用",
+        "attribution": "可选注明数据来源: PureData",
+        "disclaimer": {
+          "summary": "本数据由AI生成，仅供参考，不构成专业建议",
+          "data_quality": "卖方保证数据已通过脱敏清洗处理，符合数据安全法规定",
+          "usage_liability": "客户超出授权范围或从事违法犯罪行为，责任自负",
+          "derivative_works": "客户二次加工、衍生开发后的结果，法律责任由客户自负",
+          "law_changes": "因法律法规政策变化导致无法继续使用的，卖方不承担违约责任",
+          "ai_limitation": "AI生成内容可能存在不准确、不完整或过时的信息，请自行验证关键信息",
+          "professional_advice": "医疗/金融/法律领域数据不替代专业建议，请咨询专业人士",
+          "legal_use_only": "数据仅限合法学习、研究、AI训练使用，不得用于任何违法违规行为，否则后果自负"
+        }
+      },
+      "compliance": [
+        "数据安全法",
+        "个人信息保护法",
+        "著作权法",
+        "生成式AI服务管理办法"
+      ]
+    },
+    "_sensitivity_level": "safe"
+  },
+  {
+    "id": 14,
+    "word": "机器学习",
+    "text": "机器学习是人工智能的核心技术，应用广泛。",
+    "category": "人工智能",
+    "source": "clean",
+    "confidence": 0.97,
+    "quality_score": 0.97,
+    "quality_tier": "high",
+    "human_like_score": 0.7,
+    "timestamp": "2025-07-21T03:05:51.856507",
+    "user_id": "ai_3213",
+    "verified": true,
+    "provenance": {
+      "platform": "PureData",
+      "version": "1.0.0",
+      "generated_at": "2026-02-24T00:13:51.856509",
+      "batch_id": "8475d40f_b1",
+      "mode": "hybrid_clean",
+      "generator": "synthetic",
+      "license": "PureData-Commercial-1.0",
+      "license_url": "https://puredata.ai/license/commercial",
+      "license_terms": {
+        "allowed": [
+          "AI训练",
+          "模型微调",
+          "研究用途",
+          "商业用途",
+          "二次开发"
+        ],
+        "forbidden": [
+          "数据转售",
+          "再分发原始数据",
+          "非法用途"
+        ],
+        "ownership": "数据所有权归PureData所有",
+        "grant": "客户获得永久使用权，可商用",
+        "attribution": "可选注明数据来源: PureData",
+        "disclaimer": {
+          "summary": "本数据由AI生成，仅供参考，不构成专业建议",
+          "data_quality": "卖方保证数据已通过脱敏清洗处理，符合数据安全法规定",
+          "usage_liability": "客户超出授权范围或从事违法犯罪行为，责任自负",
+          "derivative_works": "客户二次加工、衍生开发后的结果，法律责任由客户自负",
+          "law_changes": "因法律法规政策变化导致无法继续使用的，卖方不承担违约责任",
+          "ai_limitation": "AI生成内容可能存在不准确、不完整或过时的信息，请自行验证关键信息",
+          "professional_advice": "医疗/金融/法律领域数据不替代专业建议，请咨询专业人士",
+          "legal_use_only": "数据仅限合法学习、研究、AI训练使用，不得用于任何违法违规行为，否则后果自负"
+        }
+      },
+      "compliance": [
+        "数据安全法",
+        "个人信息保护法",
+        "著作权法",
+        "生成式AI服务管理办法"
+      ]
+    },
+    "_sensitivity_level": "safe"
+  },
+  {
+    "id": 15,
+    "word": "实例分割",
+    "text": "AI笔记: 实例分割作为人工智能领域的关键技术，正在推动产业变革。",
+    "category": "人工智能",
+    "source": "structured",
+    "confidence": 0.91,
+    "quality_score": 0.9,
+    "quality_tier": "medium",
+    "timestamp": "2026-01-20T12:56:51.857226",
+    "user_id": "bot_7416",
+    "verified": true,
+    "_sensitivity_level": "safe"
+  },
+  {
+    "id": 16,
+    "word": "微调",
+    "text": "在商业应用中，在掌握基础后，定义上讲，开始时，数据显示【人工智能】→ 微调是机器学习的重要研究方向。然后，! 相关研究表明其效果显著。 怎么说呢 相关研究表明其效果显著。 值得注意的是，这个概念的发展历程也很有趣。从最初的理论提出到现在的广泛应用，经历了多个阶段。 这就是对微调的定义。，这涉及到微调的进阶应用 企业可以从中受益。",
+    "category": "人工智能",
+    "source": "noisy",
+    "confidence": 0.6,
+    "quality_score": 0.5,
+    "quality_tier": "medium",
+    "noise_level": 2,
+    "noise_types": [],
+    "timestamp": "2025-12-27T02:44:51.857207",
+    "user_id": "bot_8709",
+    "verified": true,
+    "provenance": {
+      "platform": "PureData",
+      "version": "1.0.0",
+      "generated_at": "2026-02-24T00:13:51.857210",
+      "batch_id": "8475d40f_b1",
+      "mode": "hybrid_noisy",
+      "noise_level": 2,
+      "generator": "synthetic",
+      "license": "PureData-Commercial-1.0",
+      "license_url": "https://puredata.ai/license/commercial",
+      "license_terms": {
+        "allowed": [
+          "AI训练",
+          "模型微调",
+          "研究用途",
+          "商业用途",
+          "二次开发"
+        ],
+        "forbidden": [
+          "数据转售",
+          "再分发原始数据",
+          "非法用途"
+        ],
+        "ownership": "数据所有权归PureData所有",
+        "grant": "客户获得永久使用权，可商用",
+        "attribution": "可选注明数据来源: PureData",
+        "disclaimer": {
+          "summary": "本数据由AI生成，仅供参考，不构成专业建议",
+          "data_quality": "卖方保证数据已通过脱敏清洗处理，符合数据安全法规定",
+          "usage_liability": "客户超出授权范围或从事违法犯罪行为，责任自负",
+          "derivative_works": "客户二次加工、衍生开发后的结果，法律责任由客户自负",
+          "law_changes": "因法律法规政策变化导致无法继续使用的，卖方不承担违约责任",
+          "ai_limitation": "AI生成内容可能存在不准确、不完整或过时的信息，请自行验证关键信息",
+          "professional_advice": "医疗/金融/法律领域数据不替代专业建议，请咨询专业人士",
+          "legal_use_only": "数据仅限合法学习、研究、AI训练使用，不得用于任何违法违规行为，否则后果自负"
+        }
+      },
+      "compliance": [
+        "数据安全法",
+        "个人信息保护法",
+        "著作权法",
+        "生成式AI服务管理办法"
+      ]
+    },
+    "_sensitivity_level": "safe"
+  },
+  {
+    "id": 17,
+    "word": "机器学习",
+    "text": "在学术研究中，深入研究，定义上讲，开始时，说实话技术参考: AI前沿:。接下来， 这一点在机器学习领域尤为重要。，最新研究表明机器学习领域有新的突破 值得进一步探索。",
+    "category": "人工智能",
+    "source": "noisy",
+    "confidence": 0.73,
+    "quality_score": 0.61,
+    "quality_tier": "medium",
+    "noise_level": 2,
+    "noise_types": [],
+    "timestamp": "2025-05-07T01:18:51.857111",
+    "user_id": "user_9407",
+    "verified": true,
+    "provenance": {
+      "platform": "PureData",
+      "version": "1.0.0",
+      "generated_at": "2026-02-24T00:13:51.857114",
+      "batch_id": "8475d40f_b1",
+      "mode": "hybrid_noisy",
+      "noise_level": 2,
+      "generator": "synthetic",
+      "license": "PureData-Commercial-1.0",
+      "license_url": "https://puredata.ai/license/commercial",
+      "license_terms": {
+        "allowed": [
+          "AI训练",
+          "模型微调",
+          "研究用途",
+          "商业用途",
+          "二次开发"
+        ],
+        "forbidden": [
+          "数据转售",
+          "再分发原始数据",
+          "非法用途"
+        ],
+        "ownership": "数据所有权归PureData所有",
+        "grant": "客户获得永久使用权，可商用",
+        "attribution": "可选注明数据来源: PureData",
+        "disclaimer": {
+          "summary": "本数据由AI生成，仅供参考，不构成专业建议",
+          "data_quality": "卖方保证数据已通过脱敏清洗处理，符合数据安全法规定",
+          "usage_liability": "客户超出授权范围或从事违法犯罪行为，责任自负",
+          "derivative_works": "客户二次加工、衍生开发后的结果，法律责任由客户自负",
+          "law_changes": "因法律法规政策变化导致无法继续使用的，卖方不承担违约责任",
+          "ai_limitation": "AI生成内容可能存在不准确、不完整或过时的信息，请自行验证关键信息",
+          "professional_advice": "医疗/金融/法律领域数据不替代专业建议，请咨询专业人士",
+          "legal_use_only": "数据仅限合法学习、研究、AI训练使用，不得用于任何违法违规行为，否则后果自负"
+        }
+      },
+      "compliance": [
+        "数据安全法",
+        "个人信息保护法",
+        "著作权法",
+        "生成式AI服务管理办法"
+      ]
+    },
+    "_sensitivity_level": "safe"
+  },
+  {
+    "id": 18,
+    "word": "神经网络",
+    "text": "怎么说呢，在商业应用中，用通俗的话讲，从概念上来说，开始时，根据理论分析关于人工智能: ※。然后， 在实际操作中，我们需要考虑多种因素。不同的场景可能需要不同的处理方式，这就要求我们具备灵活运用的能力。（即就是关于神经网络的基本概念） 这样理解就对了。",
+    "category": "人工智能",
+    "source": "noisy",
+    "confidence": 0.72,
+    "quality_score": 0.66,
+    "quality_tier": "medium",
+    "noise_level": 2,
+    "noise_types": [],
+    "timestamp": "2025-06-10T13:56:51.856824",
+    "user_id": "ai_2073",
+    "verified": true,
+    "provenance": {
+      "platform": "PureData",
+      "version": "1.0.0",
+      "generated_at": "2026-02-24T00:13:51.856827",
+      "batch_id": "8475d40f_b1",
+      "mode": "hybrid_noisy",
+      "noise_level": 2,
+      "generator": "synthetic",
+      "license": "PureData-Commercial-1.0",
+      "license_url": "https://puredata.ai/license/commercial",
+      "license_terms": {
+        "allowed": [
+          "AI训练",
+          "模型微调",
+          "研究用途",
+          "商业用途",
+          "二次开发"
+        ],
+        "forbidden": [
+          "数据转售",
+          "再分发原始数据",
+          "非法用途"
+        ],
+        "ownership": "数据所有权归PureData所有",
+        "grant": "客户获得永久使用权，可商用",
+        "attribution": "可选注明数据来源: PureData",
+        "disclaimer": {
+          "summary": "本数据由AI生成，仅供参考，不构成专业建议",
+          "data_quality": "卖方保证数据已通过脱敏清洗处理，符合数据安全法规定",
+          "usage_liability": "客户超出授权范围或从事违法犯罪行为，责任自负",
+          "derivative_works": "客户二次加工、衍生开发后的结果，法律责任由客户自负",
+          "law_changes": "因法律法规政策变化导致无法继续使用的，卖方不承担违约责任",
+          "ai_limitation": "AI生成内容可能存在不准确、不完整或过时的信息，请自行验证关键信息",
+          "professional_advice": "医疗/金融/法律领域数据不替代专业建议，请咨询专业人士",
+          "legal_use_only": "数据仅限合法学习、研究、AI训练使用，不得用于任何违法违规行为，否则后果自负"
+        }
+      },
+      "compliance": [
+        "数据安全法",
+        "个人信息保护法",
+        "著作权法",
+        "生成式AI服务管理办法"
+      ]
+    },
+    "_sensitivity_level": "safe"
+  },
+  {
+    "id": 19,
+    "word": "实时推理",
+    "text": "技术#3: 实时推理技术已应用于图像和语音处理。",
+    "category": "人工智能",
+    "source": "structured",
+    "confidence": 0.9,
+    "quality_score": 0.88,
+    "quality_tier": "medium",
+    "timestamp": "2025-04-17T07:55:51.857259",
+    "user_id": "guest_7300",
+    "verified": false,
+    "_sensitivity_level": "safe"
+  },
+  {
+    "id": 20,
+    "word": "情感分析",
+    "text": "技术#5: 情感分析是智能系统的基础技术。",
+    "category": "人工智能",
+    "source": "structured",
+    "confidence": 0.84,
+    "quality_score": 0.82,
+    "quality_tier": "medium",
+    "timestamp": "2025-03-22T08:40:51.857280",
+    "user_id": "ai_8348",
+    "verified": true,
+    "_sensitivity_level": "safe"
+  },
+  {
+    "id": 21,
+    "word": "Encoder-Decoder",
+    "text": "Encoder-Decoder的应用范围涵盖计算机视觉、语音识别等多个领域。",
+    "category": "人工智能",
+    "source": "clean",
+    "confidence": 0.97,
+    "quality_score": 0.99,
+    "quality_tier": "high",
+    "human_like_score": 0.65,
+    "timestamp": "2026-01-02T13:16:51.856411",
+    "user_id": "bot_1145",
+    "verified": true,
+    "provenance": {
+      "platform": "PureData",
+      "version": "1.0.0",
+      "generated_at": "2026-02-24T00:13:51.856414",
+      "batch_id": "8475d40f_b1",
+      "mode": "hybrid_clean",
+      "generator": "synthetic",
+      "license": "PureData-Commercial-1.0",
+      "license_url": "https://puredata.ai/license/commercial",
+      "license_terms": {
+        "allowed": [
+          "AI训练",
+          "模型微调",
+          "研究用途",
+          "商业用途",
+          "二次开发"
+        ],
+        "forbidden": [
+          "数据转售",
+          "再分发原始数据",
+          "非法用途"
+        ],
+        "ownership": "数据所有权归PureData所有",
+        "grant": "客户获得永久使用权，可商用",
+        "attribution": "可选注明数据来源: PureData",
+        "disclaimer": {
+          "summary": "本数据由AI生成，仅供参考，不构成专业建议",
+          "data_quality": "卖方保证数据已通过脱敏清洗处理，符合数据安全法规定",
+          "usage_liability": "客户超出授权范围或从事违法犯罪行为，责任自负",
+          "derivative_works": "客户二次加工、衍生开发后的结果，法律责任由客户自负",
+          "law_changes": "因法律法规政策变化导致无法继续使用的，卖方不承担违约责任",
+          "ai_limitation": "AI生成内容可能存在不准确、不完整或过时的信息，请自行验证关键信息",
+          "professional_advice": "医疗/金融/法律领域数据不替代专业建议，请咨询专业人士",
+          "legal_use_only": "数据仅限合法学习、研究、AI训练使用，不得用于任何违法违规行为，否则后果自负"
+        }
+      },
+      "compliance": [
+        "数据安全法",
+        "个人信息保护法",
+        "著作权法",
+        "生成式AI服务管理办法"
+      ]
+    },
+    "_sensitivity_level": "safe"
+  },
+  {
+    "id": 22,
+    "word": "边缘计算",
+    "text": "关于边缘计算: 深度学习框架中，边缘计算是不可或缺的核心组件。!",
+    "category": "人工智能",
+    "source": "structured",
+    "confidence": 0.81,
+    "quality_score": 0.74,
+    "quality_tier": "medium",
+    "timestamp": "2025-10-05T14:23:51.857248",
+    "user_id": "guest_2368",
+    "verified": true,
+    "_sensitivity_level": "safe"
+  },
+  {
+    "id": 23,
+    "word": "用户画像",
+    "text": "专家预测用户画像将成为未来的核心趋势。 [补充说明: 该条目关于用户画像]",
+    "category": "人工智能",
+    "source": "clean",
+    "confidence": 0.97,
+    "quality_score": 0.97,
+    "quality_tier": "high",
+    "human_like_score": 0.76,
+    "timestamp": "2025-08-18T16:41:51.856388",
+    "user_id": "bot_2154",
+    "verified": true,
+    "provenance": {
+      "platform": "PureData",
+      "version": "1.0.0",
+      "generated_at": "2026-02-24T00:13:51.856398",
+      "batch_id": "8475d40f_b1",
+      "mode": "hybrid_clean",
+      "generator": "synthetic",
+      "license": "PureData-Commercial-1.0",
+      "license_url": "https://puredata.ai/license/commercial",
+      "license_terms": {
+        "allowed": [
+          "AI训练",
+          "模型微调",
+          "研究用途",
+          "商业用途",
+          "二次开发"
+        ],
+        "forbidden": [
+          "数据转售",
+          "再分发原始数据",
+          "非法用途"
+        ],
+        "ownership": "数据所有权归PureData所有",
+        "grant": "客户获得永久使用权，可商用",
+        "attribution": "可选注明数据来源: PureData",
+        "disclaimer": {
+          "summary": "本数据由AI生成，仅供参考，不构成专业建议",
+          "data_quality": "卖方保证数据已通过脱敏清洗处理，符合数据安全法规定",
+          "usage_liability": "客户超出授权范围或从事违法犯罪行为，责任自负",
+          "derivative_works": "客户二次加工、衍生开发后的结果，法律责任由客户自负",
+          "law_changes": "因法律法规政策变化导致无法继续使用的，卖方不承担违约责任",
+          "ai_limitation": "AI生成内容可能存在不准确、不完整或过时的信息，请自行验证关键信息",
+          "professional_advice": "医疗/金融/法律领域数据不替代专业建议，请咨询专业人士",
+          "legal_use_only": "数据仅限合法学习、研究、AI训练使用，不得用于任何违法违规行为，否则后果自负"
+        }
+      },
+      "compliance": [
+        "数据安全法",
+        "个人信息保护法",
+        "著作权法",
+        "生成式AI服务管理办法"
+      ]
+    },
+    "_sensitivity_level": "safe"
+  },
+  {
+    "id": 24,
+    "word": "机器学习",
+    "text": "对于研究者而言，从专家视角，定义上讲，开始时，简单来讲技术#13: ⚡ 机器学习在自然语言处理中发挥重要作用。接下来，. 该领域发展前景广阔。 实践证明其具有重要价值。 该领域发展前景广阔。 实践证明其具有重要价值。 实践证明其具有重要价值。 业内专家对此给予高度评价。 这就是对机器学习的定义。，最新研究表明机器学习领域有新的突破 值得进一步探索。 期待更多研究成果。",
+    "category": "人工智能",
+    "source": "noisy",
+    "confidence": 0.69,
+    "quality_score": 0.6,
+    "quality_tier": "medium",
+    "noise_level": 2,
+    "noise_types": [],
+    "timestamp": "2025-11-10T15:59:51.857166",
+    "user_id": "ai_8129",
+    "verified": true,
+    "provenance": {
+      "platform": "PureData",
+      "version": "1.0.0",
+      "generated_at": "2026-02-24T00:13:51.857168",
+      "batch_id": "8475d40f_b1",
+      "mode": "hybrid_noisy",
+      "noise_level": 2,
+      "generator": "synthetic",
+      "license": "PureData-Commercial-1.0",
+      "license_url": "https://puredata.ai/license/commercial",
+      "license_terms": {
+        "allowed": [
+          "AI训练",
+          "模型微调",
+          "研究用途",
+          "商业用途",
+          "二次开发"
+        ],
+        "forbidden": [
+          "数据转售",
+          "再分发原始数据",
+          "非法用途"
+        ],
+        "ownership": "数据所有权归PureData所有",
+        "grant": "客户获得永久使用权，可商用",
+        "attribution": "可选注明数据来源: PureData",
+        "disclaimer": {
+          "summary": "本数据由AI生成，仅供参考，不构成专业建议",
+          "data_quality": "卖方保证数据已通过脱敏清洗处理，符合数据安全法规定",
+          "usage_liability": "客户超出授权范围或从事违法犯罪行为，责任自负",
+          "derivative_works": "客户二次加工、衍生开发后的结果，法律责任由客户自负",
+          "law_changes": "因法律法规政策变化导致无法继续使用的，卖方不承担违约责任",
+          "ai_limitation": "AI生成内容可能存在不准确、不完整或过时的信息，请自行验证关键信息",
+          "professional_advice": "医疗/金融/法律领域数据不替代专业建议，请咨询专业人士",
+          "legal_use_only": "数据仅限合法学习、研究、AI训练使用，不得用于任何违法违规行为，否则后果自负"
+        }
+      },
+      "compliance": [
+        "数据安全法",
+        "个人信息保护法",
+        "著作权法",
+        "生成式AI服务管理办法"
+      ]
+    },
+    "_sensitivity_level": "safe"
+  },
+  {
+    "id": 25,
+    "word": "大模型",
+    "text": "技术参考: 注: 大模型是智能系统的基础技术。 实践证明其具有重要价值。",
+    "category": "人工智能",
+    "source": "noisy",
+    "confidence": 0.7,
+    "quality_score": 0.6,
+    "quality_tier": "medium",
+    "noise_level": 2,
+    "noise_types": [],
+    "timestamp": "2025-08-29T13:03:51.856709",
+    "user_id": "bot_9796",
+    "verified": true,
+    "provenance": {
+      "platform": "PureData",
+      "version": "1.0.0",
+      "generated_at": "2026-02-24T00:13:51.856712",
+      "batch_id": "8475d40f_b1",
+      "mode": "hybrid_noisy",
+      "noise_level": 2,
+      "generator": "synthetic",
+      "license": "PureData-Commercial-1.0",
+      "license_url": "https://puredata.ai/license/commercial",
+      "license_terms": {
+        "allowed": [
+          "AI训练",
+          "模型微调",
+          "研究用途",
+          "商业用途",
+          "二次开发"
+        ],
+        "forbidden": [
+          "数据转售",
+          "再分发原始数据",
+          "非法用途"
+        ],
+        "ownership": "数据所有权归PureData所有",
+        "grant": "客户获得永久使用权，可商用",
+        "attribution": "可选注明数据来源: PureData",
+        "disclaimer": {
+          "summary": "本数据由AI生成，仅供参考，不构成专业建议",
+          "data_quality": "卖方保证数据已通过脱敏清洗处理，符合数据安全法规定",
+          "usage_liability": "客户超出授权范围或从事违法犯罪行为，责任自负",
+          "derivative_works": "客户二次加工、衍生开发后的结果，法律责任由客户自负",
+          "law_changes": "因法律法规政策变化导致无法继续使用的，卖方不承担违约责任",
+          "ai_limitation": "AI生成内容可能存在不准确、不完整或过时的信息，请自行验证关键信息",
+          "professional_advice": "医疗/金融/法律领域数据不替代专业建议，请咨询专业人士",
+          "legal_use_only": "数据仅限合法学习、研究、AI训练使用，不得用于任何违法违规行为，否则后果自负"
+        }
+      },
+      "compliance": [
+        "数据安全法",
+        "个人信息保护法",
+        "著作权法",
+        "生成式AI服务管理办法"
+      ]
+    },
+    "_sensitivity_level": "safe"
+  },
+  {
+    "id": 26,
+    "word": "方差",
+    "text": "，嗯， 方差是智能系统的基础技术。你还有什么疑问吗？",
+    "category": "人工智能",
+    "source": "clean",
+    "confidence": 0.9,
+    "quality_score": 0.88,
+    "quality_tier": "high",
+    "human_like_score": 0.9,
+    "timestamp": "2025-12-19T07:58:51.856496",
+    "user_id": "user_9062",
+    "verified": true,
+    "provenance": {
+      "platform": "PureData",
+      "version": "1.0.0",
+      "generated_at": "2026-02-24T00:13:51.856498",
+      "batch_id": "8475d40f_b1",
+      "mode": "hybrid_clean",
+      "generator": "synthetic",
+      "license": "PureData-Commercial-1.0",
+      "license_url": "https://puredata.ai/license/commercial",
+      "license_terms": {
+        "allowed": [
+          "AI训练",
+          "模型微调",
+          "研究用途",
+          "商业用途",
+          "二次开发"
+        ],
+        "forbidden": [
+          "数据转售",
+          "再分发原始数据",
+          "非法用途"
+        ],
+        "ownership": "数据所有权归PureData所有",
+        "grant": "客户获得永久使用权，可商用",
+        "attribution": "可选注明数据来源: PureData",
+        "disclaimer": {
+          "summary": "本数据由AI生成，仅供参考，不构成专业建议",
+          "data_quality": "卖方保证数据已通过脱敏清洗处理，符合数据安全法规定",
+          "usage_liability": "客户超出授权范围或从事违法犯罪行为，责任自负",
+          "derivative_works": "客户二次加工、衍生开发后的结果，法律责任由客户自负",
+          "law_changes": "因法律法规政策变化导致无法继续使用的，卖方不承担违约责任",
+          "ai_limitation": "AI生成内容可能存在不准确、不完整或过时的信息，请自行验证关键信息",
+          "professional_advice": "医疗/金融/法律领域数据不替代专业建议，请咨询专业人士",
+          "legal_use_only": "数据仅限合法学习、研究、AI训练使用，不得用于任何违法违规行为，否则后果自负"
+        }
+      },
+      "compliance": [
+        "数据安全法",
+        "个人信息保护法",
+        "著作权法",
+        "生成式AI服务管理办法"
+      ]
+    },
+    "_sensitivity_level": "safe"
+  },
+  {
+    "id": 27,
+    "word": "自然语言处理",
+    "text": "在深度学习中，自然语言处理扮演着关键角色。!",
+    "category": "人工智能",
+    "source": "clean",
+    "confidence": 0.91,
+    "quality_score": 0.92,
+    "quality_tier": "high",
+    "human_like_score": 0.61,
+    "timestamp": "2025-08-23T04:39:51.856541",
+    "user_id": "expert_1181",
+    "verified": true,
+    "provenance": {
+      "platform": "PureData",
+      "version": "1.0.0",
+      "generated_at": "2026-02-24T00:13:51.856544",
+      "batch_id": "8475d40f_b1",
+      "mode": "hybrid_clean",
+      "generator": "synthetic",
+      "license": "PureData-Commercial-1.0",
+      "license_url": "https://puredata.ai/license/commercial",
+      "license_terms": {
+        "allowed": [
+          "AI训练",
+          "模型微调",
+          "研究用途",
+          "商业用途",
+          "二次开发"
+        ],
+        "forbidden": [
+          "数据转售",
+          "再分发原始数据",
+          "非法用途"
+        ],
+        "ownership": "数据所有权归PureData所有",
+        "grant": "客户获得永久使用权，可商用",
+        "attribution": "可选注明数据来源: PureData",
+        "disclaimer": {
+          "summary": "本数据由AI生成，仅供参考，不构成专业建议",
+          "data_quality": "卖方保证数据已通过脱敏清洗处理，符合数据安全法规定",
+          "usage_liability": "客户超出授权范围或从事违法犯罪行为，责任自负",
+          "derivative_works": "客户二次加工、衍生开发后的结果，法律责任由客户自负",
+          "law_changes": "因法律法规政策变化导致无法继续使用的，卖方不承担违约责任",
+          "ai_limitation": "AI生成内容可能存在不准确、不完整或过时的信息，请自行验证关键信息",
+          "professional_advice": "医疗/金融/法律领域数据不替代专业建议，请咨询专业人士",
+          "legal_use_only": "数据仅限合法学习、研究、AI训练使用，不得用于任何违法违规行为，否则后果自负"
+        }
+      },
+      "compliance": [
+        "数据安全法",
+        "个人信息保护法",
+        "著作权法",
+        "生成式AI服务管理办法"
+      ]
+    },
+    "_sensitivity_level": "safe"
+  },
+  {
+    "id": 28,
+    "word": "神经网络",
+    "text": "从教育角度看，深入研究，所谓开始时，就是，根据理论分析【AI知识】技术要点: 神经网络技术已应用于图像和语音处理。接下来， 常与计算机视觉一起讨论。 嗯 业内专家对此给予高度评价。 这就是对神经网络的定义。，最新研究表明神经网络的应用边界在不断拓展 值得进一步探索。 这对学习者很有帮助。",
+    "category": "人工智能",
+    "source": "noisy",
+    "confidence": 0.64,
+    "quality_score": 0.5,
+    "quality_tier": "medium",
+    "noise_level": 2,
+    "noise_types": [],
+    "timestamp": "2025-07-14T03:57:51.856771",
+    "user_id": "ai_5007",
+    "verified": true,
+    "provenance": {
+      "platform": "PureData",
+      "version": "1.0.0",
+      "generated_at": "2026-02-24T00:13:51.856774",
+      "batch_id": "8475d40f_b1",
+      "mode": "hybrid_noisy",
+      "noise_level": 2,
+      "generator": "synthetic",
+      "license": "PureData-Commercial-1.0",
+      "license_url": "https://puredata.ai/license/commercial",
+      "license_terms": {
+        "allowed": [
+          "AI训练",
+          "模型微调",
+          "研究用途",
+          "商业用途",
+          "二次开发"
+        ],
+        "forbidden": [
+          "数据转售",
+          "再分发原始数据",
+          "非法用途"
+        ],
+        "ownership": "数据所有权归PureData所有",
+        "grant": "客户获得永久使用权，可商用",
+        "attribution": "可选注明数据来源: PureData",
+        "disclaimer": {
+          "summary": "本数据由AI生成，仅供参考，不构成专业建议",
+          "data_quality": "卖方保证数据已通过脱敏清洗处理，符合数据安全法规定",
+          "usage_liability": "客户超出授权范围或从事违法犯罪行为，责任自负",
+          "derivative_works": "客户二次加工、衍生开发后的结果，法律责任由客户自负",
+          "law_changes": "因法律法规政策变化导致无法继续使用的，卖方不承担违约责任",
+          "ai_limitation": "AI生成内容可能存在不准确、不完整或过时的信息，请自行验证关键信息",
+          "professional_advice": "医疗/金融/法律领域数据不替代专业建议，请咨询专业人士",
+          "legal_use_only": "数据仅限合法学习、研究、AI训练使用，不得用于任何违法违规行为，否则后果自负"
+        }
+      },
+      "compliance": [
+        "数据安全法",
+        "个人信息保护法",
+        "著作权法",
+        "生成式AI服务管理办法"
+      ]
+    },
+    "_sensitivity_level": "safe"
+  },
+  {
+    "id": 29,
+    "word": "深度学习",
+    "text": "【人工智能】技术要点: 基于深度学习的创新解决方案正在重塑行业。 类似概念包括神经网络。 这一技术已广泛应用于实际场景。 实践证明其具有重要价值。 实践证明其具有重要价值。 这一技术已广泛应用于实际场景。",
+    "category": "人工智能",
+    "source": "noisy",
+    "confidence": 0.65,
+    "quality_score": 0.53,
+    "quality_tier": "medium",
+    "noise_level": 2,
+    "noise_types": [],
+    "timestamp": "2026-02-14T16:48:51.856657",
+    "user_id": "bot_8799",
+    "verified": true,
+    "provenance": {
+      "platform": "PureData",
+      "version": "1.0.0",
+      "generated_at": "2026-02-24T00:13:51.856660",
+      "batch_id": "8475d40f_b1",
+      "mode": "hybrid_noisy",
+      "noise_level": 2,
+      "generator": "synthetic",
+      "license": "PureData-Commercial-1.0",
+      "license_url": "https://puredata.ai/license/commercial",
+      "license_terms": {
+        "allowed": [
+          "AI训练",
+          "模型微调",
+          "研究用途",
+          "商业用途",
+          "二次开发"
+        ],
+        "forbidden": [
+          "数据转售",
+          "再分发原始数据",
+          "非法用途"
+        ],
+        "ownership": "数据所有权归PureData所有",
+        "grant": "客户获得永久使用权，可商用",
+        "attribution": "可选注明数据来源: PureData",
+        "disclaimer": {
+          "summary": "本数据由AI生成，仅供参考，不构成专业建议",
+          "data_quality": "卖方保证数据已通过脱敏清洗处理，符合数据安全法规定",
+          "usage_liability": "客户超出授权范围或从事违法犯罪行为，责任自负",
+          "derivative_works": "客户二次加工、衍生开发后的结果，法律责任由客户自负",
+          "law_changes": "因法律法规政策变化导致无法继续使用的，卖方不承担违约责任",
+          "ai_limitation": "AI生成内容可能存在不准确、不完整或过时的信息，请自行验证关键信息",
+          "professional_advice": "医疗/金融/法律领域数据不替代专业建议，请咨询专业人士",
+          "legal_use_only": "数据仅限合法学习、研究、AI训练使用，不得用于任何违法违规行为，否则后果自负"
+        }
+      },
+      "compliance": [
+        "数据安全法",
+        "个人信息保护法",
+        "著作权法",
+        "生成式AI服务管理办法"
+      ]
+    },
+    "_sensitivity_level": "safe"
+  },
+  {
+    "id": 30,
+    "word": "深度学习",
+    "text": "q: 什么是人工智能? a: 技术要点: 专家预测深度学习将成为未来的核心趋势。 相关研究表明其效果显著。 该领域发展前景广阔。",
+    "category": "人工智能",
+    "source": "noisy",
+    "confidence": 0.73,
+    "quality_score": 0.59,
+    "quality_tier": "medium",
+    "noise_level": 2,
+    "noise_types": [],
+    "timestamp": "2025-05-21T08:17:51.856852",
+    "user_id": "expert_4677",
+    "verified": true,
+    "provenance": {
+      "platform": "PureData",
+      "version": "1.0.0",
+      "generated_at": "2026-02-24T00:13:51.856855",
+      "batch_id": "8475d40f_b1",
+      "mode": "hybrid_noisy",
+      "noise_level": 2,
+      "generator": "synthetic",
+      "license": "PureData-Commercial-1.0",
+      "license_url": "https://puredata.ai/license/commercial",
+      "license_terms": {
+        "allowed": [
+          "AI训练",
+          "模型微调",
+          "研究用途",
+          "商业用途",
+          "二次开发"
+        ],
+        "forbidden": [
+          "数据转售",
+          "再分发原始数据",
+          "非法用途"
+        ],
+        "ownership": "数据所有权归PureData所有",
+        "grant": "客户获得永久使用权，可商用",
+        "attribution": "可选注明数据来源: PureData",
+        "disclaimer": {
+          "summary": "本数据由AI生成，仅供参考，不构成专业建议",
+          "data_quality": "卖方保证数据已通过脱敏清洗处理，符合数据安全法规定",
+          "usage_liability": "客户超出授权范围或从事违法犯罪行为，责任自负",
+          "derivative_works": "客户二次加工、衍生开发后的结果，法律责任由客户自负",
+          "law_changes": "因法律法规政策变化导致无法继续使用的，卖方不承担违约责任",
+          "ai_limitation": "AI生成内容可能存在不准确、不完整或过时的信息，请自行验证关键信息",
+          "professional_advice": "医疗/金融/法律领域数据不替代专业建议，请咨询专业人士",
+          "legal_use_only": "数据仅限合法学习、研究、AI训练使用，不得用于任何违法违规行为，否则后果自负"
+        }
+      },
+      "compliance": [
+        "数据安全法",
+        "个人信息保护法",
+        "著作权法",
+        "生成式AI服务管理办法"
+      ]
+    },
+    "_sensitivity_level": "safe"
+  }
+]

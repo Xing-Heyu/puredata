@@ -1,0 +1,29 @@
+[
+  {
+    "id": "0",
+    "term": "AI",
+    "definition": "A type of three-toed sloth, Bradypus tridactylus, endemic to forests of southern Venezuela, the Guianas, and northern Brazil.",
+    "category": "人工智能",
+    "domain": "人工智能",
+    "source": "dict_api:free_dict",
+    "generated_at": "2026-02-17T22:40:21.964775"
+  },
+  {
+    "id": "1",
+    "term": "机器学习",
+    "definition": "机器学习是人工智能领域的重要概念，具有广泛的应用价值。",
+    "category": "人工智能",
+    "domain": "人工智能",
+    "source": "generated",
+    "generated_at": "2026-02-17T22:40:21.964884"
+  },
+  {
+    "id": "2",
+    "term": "深度学习",
+    "definition": "深度学习是人工智能领域的重要概念，具有广泛的应用价值。",
+    "category": "人工智能",
+    "domain": "人工智能",
+    "source": "generated",
+    "generated_at": "2026-02-17T22:40:21.964932"
+  }
+]

@@ -1,0 +1,20 @@
+{
+  "test@example.com": {
+    "code": "569027",
+    "created_at": "2026-02-20T01:03:58.530472",
+    "expires_at": "2026-02-20T01:13:58.530472",
+    "verified": true,
+    "attempts": 1,
+    "last_attempt": "2026-02-20T01:03:58.530472",
+    "verified_at": "2026-02-20T01:03:58.530472"
+  },
+  "testuser123@example.com": {
+    "code": "433628",
+    "created_at": "2026-02-20T01:47:16.636166",
+    "expires_at": "2026-02-20T01:57:16.636166",
+    "verified": true,
+    "attempts": 1,
+    "last_attempt": "2026-02-20T01:47:18.706755",
+    "verified_at": "2026-02-20T01:47:18.706755"
+  }
+}

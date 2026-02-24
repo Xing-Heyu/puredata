@@ -1,0 +1,3055 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PureData - AI训练数据生成平台</title>
+    <meta name="description" content="一键生成高质量AI训练数据，支持多领域、多格式，让AI模型训练更高效">
+    <script src="https://cdn.jsdelivr.net/npm/vue@3/dist/vue.global.prod.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <style>
+        :root {
+            --primary: #6366f1;
+            --primary-light: #818cf8;
+            --primary-dark: #4f46e5;
+            --primary-gradient: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+            --success: #10b981;
+            --success-light: #34d399;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --gray-50: #f9fafb;
+            --gray-100: #f3f4f6;
+            --gray-200: #e5e7eb;
+            --gray-300: #d1d5db;
+            --gray-400: #9ca3af;
+            --gray-500: #6b7280;
+            --gray-600: #4b5563;
+            --gray-700: #374151;
+            --gray-800: #1f2937;
+            --gray-900: #111827;
+            --sidebar-width: 260px;
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+            --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+            background: var(--gray-50);
+            color: var(--gray-800);
+            line-height: 1.5;
+        }
+        
+        .app-layout { display: flex; min-height: 100vh; }
+        
+        .sidebar {
+            width: var(--sidebar-width);
+            background: var(--gray-900);
+            position: fixed;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            display: flex;
+            flex-direction: column;
+            z-index: 100;
+        }
+        
+        .sidebar-header { padding: 20px; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        
+        .sidebar-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: white;
+            text-decoration: none;
+        }
+        
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--primary-gradient);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 16px;
+            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.4);
+        }
+        
+        .logo-text { font-size: 18px; font-weight: 600; }
+        .logo-text span { color: var(--primary-light); }
+        
+        .sidebar-nav { flex: 1; padding: 16px 12px; }
+        .nav-section { margin-bottom: 24px; }
+        
+        .nav-section-title {
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--gray-500);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            padding: 0 12px;
+            margin-bottom: 8px;
+        }
+        
+        .nav-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 12px;
+            color: var(--gray-400);
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.15s;
+            margin-bottom: 4px;
+        }
+        
+        .nav-item:hover { background: rgba(255,255,255,0.05); color: white; }
+        .nav-item.active { background: var(--primary); color: white; }
+        .nav-item svg { width: 20px; height: 20px; flex-shrink: 0; }
+        
+        .sidebar-footer { padding: 16px; border-top: 1px solid rgba(255,255,255,0.1); }
+        
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 8px;
+            border-radius: 8px;
+            background: rgba(255,255,255,0.05);
+        }
+        
+        .user-avatar {
+            width: 36px;
+            height: 36px;
+            background: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+            font-size: 14px;
+        }
+        
+        .user-details { flex: 1; }
+        .user-name { font-size: 14px; font-weight: 500; color: white; }
+        .user-plan { font-size: 12px; color: var(--gray-400); }
+        
+        .quota-mini-bar {
+            width: 100%;
+            height: 4px;
+            background: var(--gray-600);
+            border-radius: 2px;
+            margin-top: 4px;
+            overflow: hidden;
+        }
+        
+        .quota-mini-fill {
+            height: 100%;
+            border-radius: 2px;
+            transition: width 0.3s;
+        }
+        
+        .quota-mini-fill.normal { background: var(--success); }
+        .quota-mini-fill.warning { background: var(--warning); }
+        .quota-mini-fill.critical { background: var(--danger); }
+        
+        .quota-card {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 16px;
+            border: 1px solid var(--gray-200);
+        }
+        
+        .quota-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+        
+        .quota-title { font-size: 14px; font-weight: 600; color: var(--gray-800); }
+        .quota-badge { font-size: 12px; padding: 4px 8px; border-radius: 12px; }
+        .quota-badge.normal { background: rgba(16, 185, 129, 0.1); color: var(--success); }
+        .quota-badge.warning { background: rgba(245, 158, 11, 0.1); color: var(--warning); }
+        .quota-badge.critical { background: rgba(239, 68, 68, 0.1); color: var(--danger); }
+        
+        .quota-progress {
+            height: 12px;
+            background: var(--gray-100);
+            border-radius: 6px;
+            overflow: hidden;
+            margin-bottom: 8px;
+        }
+        
+        .quota-progress-fill {
+            height: 100%;
+            border-radius: 6px;
+            transition: width 0.5s ease;
+        }
+        
+        .quota-progress-fill.normal { background: linear-gradient(90deg, var(--success), var(--success-light)); }
+        .quota-progress-fill.warning { background: linear-gradient(90deg, var(--warning), #fbbf24); }
+        .quota-progress-fill.critical { background: linear-gradient(90deg, var(--danger), #f87171); }
+        
+        .quota-stats {
+            display: flex;
+            justify-content: space-between;
+            font-size: 13px;
+            color: var(--gray-500);
+        }
+        
+        .quota-stats strong { color: var(--gray-800); }
+        
+        .quota-warning-modal {
+            max-width: 450px;
+        }
+        
+        .quota-warning-icon {
+            width: 64px;
+            height: 64px;
+            background: rgba(245, 158, 11, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+        }
+        
+        .quota-warning-icon svg { width: 32px; height: 32px; color: var(--warning); }
+        
+        .quota-warning-title {
+            text-align: center;
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--gray-900);
+            margin-bottom: 12px;
+        }
+        
+        .quota-warning-text {
+            text-align: center;
+            font-size: 14px;
+            color: var(--gray-600);
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+        
+        .quota-actions {
+            display: flex;
+            gap: 12px;
+        }
+        
+        .quota-actions .btn { flex: 1; }
+        
+        .notification-badge {
+            position: absolute;
+            top: -4px;
+            right: -4px;
+            width: 18px;
+            height: 18px;
+            background: var(--danger);
+            color: white;
+            border-radius: 50%;
+            font-size: 11px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .toast-container {
+            position: fixed;
+            top: 80px;
+            right: 20px;
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .toast {
+            padding: 12px 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            animation: slideIn 0.3s ease;
+            min-width: 280px;
+        }
+        
+        .toast.success { border-left: 4px solid var(--success); }
+        .toast.error { border-left: 4px solid var(--danger); }
+        .toast.info { border-left: 4px solid var(--primary); }
+        
+        .toast-icon {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .toast.success .toast-icon { background: rgba(16, 185, 129, 0.1); color: var(--success); }
+        .toast.error .toast-icon { background: rgba(239, 68, 68, 0.1); color: var(--danger); }
+        .toast.info .toast-icon { background: rgba(79, 70, 229, 0.1); color: var(--primary); }
+        
+        .toast-content { flex: 1; }
+        .toast-title { font-size: 14px; font-weight: 500; color: var(--gray-800); }
+        .toast-message { font-size: 12px; color: var(--gray-500); }
+        
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1001;
+        }
+        
+        .modal-content {
+            background: white;
+            border-radius: 16px;
+            padding: 24px;
+            max-width: 500px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+        
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .modal-header h3 { font-size: 18px; font-weight: 600; color: var(--gray-800); }
+        
+        .modal-close {
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--gray-400);
+            padding: 0;
+            line-height: 1;
+        }
+        
+        .modal-close:hover { color: var(--gray-600); }
+        
+        .alert { padding: 12px 16px; border-radius: 8px; margin-bottom: 16px; font-size: 14px; }
+        .alert-error { background: rgba(239, 68, 68, 0.1); color: var(--danger); border: 1px solid rgba(239, 68, 68, 0.2); }
+        .alert-success { background: rgba(16, 185, 129, 0.1); color: var(--success); border: 1px solid rgba(16, 185, 129, 0.2); }
+        
+        @keyframes slideIn { from { opacity: 0; transform: translateX(100px); } to { opacity: 1; transform: translateX(0); } }
+        
+        .main-content { flex: 1; margin-left: var(--sidebar-width); }
+        
+        .page-header { margin-bottom: 24px; padding: 0 32px; }
+        .page-title { font-size: 24px; font-weight: 600; color: var(--gray-900); margin-bottom: 4px; }
+        .page-subtitle { font-size: 14px; color: var(--gray-500); }
+        
+        .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 24px; padding: 0 32px; }
+        
+        .stat-card {
+            background: white;
+            border-radius: 16px;
+            padding: 24px;
+            border: 1px solid var(--gray-200);
+            box-shadow: var(--shadow-sm);
+            transition: all 0.2s;
+        }
+        
+        .stat-card:hover { box-shadow: var(--shadow-md); transform: translateY(-2px); }
+        
+        .stat-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 16px;
+        }
+        
+        .stat-icon.primary { background: rgba(99, 102, 241, 0.1); color: var(--primary); }
+        .stat-icon.success { background: rgba(16, 185, 129, 0.1); color: var(--success); }
+        .stat-icon.warning { background: rgba(245, 158, 11, 0.1); color: var(--warning); }
+        .stat-icon.danger { background: rgba(239, 68, 68, 0.1); color: var(--danger); }
+        
+        .stat-label { font-size: 13px; color: var(--gray-500); margin-bottom: 8px; }
+        .stat-value { font-size: 28px; font-weight: 700; color: var(--gray-900); }
+        .stat-change { font-size: 12px; color: var(--success); margin-top: 4px; }
+        
+        .card {
+            background: white;
+            border-radius: 16px;
+            border: 1px solid var(--gray-200);
+            margin-bottom: 16px;
+            box-shadow: var(--shadow-sm);
+            overflow: hidden;
+        }
+        
+        .card-header {
+            padding: 16px 20px;
+            border-bottom: 1px solid var(--gray-200);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .card-title { font-size: 16px; font-weight: 600; color: var(--gray-900); }
+        .card-body { padding: 20px; }
+        
+        .form-group { margin-bottom: 16px; }
+        
+        .form-label {
+            display: block;
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--gray-700);
+            margin-bottom: 6px;
+        }
+        
+        .form-input, .form-select {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid var(--gray-300);
+            border-radius: 8px;
+            font-size: 14px;
+            transition: all 0.15s;
+            background: white;
+        }
+        
+        .form-input:focus, .form-select:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+        }
+        
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 10px 16px;
+            font-size: 14px;
+            font-weight: 500;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.15s;
+        }
+        
+        .btn-primary {
+            background: var(--primary-gradient);
+            color: white;
+            box-shadow: 0 2px 8px rgba(99, 102, 241, 0.3);
+        }
+        
+        .btn-primary:hover { box-shadow: 0 4px 12px rgba(99, 102, 241, 0.4); transform: translateY(-1px); }
+        .btn-primary:disabled { background: var(--gray-300); cursor: not-allowed; }
+        
+        .btn-secondary { background: white; color: var(--gray-700); border: 1px solid var(--gray-300); }
+        .btn-secondary:hover { background: var(--gray-50); }
+        .btn-success { background: var(--success); color: white; }
+        .btn-success:hover { background: #059669; }
+        .btn-lg { padding: 14px 28px; font-size: 16px; border-radius: 10px; }
+        
+        .domain-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+        
+        .domain-option {
+            padding: 16px;
+            border: 2px solid var(--gray-200);
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.15s;
+        }
+        
+        .domain-option:hover { border-color: var(--gray-300); }
+        .domain-option.selected { border-color: var(--primary); background: rgba(79, 70, 229, 0.05); }
+        .domain-name { font-size: 15px; font-weight: 500; color: var(--gray-800); margin-bottom: 4px; }
+        .domain-count { font-size: 13px; color: var(--gray-500); }
+        
+        .table-container { overflow-x: auto; }
+        .data-table { width: 100%; border-collapse: collapse; }
+        
+        .data-table th {
+            text-align: left;
+            padding: 12px 16px;
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--gray-500);
+            background: var(--gray-50);
+            border-bottom: 1px solid var(--gray-200);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .data-table td {
+            padding: 12px 16px;
+            font-size: 14px;
+            color: var(--gray-700);
+            border-bottom: 1px solid var(--gray-100);
+        }
+        
+        .data-table tr:hover td { background: var(--gray-50); }
+        
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 4px 10px;
+            font-size: 12px;
+            font-weight: 500;
+            border-radius: 20px;
+        }
+        
+        .badge-success { background: rgba(16, 185, 129, 0.1); color: var(--success); }
+        .badge-warning { background: rgba(245, 158, 11, 0.1); color: var(--warning); }
+        .badge-error { background: rgba(239, 68, 68, 0.1); color: var(--danger); }
+        
+        .progress-bar { height: 8px; background: var(--gray-200); border-radius: 4px; overflow: hidden; }
+        
+        .progress-fill {
+            height: 100%;
+            background: var(--primary-gradient);
+            border-radius: 4px;
+            transition: width 0.3s;
+            position: relative;
+        }
+        
+        .progress-fill::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            animation: shimmer 1.5s infinite;
+        }
+        
+        @keyframes shimmer { 0% { transform: translateX(-100%); } 100% { transform: translateX(100%); } }
+        
+        .pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; max-width: 900px; }
+        
+        .pricing-card {
+            background: white;
+            border-radius: 12px;
+            border: 1px solid var(--gray-200);
+            padding: 24px;
+            position: relative;
+        }
+        
+        .pricing-card.featured { border-color: var(--primary); box-shadow: 0 4px 20px rgba(79, 70, 229, 0.15); }
+        
+        .pricing-badge {
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--primary);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+        
+        .pricing-name { font-size: 18px; font-weight: 600; color: var(--gray-900); margin-bottom: 8px; }
+        .pricing-price { font-size: 36px; font-weight: 700; color: var(--gray-900); margin-bottom: 4px; }
+        .pricing-price span { font-size: 14px; font-weight: 400; color: var(--gray-500); }
+        .pricing-desc { font-size: 14px; color: var(--gray-500); margin-bottom: 20px; }
+        .pricing-features { list-style: none; margin-bottom: 24px; }
+        .pricing-features li { display: flex; align-items: center; gap: 10px; padding: 8px 0; font-size: 14px; color: var(--gray-600); }
+        .pricing-features li svg { width: 16px; height: 16px; color: var(--success); }
+        .pricing-btn { width: 100%; }
+        
+        .quick-actions { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+        
+        .quick-action {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 20px;
+            background: white;
+            border: 1px solid var(--gray-200);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.15s;
+        }
+        
+        .quick-action:hover { border-color: var(--primary); box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+        
+        .quick-action-icon {
+            width: 48px;
+            height: 48px;
+            background: var(--gray-100);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .quick-action-icon svg { width: 24px; height: 24px; color: var(--primary); }
+        .quick-action-content h3 { font-size: 15px; font-weight: 600; color: var(--gray-800); margin-bottom: 2px; }
+        .quick-action-content p { font-size: 13px; color: var(--gray-500); }
+        
+        .empty-state { text-align: center; padding: 48px 24px; }
+        .empty-state svg { width: 64px; height: 64px; color: var(--gray-300); margin-bottom: 16px; }
+        .empty-state h3 { font-size: 16px; font-weight: 600; color: var(--gray-700); margin-bottom: 8px; }
+        .empty-state p { font-size: 14px; color: var(--gray-500); }
+        
+        .spinner {
+            width: 18px;
+            height: 18px;
+            border: 2px solid rgba(255,255,255,0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 0.8s linear infinite;
+        }
+        
+        @keyframes spin { to { transform: rotate(360deg); } }
+        .fade-enter { animation: fadeIn 0.2s ease; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        
+        .hero-section {
+            background: var(--primary-gradient);
+            padding: 80px 32px;
+            color: white;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+        
+        .hero-content { position: relative; z-index: 1; max-width: 800px; margin: 0 auto; }
+        .hero-title { font-size: 48px; font-weight: 700; margin-bottom: 16px; line-height: 1.2; }
+        .hero-subtitle { font-size: 20px; opacity: 0.9; margin-bottom: 32px; line-height: 1.6; }
+        .hero-buttons { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+        
+        .btn-hero {
+            background: white;
+            color: var(--primary);
+            padding: 14px 32px;
+            font-size: 16px;
+            font-weight: 600;
+            border-radius: 10px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s;
+            box-shadow: 0 4px 14px rgba(0,0,0,0.15);
+        }
+        
+        .btn-hero:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.2); }
+        
+        .btn-hero-outline {
+            background: transparent;
+            color: white;
+            padding: 14px 32px;
+            font-size: 16px;
+            font-weight: 600;
+            border-radius: 10px;
+            border: 2px solid rgba(255,255,255,0.5);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .btn-hero-outline:hover { background: rgba(255,255,255,0.1); border-color: white; }
+        
+        .features-section { padding: 80px 32px; background: white; }
+        .section-title { text-align: center; font-size: 32px; font-weight: 700; color: var(--gray-900); margin-bottom: 12px; }
+        .section-subtitle { text-align: center; font-size: 16px; color: var(--gray-500); margin-bottom: 48px; }
+        
+        .features-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; max-width: 1100px; margin: 0 auto; }
+        
+        .feature-card {
+            padding: 32px;
+            background: var(--gray-50);
+            border-radius: 16px;
+            text-align: center;
+            transition: all 0.2s;
+        }
+        
+        .feature-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+        
+        .feature-icon {
+            width: 64px;
+            height: 64px;
+            background: var(--primary-gradient);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            box-shadow: 0 4px 14px rgba(99, 102, 241, 0.3);
+        }
+        
+        .feature-icon svg { width: 32px; height: 32px; color: white; }
+        .feature-title { font-size: 18px; font-weight: 600; color: var(--gray-900); margin-bottom: 12px; }
+        .feature-desc { font-size: 14px; color: var(--gray-500); line-height: 1.6; }
+        
+        .testimonials-section { padding: 80px 32px; background: var(--gray-50); }
+        
+        .testimonials-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; max-width: 1100px; margin: 0 auto; }
+        
+        .testimonial-card {
+            background: white;
+            padding: 32px;
+            border-radius: 16px;
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .testimonial-text {
+            font-size: 15px;
+            color: var(--gray-600);
+            line-height: 1.7;
+            margin-bottom: 24px;
+            font-style: italic;
+        }
+        
+        .testimonial-author { display: flex; align-items: center; gap: 12px; }
+        .testimonial-avatar { width: 48px; height: 48px; background: var(--primary-gradient); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: 600; }
+        .testimonial-name { font-size: 14px; font-weight: 600; color: var(--gray-900); }
+        .testimonial-role { font-size: 12px; color: var(--gray-500); }
+        
+        .partners-section { padding: 60px 32px; background: white; border-top: 1px solid var(--gray-200); border-bottom: 1px solid var(--gray-200); }
+        .partners-title { text-align: center; font-size: 14px; color: var(--gray-500); margin-bottom: 32px; text-transform: uppercase; letter-spacing: 1px; }
+        
+        .partners-grid { display: flex; justify-content: center; align-items: center; gap: 48px; flex-wrap: wrap; max-width: 900px; margin: 0 auto; }
+        
+        .partner-logo {
+            padding: 16px 24px;
+            background: var(--gray-50);
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--gray-400);
+            transition: all 0.2s;
+        }
+        
+        .partner-logo:hover { color: var(--gray-600); background: var(--gray-100); }
+        
+        .faq-section { padding: 80px 32px; background: var(--gray-50); }
+        
+        .faq-grid { max-width: 800px; margin: 0 auto; }
+        
+        .faq-item {
+            background: white;
+            border-radius: 12px;
+            margin-bottom: 12px;
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .faq-question {
+            padding: 20px 24px;
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--gray-900);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.2s;
+        }
+        
+        .faq-question:hover { background: var(--gray-50); }
+        .faq-question svg { width: 20px; height: 20px; color: var(--gray-400); transition: transform 0.2s; }
+        .faq-item.open .faq-question svg { transform: rotate(180deg); }
+        
+        .faq-answer {
+            padding: 0 24px;
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.3s;
+        }
+        
+        .faq-item.open .faq-answer { padding: 0 24px 20px; max-height: 200px; }
+        .faq-answer p { font-size: 14px; color: var(--gray-600); line-height: 1.7; }
+        
+        .cta-section {
+            background: var(--primary-gradient);
+            padding: 80px 32px;
+            text-align: center;
+            color: white;
+        }
+        
+        .cta-title { font-size: 32px; font-weight: 700; margin-bottom: 16px; }
+        .cta-subtitle { font-size: 16px; opacity: 0.9; margin-bottom: 32px; }
+        
+        .footer {
+            background: var(--gray-900);
+            color: white;
+            padding: 60px 32px 24px;
+        }
+        
+        .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px; max-width: 1100px; margin: 0 auto 48px; }
+        
+        .footer-brand .logo-text { font-size: 20px; margin-bottom: 16px; }
+        .footer-brand p { font-size: 14px; color: var(--gray-400); line-height: 1.6; margin-bottom: 20px; }
+        
+        .footer-title { font-size: 14px; font-weight: 600; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 0.5px; }
+        .footer-links { list-style: none; }
+        .footer-links li { margin-bottom: 12px; }
+        .footer-links a { color: var(--gray-400); text-decoration: none; font-size: 14px; transition: color 0.2s; }
+        .footer-links a:hover { color: white; }
+        
+        .footer-bottom { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 24px; text-align: center; }
+        .footer-bottom p { font-size: 13px; color: var(--gray-500); }
+        
+        .social-links { display: flex; gap: 12px; margin-top: 16px; }
+        .social-link { width: 36px; height: 36px; background: rgba(255,255,255,0.1); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: var(--gray-400); transition: all 0.2s; }
+        .social-link:hover { background: var(--primary); color: white; }
+        .social-link svg { width: 18px; height: 18px; }
+        
+        .help-fab {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            width: 56px;
+            height: 56px;
+            background: var(--primary-gradient);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            box-shadow: 0 4px 20px rgba(99, 102, 241, 0.4);
+            cursor: pointer;
+            z-index: 99;
+            transition: all 0.2s;
+        }
+        
+        .help-fab:hover { transform: scale(1.1); }
+        .help-fab svg { width: 24px; height: 24px; }
+        
+        .content-wrapper { padding: 24px 32px; }
+        
+        @media (max-width: 1024px) {
+            .stats-grid { grid-template-columns: repeat(2, 1fr); }
+            .pricing-grid { grid-template-columns: 1fr; }
+            .features-grid { grid-template-columns: repeat(2, 1fr); }
+            .testimonials-grid { grid-template-columns: 1fr; }
+            .footer-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        
+        @media (max-width: 768px) {
+            .sidebar { width: 60px; }
+            .sidebar-header, .sidebar-footer { padding: 12px; }
+            .logo-text, .nav-section-title, .nav-item span, .user-details { display: none; }
+            .main-content { margin-left: 60px; }
+            .stats-grid { grid-template-columns: 1fr; }
+            .domain-grid { grid-template-columns: 1fr; }
+            .hero-title { font-size: 32px; }
+            .hero-subtitle { font-size: 16px; }
+            .features-grid { grid-template-columns: 1fr; }
+            .footer-grid { grid-template-columns: 1fr; }
+            .content-wrapper { padding: 16px; }
+        }
+    </style>
+</head>
+<body>
+    <div id="app" class="app-layout">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <a href="#" class="sidebar-logo">
+                    <div class="logo-icon">PD</div>
+                    <div class="logo-text">Pure<span>Data</span></div>
+                </a>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <div class="nav-section">
+                    <div class="nav-section-title">主菜单</div>
+                    <a class="nav-item" :class="{ active: currentPage === 'home' }" @click="currentPage = 'home'">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
+                        </svg>
+                        <span>工作台</span>
+                    </a>
+                    <a class="nav-item" :class="{ active: currentPage === 'generate' }" @click="currentPage = 'generate'">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
+                        </svg>
+                        <span>生成数据</span>
+                    </a>
+                    <a class="nav-item" :class="{ active: currentPage === 'history' }" @click="currentPage = 'history'">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                        <span>历史记录</span>
+                    </a>
+                    <a class="nav-item" :class="{ active: currentPage === 'invoice' }" @click="currentPage = 'invoice'">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                        </svg>
+                        <span>发票申请</span>
+                    </a>
+                </div>
+                
+                <div class="nav-section">
+                    <div class="nav-section-title">系统</div>
+                    <a class="nav-item" :class="{ active: currentPage === 'pricing' }" @click="currentPage = 'pricing'">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"/>
+                        </svg>
+                        <span>订阅方案</span>
+                    </a>
+                    <a class="nav-item" href="/quality_showcase.html">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+                        </svg>
+                        <span>质量对比</span>
+                    </a>
+                    <a class="nav-item" :class="{ active: currentPage === 'policy' }" @click="currentPage = 'policy'">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/>
+                        </svg>
+                        <span>政策发现</span>
+                    </a>
+                    <a class="nav-item" href="/docs" target="_blank">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                        </svg>
+                        <span>API文档</span>
+                    </a>
+                    <a class="nav-item" href="/admin">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                        </svg>
+                        <span>管理后台</span>
+                    </a>
+                </div>
+            </nav>
+            
+            <div class="sidebar-footer">
+                <div v-if="!currentUser" class="user-auth-buttons" style="padding: 12px;">
+                    <button class="btn btn-primary" style="width: 100%; margin-bottom: 8px;" @click="showLoginModal = true">登录</button>
+                    <button class="btn btn-secondary" style="width: 100%;" @click="showRegisterModal = true">注册</button>
+                </div>
+                <div v-else class="user-info" style="position: relative;">
+                    <div class="user-avatar">{{ currentUser.username.charAt(0).toUpperCase() }}</div>
+                    <div class="user-details" style="flex: 1; min-width: 0;">
+                        <div class="user-name">{{ currentUser.username }}</div>
+                        <div class="user-plan">{{ quotaStatus ? quotaStatus.plan_name : '加载中...' }}</div>
+                        <div v-if="quotaStatus" class="quota-mini-bar">
+                            <div class="quota-mini-fill" :class="quotaStatus.warning_level" 
+                                 :style="{ width: Math.min(quotaStatus.is_free ? quotaStatus.percent : quotaStatus.monthly.percent, 100) + '%' }"></div>
+                        </div>
+                    </div>
+                    <div v-if="activeTaskCount > 0" class="notification-badge">{{ activeTaskCount }}</div>
+                    <button class="btn btn-secondary" style="margin-left: auto; padding: 4px 8px; font-size: 12px;" @click="logout">退出</button>
+                </div>
+            </div>
+        </aside>
+        
+        <main class="main-content">
+            <div v-if="currentPage === 'home'" class="fade-enter">
+                <section class="hero-section">
+                    <div class="hero-content">
+                        <h1 class="hero-title">AI训练数据生成平台</h1>
+                        <p class="hero-subtitle">一键生成高质量训练数据，支持多领域、多格式输出<br>让AI模型训练更高效，数据准备更简单</p>
+                        <div class="hero-buttons">
+                            <button class="btn-hero" @click="currentPage = 'generate'">立即开始</button>
+                            <button class="btn-hero-outline" @click="currentPage = 'pricing'">查看定价</button>
+                        </div>
+                    </div>
+                </section>
+                
+                <section class="features-section">
+                    <h2 class="section-title">核心功能</h2>
+                    <p class="section-subtitle">专业的数据生成能力，满足各类AI训练需求</p>
+                    <div class="features-grid">
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/>
+                                </svg>
+                            </div>
+                            <h3 class="feature-title">多领域支持</h3>
+                            <p class="feature-desc">覆盖人工智能、医疗、金融、劳动合同等多个垂直领域，满足不同行业的数据需求</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                                </svg>
+                            </div>
+                            <h3 class="feature-title">高速生成</h3>
+                            <p class="feature-desc">并行生成引擎，每分钟可生成数百条高质量数据，大幅提升数据准备效率</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+                                </svg>
+                            </div>
+                            <h3 class="feature-title">数据安全</h3>
+                            <p class="feature-desc">云端安全部署，数据加密传输存储，严格保障用户数据安全与隐私合规</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4"/>
+                                </svg>
+                            </div>
+                            <h3 class="feature-title">多格式输出</h3>
+                            <p class="feature-desc">支持JSON、CSV、JSONL等多种格式，兼容主流AI训练框架</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+                                </svg>
+                            </div>
+                            <h3 class="feature-title">行为序列</h3>
+                            <p class="feature-desc">生成具有因果关系的用户行为序列数据，模拟真实用户旅程</p>
+                        </div>
+                        <div class="feature-card" style="border-color: var(--success);">
+                            <div class="feature-icon" style="color: var(--success);">
+                                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/>
+                                </svg>
+                            </div>
+                            <h3 class="feature-title">政策发现 <span style="font-size: 10px; background: var(--success); color: white; padding: 2px 6px; border-radius: 4px; margin-left: 4px;">新</span></h3>
+                            <p class="feature-desc">实时更新数据产业政策，帮助企业获取补贴、税收优惠等政策红利</p>
+                        </div>
+
+                    </div>
+                </section>
+                
+                <section class="academic-section" style="padding: 80px 32px; background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);">
+                    <h2 class="section-title">📚 学术验证：数据质量 > 数据规模</h2>
+                    <p class="section-subtitle">基于顶级论文与行业实践，证明高质量合成数据训练的有效性</p>
+                    
+                    <div style="max-width: 1100px; margin: 0 auto;">
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 32px;">
+                            <div style="background: white; padding: 24px; border-radius: 16px; box-shadow: var(--shadow-md);">
+                                <h3 style="font-size: 18px; font-weight: 600; color: var(--primary); margin-bottom: 12px;">🎯 核心结论</h3>
+                                <p style="font-size: 15px; color: var(--gray-700); line-height: 1.7;">
+                                    <strong style="color: var(--primary); font-size: 20px;">质量分≥0.75的数据</strong>对模型训练最有效<br>
+                                    学术界没有固定的"黄金比例"，关键在于<strong>数据质量</strong>而非固定配比。
+                                </p>
+                            </div>
+                            <div style="background: white; padding: 24px; border-radius: 16px; box-shadow: var(--shadow-md);">
+                                <h3 style="font-size: 18px; font-weight: 600; color: var(--success); margin-bottom: 12px;">💰 市场成本对比</h3>
+                                <p style="font-size: 15px; color: var(--gray-700); line-height: 1.7;">
+                                    传统数据标注市场价：<strong style="color: var(--danger);">¥0.5-2.0/条</strong><br>
+                                    合成数据市场价：<strong style="color: var(--primary);">¥0.1-0.3/条</strong><br>
+                                    <span style="color: var(--success); font-weight: 600;">选择我们，节省成本高达 80%+</span>
+                                </p>
+                            </div>
+                        </div>
+                        
+                        <div style="background: linear-gradient(135deg, var(--primary) 0%, #764ba2 100%); padding: 24px; border-radius: 16px; margin-bottom: 24px; color: white;">
+                            <h3 style="font-size: 18px; font-weight: 600; margin-bottom: 16px;">📊 各模型的合成数据比例</h3>
+                            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;">
+                                <div style="background: rgba(255,255,255,0.15); padding: 16px; border-radius: 12px; text-align: center;">
+                                    <div style="font-size: 32px; font-weight: 700;">40%</div>
+                                    <div style="font-size: 14px; margin-top: 4px;">Phi-4 (2024)</div>
+                                    <div style="font-size: 12px; opacity: 0.8; margin-top: 4px;">数学推理超越GPT-4o</div>
+                                </div>
+                                <div style="background: rgba(255,255,255,0.15); padding: 16px; border-radius: 12px; text-align: center;">
+                                    <div style="font-size: 32px; font-weight: 700;">~85%</div>
+                                    <div style="font-size: 14px; margin-top: 4px;">Phi-1 (2023)</div>
+                                    <div style="font-size: 12px; opacity: 0.8; margin-top: 4px;">1.3B媲美10B模型</div>
+                                </div>
+                                <div style="background: rgba(255,255,255,0.15); padding: 16px; border-radius: 12px; text-align: center;">
+                                    <div style="font-size: 32px; font-weight: 700;">90%+</div>
+                                    <div style="font-size: 14px; margin-top: 4px;">Persona Hub</div>
+                                    <div style="font-size: 12px; opacity: 0.8; margin-top: 4px;">与真实数据效果相当</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div style="background: white; padding: 24px; border-radius: 16px; box-shadow: var(--shadow-md); margin-bottom: 24px;">
+                            <h3 style="font-size: 18px; font-weight: 600; color: var(--gray-900); margin-bottom: 16px;">📖 学术论文支撑</h3>
+                            <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px;">
+                                <div style="padding: 16px; background: var(--gray-50); border-radius: 12px; border-left: 4px solid var(--primary);">
+                                    <h4 style="font-size: 14px; font-weight: 600; color: var(--gray-900); margin-bottom: 8px;">Phi-4: 数学推理新突破</h4>
+                                    <p style="font-size: 13px; color: var(--gray-600); margin-bottom: 8px;">Microsoft Research, 2024.12</p>
+                                    <p style="font-size: 13px; color: var(--gray-700);"><strong>40%合成数据</strong>，14B参数在数学推理上超越GPT-4o，ACM数学竞赛91.8%准确率。</p>
+                                </div>
+                                <div style="padding: 16px; background: var(--gray-50); border-radius: 12px; border-left: 4px solid var(--success);">
+                                    <h4 style="font-size: 14px; font-weight: 600; color: var(--gray-900); margin-bottom: 8px;">Phi-1: Textbooks Are All You Need</h4>
+                                    <p style="font-size: 13px; color: var(--gray-600); margin-bottom: 8px;">Microsoft Research, 2023</p>
+                                    <p style="font-size: 13px; color: var(--gray-700);">仅用<strong>1.3B参数</strong>和<strong>教科书质量数据</strong>，在编码任务上达到50.6% HumanEval。</p>
+                                </div>
+                                <div style="padding: 16px; background: var(--gray-50); border-radius: 12px; border-left: 4px solid var(--warning);">
+                                    <h4 style="font-size: 14px; font-weight: 600; color: var(--gray-900); margin-bottom: 8px;">Persona Hub: 10亿人格数据</h4>
+                                    <p style="font-size: 13px; color: var(--gray-600); margin-bottom: 8px;">2024</p>
+                                    <p style="font-size: 13px; color: var(--gray-700);">使用<strong>10亿虚拟人格</strong>生成大规模合成数据，验证了90%+合成数据的有效性。</p>
+                                </div>
+                                <div style="padding: 16px; background: var(--gray-50); border-radius: 12px; border-left: 4px solid var(--danger);">
+                                    <h4 style="font-size: 14px; font-weight: 600; color: var(--gray-900); margin-bottom: 8px;">Ultra-FineWeb: 数据质量过滤</h4>
+                                    <p style="font-size: 13px; color: var(--gray-600); margin-bottom: 8px;">Hugging Face, 2024</p>
+                                    <p style="font-size: 13px; color: var(--gray-700);">证明<strong>高质量数据过滤</strong>可显著提升LLM训练效果，1万亿词元高质量数据。</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div style="background: white; padding: 24px; border-radius: 16px; box-shadow: var(--shadow-md); margin-bottom: 24px;">
+                            <h3 style="font-size: 18px; font-weight: 600; color: var(--gray-900); margin-bottom: 16px;">📝 数据样例预览</h3>
+                            <p style="font-size: 14px; color: var(--gray-600); margin-bottom: 16px;">以下是各领域生成的数据样例，展示真实效果</p>
+                            <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px;">
+                                <div style="padding: 16px; background: var(--gray-50); border-radius: 12px; border-left: 4px solid var(--primary);">
+                                    <div style="font-size: 12px; color: var(--primary); font-weight: 600; margin-bottom: 8px;">人工智能领域</div>
+                                    <p style="font-size: 13px; color: var(--gray-700); line-height: 1.6;">"深度学习模型在图像识别任务中表现出色，通过卷积神经网络提取特征，结合注意力机制提升准确率至95.6%..."</p>
+                                    <div style="font-size: 11px; color: var(--gray-400); margin-top: 8px;">质量评分: 0.96 | 长度: 128字</div>
+                                </div>
+                                <div style="padding: 16px; background: var(--gray-50); border-radius: 12px; border-left: 4px solid var(--success);">
+                                    <div style="font-size: 12px; color: var(--success); font-weight: 600; margin-bottom: 8px;">医疗健康领域</div>
+                                    <p style="font-size: 13px; color: var(--gray-700); line-height: 1.6;">"患者男性，52岁，主诉胸闷气短3天。心电图显示ST段抬高，肌钙蛋白升高，诊断为急性心肌梗死..."</p>
+                                    <div style="font-size: 11px; color: var(--gray-400); margin-top: 8px;">质量评分: 0.94 | 长度: 86字</div>
+                                </div>
+                                <div style="padding: 16px; background: var(--gray-50); border-radius: 12px; border-left: 4px solid var(--warning);">
+                                    <div style="font-size: 12px; color: var(--warning); font-weight: 600; margin-bottom: 8px;">金融财经领域</div>
+                                    <p style="font-size: 13px; color: var(--gray-700); line-height: 1.6;">"2024年第四季度，公司实现营业收入25.6亿元，同比增长18.3%；净利润3.2亿元，毛利率维持在42%..."</p>
+                                    <div style="font-size: 11px; color: var(--gray-400); margin-top: 8px;">质量评分: 0.92 | 长度: 75字</div>
+                                </div>
+                                <div style="padding: 16px; background: var(--gray-50); border-radius: 12px; border-left: 4px solid var(--danger);">
+                                    <div style="font-size: 12px; color: var(--danger); font-weight: 600; margin-bottom: 8px;">法律合同领域</div>
+                                    <p style="font-size: 13px; color: var(--gray-700); line-height: 1.6;">"甲方委托乙方开发企业管理系统，合同总金额为人民币50万元整，开发周期为90个工作日..."</p>
+                                    <div style="font-size: 11px; color: var(--gray-400); margin-top: 8px;">质量评分: 0.91 | 长度: 68字</div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </section>
+                
+                <section class="stats-grid" style="background: white; padding: 40px 32px; margin: 0;">
+                    <div class="stat-card">
+                        <div class="stat-icon primary">
+                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" style="width: 24px; height: 24px;">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+                            </svg>
+                        </div>
+                        <div class="stat-label">已生成数据</div>
+                        <div class="stat-value">{{ stats.totalGenerated.toLocaleString() }}</div>
+                        <div class="stat-change">累计生成</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon success">
+                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" style="width: 24px; height: 24px;">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/>
+                            </svg>
+                        </div>
+                        <div class="stat-label">支持领域</div>
+                        <div class="stat-value">{{ stats.domains }}</div>
+                        <div class="stat-change">个垂直领域</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon warning">
+                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" style="width: 24px; height: 24px;">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"/>
+                            </svg>
+                        </div>
+                        <div class="stat-label">关键词库</div>
+                        <div class="stat-value">{{ stats.totalKeywords ? stats.totalKeywords.toLocaleString() : '4,500+' }}</div>
+                        <div class="stat-change">个关键词</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon danger">
+                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" style="width: 24px; height: 24px;">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/>
+                            </svg>
+                        </div>
+                        <div class="stat-label">变化维度</div>
+                        <div class="stat-value">{{ stats.variationMultiplier ? (stats.variationMultiplier / 10000).toFixed(0) + '万' : '1475万' }}</div>
+                        <div class="stat-change">倍扩展</div>
+                    </div>
+                </section>
+                
+                <section class="testimonials-section">
+                    <h2 class="section-title">使用场景</h2>
+                    <p class="section-subtitle">适用于多种AI训练场景</p>
+                    <div class="testimonials-grid">
+                        <div class="testimonial-card">
+                            <p class="testimonial-text">"预训练数据生成：支持大规模文本数据生成，可用于语言模型的预训练阶段，提供干净、高质量的基础语料。"</p>
+                            <div class="testimonial-author">
+                                <div class="testimonial-avatar">预</div>
+                                <div>
+                                    <div class="testimonial-name">预训练场景</div>
+                                    <div class="testimonial-role">Clean 模式推荐</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="testimonial-card">
+                            <p class="testimonial-text">"指令微调数据：生成问答对、对话数据，适用于指令微调（SFT）阶段，帮助模型学习遵循指令的能力。"</p>
+                            <div class="testimonial-author">
+                                <div class="testimonial-avatar">微</div>
+                                <div>
+                                    <div class="testimonial-name">指令微调场景</div>
+                                    <div class="testimonial-role">Hybrid 模式推荐</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="testimonial-card">
+                            <p class="testimonial-text">"鲁棒性训练：通过Noisy模式生成带有噪声的数据，提升模型在真实场景中的泛化能力和容错性。"</p>
+                            <div class="testimonial-author">
+                                <div class="testimonial-avatar">鲁</div>
+                                <div>
+                                    <div class="testimonial-name">鲁棒性训练</div>
+                                    <div class="testimonial-role">Noisy 模式推荐</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                
+                <section class="partners-section">
+                    <p class="partners-title">支持多种数据格式与框架</p>
+                    <div class="partners-grid">
+                        <div class="partner-logo">JSONL</div>
+                        <div class="partner-logo">ShareGPT</div>
+                        <div class="partner-logo">OpenAI</div>
+                        <div class="partner-logo">Alpaca</div>
+                        <div class="partner-logo">MOSS</div>
+                        <div class="partner-logo">DPO</div>
+                        <div class="partner-logo">ChatML</div>
+                        <div class="partner-logo">Parquet</div>
+                        <div class="partner-logo">PyTorch</div>
+                        <div class="partner-logo">TensorFlow</div>
+                    </div>
+                </section>
+                
+                <section class="faq-section">
+                    <h2 class="section-title">常见问题</h2>
+                    <p class="section-subtitle">快速了解我们的服务</p>
+                    <div class="faq-grid">
+                        <div class="faq-item" :class="{ open: openFaq === 1 }" @click="openFaq = openFaq === 1 ? 0 : 1">
+                            <div class="faq-question">
+                                生成的数据可以直接用于AI训练吗？
+                                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                            </div>
+                            <div class="faq-answer">
+                                <p>是的，数据已经过格式化和质量筛选，可直接用于预训练、指令微调等场景。支持多种主流AI训练格式输出。</p>
+                            </div>
+                        </div>
+                        <div class="faq-item" :class="{ open: openFaq === 2 }" @click="openFaq = openFaq === 2 ? 0 : 2">
+                            <div class="faq-question">
+                                如何获取更高质量的数据？
+                                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                            </div>
+                            <div class="faq-answer">
+                                <p>建议使用 Hybrid 模式，该模式混合了多种数据类型，更接近真实训练数据分布，适合大多数训练场景。</p>
+                            </div>
+                        </div>
+                        <div class="faq-item" :class="{ open: openFaq === 3 }" @click="openFaq = openFaq === 3 ? 0 : 3">
+                            <div class="faq-question">
+                                数据安全性如何保障？
+                                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                            </div>
+                            <div class="faq-answer">
+                                <p>采用云端安全部署，所有数据传输加密存储，严格保障用户数据安全与隐私合规。</p>
+                            </div>
+                        </div>
+                        <div class="faq-item" :class="{ open: openFaq === 4 }" @click="openFaq = openFaq === 4 ? 0 : 4">
+                            <div class="faq-question">
+                                支持哪些输出格式？
+                                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                            </div>
+                            <div class="faq-answer">
+                                <p>支持JSONL、JSON、ShareGPT、OpenAI Chat、Alpaca、MOSS、DPO、ChatML、CSV、TXT、Parquet等多种格式，兼容主流AI训练框架。</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                
+                <section class="cta-section">
+                    <h2 class="cta-title">准备好开始了吗？</h2>
+                    <p class="cta-subtitle">立即注册，免费体验100条数据生成</p>
+                    <button class="btn-hero" @click="currentUser ? (currentPage = 'generate') : (showRegisterModal = true)">免费开始</button>
+                </section>
+            </div>
+            
+            <div v-if="currentPage === 'policy'" class="fade-enter">
+                <div class="page-header">
+                    <h1 class="page-title">📋 政策发现</h1>
+                    <p class="page-subtitle">实时更新数据产业政策，帮助企业获取补贴、税收优惠等政策红利</p>
+                </div>
+                
+                <div class="content-wrapper">
+                    <div style="background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(99, 102, 241, 0.1)); padding: 20px; border-radius: 12px; margin-bottom: 24px;">
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <div>
+                                <h3 style="font-size: 18px; font-weight: 600; color: var(--gray-900);">🔔 政策红利提醒</h3>
+                                <p style="font-size: 14px; color: var(--gray-600);">数据要素相关政策持续更新中，关注政策动态，把握发展机遇</p>
+                            </div>
+                            <div style="font-size: 12px; color: var(--gray-500);">最后更新: 2026年2月</div>
+                        </div>
+                    </div>
+                    
+                    <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px;">
+                        <div class="card">
+                            <div class="card-header" style="background: rgba(16, 185, 129, 0.05);">
+                                <h3 class="card-title" style="color: var(--success);">💰 补贴政策</h3>
+                            </div>
+                            <div class="card-body" style="padding: 16px;">
+                                <div style="margin-bottom: 16px; padding: 12px; background: var(--gray-50); border-radius: 8px; border-left: 3px solid var(--success);">
+                                    <h4 style="font-size: 14px; font-weight: 600; margin-bottom: 8px;">数据要素市场化配置改革</h4>
+                                    <p style="font-size: 13px; color: var(--gray-600); margin-bottom: 8px;">支持企业开展数据资产评估、数据交易等业务，符合条件的可申请专项资金补贴。</p>
+                                    <a href="https://www.gov.cn/zhengce/" target="_blank" style="font-size: 12px; color: var(--primary);">查看详情 →</a>
+                                </div>
+                                <div style="margin-bottom: 16px; padding: 12px; background: var(--gray-50); border-radius: 8px; border-left: 3px solid var(--success);">
+                                    <h4 style="font-size: 14px; font-weight: 600; margin-bottom: 8px;">人工智能产业发展专项资金</h4>
+                                    <p style="font-size: 13px; color: var(--gray-600); margin-bottom: 8px;">对AI训练数据集建设、数据标注等项目给予资金支持，最高可达500万元。</p>
+                                    <a href="https://www.miit.gov.cn/" target="_blank" style="font-size: 12px; color: var(--primary);">查看详情 →</a>
+                                </div>
+                                <div style="padding: 12px; background: var(--gray-50); border-radius: 8px; border-left: 3px solid var(--success);">
+                                    <h4 style="font-size: 14px; font-weight: 600; margin-bottom: 8px;">数字经济创新发展试验区</h4>
+                                    <p style="font-size: 13px; color: var(--gray-600); margin-bottom: 8px;">试验区企业可享受数据要素市场建设相关补贴和税收优惠。</p>
+                                    <a href="https://www.ndrc.gov.cn/" target="_blank" style="font-size: 12px; color: var(--primary);">查看详情 →</a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="card">
+                            <div class="card-header" style="background: rgba(99, 102, 241, 0.05);">
+                                <h3 class="card-title" style="color: var(--primary);">📊 税收优惠</h3>
+                            </div>
+                            <div class="card-body" style="padding: 16px;">
+                                <div style="margin-bottom: 16px; padding: 12px; background: var(--gray-50); border-radius: 8px; border-left: 3px solid var(--primary);">
+                                    <h4 style="font-size: 14px; font-weight: 600; margin-bottom: 8px;">高新技术企业认定</h4>
+                                    <p style="font-size: 13px; color: var(--gray-600); margin-bottom: 8px;">数据服务企业可申请高新技术企业认定，享受15%企业所得税优惠税率。</p>
+                                    <a href="https://fuwu.most.gov.cn/" target="_blank" style="font-size: 12px; color: var(--primary);">查看详情 →</a>
+                                </div>
+                                <div style="margin-bottom: 16px; padding: 12px; background: var(--gray-50); border-radius: 8px; border-left: 3px solid var(--primary);">
+                                    <h4 style="font-size: 14px; font-weight: 600; margin-bottom: 8px;">研发费用加计扣除</h4>
+                                    <p style="font-size: 13px; color: var(--gray-600); margin-bottom: 8px;">AI数据训练相关研发费用可享受100%加计扣除政策。</p>
+                                    <a href="https://www.chinatax.gov.cn/chinatax/c102061/c102072/c102077/index.html" target="_blank" style="font-size: 12px; color: var(--primary);">查看详情 →</a>
+                                </div>
+                                <div style="padding: 12px; background: var(--gray-50); border-radius: 8px; border-left: 3px solid var(--primary);">
+                                    <h4 style="font-size: 14px; font-weight: 600; margin-bottom: 8px;">软件企业税收优惠</h4>
+                                    <p style="font-size: 13px; color: var(--gray-600); margin-bottom: 8px;">符合条件的软件企业可享受"两免三减半"企业所得税优惠。</p>
+                                    <a href="https://www.chinatax.gov.cn/chinatax/n810341/n810765/n812191/n812199/c1188025/content.html" target="_blank" style="font-size: 12px; color: var(--primary);">查看详情 →</a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="card">
+                            <div class="card-header" style="background: rgba(245, 158, 11, 0.05);">
+                                <h3 class="card-title" style="color: var(--warning);">🏛️ 资质认证</h3>
+                            </div>
+                            <div class="card-body" style="padding: 16px;">
+                                <div style="margin-bottom: 16px; padding: 12px; background: var(--gray-50); border-radius: 8px; border-left: 3px solid var(--warning);">
+                                    <h4 style="font-size: 14px; font-weight: 600; margin-bottom: 8px;">数据管理能力成熟度(DCMM)</h4>
+                                    <p style="font-size: 13px; color: var(--gray-600); margin-bottom: 8px;">通过DCMM认证的企业可获得地方补贴，最高50万元。</p>
+                                    <a href="https://www.dcmm-cfeii.com/" target="_blank" style="font-size: 12px; color: var(--primary);">查看详情 →</a>
+                                </div>
+                                <div style="margin-bottom: 16px; padding: 12px; background: var(--gray-50); border-radius: 8px; border-left: 3px solid var(--warning);">
+                                    <h4 style="font-size: 14px; font-weight: 600; margin-bottom: 8px;">信息安全等级保护</h4>
+                                    <p style="font-size: 13px; color: var(--gray-600); margin-bottom: 8px;">数据安全合规认证，部分行业必备资质，可申请认证补贴。</p>
+                                    <a href="https://www.djbh.net/" target="_blank" style="font-size: 12px; color: var(--primary);">查看详情 →</a>
+                                </div>
+                                <div style="padding: 12px; background: var(--gray-50); border-radius: 8px; border-left: 3px solid var(--warning);">
+                                    <h4 style="font-size: 14px; font-weight: 600; margin-bottom: 8px;">ISO 27001认证</h4>
+                                    <p style="font-size: 13px; color: var(--gray-600); margin-bottom: 8px;">信息安全管理体系认证，提升企业数据安全信誉度。</p>
+                                    <a href="https://www.iso.org/isoiec-27001-information-security.html" target="_blank" style="font-size: 12px; color: var(--primary);">查看详情 →</a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="card">
+                            <div class="card-header" style="background: rgba(220, 38, 38, 0.05);">
+                                <h3 class="card-title" style="color: var(--danger);">📈 产业政策</h3>
+                            </div>
+                            <div class="card-body" style="padding: 16px;">
+                                <div style="margin-bottom: 16px; padding: 12px; background: var(--gray-50); border-radius: 8px; border-left: 3px solid var(--danger);">
+                                    <h4 style="font-size: 14px; font-weight: 600; margin-bottom: 8px;">"数据要素×"三年行动计划</h4>
+                                    <p style="font-size: 13px; color: var(--gray-600); margin-bottom: 8px;">国家数据局发布，重点支持工业、金融、医疗等12个行业数据应用。</p>
+                                    <a href="https://www.ndrc.gov.cn/" target="_blank" style="font-size: 12px; color: var(--primary);">查看详情 →</a>
+                                </div>
+                                <div style="margin-bottom: 16px; padding: 12px; background: var(--gray-50); border-radius: 8px; border-left: 3px solid var(--danger);">
+                                    <h4 style="font-size: 14px; font-weight: 600; margin-bottom: 8px;">人工智能+行动</h4>
+                                    <p style="font-size: 13px; color: var(--gray-600); margin-bottom: 8px;">推动AI与实体经济深度融合，支持AI训练数据集建设。</p>
+                                    <a href="https://www.gov.cn/" target="_blank" style="font-size: 12px; color: var(--primary);">查看详情 →</a>
+                                </div>
+                                <div style="padding: 12px; background: var(--gray-50); border-radius: 8px; border-left: 3px solid var(--danger);">
+                                    <h4 style="font-size: 14px; font-weight: 600; margin-bottom: 8px;">数字中国建设整体布局规划</h4>
+                                    <p style="font-size: 13px; color: var(--gray-600); margin-bottom: 8px;">国家级战略规划，数据要素市场建设是重点任务。</p>
+                                    <a href="https://www.gov.cn/" target="_blank" style="font-size: 12px; color: var(--primary);">查看详情 →</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="card" style="margin-top: 20px;">
+                        <div class="card-header">
+                            <h3 class="card-title">🔗 更多政策资源</h3>
+                        </div>
+                        <div class="card-body">
+                            <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px;">
+                                <a href="https://www.gov.cn/zhengce/" target="_blank" style="padding: 16px; background: var(--gray-50); border-radius: 8px; text-align: center; text-decoration: none;">
+                                    <div style="font-size: 24px; margin-bottom: 8px;">🏛️</div>
+                                    <div style="font-size: 14px; font-weight: 600; color: var(--gray-900);">国务院政策文件</div>
+                                    <div style="font-size: 12px; color: var(--gray-500);">中央政策发布</div>
+                                </a>
+                                <a href="https://www.ndrc.gov.cn/" target="_blank" style="padding: 16px; background: var(--gray-50); border-radius: 8px; text-align: center; text-decoration: none;">
+                                    <div style="font-size: 24px; margin-bottom: 8px;">📊</div>
+                                    <div style="font-size: 14px; font-weight: 600; color: var(--gray-900);">国家发改委</div>
+                                    <div style="font-size: 12px; color: var(--gray-500);">产业政策制定</div>
+                                </a>
+                                <a href="https://www.miit.gov.cn/" target="_blank" style="padding: 16px; background: var(--gray-50); border-radius: 8px; text-align: center; text-decoration: none;">
+                                    <div style="font-size: 24px; margin-bottom: 8px;">🏭</div>
+                                    <div style="font-size: 14px; font-weight: 600; color: var(--gray-900);">工信部</div>
+                                    <div style="font-size: 12px; color: var(--gray-500);">数字经济政策</div>
+                                </a>
+                                <a href="https://www.chinatax.gov.cn/" target="_blank" style="padding: 16px; background: var(--gray-50); border-radius: 8px; text-align: center; text-decoration: none;">
+                                    <div style="font-size: 24px; margin-bottom: 8px;">💰</div>
+                                    <div style="font-size: 14px; font-weight: 600; color: var(--gray-900);">国家税务总局</div>
+                                    <div style="font-size: 12px; color: var(--gray-500);">税收优惠政策</div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div v-if="currentPage === 'generate'" class="fade-enter">
+                <div class="page-header">
+                    <h1 class="page-title">生成数据</h1>
+                    <p class="page-subtitle">配置参数，开始生成AI训练数据</p>
+                </div>
+                
+                <div v-if="quotaStatus" class="content-wrapper">
+                    <div class="quota-card" :class="{ 'warning': quotaStatus.warning_level === 'warning', 'critical': quotaStatus.warning_level === 'critical' }" 
+                         :style="quotaStatus.warning_level !== 'normal' ? 'border-color: var(--warning);' : ''">
+                        <div class="quota-header">
+                            <span class="quota-title">📊 {{ quotaStatus.is_free ? '免费额度' : '本月配额' }}</span>
+                            <span class="quota-badge" :class="quotaStatus.warning_level">
+                                {{ quotaStatus.warning_level === 'normal' ? '正常' : quotaStatus.warning_level === 'warning' ? '即将用完' : quotaStatus.warning_level === 'exhausted' ? '已用完' : '即将耗尽' }}
+                            </span>
+                        </div>
+                        
+                        <template v-if="quotaStatus.is_free">
+                            <div class="quota-progress">
+                                <div class="quota-progress-fill" :class="quotaStatus.warning_level" 
+                                     :style="{ width: Math.min(quotaStatus.percent, 100) + '%' }"></div>
+                            </div>
+                            <div class="quota-stats">
+                                <span>已用 <strong>{{ quotaStatus.used.toLocaleString() }}</strong> 条</span>
+                                <span>剩余 <strong>{{ quotaStatus.remaining.toLocaleString() }}</strong> 条</span>
+                                <span>共 <strong>{{ quotaStatus.free_quota.toLocaleString() }}</strong> 条</span>
+                            </div>
+                            <div v-if="quotaStatus.remaining <= 200 && quotaStatus.remaining > 0" style="margin-top: 12px; padding: 10px; background: rgba(245, 158, 11, 0.1); border-radius: 8px; font-size: 13px; color: var(--warning);">
+                                ⚠️ 免费额度即将用完，升级套餐继续生成
+                            </div>
+                            <div v-if="quotaStatus.remaining <= 0" style="margin-top: 12px; padding: 10px; background: rgba(239, 68, 68, 0.1); border-radius: 8px; font-size: 13px; color: var(--danger);">
+                                ❌ 免费额度已用完，升级套餐继续生成
+                            </div>
+                            <div v-if="quotaStatus.invite_code" style="margin-top: 12px; padding: 10px; background: rgba(16, 185, 129, 0.1); border-radius: 8px; font-size: 13px;">
+                                🎁 邀请码：<strong style="cursor: pointer; user-select: all;">{{ quotaStatus.invite_code }}</strong>
+                                <span style="color: var(--gray-500); margin-left: 8px;">分享给好友，双方各得500条</span>
+                            </div>
+                        </template>
+                        
+                        <template v-else>
+                            <div class="quota-progress">
+                                <div class="quota-progress-fill" :class="quotaStatus.warning_level" 
+                                     :style="{ width: Math.min(quotaStatus.monthly.percent, 100) + '%' }"></div>
+                            </div>
+                            <div class="quota-stats">
+                                <span>已用 <strong>{{ quotaStatus.monthly.used.toLocaleString() }}</strong> 条</span>
+                                <span>剩余 <strong>{{ quotaStatus.monthly.remaining.toLocaleString() }}</strong> 条</span>
+                                <span>共 <strong>{{ quotaStatus.monthly.limit.toLocaleString() }}</strong> 条/月</span>
+                            </div>
+                            <div v-if="quotaStatus.monthly.percent >= 75" style="margin-top: 12px; padding: 10px; background: rgba(245, 158, 11, 0.1); border-radius: 8px; font-size: 13px; color: var(--warning);">
+                                ⚠️ 配额即将用完，超量后按 ¥{{ quotaStatus.overage_price }}/条 计费
+                            </div>
+                        </template>
+                    </div>
+                </div>
+                
+                <div class="content-wrapper" style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+                    <div class="card">
+                        <div class="card-header">
+                            <h2 class="card-title">选择领域</h2>
+                        </div>
+                        <div class="card-body">
+                            <div class="domain-grid">
+                                <div v-for="d in domains" :key="d.name" 
+                                     class="domain-option" 
+                                     :class="{ selected: selectedDomain === d.name }"
+                                     @click="selectedDomain = d.name">
+                                    <div class="domain-name">{{ d.name }}</div>
+                                    <div class="domain-count">{{ d.keywords }} 个关键词</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-header">
+                            <h2 class="card-title">生成配置</h2>
+                        </div>
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label class="form-label">生成数量</label>
+                                <input type="number" class="form-input" v-model="count" min="1" max="500000" placeholder="输入数量（最大50万）">
+                                <div v-if="count > 10000" style="font-size: 12px; color: var(--primary); margin-top: 4px;">
+                                    📦 大批量任务将自动分批处理（每批1万条）
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="form-label">生成模式</label>
+                                <select class="form-select" v-model="mode">
+                                    <option value="hybrid">Hybrid 混合模式（推荐）</option>
+                                    <option value="clean">Clean 干净模式</option>
+                                    <option value="noisy">Noisy 噪声模式</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group" v-if="mode === 'noisy'">
+                                <label class="form-label">噪音等级</label>
+                                <select class="form-select" v-model="noiseLevel">
+                                    <option value="0">Level 0 - 无噪音（干净数据）</option>
+                                    <option value="1">Level 1 - 轻微噪音（5%错误率）</option>
+                                    <option value="2" selected>Level 2 - 中等噪音（15%错误率）</option>
+                                    <option value="3">Level 3 - 较重噪音（30%错误率）</option>
+                                    <option value="4">Level 4 - 极重噪音（50%错误率）</option>
+                                </select>
+                                <div style="font-size: 12px; color: var(--gray-500); margin-top: 4px;">
+                                    噪音类型：OCR错误、ASR错误、拼写错误、格式混乱、口语化插入
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="form-label">质量模式 <span style="color: var(--danger);">★新</span></label>
+                                <select class="form-select" v-model="qualityMode" :disabled="currentUser && currentUser.role === 'free'">
+                                    <option v-for="m in qualityModes" :key="m.id" :value="m.id" :disabled="!canUseQualityMode(m)">
+                                        {{ m.name }} - {{ m.description }}{{ !canUseQualityMode(m) ? '（需升级）' : '' }}
+                                    </option>
+                                </select>
+                                <div style="font-size: 12px; color: var(--gray-500); margin-top: 4px;">
+                                    <span v-if="!currentUser" style="color: var(--warning);">💡 登录后解锁更多质量模式</span>
+                                    <span v-else-if="currentUser.role === 'free'" style="color: var(--warning);">💡 体验版固定配比：20%高+40%中+40%低，升级解锁标准/高质量模式</span>
+                                    <span v-else-if="currentUser.role === 'standard'" style="color: var(--info);">💡 升级到高级版解锁高质量模式</span>
+                                    <span v-else style="color: var(--success);">✓ 已解锁所有质量模式</span>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="form-label">输出格式</label>
+                                <select class="form-select" v-model="format">
+                                    <option value="jsonl">JSONL 格式（大模型训练推荐）</option>
+                                    <option value="json">JSON 格式</option>
+                                    <option value="sharegpt">ShareGPT 格式（开源对话）</option>
+                                    <option value="openai_chat">OpenAI Chat 格式（官方微调）</option>
+                                    <option value="alpaca">Alpaca 格式（指令微调）</option>
+                                    <option value="moss">MOSS 格式（对话数据）</option>
+                                    <option value="dpo">DPO 格式（偏好优化）</option>
+                                    <option value="chatml">ChatML 格式（通义千问）</option>
+                                    <option value="csv" :disabled="!currentUser || currentUser.role === 'free'">CSV 格式 {{ (!currentUser || currentUser.role === 'free') ? '（专业版及以上）' : '' }}</option>
+                                    <option value="txt" :disabled="!currentUser || currentUser.role === 'free'">TXT 格式 {{ (!currentUser || currentUser.role === 'free') ? '（专业版及以上）' : '' }}</option>
+                                    <option value="parquet" :disabled="!currentUser || (currentUser.role !== 'premium' && currentUser.role !== 'developer')" style="color: var(--warning);">Parquet 格式（开发者/企业版）</option>
+                                </select>
+                                <div v-if="format === 'sharegpt'" style="font-size: 12px; color: var(--primary); margin-top: 4px;">
+                                    💬 ShareGPT：{"conversations": [{"from": "human", "value": "..."}, {"from": "gpt", "value": "..."}]}
+                                </div>
+                                <div v-if="format === 'openai_chat'" style="font-size: 12px; color: var(--primary); margin-top: 4px;">
+                                    🤖 OpenAI Chat：{"messages": [{"role": "system/user/assistant", "content": "..."}]}
+                                </div>
+                                <div v-if="format === 'alpaca'" style="font-size: 12px; color: var(--primary); margin-top: 4px;">
+                                    📝 Alpaca：{"instruction": "...", "input": "", "output": "..."}
+                                </div>
+                                <div v-if="format === 'moss'" style="font-size: 12px; color: var(--primary); margin-top: 4px;">
+                                    💬 MOSS：{"conversation": [...], "meta": {...}}
+                                </div>
+                                <div v-if="format === 'dpo'" style="font-size: 12px; color: var(--primary); margin-top: 4px;">
+                                    ⚖️ DPO：{"prompt": "...", "chosen": "好回答", "rejected": "差回答"}
+                                </div>
+                                <div v-if="format === 'chatml'" style="font-size: 12px; color: var(--primary); margin-top: 4px;">
+                                    🔄 ChatML：&lt;|im_start|&gt;system...&lt;|im_end|&gt; 格式
+                                </div>
+                                <div v-if="format === 'parquet' && (!currentUser || (currentUser.role !== 'premium' && currentUser.role !== 'developer'))" style="font-size: 12px; color: var(--warning); margin-top: 4px;">
+                                    ⚠️ Parquet 格式仅限开发者版/企业版用户使用
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="form-label">预计费用</label>
+                                <div style="padding: 12px; background: var(--gray-50); border-radius: 8px; font-size: 14px; color: var(--gray-700);">
+                                    <span v-if="!currentUser">请先登录</span>
+                                    <span v-else-if="currentUser.role === 'free' && count > 100">超出免费额度，请升级</span>
+                                    <span v-else-if="currentUser.role === 'standard' && count > 10000">超出专业版额度</span>
+                                    <span v-else-if="currentUser.role === 'free'">免费额度内</span>
+                                    <span v-else-if="currentUser.role === 'standard'">专业版额度内</span>
+                                    <span v-else>企业版无限量</span>
+                                </div>
+                            </div>
+                            
+                            <button class="btn btn-primary btn-lg" style="width: 100%; margin-top: 8px;" @click="startGenerate" :disabled="generating">
+                                <span v-if="generating" class="spinner"></span>
+                                <span v-else>开始生成</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div v-if="taskId" class="card content-wrapper" style="margin-top: 16px;">
+                    <div class="card-header">
+                        <h2 class="card-title">任务状态</h2>
+                        <span class="badge" :class="{
+                            'badge-warning': taskStatus === 'pending' || taskStatus === 'processing',
+                            'badge-success': taskStatus === 'completed',
+                            'badge-error': taskStatus === 'failed'
+                        }">
+                            {{ taskStatus === 'pending' ? '等待中' : taskStatus === 'processing' ? '处理中' : taskStatus === 'completed' ? '已完成' : '失败' }}
+                        </span>
+                    </div>
+                    <div class="card-body">
+                        <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 16px;">
+                            <span style="font-size: 14px; color: var(--gray-500);">任务ID: {{ taskId }}</span>
+                            <span v-if="taskBatches > 1" style="font-size: 14px; color: var(--primary);">📦 分{{ taskBatches }}批处理</span>
+                        </div>
+                        
+                        <div v-if="taskStatus === 'processing'" class="progress-bar">
+                            <div class="progress-fill" :style="{ width: taskProgress + '%' }"></div>
+                        </div>
+                        <div v-if="taskStatus === 'processing' && taskBatches > 1" style="margin-top: 8px; font-size: 13px; color: var(--gray-600);">
+                            正在处理第 {{ currentBatch }}/{{ taskBatches }} 批，已完成 {{ taskProgress }} 条
+                        </div>
+                        
+                        <div v-if="taskStatus === 'completed'" style="display: flex; gap: 12px; flex-wrap: wrap; align-items: center;">
+                            <button class="btn btn-success" @click="downloadFile">
+                                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" style="width: 18px; height: 18px;">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
+                                </svg>
+                                下载数据 ({{ actualCount }}条)
+                            </button>
+                            <span v-if="taskBatches > 1" style="font-size: 13px; color: var(--success);">✓ 已合并 {{ taskBatches }} 批数据</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div v-if="preview.length > 0" class="card content-wrapper" style="margin-top: 16px;">
+                    <div class="card-header">
+                        <h2 class="card-title">数据预览</h2>
+                        <div style="display: flex; gap: 8px;">
+                            <button v-if="qualityReport" class="btn btn-secondary" style="padding: 6px 12px; font-size: 13px;" @click="showQualityModal = true">
+                                📊 质量报告: {{ qualityReport.grade }}
+                            </button>
+                            <a v-if="downloadUrl" :href="downloadUrl" class="btn btn-primary" style="padding: 6px 12px; font-size: 13px;">下载全部 ({{ actualCount }}条)</a>
+                        </div>
+                    </div>
+                    <div class="card-body" style="padding: 0;">
+                        <div class="table-container">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>词汇</th>
+                                        <th>内容预览</th>
+                                        <th>质量</th>
+                                        <th>噪音</th>
+                                        <th>来源</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr v-for="item in preview" :key="item.id">
+                                        <td>{{ item.id }}</td>
+                                        <td><strong>{{ item.word }}</strong></td>
+                                        <td>{{ item.text.substring(0, 40) }}...</td>
+                                        <td>
+                                            <span class="badge" :class="{
+                                                'badge-success': item.quality_tier === 'high',
+                                                'badge-warning': item.quality_tier === 'medium',
+                                                'badge-error': item.quality_tier === 'low'
+                                            }">{{ item.quality_score || '-' }}</span>
+                                        </td>
+                                        <td>
+                                            <span v-if="item.noise_level !== undefined" class="badge" :class="{
+                                                'badge-success': item.noise_level <= 1,
+                                                'badge-warning': item.noise_level === 2,
+                                                'badge-error': item.noise_level >= 3
+                                            }">L{{ item.noise_level }}</span>
+                                            <span v-else>-</span>
+                                        </td>
+                                        <td><span class="badge badge-info">{{ item.source }}</span></td>
+                                    </tr>
+                                    <template v-for="item in preview" :key="'reason-' + item.id">
+                                        <tr v-if="item.low_quality_reason">
+                                            <td colspan="6" style="color: var(--warning); font-size: 12px;">
+                                                ⚠️ 低质量原因: {{ item.low_quality_reason }}
+                                            </td>
+                                        </tr>
+                                    </template>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div v-if="currentPage === 'invoice'" class="fade-enter">
+                <div class="page-header">
+                    <h1 class="page-title">发票申请</h1>
+                    <p class="page-subtitle">申请开具增值税发票</p>
+                </div>
+                
+                <div class="card content-wrapper">
+                    <div class="card-header">
+                        <h2 class="card-title">发票信息</h2>
+                    </div>
+                    <div class="card-body">
+                        <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px;">
+                            <div class="form-group">
+                                <label class="form-label">发票类型</label>
+                                <select class="form-select" v-model="invoiceForm.type">
+                                    <option value="normal">增值税普通发票</option>
+                                    <option value="special">增值税专用发票</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">开票金额</label>
+                                <input type="text" class="form-input" v-model="invoiceForm.amount" placeholder="请输入开票金额">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">公司名称</label>
+                                <input type="text" class="form-input" v-model="invoiceForm.companyName" placeholder="请输入公司名称">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">纳税人识别号</label>
+                                <input type="text" class="form-input" v-model="invoiceForm.taxId" placeholder="请输入纳税人识别号">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">注册地址</label>
+                                <input type="text" class="form-input" v-model="invoiceForm.address" placeholder="请输入注册地址">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">注册电话</label>
+                                <input type="text" class="form-input" v-model="invoiceForm.phone" placeholder="请输入注册电话">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">开户银行</label>
+                                <input type="text" class="form-input" v-model="invoiceForm.bank" placeholder="请输入开户银行">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">银行账号</label>
+                                <input type="text" class="form-input" v-model="invoiceForm.bankAccount" placeholder="请输入银行账号">
+                            </div>
+                            <div class="form-group" style="grid-column: span 2;">
+                                <label class="form-label">备注</label>
+                                <textarea class="form-input" v-model="invoiceForm.remark" rows="3" placeholder="如有特殊要求请备注"></textarea>
+                            </div>
+                        </div>
+                        <div style="margin-top: 24px; display: flex; gap: 12px;">
+                            <button class="btn btn-primary" @click="submitInvoice">提交申请</button>
+                            <button class="btn btn-secondary" @click="resetInvoiceForm">重置</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card content-wrapper" style="margin-top: 24px;">
+                    <div class="card-header">
+                        <h2 class="card-title">开票记录</h2>
+                    </div>
+                    <div class="card-body" style="padding: 0;">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>申请时间</th>
+                                    <th>发票类型</th>
+                                    <th>金额</th>
+                                    <th>状态</th>
+                                    <th>操作</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr v-if="invoiceRecords.length === 0">
+                                    <td colspan="5" style="text-align: center; color: var(--gray-500); padding: 40px;">暂无开票记录</td>
+                                </tr>
+                                <tr v-for="record in invoiceRecords" :key="record.id">
+                                    <td>{{ record.time }}</td>
+                                    <td>{{ record.type === 'special' ? '专票' : '普票' }}</td>
+                                    <td>¥{{ record.amount }}</td>
+                                    <td><span class="status-badge" :class="record.status">{{ record.statusText }}</span></td>
+                                    <td><button class="btn btn-secondary" style="padding: 4px 8px; font-size: 12px;" @click="showInvoiceDetail(record)">查看</button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            
+            <div v-if="currentPage === 'history'" class="fade-enter">
+                <div class="page-header">
+                    <h1 class="page-title">历史记录</h1>
+                    <p class="page-subtitle">查看和管理已生成的数据</p>
+                </div>
+                
+                <div class="card content-wrapper">
+                    <div class="card-header">
+                        <h2 class="card-title">任务列表</h2>
+                    </div>
+                    <div class="card-body" style="padding: 0;">
+                        <div v-if="history.length > 0" class="table-container">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>任务ID</th>
+                                        <th>领域</th>
+                                        <th>数量</th>
+                                        <th>状态</th>
+                                        <th>时间</th>
+                                        <th>操作</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr v-for="task in history" :key="task.id">
+                                        <td>{{ task.id }}</td>
+                                        <td>{{ task.domain }}</td>
+                                        <td>{{ task.count }}</td>
+                                        <td>
+                                            <span class="badge" :class="{
+                                                'badge-success': task.status === 'completed',
+                                                'badge-warning': task.status === 'processing'
+                                            }">{{ task.status === 'completed' ? '已完成' : '处理中' }}</span>
+                                        </td>
+                                        <td>{{ task.time }}</td>
+                                        <td>
+                                            <button class="btn btn-secondary" style="padding: 6px 12px; font-size: 13px;" @click="redownload(task)">下载</button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div v-else class="empty-state">
+                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                            </svg>
+                            <h3>暂无历史记录</h3>
+                            <p>开始生成数据后，记录将显示在这里</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card content-wrapper" style="margin-top: 24px;">
+                    <div class="card-header">
+                        <h2 class="card-title">操作日志</h2>
+                    </div>
+                    <div class="card-body" style="padding: 0;">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>时间</th>
+                                    <th>操作类型</th>
+                                    <th>详情</th>
+                                    <th>IP地址</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr v-if="operationLogs.length === 0">
+                                    <td colspan="4" style="text-align: center; color: var(--gray-500); padding: 40px;">暂无操作日志</td>
+                                </tr>
+                                <tr v-for="log in operationLogs" :key="log.id">
+                                    <td>{{ log.time }}</td>
+                                    <td><span class="status-badge" :class="log.type">{{ log.action }}</span></td>
+                                    <td>{{ log.detail }}</td>
+                                    <td>{{ log.ip }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            
+            <div v-if="currentPage === 'pricing'" class="fade-enter">
+                <div class="page-header">
+                    <h1 class="page-title">订阅方案</h1>
+                    <p class="page-subtitle">高质量AI训练数据，比传统标注省80%，比自建团队省90%</p>
+                </div>
+                
+                <div class="pricing-grid content-wrapper">
+                    <div class="pricing-card" style="border-color: var(--success);">
+                        <div class="pricing-badge" style="background: var(--success);">免费体验</div>
+                        <div class="pricing-name">体验版</div>
+                        <div class="pricing-price">¥0<span>/永久</span></div>
+                        <div class="pricing-desc">新用户注册即送1000条免费额度</div>
+                        <ul class="pricing-features">
+                            <li><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg><strong>1000条</strong> 免费额度</li>
+                            <li><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>通用领域</li>
+                            <li style="color: var(--warning);"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg><strong>20%高+40%中+40%低</strong> 质量配比</li>
+                            <li><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>JSON格式输出</li>
+                            <li style="color: var(--success);"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>无需绑卡，用完即止</li>
+                        </ul>
+                        <div style="background: var(--gray-50); padding: 12px; border-radius: 8px; margin: 12px 0; font-size: 12px; color: var(--gray-600);">
+                            💡 体验包含多质量样本，供您全面对比测试。订阅后可获得<strong style="color: var(--primary);">80%+高质量</strong>生成。
+                        </div>
+                        <button class="btn btn-success pricing-btn" @click="showRegisterModal = true">免费注册</button>
+                    </div>
+                    
+                    <div class="pricing-card">
+                        <div class="pricing-name">入门版</div>
+                        <div class="pricing-price">¥1,199<span>/月</span></div>
+                        <div class="pricing-desc">适合个人开发者、小项目试用</div>
+                        <ul class="pricing-features">
+                            <li><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg><strong>1万条/月</strong> 生成配额</li>
+                            <li><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>通用领域</li>
+                            <li><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>标准质量模式</li>
+                            <li><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>超量：¥0.12/条</li>
+                            <li style="color: var(--gray-400);"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" style="color: var(--gray-400);"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>无高质量模式</li>
+                        </ul>
+                        <button class="btn btn-secondary pricing-btn" @click="showComingSoon('入门版订阅')">立即订阅</button>
+                    </div>
+                    
+                    <div class="pricing-card featured">
+                        <div class="pricing-badge">🔥 主力推荐</div>
+                        <div class="pricing-name">基础版</div>
+                        <div class="pricing-price">¥11,999<span>/月</span></div>
+                        <div class="pricing-desc">适合小团队、初创公司</div>
+                        <ul class="pricing-features">
+                            <li><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg><strong>5万条/月</strong> 生成配额</li>
+                            <li><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>通用领域</li>
+                            <li><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>标准质量模式</li>
+                            <li><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>超量：¥0.24/条</li>
+                            <li style="color: var(--gray-400);"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" style="color: var(--gray-400);"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>无高质量模式</li>
+                        </ul>
+                        <button class="btn btn-primary pricing-btn" @click="showComingSoon('基础版订阅')">立即订阅</button>
+                    </div>
+                    
+                    <div class="pricing-card" style="border-color: var(--warning);">
+                        <div class="pricing-badge" style="background: var(--warning);">💎 企业首选</div>
+                        <div class="pricing-name">专业版</div>
+                        <div class="pricing-price">¥29,999<span>/月</span></div>
+                        <div class="pricing-desc">适合中型团队，性价比最高</div>
+                        <ul class="pricing-features">
+                            <li><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg><strong>20万条/月</strong> 生成配额</li>
+                            <li><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>全部垂直领域</li>
+                            <li><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>标准/高质量模式</li>
+                            <li><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>超量：¥0.15/条</li>
+                            <li><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>优先生成队列</li>
+                        </ul>
+                        <div style="padding: 8px; background: rgba(245, 158, 11, 0.1); border-radius: 8px; margin-bottom: 12px; font-size: 13px; color: var(--warning);">
+                            年付 ¥299,990（省¥59,998）
+                        </div>
+                        <button class="btn btn-secondary pricing-btn" style="border-color: var(--warning); color: var(--warning);" @click="showComingSoon('专业版订阅')">立即订阅</button>
+                    </div>
+                </div>
+                
+                <div class="card content-wrapper" style="margin-top: 24px; border-color: var(--warning);">
+                    <div class="card-header" style="background: rgba(245, 158, 11, 0.05);">
+                        <h2 class="card-title" style="color: var(--warning);">🏢 企业版 & 旗舰版（年付）</h2>
+                    </div>
+                    <div class="card-body">
+                        <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px;">
+                            <div style="padding: 24px; background: linear-gradient(135deg, rgba(245, 158, 11, 0.1), rgba(99, 102, 241, 0.05)); border-radius: 16px; border: 2px solid var(--warning);">
+                                <div style="font-size: 11px; color: var(--warning); margin-bottom: 4px;">💎 企业首选</div>
+                                <h3 style="font-size: 20px; font-weight: 600; margin-bottom: 8px;">企业版</h3>
+                                <div style="font-size: 32px; font-weight: 700; color: var(--warning); margin-bottom: 8px;">¥699,990<span style="font-size: 14px; font-weight: 400; color: var(--gray-500);">/年</span></div>
+                                <p style="font-size: 14px; color: var(--gray-600); margin-bottom: 16px;">单一垂直领域定制（金融/医疗/法律等）</p>
+                                <ul style="font-size: 14px; color: var(--gray-600); margin-bottom: 16px; padding-left: 20px;">
+                                    <li><strong>80万条/年</strong> 生成配额</li>
+                                    <li>单一垂直领域深度定制</li>
+                                    <li>高质量模式默认开启</li>
+                                    <li>专属技术支持</li>
+                                </ul>
+                                <button class="btn btn-primary" style="width: 100%; background: var(--warning);" @click="showComingSoon('企业版年付')">联系我们</button>
+                            </div>
+                            <div style="padding: 24px; background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(16, 185, 129, 0.1)); border-radius: 16px; border: 2px solid var(--success);">
+                                <div style="font-size: 11px; color: var(--success); margin-bottom: 4px;">🚀 大客户首选</div>
+                                <h3 style="font-size: 20px; font-weight: 600; margin-bottom: 8px;">旗舰版</h3>
+                                <div style="font-size: 32px; font-weight: 700; color: var(--success); margin-bottom: 8px;">¥1,999,990<span style="font-size: 14px; font-weight: 400; color: var(--gray-500);">/年</span></div>
+                                <p style="font-size: 14px; color: var(--gray-600); margin-bottom: 16px;">多领域混合生成，灵活配置</p>
+                                <ul style="font-size: 14px; color: var(--gray-600); margin-bottom: 16px; padding-left: 20px;">
+                                    <li><strong>300万条/年</strong> 生成配额</li>
+                                    <li>多领域混合生成</li>
+                                    <li>超高质量模式（90%+）</li>
+                                    <li>专属客户经理</li>
+                                </ul>
+                                <button class="btn btn-success" style="width: 100%;" @click="showComingSoon('旗舰版年付')">联系我们</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card content-wrapper" style="margin-top: 24px; border-color: var(--primary);">
+                    <div class="card-header" style="background: rgba(99, 102, 241, 0.05);">
+                        <h2 class="card-title" style="color: var(--primary);">⭐ 高质量版（溢价可选）</h2>
+                    </div>
+                    <div class="card-body">
+                        <p style="color: var(--gray-600); margin-bottom: 16px;">高质量版适合LLM预训练、模型微调等对数据质量要求高的场景。高质量比例达80%+，数据经过专业验证。</p>
+                        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;">
+                            <div style="padding: 16px; background: var(--gray-50); border-radius: 12px; border: 2px solid var(--primary);">
+                                <h3 style="font-size: 16px; font-weight: 600; margin-bottom: 8px;">专业版+高质量</h3>
+                                <div style="font-size: 24px; font-weight: 700; color: var(--primary); margin-bottom: 8px;">¥49,999<span style="font-size: 12px; font-weight: 400; color: var(--gray-500);">/月</span></div>
+                                <p style="font-size: 13px; color: var(--gray-600);">20万条/月，80%高质量</p>
+                                <p style="font-size: 11px; color: var(--success);">适合模型微调、预训练</p>
+                            </div>
+                            <div style="padding: 16px; background: linear-gradient(135deg, rgba(245, 158, 11, 0.1), rgba(99, 102, 241, 0.1)); border-radius: 12px; border: 2px solid var(--warning);">
+                                <h3 style="font-size: 16px; font-weight: 600; margin-bottom: 8px;">企业版+高质量</h3>
+                                <div style="font-size: 24px; font-weight: 700; color: var(--warning); margin-bottom: 8px;">¥99,999<span style="font-size: 12px; font-weight: 400; color: var(--gray-500);">/年</span></div>
+                                <p style="font-size: 13px; color: var(--gray-600);">80万条/年，80%高质量</p>
+                                <p style="font-size: 11px; color: var(--success);">高精度垂直任务</p>
+                            </div>
+                            <div style="padding: 16px; background: var(--gray-50); border-radius: 12px; border: 2px solid var(--success);">
+                                <h3 style="font-size: 16px; font-weight: 600; margin-bottom: 8px;">旗舰版+高质量</h3>
+                                <div style="font-size: 24px; font-weight: 700; color: var(--success); margin-bottom: 8px;">询价<span style="font-size: 12px; font-weight: 400; color: var(--gray-500);"></span></div>
+                                <p style="font-size: 13px; color: var(--gray-600);">300万条/年，90%+高质量</p>
+                                <p style="font-size: 11px; color: var(--success);">多领域复杂模型</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card content-wrapper" style="margin-top: 24px; border-color: var(--success);">
+                    <div class="card-header" style="background: rgba(16, 185, 129, 0.05);">
+                        <h2 class="card-title" style="color: var(--success);">🎁 按需付费包</h2>
+                    </div>
+                    <div class="card-body">
+                        <p style="color: var(--gray-600); margin-bottom: 16px;">不想订阅？按需购买，用完再买。按需包单价高于订阅，建议长期用户选择订阅更划算。</p>
+                        <div style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px;">
+                            <div style="padding: 16px; background: var(--gray-50); border-radius: 12px; text-align: center;">
+                                <div style="font-size: 18px; font-weight: 700; color: var(--gray-900);">¥2,999</div>
+                                <div style="font-size: 13px; color: var(--gray-600); margin: 6px 0;">1万条</div>
+                                <div style="font-size: 11px; color: var(--gray-400); margin-bottom: 8px;">¥0.30/条</div>
+                                <button class="btn btn-secondary" style="width: 100%; font-size: 11px; padding: 4px 8px;" @click="showComingSoon('购买1万条包')">立即购买</button>
+                            </div>
+                            <div style="padding: 16px; background: var(--gray-50); border-radius: 12px; text-align: center;">
+                                <div style="font-size: 18px; font-weight: 700; color: var(--gray-900);">¥9,999</div>
+                                <div style="font-size: 13px; color: var(--gray-600); margin: 6px 0;">5万条</div>
+                                <div style="font-size: 11px; color: var(--gray-400); margin-bottom: 8px;">¥0.20/条</div>
+                                <button class="btn btn-secondary" style="width: 100%; font-size: 11px; padding: 4px 8px;" @click="showComingSoon('购买5万条包')">立即购买</button>
+                            </div>
+                            <div style="padding: 16px; background: rgba(16, 185, 129, 0.1); border-radius: 12px; text-align: center; border: 2px solid var(--success);">
+                                <div style="font-size: 11px; color: var(--success); margin-bottom: 2px;">🔥 最受欢迎</div>
+                                <div style="font-size: 18px; font-weight: 700; color: var(--success);">¥29,999</div>
+                                <div style="font-size: 13px; color: var(--gray-600); margin: 6px 0;">20万条</div>
+                                <div style="font-size: 11px; color: var(--success); margin-bottom: 8px;">¥0.15/条</div>
+                                <button class="btn btn-success" style="width: 100%; font-size: 11px; padding: 4px 8px;" @click="showComingSoon('购买20万条包')">立即购买</button>
+                            </div>
+                            <div style="padding: 16px; background: var(--gray-50); border-radius: 12px; text-align: center;">
+                                <div style="font-size: 18px; font-weight: 700; color: var(--gray-900);">¥79,999</div>
+                                <div style="font-size: 13px; color: var(--gray-600); margin: 6px 0;">80万条</div>
+                                <div style="font-size: 11px; color: var(--gray-400); margin-bottom: 8px;">¥0.10/条</div>
+                                <button class="btn btn-secondary" style="width: 100%; font-size: 11px; padding: 4px 8px;" @click="showComingSoon('购买80万条包')">立即购买</button>
+                            </div>
+                            <div style="padding: 16px; background: rgba(245, 158, 11, 0.1); border-radius: 12px; text-align: center; border: 2px solid var(--warning);">
+                                <div style="font-size: 11px; color: var(--warning); margin-bottom: 2px;">💎 企业首选</div>
+                                <div style="font-size: 18px; font-weight: 700; color: var(--warning);">¥199,999</div>
+                                <div style="font-size: 13px; color: var(--gray-600); margin: 6px 0;">300万条</div>
+                                <div style="font-size: 11px; color: var(--warning); margin-bottom: 8px;">¥0.067/条</div>
+                                <button class="btn btn-primary" style="width: 100%; font-size: 11px; padding: 4px 8px;" @click="showComingSoon('购买300万条包')">立即购买</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card content-wrapper" style="margin-top: 24px; border-color: var(--success);">
+                    <div class="card-header" style="background: rgba(16, 185, 129, 0.05);">
+                        <h2 class="card-title" style="color: var(--success);">💰 年付优惠（送2个月）</h2>
+                    </div>
+                    <div class="card-body">
+                        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;">
+                            <div style="padding: 20px; background: var(--gray-50); border-radius: 12px; border: 2px solid var(--primary);">
+                                <h3 style="font-size: 16px; font-weight: 600; margin-bottom: 8px;">专业版年付</h3>
+                                <div style="font-size: 24px; font-weight: 700; color: var(--primary); margin-bottom: 8px;">¥299,990<span style="font-size: 12px; font-weight: 400; color: var(--gray-500);">/年</span></div>
+                                <ul style="font-size: 13px; color: var(--gray-600); margin-bottom: 12px; padding-left: 16px;">
+                                    <li>20万条/月生成配额</li>
+                                    <li>标准/高质量模式</li>
+                                    <li>比月付省¥59,998</li>
+                                </ul>
+                                <button class="btn btn-primary" style="width: 100%;" @click="showComingSoon('专业版年付')">立即购买</button>
+                            </div>
+                            <div style="padding: 20px; background: linear-gradient(135deg, rgba(245, 158, 11, 0.1), rgba(99, 102, 241, 0.1)); border-radius: 12px; border: 2px solid var(--warning);">
+                                <div style="font-size: 11px; color: var(--warning); margin-bottom: 4px;">💎 企业首选</div>
+                                <h3 style="font-size: 16px; font-weight: 600; margin-bottom: 8px;">企业版年付</h3>
+                                <div style="font-size: 24px; font-weight: 700; color: var(--warning); margin-bottom: 8px;">¥699,990<span style="font-size: 12px; font-weight: 400; color: var(--gray-500);">/年</span></div>
+                                <ul style="font-size: 13px; color: var(--gray-600); margin-bottom: 12px; padding-left: 16px;">
+                                    <li>80万条/年生成配额</li>
+                                    <li>单一垂直领域定制</li>
+                                    <li>高质量模式默认</li>
+                                </ul>
+                                <button class="btn btn-primary" style="width: 100%; background: var(--warning);" @click="showComingSoon('企业版年付')">联系我们</button>
+                            </div>
+                            <div style="padding: 20px; background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(16, 185, 129, 0.1)); border-radius: 12px; border: 2px solid var(--success);">
+                                <div style="font-size: 11px; color: var(--success); margin-bottom: 4px;">🚀 大客户首选</div>
+                                <h3 style="font-size: 16px; font-weight: 600; margin-bottom: 8px;">旗舰版年付</h3>
+                                <div style="font-size: 24px; font-weight: 700; color: var(--success); margin-bottom: 8px;">¥1,999,990<span style="font-size: 12px; font-weight: 400; color: var(--gray-500);">/年</span></div>
+                                <ul style="font-size: 13px; color: var(--gray-600); margin-bottom: 12px; padding-left: 16px;">
+                                    <li>300万条/年生成配额</li>
+                                    <li>多领域混合生成</li>
+                                    <li>超高质量模式（90%+）</li>
+                                </ul>
+                                <button class="btn btn-success" style="width: 100%;" @click="showComingSoon('旗舰版年付')">联系我们</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card content-wrapper" style="margin-top: 24px;">
+                    <div class="card-header">
+                        <h2 class="card-title">客户算账</h2>
+                    </div>
+                    <div class="card-body">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>方案</th>
+                                    <th>内容</th>
+                                    <th>年成本</th>
+                                    <th>省</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>方案A</strong></td>
+                                    <td>专业版月付（12个月）</td>
+                                    <td style="color: var(--danger);">¥359,988</td>
+                                    <td>—</td>
+                                </tr>
+                                <tr style="background: rgba(16, 185, 129, 0.05);">
+                                    <td><strong>方案B</strong></td>
+                                    <td>专业版年付（一次性）</td>
+                                    <td style="color: var(--success);">¥299,999</td>
+                                    <td><strong style="color: var(--success);">¥59,989</strong></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <p style="margin-top: 16px; font-size: 14px; color: var(--gray-600);">
+                            <strong>话术：</strong>"年付比月付省6万，相当于打83折。长期用户建议直接年付。"
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="card content-wrapper" style="margin-top: 24px;">
+                    <div class="card-header">
+                        <h2 class="card-title">产品优势</h2>
+                    </div>
+                    <div class="card-body" style="padding: 0;">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>特性</th>
+                                    <th>说明</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>单价</td>
+                                    <td><strong style="color: var(--success);">¥0.03-0.08/条</strong>（按套餐）</td>
+                                </tr>
+                                <tr>
+                                    <td>生成速度</td>
+                                    <td><strong style="color: var(--success);">即时生成</strong>，无需等待</td>
+                                </tr>
+                                <tr>
+                                    <td>数据质量</td>
+                                    <td>自动脱敏、质量评分、优化建议</td>
+                                </tr>
+                                <tr>
+                                    <td>支持格式</td>
+                                    <td>JSON、JSONL、CSV、TXT、Parquet</td>
+                                </tr>
+                                <tr>
+                                    <td>免费体验</td>
+                                    <td><strong style="color: var(--success);">注册即送1000条</strong></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            
+            <footer class="footer">
+                <div class="footer-grid">
+                    <div class="footer-brand">
+                        <div class="logo-text">Pure<span style="color: var(--primary-light);">Data</span></div>
+                        <p>专业的AI训练数据生成平台，让数据准备更简单，让AI训练更高效。</p>
+                        <p style="font-size: 13px; color: var(--gray-500); margin-top: 12px;">
+                            📧 联系我们：support@puredata.ai
+                        </p>
+                    </div>
+                    <div>
+                        <h4 class="footer-title">产品</h4>
+                        <ul class="footer-links">
+                            <li><a href="#" @click.prevent="currentPage = 'generate'">数据生成</a></li>
+                            <li><a href="#" @click.prevent="currentPage = 'pricing'">定价方案</a></li>
+                            <li><a href="/docs/USER_GUIDE.md" target="_blank">使用指南</a></li>
+                            <li><a href="/docs/API.md" target="_blank">API文档</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="footer-title">支持</h4>
+                        <ul class="footer-links">
+                            <li><a href="#" @click.prevent="currentPage = 'home'; setTimeout(() => { const el = document.querySelector('.faq-section'); if(el) el.scrollIntoView({behavior: 'smooth'}); }, 100)">常见问题</a></li>
+                            <li><a href="/docs/用户服务协议.md" target="_blank">用户协议</a></li>
+                            <li><a href="/docs/隐私政策.md" target="_blank">隐私政策</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="footer-title">联系我们</h4>
+                        <ul class="footer-links">
+                            <li><span style="color: var(--gray-400);">📧 support@puredata.ai</span></li>
+                            <li><span style="color: var(--gray-400);">📱 400-XXX-XXXX</span></li>
+                            <li><span style="color: var(--gray-400);">🌐 puredata.ai</span></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="footer-bottom">
+                    <p>© 2024-2026 PureData. All rights reserved.</p>
+                </div>
+            </footer>
+        </main>
+        
+        <div class="help-fab" @click="showHelpModal = true" title="帮助">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+            </svg>
+        </div>
+        
+        <div class="toast-container">
+            <div v-for="toast in toasts" :key="toast.id" class="toast" :class="toast.type">
+                <div class="toast-icon">
+                    <svg v-if="toast.type === 'success'" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="width: 16px; height: 16px;">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                    </svg>
+                    <svg v-else-if="toast.type === 'error'" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="width: 16px; height: 16px;">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                    </svg>
+                    <svg v-else fill="none" stroke="currentColor" viewBox="0 0 24 24" style="width: 16px; height: 16px;">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                    </svg>
+                </div>
+                <div class="toast-content">
+                    <div class="toast-title">{{ toast.title }}</div>
+                    <div class="toast-message">{{ toast.message }}</div>
+                </div>
+            </div>
+        </div>
+        
+        <div v-if="showLoginModal" class="modal-overlay" @click.self="closeLoginModal">
+            <div class="modal-content" style="max-width: 400px;">
+                <div class="modal-header">
+                    <h3>登录</h3>
+                    <button class="modal-close" @click="closeLoginModal">&times;</button>
+                </div>
+                <div class="form-group">
+                    <label>用户名</label>
+                    <input type="text" class="form-input" v-model="loginForm.username" placeholder="请输入用户名" @keyup.enter="login">
+                </div>
+                <div class="form-group">
+                    <label>密码</label>
+                    <input type="password" class="form-input" v-model="loginForm.password" placeholder="请输入密码" @keyup.enter="login">
+                </div>
+                <div v-if="authError" class="alert alert-error">{{ authError }}</div>
+                <button class="btn btn-primary" style="width: 100%;" @click="login" :disabled="authLoading">
+                    {{ authLoading ? '登录中...' : '登录' }}
+                </button>
+                <p style="text-align: center; margin-top: 16px; color: var(--gray-500); font-size: 14px;">
+                    还没有账号？<a href="#" @click.prevent="closeLoginModal(); showRegisterModal = true" style="color: var(--primary);">立即注册</a>
+                </p>
+            </div>
+        </div>
+        
+        <div v-if="showRegisterModal" class="modal-overlay" @click.self="closeRegisterModal">
+            <div class="modal-content" style="max-width: 420px;">
+                <div class="modal-header">
+                    <h3>{{ registerStep === 1 ? '注册账号' : '设置密码' }}</h3>
+                    <button class="modal-close" @click="closeRegisterModal">&times;</button>
+                </div>
+                
+                <div v-if="registerStep === 1">
+                    <div class="form-group">
+                        <label>手机号/邮箱 <span style="color: var(--danger);">*</span></label>
+                        <input type="text" class="form-input" v-model="registerForm.account" 
+                               placeholder="请输入手机号或邮箱">
+                    </div>
+                    <div class="form-group">
+                        <label>验证码 <span style="color: var(--danger);">*</span></label>
+                        <div style="display: flex; gap: 8px;">
+                            <input type="text" class="form-input" v-model="registerForm.code" 
+                                   placeholder="请输入验证码" style="flex: 1;">
+                            <button class="btn btn-secondary" style="white-space: nowrap; min-width: 100px;"
+                                    @click="sendRegisterCode" :disabled="codeCountdown > 0">
+                                {{ codeCountdown > 0 ? codeCountdown + 's' : '获取验证码' }}
+                            </button>
+                        </div>
+                    </div>
+                    <div v-if="authError" class="alert alert-error">{{ authError }}</div>
+                    <button class="btn btn-primary" style="width: 100%;" @click="verifyRegisterCode" :disabled="authLoading">
+                        {{ authLoading ? '验证中...' : '下一步' }}
+                    </button>
+                </div>
+                
+                <div v-else>
+                    <div style="text-align: center; margin-bottom: 16px; padding: 12px; background: var(--gray-100); border-radius: 8px;">
+                        <span style="color: var(--gray-600);">账号：</span>
+                        <strong>{{ registerForm.account }}</strong>
+                    </div>
+                    <div class="form-group">
+                        <label>用户名 <span style="color: var(--danger);">*</span></label>
+                        <input type="text" class="form-input" v-model="registerForm.username" 
+                               placeholder="请输入用户名（4-20位字母数字）">
+                    </div>
+                    <div class="form-group">
+                        <label>密码 <span style="color: var(--danger);">*</span></label>
+                        <input type="password" class="form-input" v-model="registerForm.password" 
+                               @input="checkPasswordStrength(registerForm.password)" placeholder="至少6位密码">
+                        <div v-if="passwordStrength" style="margin-top: 8px;">
+                            <div style="display: flex; gap: 4px; margin-bottom: 4px;">
+                                <div v-for="i in 6" :key="i" style="flex: 1; height: 4px; border-radius: 2px;" 
+                                     :style="{background: i <= passwordStrength.score ? passwordStrength.color : 'var(--gray-200)'}"></div>
+                            </div>
+                            <span :style="{color: passwordStrength.color, fontSize: '12px'}">密码强度: {{ passwordStrength.levelText }}</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>确认密码 <span style="color: var(--danger);">*</span></label>
+                        <input type="password" class="form-input" v-model="registerForm.confirmPassword" 
+                               placeholder="请再次输入密码">
+                    </div>
+                    <div class="form-group">
+                        <label>邀请码 <span style="color: var(--gray-400);">(选填)</span></label>
+                        <input type="text" class="form-input" v-model="registerForm.invite_code" 
+                               placeholder="有邀请码？双方各得500条额度">
+                    </div>
+                    <div style="margin-bottom: 16px;">
+                        <label style="display: flex; align-items: flex-start; gap: 8px; cursor: pointer;">
+                            <input type="checkbox" v-model="registerForm.agreeTerms" style="margin-top: 3px;">
+                            <span style="font-size: 12px; color: var(--gray-600);">
+                                我已阅读并同意
+                                <a href="#" @click.prevent="showTermsModal = true" style="color: var(--primary);">《用户协议》</a>
+                                和
+                                <a href="#" @click.prevent="showPrivacyModal = true" style="color: var(--primary);">《隐私政策》</a>
+                            </span>
+                        </label>
+                    </div>
+                    <div v-if="authError" class="alert alert-error">{{ authError }}</div>
+                    <button class="btn btn-primary" style="width: 100%;" @click="register" 
+                            :disabled="authLoading || !registerForm.agreeTerms">
+                        {{ authLoading ? '注册中...' : '完成注册' }}
+                    </button>
+                    <button class="btn btn-secondary" style="width: 100%; margin-top: 8px;" @click="registerStep = 1">
+                        返回上一步
+                    </button>
+                </div>
+                
+                <p style="text-align: center; margin-top: 16px; color: var(--gray-500); font-size: 14px;">
+                    已有账号？<a href="#" @click.prevent="closeRegisterModal(); showLoginModal = true" style="color: var(--primary);">立即登录</a>
+                </p>
+            </div>
+        </div>
+        
+        <div v-if="showHelpModal" class="modal-overlay" @click.self="showHelpModal = false">
+            <div class="modal-content" style="max-width: 500px;">
+                <div class="modal-header">
+                    <h3>帮助中心</h3>
+                    <button class="modal-close" @click="showHelpModal = false">&times;</button>
+                </div>
+                <div style="padding: 8px 0;">
+                    <h4 style="font-size: 14px; font-weight: 600; margin-bottom: 8px; color: var(--gray-800);">快速开始</h4>
+                    <p style="font-size: 13px; color: var(--gray-600); margin-bottom: 16px;">1. 选择数据领域 → 2. 设置生成数量 → 3. 点击开始生成 → 4. 下载结果</p>
+                    
+                    <h4 style="font-size: 14px; font-weight: 600; margin-bottom: 8px; color: var(--gray-800);">生成模式说明</h4>
+                    <p style="font-size: 13px; color: var(--gray-600); margin-bottom: 8px;"><strong>Hybrid（推荐）</strong>：混合模式，30%干净+50%噪声+20%结构化</p>
+                    <p style="font-size: 13px; color: var(--gray-600); margin-bottom: 8px;"><strong>Clean</strong>：干净数据，无噪声，适合预训练</p>
+                    <p style="font-size: 13px; color: var(--gray-600); margin-bottom: 16px;"><strong>Noisy</strong>：噪声数据，模拟真实数据，适合鲁棒性训练</p>
+                    
+                    <h4 style="font-size: 14px; font-weight: 600; margin-bottom: 8px; color: var(--gray-800);">需要更多帮助？</h4>
+                    <p style="font-size: 13px; color: var(--gray-600);">查看 <a href="/docs" target="_blank" style="color: var(--primary);">API文档</a> 或联系技术支持</p>
+                </div>
+            </div>
+        </div>
+        
+        <div v-if="showQuotaWarningModal" class="modal-overlay" @click.self="showQuotaWarningModal = false">
+            <div class="modal-content quota-warning-modal">
+                <div class="quota-warning-icon">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
+                    </svg>
+                </div>
+                <div class="quota-warning-title">{{ quotaStatus && quotaStatus.is_free ? '免费额度即将用完' : '配额即将用完' }}</div>
+                <div class="quota-warning-text">
+                    <template v-if="quotaStatus && quotaStatus.is_free">
+                        您已使用 <strong>{{ quotaStatus.used.toLocaleString() }}</strong> 条，<br>
+                        剩余 <strong>{{ quotaStatus.remaining.toLocaleString() }}</strong> 条免费额度。<br><br>
+                        <span v-if="quotaStatus.remaining > 0">升级套餐获得更多配额和高级功能。</span>
+                        <span v-else>免费额度已用完，升级套餐继续生成数据。</span>
+                    </template>
+                    <template v-else>
+                        您本月已使用 <strong>{{ quotaStatus ? quotaStatus.monthly.used.toLocaleString() : 0 }}</strong> 条，<br>
+                        剩余 <strong>{{ quotaStatus ? quotaStatus.monthly.remaining.toLocaleString() : 0 }}</strong> 条。<br><br>
+                        超量后将按 <strong style="color: var(--warning);">¥{{ quotaStatus ? quotaStatus.overage_price : 0.08 }}/条</strong> 计费。<br>
+                        建议升级套餐以获得更多配额和更低的超量价格。
+                    </template>
+                </div>
+                <div class="quota-actions">
+                    <button class="btn btn-secondary" @click="showQuotaWarningModal = false">继续使用</button>
+                    <button class="btn btn-primary" @click="showQuotaWarningModal = false; currentPage = 'pricing'">查看套餐</button>
+                </div>
+            </div>
+        </div>
+        
+        <div v-if="showComingSoonModal" class="modal-overlay" @click.self="showComingSoonModal = false">
+            <div class="modal-content quota-warning-modal">
+                <div class="quota-warning-icon" style="background: rgba(99, 102, 241, 0.1);">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" style="color: var(--primary);">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"/>
+                    </svg>
+                </div>
+                <div class="quota-warning-title">功能开发中</div>
+                <div class="quota-warning-text">
+                    <strong>{{ comingSoonFeature }}</strong><br><br>
+                    该功能正在紧张开发中，敬请期待！<br>
+                    如需提前体验，请联系我们。
+                </div>
+                <div class="quota-actions">
+                    <button class="btn btn-primary" style="width: 100%;" @click="showComingSoonModal = false">我知道了</button>
+                </div>
+            </div>
+        </div>
+        
+        <div v-if="showContactModal" class="modal-overlay" @click.self="showContactModal = false">
+            <div class="modal-content quota-warning-modal">
+                <div class="quota-warning-icon" style="background: rgba(16, 185, 129, 0.1);">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" style="color: var(--success);">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
+                    </svg>
+                </div>
+                <div class="quota-warning-title">联系我们</div>
+                <div class="quota-warning-text">
+                    <div style="background: var(--gray-50); padding: 16px; border-radius: 12px; margin-bottom: 16px;">
+                        <div style="font-size: 13px; color: var(--gray-500); margin-bottom: 8px;">📞 客服电话</div>
+                        <div style="font-size: 24px; font-weight: 700; color: var(--primary);">{{ contactInfo.phone }}</div>
+                        <div style="font-size: 12px; color: var(--gray-400); margin-top: 4px;">{{ contactInfo.business_hours || '工作日 9:00-18:00' }}</div>
+                    </div>
+                    <div style="background: var(--gray-50); padding: 16px; border-radius: 12px;">
+                        <div style="font-size: 13px; color: var(--gray-500); margin-bottom: 8px;">📧 商务邮箱</div>
+                        <div style="font-size: 16px; font-weight: 600; color: var(--gray-800);">{{ contactInfo.sales_email || contactInfo.email }}</div>
+                    </div>
+                </div>
+                <div class="quota-actions">
+                    <button class="btn btn-secondary" @click="showContactModal = false">关闭</button>
+                    <a :href="'tel:' + contactInfo.phone" class="btn btn-primary" style="text-decoration: none;">立即拨打</a>
+                </div>
+            </div>
+        </div>
+        
+        <div v-if="showPaymentModal" class="modal-overlay" @click.self="showPaymentModal = false">
+            <div class="modal-content" style="max-width: 420px;">
+                <div class="modal-header">
+                    <h3>💳 扫码支付</h3>
+                    <button class="modal-close" @click="showPaymentModal = false">&times;</button>
+                </div>
+                <div style="padding: 24px; text-align: center;">
+                    <div style="font-size: 18px; font-weight: 600; margin-bottom: 8px;">{{ selectedPlan }}</div>
+                    <div style="color: var(--gray-500); margin-bottom: 20px;">请选择支付方式</div>
+                    
+                    <div style="display: flex; gap: 12px; margin-bottom: 20px; justify-content: center;">
+                        <button 
+                            v-for="method in paymentMethods" 
+                            :key="method.id"
+                            @click="selectedPaymentMethod = method.id"
+                            :class="['btn', selectedPaymentMethod === method.id ? 'btn-primary' : 'btn-secondary']"
+                            style="padding: 12px 24px;">
+                            {{ method.name }}
+                        </button>
+                    </div>
+                    
+                    <div v-if="selectedPaymentMethod === 'wechat'" style="background: var(--gray-50); padding: 24px; border-radius: 16px;">
+                        <div style="font-size: 14px; color: var(--gray-500); margin-bottom: 12px;">微信扫码支付</div>
+                        <div style="width: 200px; height: 200px; background: white; margin: 0 auto; border-radius: 12px; display: flex; align-items: center; justify-content: center; border: 2px dashed var(--gray-300);">
+                            <img src="/static/images/wechat_pay.png" style="width: 180px; height: 180px;" alt="微信支付二维码">
+                        </div>
+                        <div style="font-size: 12px; color: var(--gray-400); margin-top: 12px;">付款后请联系客服确认</div>
+                    </div>
+                    
+                    <div v-else-if="selectedPaymentMethod === 'alipay'" style="background: var(--gray-50); padding: 24px; border-radius: 16px;">
+                        <div style="font-size: 14px; color: var(--gray-500); margin-bottom: 12px;">支付宝扫码支付</div>
+                        <div style="width: 200px; height: 200px; background: white; margin: 0 auto; border-radius: 12px; display: flex; align-items: center; justify-content: center; border: 2px dashed var(--gray-300);">
+                            <img src="/static/images/alipay.png" style="width: 180px; height: 180px;" alt="支付宝二维码">
+                        </div>
+                        <div style="font-size: 12px; color: var(--gray-400); margin-top: 12px;">付款后请联系客服确认</div>
+                    </div>
+                    
+                    <div style="margin-top: 20px; padding: 12px; background: rgba(16, 185, 129, 0.1); border-radius: 8px; font-size: 13px; color: var(--gray-600);">
+                        📞 支付问题？致电 {{ contactInfo.phone }}
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div v-if="showOnboarding" class="modal-overlay">
+            <div class="modal-content" style="max-width: 500px;">
+                <div class="modal-header">
+                    <h3>🎉 欢迎使用 PureData</h3>
+                    <button class="modal-close" @click="skipOnboarding">&times;</button>
+                </div>
+                <div style="padding: 20px;">
+                    <div v-if="onboardingStep === 0">
+                        <h4 style="margin-bottom: 12px;">第一步：选择领域</h4>
+                        <p style="color: var(--gray-600); margin-bottom: 16px;">选择您需要生成数据的领域，如人工智能、医疗、金融等。</p>
+                        <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                            <span v-for="d in domains" :key="d.name" style="padding: 6px 12px; background: var(--gray-100); border-radius: 16px; font-size: 13px;">{{ d.name }}</span>
+                        </div>
+                    </div>
+                    <div v-else-if="onboardingStep === 1">
+                        <h4 style="margin-bottom: 12px;">第二步：设置数量</h4>
+                        <p style="color: var(--gray-600); margin-bottom: 16px;">输入您需要生成的数据条数，体验版用户有1000条免费额度。</p>
+                        <div style="padding: 16px; background: var(--gray-50); border-radius: 8px; text-align: center;">
+                            <span style="font-size: 32px; font-weight: 700; color: var(--primary);">100</span>
+                            <span style="color: var(--gray-500);"> 条</span>
+                        </div>
+                    </div>
+                    <div v-else-if="onboardingStep === 2">
+                        <h4 style="margin-bottom: 12px;">第三步：开始生成</h4>
+                        <p style="color: var(--gray-600); margin-bottom: 16px;">点击"开始生成"按钮，系统将自动生成高质量数据。</p>
+                        <div style="padding: 16px; background: var(--gray-50); border-radius: 8px; text-align: center;">
+                            <span style="font-size: 14px; color: var(--gray-500);">生成过程中可实时查看进度</span>
+                        </div>
+                    </div>
+                    <div v-else>
+                        <h4 style="margin-bottom: 12px;">第四步：下载使用</h4>
+                        <p style="color: var(--gray-600); margin-bottom: 16px;">生成完成后，可下载JSON、JSONL、CSV等格式的数据文件。</p>
+                        <div style="padding: 16px; background: rgba(16, 185, 129, 0.1); border-radius: 8px; text-align: center;">
+                            <span style="color: var(--success);">✓ 准备就绪，开始体验吧！</span>
+                        </div>
+                    </div>
+                    
+                    <div style="display: flex; justify-content: center; gap: 8px; margin-top: 20px;">
+                        <span v-for="i in 4" :key="i" :style="{width: '8px', height: '8px', borderRadius: '50%', background: i <= onboardingStep + 1 ? 'var(--primary)' : 'var(--gray-300)'}"></span>
+                    </div>
+                </div>
+                <div style="padding: 16px 20px; border-top: 1px solid var(--gray-200); display: flex; gap: 12px;">
+                    <button class="btn btn-secondary" style="flex: 1;" @click="skipOnboarding">跳过引导</button>
+                    <button class="btn btn-primary" style="flex: 1;" @click="nextOnboardingStep">
+                        {{ onboardingStep === 3 ? '开始使用' : '下一步' }}
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <div v-if="showQualityModal && qualityReport" class="modal-overlay" @click.self="showQualityModal = false">
+            <div class="modal-content" style="max-width: 500px;">
+                <div class="modal-header">
+                    <h3>📊 数据质量报告</h3>
+                    <button class="modal-close" @click="showQualityModal = false">&times;</button>
+                </div>
+                <div style="padding: 20px;">
+                    <div style="text-align: center; margin-bottom: 20px;">
+                        <div :style="{fontSize: '48px', fontWeight: '700', color: qualityReport.overall >= 0.8 ? 'var(--success)' : qualityReport.overall >= 0.6 ? 'var(--warning)' : 'var(--danger)'}">
+                            {{ qualityReport.overall }}
+                        </div>
+                        <div style="fontSize: '24px'; color: var(--gray-600);">评分 {{ qualityReport.grade }}</div>
+                    </div>
+                    
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 20px;">
+                        <div style="padding: 12px; background: var(--gray-50); border-radius: 8px;">
+                            <div style="font-size: 12px; color: var(--gray-500);">完整性</div>
+                            <div style="font-size: 18px; font-weight: 600;">{{ (qualityReport.completeness * 100).toFixed(0) }}%</div>
+                        </div>
+                        <div style="padding: 12px; background: var(--gray-50); border-radius: 8px;">
+                            <div style="font-size: 12px; color: var(--gray-500);">一致性</div>
+                            <div style="font-size: 18px; font-weight: 600;">{{ (qualityReport.consistency * 100).toFixed(0) }}%</div>
+                        </div>
+                        <div style="padding: 12px; background: var(--gray-50); border-radius: 8px;">
+                            <div style="font-size: 12px; color: var(--gray-500);">多样性</div>
+                            <div style="font-size: 18px; font-weight: 600;">{{ (qualityReport.diversity * 100).toFixed(0) }}%</div>
+                        </div>
+                        <div style="padding: 12px; background: var(--gray-50); border-radius: 8px;">
+                            <div style="font-size: 12px; color: var(--gray-500);">有效性</div>
+                            <div style="font-size: 18px; font-weight: 600;">{{ (qualityReport.validity * 100).toFixed(0) }}%</div>
+                        </div>
+                    </div>
+                    
+                    <div v-if="qualityReport.suggestions" style="padding: 12px; background: rgba(99, 102, 241, 0.1); border-radius: 8px;">
+                        <div style="font-size: 13px; font-weight: 600; margin-bottom: 8px;">💡 优化建议</div>
+                        <ul style="font-size: 13px; color: var(--gray-600); padding-left: 16px; margin: 0;">
+                            <li v-for="s in qualityReport.suggestions" :key="s">{{ s }}</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        const { createApp } = Vue;
+        
+        createApp({
+            data() {
+                return {
+                    currentPage: 'home',
+                    openFaq: 0,
+                    domains: [
+                        { name: '人工智能', keywords: 500 },
+                        { name: '医疗', keywords: 500 },
+                        { name: '金融', keywords: 500 },
+                        { name: '劳动合同', keywords: 500 }
+                    ],
+                    stats: { totalGenerated: 100000, domains: 4, speed: 200, remaining: 100 },
+                    selectedDomain: '人工智能',
+                    count: 100,
+                    format: 'jsonl',
+                    mode: 'hybrid',
+                    noiseLevel: '2',
+                    qualityMode: 'standard',
+                    qualityModes: [
+                        { id: 'standard', name: '标准', description: '50%高质量 - 数据增强、一般训练', roles: ['standard', 'premium', 'admin'] },
+                        { id: 'high', name: '高质量', description: '80%高质量 - LLM预训练、模型微调', roles: ['premium', 'admin'] },
+                        { id: 'ultra', name: '超高质量', description: '95%高质量 - 高端训练场景', roles: ['admin'] },
+                        { id: 'mixed', name: '混合可调', description: '自定义质量分布', roles: ['admin'] }
+                    ],
+                    generating: false,
+                    taskId: '',
+                    taskStatus: '',
+                    taskProgress: 0,
+                    taskBatches: 1,
+                    currentBatch: 0,
+                    taskElapsed: 0,
+                    preview: [],
+                    downloadUrl: '',
+                    actualCount: 0,
+                    qualityReport: null,
+                    sanitizeStats: null,
+                    history: [],
+                    activeTasks: [],
+                    toasts: [],
+                    currentUser: null,
+                    quotaStatus: null,
+                    showLoginModal: false,
+                    showRegisterModal: false,
+                    showHelpModal: false,
+                    showQuotaWarningModal: false,
+                    showComingSoonModal: false,
+                    showContactModal: false,
+                    showPaymentModal: false,
+                    selectedPlan: null,
+                    paymentMethods: [],
+                    selectedPaymentMethod: 'wechat',
+                    showOnboarding: false,
+                    invoiceForm: {
+                        type: 'normal',
+                        amount: '',
+                        companyName: '',
+                        taxId: '',
+                        address: '',
+                        phone: '',
+                        bank: '',
+                        bankAccount: '',
+                        remark: ''
+                    },
+                    invoiceRecords: [],
+                    operationLogs: [],
+                    onboardingStep: 0,
+                    showQualityModal: false,
+                    previewSearch: '',
+                    previewSort: 'default',
+                    comingSoonFeature: '',
+                    loginForm: { username: '', password: '' },
+                    registerForm: { account: '', code: '', username: '', password: '', confirmPassword: '', invite_code: '', agreeTerms: false },
+                    registerStep: 1,
+                    codeCountdown: 0,
+                    codeTimer: null,
+                    passwordStrength: null,
+                    authError: '',
+                    authLoading: false,
+                    showTermsModal: false,
+                    showPrivacyModal: false,
+                    contactInfo: {
+                        phone: '400-XXX-XXXX',
+                        email: 'support@puredata.ai',
+                        phone_display: '400-XXX-XXXX（工作日 9:00-18:00）'
+                    }
+                }
+            },
+            computed: { 
+                activeTaskCount() { return this.activeTasks.length; },
+                availableQualityModes() {
+                    const userRole = this.currentUser?.role || 'free';
+                    return this.qualityModes.filter(m => m.roles.includes(userRole));
+                }
+            },
+            mounted() { this.checkLogin(); this.loadContactInfo(); },
+            methods: {
+                canUseQualityMode(mode) {
+                    const userRole = this.currentUser?.role || 'free';
+                    return mode.roles.includes(userRole);
+                },
+                checkPasswordStrength(password) {
+                    if (!password) {
+                        this.passwordStrength = null;
+                        return;
+                    }
+                    let score = 0;
+                    const feedback = [];
+                    
+                    if (password.length >= 8) score++;
+                    if (password.length >= 12) score++;
+                    if (/[a-z]/.test(password)) score++;
+                    if (/[A-Z]/.test(password)) score++;
+                    if (/\d/.test(password)) score++;
+                    if (/[!@#$%^&*(),.?":{}|<>]/.test(password)) score++;
+                    
+                    const common = ['123456', 'password', 'qwerty', 'admin', 'root'];
+                    if (common.includes(password.toLowerCase())) score = 0;
+                    
+                    let level, levelText, color;
+                    if (score <= 2) { level = 'weak'; levelText = '弱'; color = '#ef4444'; }
+                    else if (score <= 4) { level = 'medium'; levelText = '中等'; color = '#f59e0b'; }
+                    else { level = 'strong'; levelText = '强'; color = '#10b981'; }
+                    
+                    this.passwordStrength = { score, maxScore: 6, level, levelText, color };
+                },
+                async checkLogin() {
+                    const token = localStorage.getItem('user_token');
+                    if (!token) return;
+                    try {
+                        const res = await axios.get('/api/user/info', { headers: { 'Authorization': 'Bearer ' + token } });
+                        if (res.data.success) {
+                            this.currentUser = res.data.user;
+                            this.loadHistory();
+                        }
+                    } catch (e) { localStorage.removeItem('user_token'); }
+                },
+                async loadHistory() {
+                    const token = localStorage.getItem('user_token');
+                    if (!token) return;
+                    try {
+                        const res = await axios.get('/api/user/history', { headers: { 'Authorization': 'Bearer ' + token } });
+                        if (res.data.success) {
+                            this.history = res.data.history;
+                        }
+                    } catch (e) { console.error('加载历史记录失败:', e); }
+                },
+                completeOnboarding() {
+                    localStorage.setItem('onboarding_done', 'true');
+                    this.showOnboarding = false;
+                },
+                skipOnboarding() {
+                    localStorage.setItem('onboarding_done', 'true');
+                    this.showOnboarding = false;
+                },
+                nextOnboardingStep() {
+                    if (this.onboardingStep < 3) {
+                        this.onboardingStep++;
+                    } else {
+                        this.completeOnboarding();
+                    }
+                },
+                async loadQuotaStatus() {
+                    const token = localStorage.getItem('user_token');
+                    if (!token) return;
+                    try {
+                        const res = await axios.get('/api/user/quota', { headers: { 'Authorization': 'Bearer ' + token } });
+                        if (res.data.success) {
+                            this.quotaStatus = res.data.quota;
+                            const shouldWarn = this.quotaStatus.is_free 
+                                ? this.quotaStatus.warning_level !== 'normal'
+                                : this.quotaStatus.warning_level !== 'normal';
+                            if (shouldWarn && !sessionStorage.getItem('quota_warning_shown')) {
+                                this.showQuotaWarningModal = true;
+                                sessionStorage.setItem('quota_warning_shown', 'true');
+                            }
+                        }
+                    } catch (e) { console.error('Failed to load quota:', e); }
+                },
+                async login() {
+                    if (!this.loginForm.username || !this.loginForm.password) { this.authError = '请填写用户名和密码'; return; }
+                    this.authLoading = true; this.authError = '';
+                    console.log('登录请求:', { username: this.loginForm.username });
+                    try {
+                        const res = await axios.post('/api/login', this.loginForm);
+                        console.log('登录响应:', res.data);
+                        if (res.data.success) {
+                            localStorage.setItem('user_token', res.data.token);
+                            this.currentUser = res.data.user;
+                            this.showLoginModal = false;
+                            this.showRegisterModal = false;
+                            alert('登录成功！欢迎 ' + this.currentUser.username);
+                        } else { this.authError = res.data.error || '登录失败'; }
+                    } catch (e) { 
+                        console.error('登录错误:', e);
+                        this.authError = e.response?.data?.error || '网络错误'; 
+                    }
+                    finally { this.authLoading = false; }
+                },
+                async register() {
+                    if (!this.registerForm.username) { this.authError = '请输入用户名'; return; }
+                    if (this.registerForm.username.length < 4 || this.registerForm.username.length > 20) { this.authError = '用户名需要4-20位'; return; }
+                    if (!this.registerForm.password) { this.authError = '请输入密码'; return; }
+                    if (this.registerForm.password.length < 6) { this.authError = '密码长度至少6位'; return; }
+                    if (this.registerForm.password !== this.registerForm.confirmPassword) { this.authError = '两次密码不一致'; return; }
+                    if (!this.registerForm.agreeTerms) { this.authError = '请阅读并同意用户协议'; return; }
+                    this.authLoading = true; this.authError = '';
+                    try {
+                        const res = await axios.post('/api/register', {
+                            username: this.registerForm.username,
+                            account: this.registerForm.account,
+                            password: this.registerForm.password,
+                            invite_code: this.registerForm.invite_code || null
+                        });
+                        if (res.data.success) {
+                            localStorage.setItem('user_token', res.data.token);
+                            this.currentUser = res.data.user;
+                            this.closeRegisterModal();
+                            this.loadQuotaStatus();
+                            this.showToast('success', '注册成功', res.data.message || '欢迎加入 PureData！赠送1000条免费额度');
+                        } else { this.authError = res.data.error || '注册失败'; }
+                    } catch (e) { this.authError = e.response?.data?.error || '网络错误'; }
+                    finally { this.authLoading = false; }
+                },
+                async logout() {
+                    const token = localStorage.getItem('user_token');
+                    if (token) { try { await axios.post('/api/logout', {}, { headers: { 'Authorization': 'Bearer ' + token } }); } catch (e) {} }
+                    localStorage.removeItem('user_token');
+                    this.currentUser = null;
+                    this.quotaStatus = null;
+                    sessionStorage.removeItem('quota_warning_shown');
+                    this.showToast('info', '已退出', '期待您的再次使用');
+                },
+                async loadDomains() { try { const res = await axios.get('/domains'); this.domains = res.data.domains; } catch (e) {} },
+                async loadStats() { 
+                    try { 
+                        const res = await axios.get('/stats'); 
+                        this.stats.totalGenerated = res.data.total_data || 0;
+                        this.stats.domains = res.data.domains || 10;
+                        this.stats.totalTasks = res.data.total_tasks || 0;
+                        this.stats.completedTasks = res.data.completed_tasks || 0;
+                        this.stats.totalKeywords = res.data.total_keywords || 0;
+                        this.stats.variationMultiplier = res.data.variation_multiplier || 0;
+                    } catch (e) {} 
+                },
+                showToast(type, title, message) { const toast = { id: Date.now(), type, title, message }; this.toasts.push(toast); setTimeout(() => { this.toasts = this.toasts.filter(t => t.id !== toast.id); }, 5000); },
+                closeLoginModal() { this.showLoginModal = false; this.authLoading = false; this.authError = ''; this.loginForm = { username: '', password: '' }; },
+                closeRegisterModal() { 
+                    this.showRegisterModal = false; 
+                    this.authLoading = false; 
+                    this.authError = ''; 
+                    this.registerStep = 1;
+                    this.registerForm = { account: '', code: '', username: '', password: '', confirmPassword: '', invite_code: '', agreeTerms: false };
+                    if (this.codeTimer) { clearInterval(this.codeTimer); this.codeTimer = null; }
+                    this.codeCountdown = 0;
+                },
+                async sendRegisterCode() {
+                    const account = this.registerForm.account.trim();
+                    if (!account) {
+                        this.authError = '请输入手机号或邮箱';
+                        return;
+                    }
+                    const isPhone = /^1[3-9]\d{9}$/.test(account);
+                    const isEmail = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(account);
+                    if (!isPhone && !isEmail) {
+                        this.authError = '请输入正确的手机号或邮箱格式';
+                        return;
+                    }
+                    this.authError = '';
+                    try {
+                        const res = await axios.post('/api/send_verification', {
+                            target: account,
+                            type: 'register'
+                        });
+                        if (res.data.success) {
+                            this.showToast('success', '发送成功', res.data.message);
+                            this.codeCountdown = 60;
+                            this.codeTimer = setInterval(() => {
+                                this.codeCountdown--;
+                                if (this.codeCountdown <= 0) {
+                                    clearInterval(this.codeTimer);
+                                    this.codeTimer = null;
+                                }
+                            }, 1000);
+                        } else {
+                            this.authError = res.data.error || '发送失败';
+                        }
+                    } catch (e) {
+                        this.authError = e.response?.data?.error || '网络错误';
+                    }
+                },
+                async verifyRegisterCode() {
+                    const account = this.registerForm.account.trim();
+                    const code = this.registerForm.code.trim();
+                    if (!account) { this.authError = '请输入手机号或邮箱'; return; }
+                    if (!code) { this.authError = '请输入验证码'; return; }
+                    this.authLoading = true;
+                    this.authError = '';
+                    try {
+                        const res = await axios.post('/api/verify_code', {
+                            target: account,
+                            code: code,
+                            type: 'register'
+                        });
+                        if (res.data.success) {
+                            this.registerStep = 2;
+                        } else {
+                            this.authError = res.data.error || '验证码错误';
+                        }
+                    } catch (e) {
+                        this.authError = e.response?.data?.error || '网络错误';
+                    } finally {
+                        this.authLoading = false;
+                    }
+                },
+                showComingSoon(feature) {
+                    if (feature.includes('联系我们') || feature.includes('企业版') || feature.includes('旗舰版')) {
+                        this.showContactModal = true;
+                    } else if (feature.includes('订阅') || feature.includes('购买')) {
+                        this.openPaymentModal(feature);
+                    } else {
+                        this.comingSoonFeature = feature;
+                        this.showComingSoonModal = true;
+                    }
+                },
+                async openPaymentModal(planName) {
+                    this.selectedPlan = planName;
+                    try {
+                        const res = await axios.get('/api/payment_methods');
+                        if (res.data.success) {
+                            this.paymentMethods = res.data.methods || [];
+                        }
+                    } catch (e) {}
+                    this.showPaymentModal = true;
+                },
+                async loadContactInfo() {
+                    try {
+                        const res = await axios.get('/api/contact');
+                        if (res.data.success && res.data.contact) {
+                            this.contactInfo = res.data.contact;
+                        }
+                    } catch (e) {}
+                },
+                submitInvoice() {
+                    if (!this.invoiceForm.companyName || !this.invoiceForm.taxId || !this.invoiceForm.amount) {
+                        this.showToast('error', '提交失败', '请填写完整的发票信息');
+                        return;
+                    }
+                    this.invoiceRecords.unshift({
+                        id: Date.now(),
+                        time: new Date().toLocaleString(),
+                        type: this.invoiceForm.type,
+                        amount: this.invoiceForm.amount,
+                        status: 'pending',
+                        statusText: '待审核'
+                    });
+                    this.showToast('success', '提交成功', '发票申请已提交，预计3-5个工作日处理');
+                    this.resetInvoiceForm();
+                },
+                resetInvoiceForm() {
+                    this.invoiceForm = {
+                        type: 'normal',
+                        amount: '',
+                        companyName: '',
+                        taxId: '',
+                        address: '',
+                        phone: '',
+                        bank: '',
+                        bankAccount: '',
+                        remark: ''
+                    };
+                },
+                showInvoiceDetail(record) {
+                    this.showToast('info', '发票详情', `发票金额: ¥${record.amount}，状态: ${record.statusText}`);
+                },
+                addOperationLog(type, action, detail) {
+                    this.operationLogs.unshift({
+                        id: Date.now(),
+                        time: new Date().toLocaleString(),
+                        type: type,
+                        action: action,
+                        detail: detail,
+                        ip: '***.***.***.' + Math.floor(Math.random() * 255)
+                    });
+                },
+                async startGenerate() {
+                    if (!this.currentUser) {
+                        this.showLoginModal = true;
+                        return;
+                    }
+                    this.generating = true; 
+                    this.taskStatus = 'pending'; 
+                    this.preview = [];
+                    try {
+                        const token = localStorage.getItem('user_token');
+                        const res = await axios.post('/generate', { 
+                            domain: this.selectedDomain, 
+                            count: this.count, 
+                            format: this.format, 
+                            mode: this.mode,
+                            noise_level: parseInt(this.noiseLevel),
+                            quality_mode: this.qualityMode
+                        }, {
+                            headers: { 'Authorization': 'Bearer ' + token }
+                        });
+                        this.taskId = res.data.task_id;
+                        this.pollTask();
+                    } catch (e) {
+                        this.generating = false;
+                        alert('生成失败: ' + (e.response?.data?.error || e.message));
+                    }
+                },
+                async pollTask() {
+                    const poll = async () => {
+                        if (!this.taskId) return;
+                        try {
+                            const res = await axios.get(`/task/${this.taskId}`);
+                            const task = res.data;
+                            this.taskStatus = task.status;
+                            this.taskProgress = task.progress || 0;
+                            if (task.status === 'completed') {
+                                this.generating = false;
+                                this.preview = task.preview || [];
+                                this.downloadUrl = task.download_url;
+                                this.actualCount = task.count;
+                                this.qualityReport = task.quality || null;
+                                this.loadHistory();
+                            } else if (task.status === 'failed') {
+                                this.generating = false;
+                                alert('生成失败: ' + (task.error || '未知错误'));
+                            } else {
+                                setTimeout(poll, 500);
+                            }
+                        } catch (e) {
+                            setTimeout(poll, 500);
+                        }
+                    };
+                    poll();
+                },
+                downloadFile() { 
+                    if (this.downloadUrl) {
+                        const link = document.createElement('a');
+                        link.href = encodeURI(this.downloadUrl);
+                        link.download = '';
+                        document.body.appendChild(link);
+                        link.click();
+                        document.body.removeChild(link);
+                    }
+                },
+                redownload(task) {
+                    const filename = `${task.id}_${task.domain}_${task.count}.json`;
+                    const link = document.createElement('a');
+                    link.href = encodeURI(`/download/${filename}`);
+                    link.download = filename;
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                }
+            }
+        }).mount('#app');
+    </script>
+</body>
+</html>

@@ -1,0 +1,622 @@
+[
+  {
+    "id": 1,
+    "word": "投资",
+    "text": "投资是指将资金投入到各种资产中，以期获得未来收益的经济行为。主要包括股票投资、债券投资、基金投资、房地产投资等形式。投资的核心在于风险与收益的平衡，投资者需要根据自身风险承受能力和投资目标选择合适的投资品种。",
+    "category": "金融",
+    "source": "knowledge_base",
+    "confidence": 1.05,
+    "quality_score": 1.0,
+    "quality_tier": "high",
+    "timestamp": "2026-02-22T18:22:18.072618",
+    "verified": true,
+    "text_length": 104,
+    "quality_check": {
+      "passed": true,
+      "score": 1.0
+    },
+    "provenance": {
+      "platform": "PureData",
+      "version": "2.0.0",
+      "generated_at": "2026-02-22T18:22:18.072619",
+      "batch_id": "9201546d_b1",
+      "quality_mode": "high_quality",
+      "generator": "high_quality",
+      "license": "CC-BY-4.0",
+      "compliance": [
+        "数据安全法",
+        "个人信息保护法"
+      ]
+    },
+    "_sensitivity_level": "safe"
+  },
+  {
+    "id": 2,
+    "word": "理财",
+    "text": "理财是指对个人或家庭的财务进行科学管理，包括收入管理、支出规划、投资配置、风险保障等方面。现代理财强调资产配置的多元化，通过合理的财务规划实现财富保值增值。",
+    "category": "金融",
+    "source": "knowledge_base",
+    "confidence": 0.95,
+    "quality_score": 1.0,
+    "quality_tier": "high",
+    "timestamp": "2026-02-22T18:22:18.072760",
+    "verified": true,
+    "text_length": 78,
+    "quality_check": {
+      "passed": true,
+      "score": 1.0
+    },
+    "provenance": {
+      "platform": "PureData",
+      "version": "2.0.0",
+      "generated_at": "2026-02-22T18:22:18.072762",
+      "batch_id": "9201546d_b1",
+      "quality_mode": "high_quality",
+      "generator": "high_quality",
+      "license": "CC-BY-4.0",
+      "compliance": [
+        "数据安全法",
+        "个人信息保护法"
+      ]
+    },
+    "_sensitivity_level": "safe"
+  },
+  {
+    "id": 3,
+    "word": "贷款",
+    "text": "贷款是金融机构向借款人提供资金，借款人按约定利率和期限偿还本金的信用行为。主要类型包括个人消费贷款、住房贷款、经营贷款等。贷款利率受市场利率、信用评级等因素影响。",
+    "category": "金融",
+    "source": "knowledge_base",
+    "confidence": 1.0,
+    "quality_score": 1.0,
+    "quality_tier": "high",
+    "timestamp": "2026-02-22T18:22:18.072898",
+    "verified": true,
+    "text_length": 81,
+    "quality_check": {
+      "passed": true,
+      "score": 1.0
+    },
+    "provenance": {
+      "platform": "PureData",
+      "version": "2.0.0",
+      "generated_at": "2026-02-22T18:22:18.072899",
+      "batch_id": "9201546d_b1",
+      "quality_mode": "high_quality",
+      "generator": "high_quality",
+      "license": "CC-BY-4.0",
+      "compliance": [
+        "数据安全法",
+        "个人信息保护法"
+      ]
+    },
+    "_sensitivity_level": "safe"
+  },
+  {
+    "id": 4,
+    "word": "保险",
+    "text": "保险是一种风险转移机制，投保人支付保费，保险人承担约定风险造成的经济损失。主要类型有人寿保险、财产保险、健康保险等。保险是现代金融体系的重要组成部分。 该概念与贷款、股票密切相关。",
+    "category": "金融",
+    "source": "knowledge_base",
+    "confidence": 1.0,
+    "quality_score": 1.0,
+    "quality_tier": "high",
+    "timestamp": "2026-02-22T18:22:18.073059",
+    "verified": true,
+    "text_length": 90,
+    "quality_check": {
+      "passed": true,
+      "score": 1.0
+    },
+    "provenance": {
+      "platform": "PureData",
+      "version": "2.0.0",
+      "generated_at": "2026-02-22T18:22:18.073060",
+      "batch_id": "9201546d_b1",
+      "quality_mode": "high_quality",
+      "generator": "high_quality",
+      "license": "CC-BY-4.0",
+      "compliance": [
+        "数据安全法",
+        "个人信息保护法"
+      ]
+    },
+    "_sensitivity_level": "safe"
+  },
+  {
+    "id": 5,
+    "word": "股票",
+    "text": "股票是股份公司发行的所有权凭证，代表股东对公司的部分所有权。股票投资具有高风险高收益特征，价格受公司业绩、市场环境、政策法规等多重因素影响。",
+    "category": "金融",
+    "source": "knowledge_base",
+    "confidence": 0.95,
+    "quality_score": 1.0,
+    "quality_tier": "high",
+    "timestamp": "2026-02-22T18:22:18.073147",
+    "verified": true,
+    "text_length": 70,
+    "quality_check": {
+      "passed": true,
+      "score": 1.0
+    },
+    "provenance": {
+      "platform": "PureData",
+      "version": "2.0.0",
+      "generated_at": "2026-02-22T18:22:18.073148",
+      "batch_id": "9201546d_b1",
+      "quality_mode": "high_quality",
+      "generator": "high_quality",
+      "license": "CC-BY-4.0",
+      "compliance": [
+        "数据安全法",
+        "个人信息保护法"
+      ]
+    },
+    "_sensitivity_level": "safe"
+  },
+  {
+    "id": 6,
+    "word": "基金",
+    "text": "基金是一种集合投资工具，由专业管理人运作，投资者按份额享有收益。主要类型包括股票型基金、债券型基金、混合型基金、货币市场基金等。 该概念与股票、债券密切相关。",
+    "category": "金融",
+    "source": "knowledge_base",
+    "confidence": 0.95,
+    "quality_score": 1.0,
+    "quality_tier": "high",
+    "timestamp": "2026-02-22T18:22:18.073264",
+    "verified": true,
+    "text_length": 79,
+    "quality_check": {
+      "passed": true,
+      "score": 1.0
+    },
+    "provenance": {
+      "platform": "PureData",
+      "version": "2.0.0",
+      "generated_at": "2026-02-22T18:22:18.073265",
+      "batch_id": "9201546d_b1",
+      "quality_mode": "high_quality",
+      "generator": "high_quality",
+      "license": "CC-BY-4.0",
+      "compliance": [
+        "数据安全法",
+        "个人信息保护法"
+      ]
+    },
+    "_sensitivity_level": "safe"
+  },
+  {
+    "id": 7,
+    "word": "债券",
+    "text": "债券是政府、企业等发行的债务凭证，承诺按期支付利息并到期偿还本金。债券投资相对稳健，收益率通常低于股票但风险也较低。",
+    "category": "金融",
+    "source": "knowledge_base",
+    "confidence": 0.95,
+    "quality_score": 1.0,
+    "quality_tier": "high",
+    "timestamp": "2026-02-22T18:22:18.073318",
+    "verified": true,
+    "text_length": 58,
+    "quality_check": {
+      "passed": true,
+      "score": 1.0
+    },
+    "provenance": {
+      "platform": "PureData",
+      "version": "2.0.0",
+      "generated_at": "2026-02-22T18:22:18.073318",
+      "batch_id": "9201546d_b1",
+      "quality_mode": "high_quality",
+      "generator": "high_quality",
+      "license": "CC-BY-4.0",
+      "compliance": [
+        "数据安全法",
+        "个人信息保护法"
+      ]
+    },
+    "_sensitivity_level": "safe"
+  },
+  {
+    "id": 8,
+    "word": "期货",
+    "text": "期货是标准化的远期合约，约定在未来特定时间以特定价格买卖特定资产。期货交易具有杠杆效应，风险较高，主要用于套期保值和投机交易。",
+    "category": "金融",
+    "source": "knowledge_base",
+    "confidence": 0.95,
+    "quality_score": 1.0,
+    "quality_tier": "high",
+    "timestamp": "2026-02-22T18:22:18.073382",
+    "verified": true,
+    "text_length": 63,
+    "quality_check": {
+      "passed": true,
+      "score": 1.0
+    },
+    "provenance": {
+      "platform": "PureData",
+      "version": "2.0.0",
+      "generated_at": "2026-02-22T18:22:18.073382",
+      "batch_id": "9201546d_b1",
+      "quality_mode": "high_quality",
+      "generator": "high_quality",
+      "license": "CC-BY-4.0",
+      "compliance": [
+        "数据安全法",
+        "个人信息保护法"
+      ]
+    },
+    "_sensitivity_level": "safe"
+  },
+  {
+    "id": 9,
+    "word": "外汇",
+    "text": "外汇是指外国货币及以外币表示的支付手段。外汇交易是全球最大的金融市场，日均交易量超过6万亿美元。汇率受经济数据、政治事件、央行政策等影响。 该概念与期货、风控密切相关。",
+    "category": "金融",
+    "source": "knowledge_base",
+    "confidence": 1.0,
+    "quality_score": 1.0,
+    "quality_tier": "high",
+    "timestamp": "2026-02-22T18:22:18.073514",
+    "verified": true,
+    "text_length": 84,
+    "quality_check": {
+      "passed": true,
+      "score": 1.0
+    },
+    "provenance": {
+      "platform": "PureData",
+      "version": "2.0.0",
+      "generated_at": "2026-02-22T18:22:18.073515",
+      "batch_id": "9201546d_b1",
+      "quality_mode": "high_quality",
+      "generator": "high_quality",
+      "license": "CC-BY-4.0",
+      "compliance": [
+        "数据安全法",
+        "个人信息保护法"
+      ]
+    },
+    "_sensitivity_level": "safe"
+  },
+  {
+    "id": 10,
+    "word": "风控",
+    "text": "风控即风险控制，是金融机构识别、评估、监控和控制风险的过程。现代风控体系包括信用风险、市场风险、操作风险等多个维度，运用大数据和AI技术提升风控效率。",
+    "category": "金融",
+    "source": "knowledge_base",
+    "confidence": 1.0,
+    "quality_score": 1.0,
+    "quality_tier": "high",
+    "timestamp": "2026-02-22T18:22:18.073613",
+    "verified": true,
+    "text_length": 75,
+    "quality_check": {
+      "passed": true,
+      "score": 1.0
+    },
+    "provenance": {
+      "platform": "PureData",
+      "version": "2.0.0",
+      "generated_at": "2026-02-22T18:22:18.073614",
+      "batch_id": "9201546d_b1",
+      "quality_mode": "high_quality",
+      "generator": "high_quality",
+      "license": "CC-BY-4.0",
+      "compliance": [
+        "数据安全法",
+        "个人信息保护法"
+      ]
+    },
+    "_sensitivity_level": "safe"
+  },
+  {
+    "id": 11,
+    "word": "征信",
+    "text": "征信是指依法收集、整理、保存、加工自然人、法人及其他组织的信用信息，并提供信用报告、信用评分等服务的活动。征信体系是现代金融基础设施的重要组成部分。",
+    "category": "金融",
+    "source": "knowledge_base",
+    "confidence": 1.0,
+    "quality_score": 1.0,
+    "quality_tier": "high",
+    "timestamp": "2026-02-22T18:22:18.073797",
+    "verified": true,
+    "text_length": 74,
+    "quality_check": {
+      "passed": true,
+      "score": 1.0
+    },
+    "provenance": {
+      "platform": "PureData",
+      "version": "2.0.0",
+      "generated_at": "2026-02-22T18:22:18.073800",
+      "batch_id": "9201546d_b1",
+      "quality_mode": "high_quality",
+      "generator": "high_quality",
+      "license": "CC-BY-4.0",
+      "compliance": [
+        "数据安全法",
+        "个人信息保护法"
+      ]
+    },
+    "_sensitivity_level": "safe"
+  },
+  {
+    "id": 12,
+    "word": "支付",
+    "text": "支付是货币债权转移的过程，现代支付体系包括现金支付、银行卡支付、移动支付、数字货币等多种形式。支付清算系统是金融市场的核心基础设施。",
+    "category": "金融",
+    "source": "knowledge_base",
+    "confidence": 1.0,
+    "quality_score": 1.0,
+    "quality_tier": "high",
+    "timestamp": "2026-02-22T18:22:18.073890",
+    "verified": true,
+    "text_length": 66,
+    "quality_check": {
+      "passed": true,
+      "score": 1.0
+    },
+    "provenance": {
+      "platform": "PureData",
+      "version": "2.0.0",
+      "generated_at": "2026-02-22T18:22:18.073891",
+      "batch_id": "9201546d_b1",
+      "quality_mode": "high_quality",
+      "generator": "high_quality",
+      "license": "CC-BY-4.0",
+      "compliance": [
+        "数据安全法",
+        "个人信息保护法"
+      ]
+    },
+    "_sensitivity_level": "safe"
+  },
+  {
+    "id": 13,
+    "word": "结算",
+    "text": "结算是交易双方完成资金转移的过程，包括实时全额结算、净额结算等方式。高效的结算系统对金融市场稳定运行至关重要。",
+    "category": "金融",
+    "source": "knowledge_base",
+    "confidence": 1.0,
+    "quality_score": 1.0,
+    "quality_tier": "high",
+    "timestamp": "2026-02-22T18:22:18.073955",
+    "verified": true,
+    "text_length": 55,
+    "quality_check": {
+      "passed": true,
+      "score": 1.0
+    },
+    "provenance": {
+      "platform": "PureData",
+      "version": "2.0.0",
+      "generated_at": "2026-02-22T18:22:18.073956",
+      "batch_id": "9201546d_b1",
+      "quality_mode": "high_quality",
+      "generator": "high_quality",
+      "license": "CC-BY-4.0",
+      "compliance": [
+        "数据安全法",
+        "个人信息保护法"
+      ]
+    },
+    "_sensitivity_level": "safe"
+  },
+  {
+    "id": 14,
+    "word": "融资",
+    "text": "融资是企业或个人获取资金的行为，包括股权融资、债权融资、混合融资等方式。融资渠道的选择影响企业资本结构和经营成本。 该概念与结算、上市密切相关。",
+    "category": "金融",
+    "source": "knowledge_base",
+    "confidence": 0.95,
+    "quality_score": 1.0,
+    "quality_tier": "high",
+    "timestamp": "2026-02-22T18:22:18.074056",
+    "verified": true,
+    "text_length": 72,
+    "quality_check": {
+      "passed": true,
+      "score": 1.0
+    },
+    "provenance": {
+      "platform": "PureData",
+      "version": "2.0.0",
+      "generated_at": "2026-02-22T18:22:18.074057",
+      "batch_id": "9201546d_b1",
+      "quality_mode": "high_quality",
+      "generator": "high_quality",
+      "license": "CC-BY-4.0",
+      "compliance": [
+        "数据安全法",
+        "个人信息保护法"
+      ]
+    },
+    "_sensitivity_level": "safe"
+  },
+  {
+    "id": 15,
+    "word": "上市",
+    "text": "上市是指公司股票在证券交易所公开交易的过程。上市可以为企业筹集资金、提升知名度，但也需要履行信息披露等义务。 该概念与融资、并购密切相关。",
+    "category": "金融",
+    "source": "knowledge_base",
+    "confidence": 0.95,
+    "quality_score": 1.0,
+    "quality_tier": "high",
+    "timestamp": "2026-02-22T18:22:18.074146",
+    "verified": true,
+    "text_length": 69,
+    "quality_check": {
+      "passed": true,
+      "score": 1.0
+    },
+    "provenance": {
+      "platform": "PureData",
+      "version": "2.0.0",
+      "generated_at": "2026-02-22T18:22:18.074146",
+      "batch_id": "9201546d_b1",
+      "quality_mode": "high_quality",
+      "generator": "high_quality",
+      "license": "CC-BY-4.0",
+      "compliance": [
+        "数据安全法",
+        "个人信息保护法"
+      ]
+    },
+    "_sensitivity_level": "safe"
+  },
+  {
+    "id": 16,
+    "word": "并购",
+    "text": "并购是企业兼并和收购的统称，是企业扩张和重组的重要方式。并购交易需要考虑估值、融资、整合等多个环节。 该概念与上市、资产管理密切相关。",
+    "category": "金融",
+    "source": "knowledge_base",
+    "confidence": 0.95,
+    "quality_score": 1.0,
+    "quality_tier": "high",
+    "timestamp": "2026-02-22T18:22:18.074230",
+    "verified": true,
+    "text_length": 67,
+    "quality_check": {
+      "passed": true,
+      "score": 1.0
+    },
+    "provenance": {
+      "platform": "PureData",
+      "version": "2.0.0",
+      "generated_at": "2026-02-22T18:22:18.074231",
+      "batch_id": "9201546d_b1",
+      "quality_mode": "high_quality",
+      "generator": "high_quality",
+      "license": "CC-BY-4.0",
+      "compliance": [
+        "数据安全法",
+        "个人信息保护法"
+      ]
+    },
+    "_sensitivity_level": "safe"
+  },
+  {
+    "id": 17,
+    "word": "资产管理",
+    "text": "资产管理是专业机构受托管理客户资产，实现资产保值增值的业务。包括公募基金、私募基金、银行理财、信托等多种形式。",
+    "category": "金融",
+    "source": "knowledge_base",
+    "confidence": 0.95,
+    "quality_score": 1.0,
+    "quality_tier": "high",
+    "timestamp": "2026-02-22T18:22:18.074281",
+    "verified": true,
+    "text_length": 55,
+    "quality_check": {
+      "passed": true,
+      "score": 1.0
+    },
+    "provenance": {
+      "platform": "PureData",
+      "version": "2.0.0",
+      "generated_at": "2026-02-22T18:22:18.074282",
+      "batch_id": "9201546d_b1",
+      "quality_mode": "high_quality",
+      "generator": "high_quality",
+      "license": "CC-BY-4.0",
+      "compliance": [
+        "数据安全法",
+        "个人信息保护法"
+      ]
+    },
+    "_sensitivity_level": "safe"
+  },
+  {
+    "id": 18,
+    "word": "量化交易",
+    "text": "量化交易是利用数学模型和计算机程序进行投资决策的交易方式。具有纪律性强、反应速度快、可回测验证等特点。",
+    "category": "金融",
+    "source": "knowledge_base",
+    "confidence": 0.85,
+    "quality_score": 1.0,
+    "quality_tier": "medium",
+    "timestamp": "2026-02-22T18:22:18.074446",
+    "verified": true,
+    "text_length": 51,
+    "quality_check": {
+      "passed": true,
+      "score": 1.0
+    },
+    "provenance": {
+      "platform": "PureData",
+      "version": "2.0.0",
+      "generated_at": "2026-02-22T18:22:18.074448",
+      "batch_id": "9201546d_b1",
+      "quality_mode": "high",
+      "generator": "normal",
+      "license": "CC-BY-4.0",
+      "compliance": [
+        "数据安全法",
+        "个人信息保护法"
+      ]
+    },
+    "_sensitivity_level": "safe"
+  },
+  {
+    "id": 19,
+    "word": "区块链",
+    "text": "区块链是一种分布式账本技术，具有去中心化、不可篡改、可追溯等特点。在金融领域应用于数字货币、供应链金融、跨境支付等场景。",
+    "category": "金融",
+    "source": "knowledge_base",
+    "confidence": 0.9,
+    "quality_score": 1.0,
+    "quality_tier": "medium",
+    "timestamp": "2026-02-22T18:22:18.074522",
+    "verified": true,
+    "text_length": 60,
+    "quality_check": {
+      "passed": true,
+      "score": 1.0
+    },
+    "provenance": {
+      "platform": "PureData",
+      "version": "2.0.0",
+      "generated_at": "2026-02-22T18:22:18.074523",
+      "batch_id": "9201546d_b1",
+      "quality_mode": "high",
+      "generator": "normal",
+      "license": "CC-BY-4.0",
+      "compliance": [
+        "数据安全法",
+        "个人信息保护法"
+      ]
+    },
+    "_sensitivity_level": "safe"
+  },
+  {
+    "id": 20,
+    "word": "数字货币",
+    "text": "数字货币是以数字形式存在的货币，包括央行数字货币和加密货币。具有交易便捷、可编程等特点，是金融科技发展的重要方向。 该概念与区块链密切相关。",
+    "category": "金融",
+    "source": "knowledge_base",
+    "confidence": 0.9,
+    "quality_score": 1.0,
+    "quality_tier": "medium",
+    "timestamp": "2026-02-22T18:22:18.074616",
+    "verified": true,
+    "text_length": 70,
+    "quality_check": {
+      "passed": true,
+      "score": 1.0
+    },
+    "provenance": {
+      "platform": "PureData",
+      "version": "2.0.0",
+      "generated_at": "2026-02-22T18:22:18.074617",
+      "batch_id": "9201546d_b1",
+      "quality_mode": "high",
+      "generator": "normal",
+      "license": "CC-BY-4.0",
+      "compliance": [
+        "数据安全法",
+        "个人信息保护法"
+      ]
+    },
+    "_sensitivity_level": "safe"
+  }
+]

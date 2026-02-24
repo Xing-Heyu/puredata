@@ -1,0 +1,78 @@
+{
+    "version": "v1.0",
+    "description": "质量评分配置器 - 权重可配置+阈值可配置+领域覆盖",
+    "scoring_config": {
+        "weights": {
+            "syntax": 0.30,
+            "domain_terms": 0.40,
+            "professional_correct": 0.20,
+            "noise_detection": 0.10
+        },
+        "thresholds": {
+            "high": 0.80,
+            "medium": 0.60,
+            "low": 0.40
+        },
+        "max_terms_for_full_score": 5,
+        "domain_overrides": {
+            "医疗": {
+                "weights": {
+                    "domain_terms": 0.50,
+                    "syntax": 0.20,
+                    "professional_correct": 0.20,
+                    "noise_detection": 0.10
+                },
+                "description": "医疗领域更看重术语准确性"
+            },
+            "劳动合同": {
+                "weights": {
+                    "professional_correct": 0.30,
+                    "domain_terms": 0.35,
+                    "syntax": 0.25,
+                    "noise_detection": 0.10
+                },
+                "description": "劳动合同领域更看重法律正确性"
+            },
+            "金融": {
+                "weights": {
+                    "domain_terms": 0.45,
+                    "professional_correct": 0.25,
+                    "syntax": 0.20,
+                    "noise_detection": 0.10
+                },
+                "description": "金融领域更看重术语和专业性"
+            },
+            "人工智能": {
+                "weights": {
+                    "domain_terms": 0.40,
+                    "syntax": 0.30,
+                    "professional_correct": 0.20,
+                    "noise_detection": 0.10
+                },
+                "description": "AI领域术语和语义并重"
+            }
+        }
+    },
+    "error_intensity": {
+        "light": {
+            "score_penalty": 0.10,
+            "ratio": 0.40,
+            "description": "表述不严谨，非核心违法"
+        },
+        "medium": {
+            "score_penalty": 0.25,
+            "ratio": 0.40,
+            "description": "核心规则错误，常见企业违规"
+        },
+        "severe": {
+            "score_penalty": 0.50,
+            "ratio": 0.20,
+            "description": "完全违背法条，极端错误"
+        }
+    },
+    "noise_scoring": {
+        "label_error_penalty": 0.40,
+        "domain_drift_penalty": 0.30,
+        "concept_confusion_penalty": 0.20
+    }
+}

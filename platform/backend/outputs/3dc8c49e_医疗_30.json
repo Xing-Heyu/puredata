@@ -1,0 +1,242 @@
+[
+  {
+    "id": 1,
+    "text": "医疗相关数据示例_1",
+    "domain": "医疗",
+    "quality_tier": "high",
+    "source": "synthetic",
+    "task_id": "3dc8c49e"
+  },
+  {
+    "id": 2,
+    "text": "医疗相关数据示例_2",
+    "domain": "医疗",
+    "quality_tier": "medium",
+    "source": "synthetic",
+    "task_id": "3dc8c49e"
+  },
+  {
+    "id": 3,
+    "text": "医疗相关数据示例_3",
+    "domain": "医疗",
+    "quality_tier": "medium",
+    "source": "synthetic",
+    "task_id": "3dc8c49e"
+  },
+  {
+    "id": 4,
+    "text": "医疗相关数据示例_4",
+    "domain": "医疗",
+    "quality_tier": "high",
+    "source": "synthetic",
+    "task_id": "3dc8c49e"
+  },
+  {
+    "id": 5,
+    "text": "医疗相关数据示例_5",
+    "domain": "医疗",
+    "quality_tier": "medium",
+    "source": "synthetic",
+    "task_id": "3dc8c49e"
+  },
+  {
+    "id": 6,
+    "text": "医疗相关数据示例_6",
+    "domain": "医疗",
+    "quality_tier": "medium",
+    "source": "synthetic",
+    "task_id": "3dc8c49e"
+  },
+  {
+    "id": 7,
+    "text": "医疗相关数据示例_7",
+    "domain": "医疗",
+    "quality_tier": "high",
+    "source": "synthetic",
+    "task_id": "3dc8c49e"
+  },
+  {
+    "id": 8,
+    "text": "医疗相关数据示例_8",
+    "domain": "医疗",
+    "quality_tier": "medium",
+    "source": "synthetic",
+    "task_id": "3dc8c49e"
+  },
+  {
+    "id": 9,
+    "text": "医疗相关数据示例_9",
+    "domain": "医疗",
+    "quality_tier": "medium",
+    "source": "synthetic",
+    "task_id": "3dc8c49e"
+  },
+  {
+    "id": 10,
+    "text": "医疗相关数据示例_10",
+    "domain": "医疗",
+    "quality_tier": "high",
+    "source": "synthetic",
+    "task_id": "3dc8c49e"
+  },
+  {
+    "id": 11,
+    "text": "医疗相关数据示例_11",
+    "domain": "医疗",
+    "quality_tier": "medium",
+    "source": "synthetic",
+    "task_id": "3dc8c49e"
+  },
+  {
+    "id": 12,
+    "text": "医疗相关数据示例_12",
+    "domain": "医疗",
+    "quality_tier": "medium",
+    "source": "synthetic",
+    "task_id": "3dc8c49e"
+  },
+  {
+    "id": 13,
+    "text": "医疗相关数据示例_13",
+    "domain": "医疗",
+    "quality_tier": "high",
+    "source": "synthetic",
+    "task_id": "3dc8c49e"
+  },
+  {
+    "id": 14,
+    "text": "医疗相关数据示例_14",
+    "domain": "医疗",
+    "quality_tier": "medium",
+    "source": "synthetic",
+    "task_id": "3dc8c49e"
+  },
+  {
+    "id": 15,
+    "text": "医疗相关数据示例_15",
+    "domain": "医疗",
+    "quality_tier": "medium",
+    "source": "synthetic",
+    "task_id": "3dc8c49e"
+  },
+  {
+    "id": 16,
+    "text": "医疗相关数据示例_16",
+    "domain": "医疗",
+    "quality_tier": "high",
+    "source": "synthetic",
+    "task_id": "3dc8c49e"
+  },
+  {
+    "id": 17,
+    "text": "医疗相关数据示例_17",
+    "domain": "医疗",
+    "quality_tier": "medium",
+    "source": "synthetic",
+    "task_id": "3dc8c49e"
+  },
+  {
+    "id": 18,
+    "text": "医疗相关数据示例_18",
+    "domain": "医疗",
+    "quality_tier": "medium",
+    "source": "synthetic",
+    "task_id": "3dc8c49e"
+  },
+  {
+    "id": 19,
+    "text": "医疗相关数据示例_19",
+    "domain": "医疗",
+    "quality_tier": "high",
+    "source": "synthetic",
+    "task_id": "3dc8c49e"
+  },
+  {
+    "id": 20,
+    "text": "医疗相关数据示例_20",
+    "domain": "医疗",
+    "quality_tier": "medium",
+    "source": "synthetic",
+    "task_id": "3dc8c49e"
+  },
+  {
+    "id": 21,
+    "text": "医疗相关数据示例_21",
+    "domain": "医疗",
+    "quality_tier": "medium",
+    "source": "synthetic",
+    "task_id": "3dc8c49e"
+  },
+  {
+    "id": 22,
+    "text": "医疗相关数据示例_22",
+    "domain": "医疗",
+    "quality_tier": "high",
+    "source": "synthetic",
+    "task_id": "3dc8c49e"
+  },
+  {
+    "id": 23,
+    "text": "医疗相关数据示例_23",
+    "domain": "医疗",
+    "quality_tier": "medium",
+    "source": "synthetic",
+    "task_id": "3dc8c49e"
+  },
+  {
+    "id": 24,
+    "text": "医疗相关数据示例_24",
+    "domain": "医疗",
+    "quality_tier": "medium",
+    "source": "synthetic",
+    "task_id": "3dc8c49e"
+  },
+  {
+    "id": 25,
+    "text": "医疗相关数据示例_25",
+    "domain": "医疗",
+    "quality_tier": "high",
+    "source": "synthetic",
+    "task_id": "3dc8c49e"
+  },
+  {
+    "id": 26,
+    "text": "医疗相关数据示例_26",
+    "domain": "医疗",
+    "quality_tier": "medium",
+    "source": "synthetic",
+    "task_id": "3dc8c49e"
+  },
+  {
+    "id": 27,
+    "text": "医疗相关数据示例_27",
+    "domain": "医疗",
+    "quality_tier": "medium",
+    "source": "synthetic",
+    "task_id": "3dc8c49e"
+  },
+  {
+    "id": 28,
+    "text": "医疗相关数据示例_28",
+    "domain": "医疗",
+    "quality_tier": "high",
+    "source": "synthetic",
+    "task_id": "3dc8c49e"
+  },
+  {
+    "id": 29,
+    "text": "医疗相关数据示例_29",
+    "domain": "医疗",
+    "quality_tier": "medium",
+    "source": "synthetic",
+    "task_id": "3dc8c49e"
+  },
+  {
+    "id": 30,
+    "text": "医疗相关数据示例_30",
+    "domain": "医疗",
+    "quality_tier": "medium",
+    "source": "synthetic",
+    "task_id": "3dc8c49e"
+  }
+]

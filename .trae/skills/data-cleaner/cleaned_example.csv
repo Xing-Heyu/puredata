@@ -1,0 +1,5 @@
+age,date_joined,email,name,processed_at
+25,2023-01-01T00:00:00,alice@example.com,Alice,2026-02-17T21:00:24.857137
+30,2023-02-01T00:00:00,bob@example.com,Bob,2026-02-17T21:00:24.857475
+,2023-03-01T00:00:00,charlie@example.com,Charlie,2026-02-17T21:00:24.857813
+35,2023-04-01T10:30:00,david@example.com,David,2026-02-17T21:00:24.857980

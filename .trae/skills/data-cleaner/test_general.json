@@ -1,0 +1,47 @@
+[
+  {
+    "id": "0",
+    "term": "基础",
+    "definition": "基础是通用领域的重要概念，具有广泛的应用价值。",
+    "category": "通用",
+    "domain": "通用",
+    "source": "generated",
+    "generated_at": "2026-02-17T22:06:04.639220"
+  },
+  {
+    "id": "1",
+    "term": "常见",
+    "definition": "常见是通用领域的重要概念，具有广泛的应用价值。",
+    "category": "通用",
+    "domain": "通用",
+    "source": "generated",
+    "generated_at": "2026-02-17T22:06:04.639239"
+  },
+  {
+    "id": "2",
+    "term": "标准",
+    "definition": "标准是通用领域的重要概念，具有广泛的应用价值。",
+    "category": "通用",
+    "domain": "通用",
+    "source": "generated",
+    "generated_at": "2026-02-17T22:06:04.639240"
+  },
+  {
+    "id": "3",
+    "term": "通用",
+    "definition": "通用是通用领域的重要概念，具有广泛的应用价值。",
+    "category": "通用",
+    "domain": "通用",
+    "source": "generated",
+    "generated_at": "2026-02-17T22:06:04.639242"
+  },
+  {
+    "id": "4",
+    "term": "基本",
+    "definition": "基本是通用领域的重要概念，具有广泛的应用价值。",
+    "category": "通用",
+    "domain": "通用",
+    "source": "generated",
+    "generated_at": "2026-02-17T22:06:04.639243"
+  }
+]

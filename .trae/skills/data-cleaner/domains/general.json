@@ -1,0 +1,28 @@
+{
+  "name": "通用",
+  "description": "通用领域数据，支持任意主题的数据生成",
+  "keywords": ["通用", "基础", "常见"],
+  "output_format": "json",
+  "template": {
+    "id": "{{id}}",
+    "term": "{{term}}",
+    "definition": "{{definition}}",
+    "category": "{{category}}",
+    "domain": "{{domain}}",
+    "source": "{{source}}",
+    "generated_at": "{{generated_at}}"
+  },
+  "api_config": {
+    "enabled": true,
+    "sources": [
+      {
+        "name": "国家公开字典",
+        "type": "api",
+        "url": "https://api.example.gov/dictionary",
+        "params": {
+          "format": "json"
+        }
+      }
+    ]
+  }
+}

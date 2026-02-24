@@ -1,0 +1,2002 @@
+[
+  {
+    "id": 0,
+    "word": "disease",
+    "text": "Unlike opposite, disease implies An abnormal condition of a human, animal or plant that causes discomfort or dysfunction; distinct from injury insofar as the latter is usually instantaneously acquired..",
+    "template": "Unlike {antonym}, {word} impli...",
+    "source": "api:free_dict",
+    "word_zh": "disease",
+    "category": "医疗",
+    "generated_at": "2026-02-17T23:20:14.905951"
+  },
+  {
+    "id": 0,
+    "word": "symptom",
+    "text": "The word \"symptom\" refers to A perceived change in some function, sensation or appearance of a person that indicates a disease or disorder, such as fever, headache or rash..",
+    "template": "The word \"{word}\" refers to {d...",
+    "source": "api:free_dict",
+    "word_zh": "symptom",
+    "category": "医疗",
+    "generated_at": "2026-02-17T23:20:14.926835"
+  },
+  {
+    "id": 1,
+    "word": "indication",
+    "text": "Indication is similar to symptom, meaning A perceived change in some function, sensation or appearance of a person that indicates a disease or disorder, such as fever, headache or rash.",
+    "template": "synonym_sentence",
+    "source": "generated_from_synonym",
+    "word_zh": "symptom",
+    "category": "医疗",
+    "generated_at": "2026-02-17T23:20:14.926840"
+  },
+  {
+    "id": 2,
+    "word": "manifestation",
+    "text": "Manifestation is similar to symptom, meaning A perceived change in some function, sensation or appearance of a person that indicates a disease or disorder, such as fever, headache or rash.",
+    "template": "synonym_sentence",
+    "source": "generated_from_synonym",
+    "word_zh": "symptom",
+    "category": "医疗",
+    "generated_at": "2026-02-17T23:20:14.926841"
+  },
+  {
+    "id": 0,
+    "word": "treatment",
+    "text": "The term treatment can be understood as The process or manner of treating someone or something..",
+    "template": "The term {word} can be underst...",
+    "source": "api:free_dict",
+    "word_zh": "treatment",
+    "category": "医疗",
+    "generated_at": "2026-02-17T23:20:14.948687"
+  },
+  {
+    "id": 0,
+    "word": "medicine",
+    "text": "What does medicine mean? It means A substance which specifically promotes healing when ingested or consumed in some way..",
+    "template": "What does {word} mean? It mean...",
+    "source": "api:free_dict",
+    "word_zh": "medicine",
+    "category": "医疗",
+    "generated_at": "2026-02-17T23:20:14.969460"
+  },
+  {
+    "id": 1,
+    "word": "drug",
+    "text": "Drug is similar to medicine, meaning A substance which specifically promotes healing when ingested or consumed in some way.",
+    "template": "synonym_sentence",
+    "source": "generated_from_synonym",
+    "word_zh": "medicine",
+    "category": "医疗",
+    "generated_at": "2026-02-17T23:20:14.969466"
+  },
+  {
+    "id": 2,
+    "word": "elixir",
+    "text": "Elixir is similar to medicine, meaning A substance which specifically promotes healing when ingested or consumed in some way.",
+    "template": "synonym_sentence",
+    "source": "generated_from_synonym",
+    "word_zh": "medicine",
+    "category": "医疗",
+    "generated_at": "2026-02-17T23:20:14.969466"
+  },
+  {
+    "id": 0,
+    "word": "diagnosis",
+    "text": "In the context of 医疗, diagnosis is defined as To determine which disease is causing a sick person's signs and symptoms; to find the diagnosis..",
+    "template": "In the context of {domain}, {w...",
+    "source": "api:free_dict",
+    "word_zh": "diagnosis",
+    "category": "医疗",
+    "generated_at": "2026-02-17T23:20:14.989718"
+  },
+  {
+    "id": 0,
+    "word": "surgery",
+    "text": "surgery means A procedure involving major incisions to remove, repair, or replace a part of a body..",
+    "template": "{word} means {definition}....",
+    "source": "api:free_dict",
+    "word_zh": "surgery",
+    "category": "医疗",
+    "generated_at": "2026-02-17T23:20:15.009177"
+  },
+  {
+    "id": 1,
+    "word": "office",
+    "text": "Office is similar to surgery, meaning A procedure involving major incisions to remove, repair, or replace a part of a body.",
+    "template": "synonym_sentence",
+    "source": "generated_from_synonym",
+    "word_zh": "surgery",
+    "category": "医疗",
+    "generated_at": "2026-02-17T23:20:15.009184"
+  },
+  {
+    "id": 2,
+    "word": "operation",
+    "text": "Operation is similar to surgery, meaning A procedure involving major incisions to remove, repair, or replace a part of a body.",
+    "template": "synonym_sentence",
+    "source": "generated_from_synonym",
+    "word_zh": "surgery",
+    "category": "医疗",
+    "generated_at": "2026-02-17T23:20:15.009185"
+  },
+  {
+    "id": 0,
+    "word": "hospital",
+    "text": "Unlike opposite, hospital implies A large medical facility, usually in a building with multiple floors, where seriously ill or injured patients are given extensive medical and/or surgical treatment..",
+    "template": "Unlike {antonym}, {word} impli...",
+    "source": "api:free_dict",
+    "word_zh": "hospital",
+    "category": "医疗",
+    "generated_at": "2026-02-17T23:20:15.029775"
+  },
+  {
+    "id": 1,
+    "word": "infirmary",
+    "text": "Infirmary is similar to hospital, meaning A large medical facility, usually in a building with multiple floors, where seriously ill or injured patients are given extensive medical and/or surgical treatment.",
+    "template": "synonym_sentence",
+    "source": "generated_from_synonym",
+    "word_zh": "hospital",
+    "category": "医疗",
+    "generated_at": "2026-02-17T23:20:15.029781"
+  },
+  {
+    "id": 2,
+    "word": "sickhouse",
+    "text": "Sickhouse is similar to hospital, meaning A large medical facility, usually in a building with multiple floors, where seriously ill or injured patients are given extensive medical and/or surgical treatment.",
+    "template": "synonym_sentence",
+    "source": "generated_from_synonym",
+    "word_zh": "hospital",
+    "category": "医疗",
+    "generated_at": "2026-02-17T23:20:15.029782"
+  },
+  {
+    "id": 0,
+    "word": "doctor",
+    "text": "Unlike opposite, doctor implies A physician; a member of the medical profession; one who is trained and licensed to heal the sick or injured. The final examination and qualification may award a doctor degree in which case the post-nominal letters are D.O., DPM, M.D., DMD, DDS, in the US or MBBS in the UK..",
+    "template": "Unlike {antonym}, {word} impli...",
+    "source": "api:free_dict",
+    "word_zh": "doctor",
+    "category": "医疗",
+    "generated_at": "2026-02-17T23:20:15.049634"
+  },
+  {
+    "id": 1,
+    "word": "GP",
+    "text": "Gp is similar to doctor, meaning A physician; a member of the medical profession; one who is trained and licensed to heal the sick or injured. The final examination and qualification may award a doctor degree in which case the post-nominal letters are D.O., DPM, M.D., DMD, DDS, in the US or MBBS in the UK.",
+    "template": "synonym_sentence",
+    "source": "generated_from_synonym",
+    "word_zh": "doctor",
+    "category": "医疗",
+    "generated_at": "2026-02-17T23:20:15.049640"
+  },
+  {
+    "id": 2,
+    "word": "doc",
+    "text": "Doc is similar to doctor, meaning A physician; a member of the medical profession; one who is trained and licensed to heal the sick or injured. The final examination and qualification may award a doctor degree in which case the post-nominal letters are D.O., DPM, M.D., DMD, DDS, in the US or MBBS in the UK.",
+    "template": "synonym_sentence",
+    "source": "generated_from_synonym",
+    "word_zh": "doctor",
+    "category": "医疗",
+    "generated_at": "2026-02-17T23:20:15.049640"
+  },
+  {
+    "id": 0,
+    "word": "patient",
+    "text": "patient means A person or animal who receives treatment from a doctor or other medically educated person..",
+    "template": "{word} means {definition}....",
+    "source": "api:free_dict",
+    "word_zh": "patient",
+    "category": "医疗",
+    "generated_at": "2026-02-17T23:20:15.073554"
+  },
+  {
+    "id": 0,
+    "word": "therapy",
+    "text": "therapy means Attempted remediation of a health problem following a diagnosis, usually synonymous with treatment..",
+    "template": "{word} means {definition}....",
+    "source": "api:free_dict",
+    "word_zh": "therapy",
+    "category": "医疗",
+    "generated_at": "2026-02-17T23:20:15.093481"
+  },
+  {
+    "id": 0,
+    "word": "disease",
+    "text": "The term disease can be understood as An abnormal condition of a human, animal or plant that causes discomfort or dysfunction; distinct from injury insofar as the latter is usually instantaneously acquired..",
+    "template": "The term {word} can be underst...",
+    "source": "api:free_dict",
+    "word_zh": "disease",
+    "category": "医疗",
+    "generated_at": "2026-02-17T23:20:15.113347"
+  },
+  {
+    "id": 0,
+    "word": "symptom",
+    "text": "The word \"symptom\" refers to A perceived change in some function, sensation or appearance of a person that indicates a disease or disorder, such as fever, headache or rash..",
+    "template": "The word \"{word}\" refers to {d...",
+    "source": "api:free_dict",
+    "word_zh": "symptom",
+    "category": "医疗",
+    "generated_at": "2026-02-17T23:20:15.149181"
+  },
+  {
+    "id": 1,
+    "word": "indication",
+    "text": "Indication is similar to symptom, meaning A perceived change in some function, sensation or appearance of a person that indicates a disease or disorder, such as fever, headache or rash.",
+    "template": "synonym_sentence",
+    "source": "generated_from_synonym",
+    "word_zh": "symptom",
+    "category": "医疗",
+    "generated_at": "2026-02-17T23:20:15.149188"
+  },
+  {
+    "id": 2,
+    "word": "manifestation",
+    "text": "Manifestation is similar to symptom, meaning A perceived change in some function, sensation or appearance of a person that indicates a disease or disorder, such as fever, headache or rash.",
+    "template": "synonym_sentence",
+    "source": "generated_from_synonym",
+    "word_zh": "symptom",
+    "category": "医疗",
+    "generated_at": "2026-02-17T23:20:15.149188"
+  },
+  {
+    "id": 0,
+    "word": "treatment",
+    "text": "The term treatment can be understood as The process or manner of treating someone or something..",
+    "template": "The term {word} can be underst...",
+    "source": "api:free_dict",
+    "word_zh": "treatment",
+    "category": "医疗",
+    "generated_at": "2026-02-17T23:20:15.169288"
+  },
+  {
+    "id": 0,
+    "word": "medicine",
+    "text": "Unlike opposite, medicine implies A substance which specifically promotes healing when ingested or consumed in some way..",
+    "template": "Unlike {antonym}, {word} impli...",
+    "source": "api:free_dict",
+    "word_zh": "medicine",
+    "category": "医疗",
+    "generated_at": "2026-02-17T23:20:15.188583"
+  },
+  {
+    "id": 1,
+    "word": "drug",
+    "text": "Drug is similar to medicine, meaning A substance which specifically promotes healing when ingested or consumed in some way.",
+    "template": "synonym_sentence",
+    "source": "generated_from_synonym",
+    "word_zh": "medicine",
+    "category": "医疗",
+    "generated_at": "2026-02-17T23:20:15.188589"
+  },
+  {
+    "id": 2,
+    "word": "elixir",
+    "text": "Elixir is similar to medicine, meaning A substance which specifically promotes healing when ingested or consumed in some way.",
+    "template": "synonym_sentence",
+    "source": "generated_from_synonym",
+    "word_zh": "medicine",
+    "category": "医疗",
+    "generated_at": "2026-02-17T23:20:15.188589"
+  },
+  {
+    "id": 0,
+    "word": "diagnosis",
+    "text": "Unlike opposite, diagnosis implies To determine which disease is causing a sick person's signs and symptoms; to find the diagnosis..",
+    "template": "Unlike {antonym}, {word} impli...",
+    "source": "api:free_dict",
+    "word_zh": "diagnosis",
+    "category": "医疗",
+    "generated_at": "2026-02-17T23:20:15.208191"
+  },
+  {
+    "id": 0,
+    "word": "surgery",
+    "text": "What does surgery mean? It means A procedure involving major incisions to remove, repair, or replace a part of a body..",
+    "template": "What does {word} mean? It mean...",
+    "source": "api:free_dict",
+    "word_zh": "surgery",
+    "category": "医疗",
+    "generated_at": "2026-02-17T23:20:15.228378"
+  },
+  {
+    "id": 1,
+    "word": "office",
+    "text": "Office is similar to surgery, meaning A procedure involving major incisions to remove, repair, or replace a part of a body.",
+    "template": "synonym_sentence",
+    "source": "generated_from_synonym",
+    "word_zh": "surgery",
+    "category": "医疗",
+    "generated_at": "2026-02-17T23:20:15.228384"
+  },
+  {
+    "id": 2,
+    "word": "operation",
+    "text": "Operation is similar to surgery, meaning A procedure involving major incisions to remove, repair, or replace a part of a body.",
+    "template": "synonym_sentence",
+    "source": "generated_from_synonym",
+    "word_zh": "surgery",
+    "category": "医疗",
+    "generated_at": "2026-02-17T23:20:15.228385"
+  },
+  {
+    "id": 0,
+    "word": "hospital",
+    "text": "hospital: A large medical facility, usually in a building with multiple floors, where seriously ill or injured patients are given extensive medical and/or surgical treatment..",
+    "template": "{word}: {definition}....",
+    "source": "api:free_dict",
+    "word_zh": "hospital",
+    "category": "医疗",
+    "generated_at": "2026-02-17T23:20:15.246806"
+  },
+  {
+    "id": 1,
+    "word": "infirmary",
+    "text": "Infirmary is similar to hospital, meaning A large medical facility, usually in a building with multiple floors, where seriously ill or injured patients are given extensive medical and/or surgical treatment.",
+    "template": "synonym_sentence",
+    "source": "generated_from_synonym",
+    "word_zh": "hospital",
+    "category": "医疗",
+    "generated_at": "2026-02-17T23:20:15.246813"
+  },
+  {
+    "id": 2,
+    "word": "sickhouse",
+    "text": "Sickhouse is similar to hospital, meaning A large medical facility, usually in a building with multiple floors, where seriously ill or injured patients are given extensive medical and/or surgical treatment.",
+    "template": "synonym_sentence",
+    "source": "generated_from_synonym",
+    "word_zh": "hospital",
+    "category": "医疗",
+    "generated_at": "2026-02-17T23:20:15.246814"
+  },
+  {
+    "id": 0,
+    "word": "doctor",
+    "text": "Unlike opposite, doctor implies A physician; a member of the medical profession; one who is trained and licensed to heal the sick or injured. The final examination and qualification may award a doctor degree in which case the post-nominal letters are D.O., DPM, M.D., DMD, DDS, in the US or MBBS in the UK..",
+    "template": "Unlike {antonym}, {word} impli...",
+    "source": "api:free_dict",
+    "word_zh": "doctor",
+    "category": "医疗",
+    "generated_at": "2026-02-17T23:20:15.265398"
+  },
+  {
+    "id": 1,
+    "word": "GP",
+    "text": "Gp is similar to doctor, meaning A physician; a member of the medical profession; one who is trained and licensed to heal the sick or injured. The final examination and qualification may award a doctor degree in which case the post-nominal letters are D.O., DPM, M.D., DMD, DDS, in the US or MBBS in the UK.",
+    "template": "synonym_sentence",
+    "source": "generated_from_synonym",
+    "word_zh": "doctor",
+    "category": "医疗",
+    "generated_at": "2026-02-17T23:20:15.265409"
+  },
+  {
+    "id": 2,
+    "word": "doc",
+    "text": "Doc is similar to doctor, meaning A physician; a member of the medical profession; one who is trained and licensed to heal the sick or injured. The final examination and qualification may award a doctor degree in which case the post-nominal letters are D.O., DPM, M.D., DMD, DDS, in the US or MBBS in the UK.",
+    "template": "synonym_sentence",
+    "source": "generated_from_synonym",
+    "word_zh": "doctor",
+    "category": "医疗",
+    "generated_at": "2026-02-17T23:20:15.265410"
+  },
+  {
+    "id": 0,
+    "word": "patient",
+    "text": "In the context of 医疗, patient is defined as A person or animal who receives treatment from a doctor or other medically educated person..",
+    "template": "In the context of {domain}, {w...",
+    "source": "api:free_dict",
+    "word_zh": "patient",
+    "category": "医疗",
+    "generated_at": "2026-02-17T23:20:15.283139"
+  },
+  {
+    "id": 0,
+    "word": "therapy",
+    "text": "What does therapy mean? It means Attempted remediation of a health problem following a diagnosis, usually synonymous with treatment..",
+    "template": "What does {word} mean? It mean...",
+    "source": "api:free_dict",
+    "word_zh": "therapy",
+    "category": "医疗",
+    "generated_at": "2026-02-17T23:20:15.301037"
+  },
+  {
+    "id": 0,
+    "word": "disease",
+    "text": "disease means An abnormal condition of a human, animal or plant that causes discomfort or dysfunction; distinct from injury insofar as the latter is usually instantaneously acquired..",
+    "template": "{word} means {definition}....",
+    "source": "api:free_dict",
+    "word_zh": "disease",
+    "category": "医疗",
+    "generated_at": "2026-02-17T23:20:15.320331"
+  },
+  {
+    "id": 0,
+    "word": "symptom",
+    "text": "The term symptom can be understood as A perceived change in some function, sensation or appearance of a person that indicates a disease or disorder, such as fever, headache or rash..",
+    "template": "The term {word} can be underst...",
+    "source": "api:free_dict",
+    "word_zh": "symptom",
+    "category": "医疗",
+    "generated_at": "2026-02-17T23:20:15.370978"
+  },
+  {
+    "id": 1,
+    "word": "indication",
+    "text": "Indication is similar to symptom, meaning A perceived change in some function, sensation or appearance of a person that indicates a disease or disorder, such as fever, headache or rash.",
+    "template": "synonym_sentence",
+    "source": "generated_from_synonym",
+    "word_zh": "symptom",
+    "category": "医疗",
+    "generated_at": "2026-02-17T23:20:15.370984"
+  },
+  {
+    "id": 2,
+    "word": "manifestation",
+    "text": "Manifestation is similar to symptom, meaning A perceived change in some function, sensation or appearance of a person that indicates a disease or disorder, such as fever, headache or rash.",
+    "template": "synonym_sentence",
+    "source": "generated_from_synonym",
+    "word_zh": "symptom",
+    "category": "医疗",
+    "generated_at": "2026-02-17T23:20:15.370985"
+  },
+  {
+    "id": 0,
+    "word": "treatment",
+    "text": "The term treatment can be understood as The process or manner of treating someone or something..",
+    "template": "The term {word} can be underst...",
+    "source": "api:free_dict",
+    "word_zh": "treatment",
+    "category": "医疗",
+    "generated_at": "2026-02-17T23:20:15.390697"
+  },
+  {
+    "id": 0,
+    "word": "medicine",
+    "text": "Unlike opposite, medicine implies A substance which specifically promotes healing when ingested or consumed in some way..",
+    "template": "Unlike {antonym}, {word} impli...",
+    "source": "api:free_dict",
+    "word_zh": "medicine",
+    "category": "医疗",
+    "generated_at": "2026-02-17T23:20:15.412532"
+  },
+  {
+    "id": 1,
+    "word": "drug",
+    "text": "Drug is similar to medicine, meaning A substance which specifically promotes healing when ingested or consumed in some way.",
+    "template": "synonym_sentence",
+    "source": "generated_from_synonym",
+    "word_zh": "medicine",
+    "category": "医疗",
+    "generated_at": "2026-02-17T23:20:15.412538"
+  },
+  {
+    "id": 2,
+    "word": "elixir",
+    "text": "Elixir is similar to medicine, meaning A substance which specifically promotes healing when ingested or consumed in some way.",
+    "template": "synonym_sentence",
+    "source": "generated_from_synonym",
+    "word_zh": "medicine",
+    "category": "医疗",
+    "generated_at": "2026-02-17T23:20:15.412539"
+  },
+  {
+    "id": 0,
+    "word": "diagnosis",
+    "text": "What does diagnosis mean? It means To determine which disease is causing a sick person's signs and symptoms; to find the diagnosis..",
+    "template": "What does {word} mean? It mean...",
+    "source": "api:free_dict",
+    "word_zh": "diagnosis",
+    "category": "医疗",
+    "generated_at": "2026-02-17T23:20:15.432635"
+  },
+  {
+    "id": 0,
+    "word": "surgery",
+    "text": "The term surgery can be understood as A procedure involving major incisions to remove, repair, or replace a part of a body..",
+    "template": "The term {word} can be underst...",
+    "source": "api:free_dict",
+    "word_zh": "surgery",
+    "category": "医疗",
+    "generated_at": "2026-02-17T23:20:15.453229"
+  },
+  {
+    "id": 1,
+    "word": "office",
+    "text": "Office is similar to surgery, meaning A procedure involving major incisions to remove, repair, or replace a part of a body.",
+    "template": "synonym_sentence",
+    "source": "generated_from_synonym",
+    "word_zh": "surgery",
+    "category": "医疗",
+    "generated_at": "2026-02-17T23:20:15.453235"
+  },
+  {
+    "id": 2,
+    "word": "operation",
+    "text": "Operation is similar to surgery, meaning A procedure involving major incisions to remove, repair, or replace a part of a body.",
+    "template": "synonym_sentence",
+    "source": "generated_from_synonym",
+    "word_zh": "surgery",
+    "category": "医疗",
+    "generated_at": "2026-02-17T23:20:15.453236"
+  },
+  {
+    "id": 0,
+    "word": "hospital",
+    "text": "Unlike opposite, hospital implies A large medical facility, usually in a building with multiple floors, where seriously ill or injured patients are given extensive medical and/or surgical treatment..",
+    "template": "Unlike {antonym}, {word} impli...",
+    "source": "api:free_dict",
+    "word_zh": "hospital",
+    "category": "医疗",
+    "generated_at": "2026-02-17T23:20:15.473862"
+  },
+  {
+    "id": 1,
+    "word": "infirmary",
+    "text": "Infirmary is similar to hospital, meaning A large medical facility, usually in a building with multiple floors, where seriously ill or injured patients are given extensive medical and/or surgical treatment.",
+    "template": "synonym_sentence",
+    "source": "generated_from_synonym",
+    "word_zh": "hospital",
+    "category": "医疗",
+    "generated_at": "2026-02-17T23:20:15.473868"
+  },
+  {
+    "id": 2,
+    "word": "sickhouse",
+    "text": "Sickhouse is similar to hospital, meaning A large medical facility, usually in a building with multiple floors, where seriously ill or injured patients are given extensive medical and/or surgical treatment.",
+    "template": "synonym_sentence",
+    "source": "generated_from_synonym",
+    "word_zh": "hospital",
+    "category": "医疗",
+    "generated_at": "2026-02-17T23:20:15.473869"
+  },
+  {
+    "id": 0,
+    "word": "doctor",
+    "text": "doctor means A physician; a member of the medical profession; one who is trained and licensed to heal the sick or injured. The final examination and qualification may award a doctor degree in which case the post-nominal letters are D.O., DPM, M.D., DMD, DDS, in the US or MBBS in the UK..",
+    "template": "{word} means {definition}....",
+    "source": "api:free_dict",
+    "word_zh": "doctor",
+    "category": "医疗",
+    "generated_at": "2026-02-17T23:20:15.494491"
+  },
+  {
+    "id": 1,
+    "word": "GP",
+    "text": "Gp is similar to doctor, meaning A physician; a member of the medical profession; one who is trained and licensed to heal the sick or injured. The final examination and qualification may award a doctor degree in which case the post-nominal letters are D.O., DPM, M.D., DMD, DDS, in the US or MBBS in the UK.",
+    "template": "synonym_sentence",
+    "source": "generated_from_synonym",
+    "word_zh": "doctor",
+    "category": "医疗",
+    "generated_at": "2026-02-17T23:20:15.494497"
+  },
+  {
+    "id": 2,
+    "word": "doc",
+    "text": "Doc is similar to doctor, meaning A physician; a member of the medical profession; one who is trained and licensed to heal the sick or injured. The final examination and qualification may award a doctor degree in which case the post-nominal letters are D.O., DPM, M.D., DMD, DDS, in the US or MBBS in the UK.",
+    "template": "synonym_sentence",
+    "source": "generated_from_synonym",
+    "word_zh": "doctor",
+    "category": "医疗",
+    "generated_at": "2026-02-17T23:20:15.494498"
+  },
+  {
+    "id": 0,
+    "word": "patient",
+    "text": "The word \"patient\" refers to A person or animal who receives treatment from a doctor or other medically educated person..",
+    "template": "The word \"{word}\" refers to {d...",
+    "source": "api:free_dict",
+    "word_zh": "patient",
+    "category": "医疗",
+    "generated_at": "2026-02-17T23:20:15.514953"
+  },
+  {
+    "id": 0,
+    "word": "therapy",
+    "text": "In the context of 医疗, therapy is defined as Attempted remediation of a health problem following a diagnosis, usually synonymous with treatment..",
+    "template": "In the context of {domain}, {w...",
+    "source": "api:free_dict",
+    "word_zh": "therapy",
+    "category": "医疗",
+    "generated_at": "2026-02-17T23:20:15.534525"
+  },
+  {
+    "id": 0,
+    "word": "disease",
+    "text": "disease means An abnormal condition of a human, animal or plant that causes discomfort or dysfunction; distinct from injury insofar as the latter is usually instantaneously acquired..",
+    "template": "{word} means {definition}....",
+    "source": "api:free_dict",
+    "word_zh": "disease",
+    "category": "医疗",
+    "generated_at": "2026-02-17T23:20:15.553959"
+  },
+  {
+    "id": 0,
+    "word": "symptom",
+    "text": "What does symptom mean? It means A perceived change in some function, sensation or appearance of a person that indicates a disease or disorder, such as fever, headache or rash..",
+    "template": "What does {word} mean? It mean...",
+    "source": "api:free_dict",
+    "word_zh": "symptom",
+    "category": "医疗",
+    "generated_at": "2026-02-17T23:20:15.584556"
+  },
+  {
+    "id": 1,
+    "word": "indication",
+    "text": "Indication is similar to symptom, meaning A perceived change in some function, sensation or appearance of a person that indicates a disease or disorder, such as fever, headache or rash.",
+    "template": "synonym_sentence",
+    "source": "generated_from_synonym",
+    "word_zh": "symptom",
+    "category": "医疗",
+    "generated_at": "2026-02-17T23:20:15.584562"
+  },
+  {
+    "id": 2,
+    "word": "manifestation",
+    "text": "Manifestation is similar to symptom, meaning A perceived change in some function, sensation or appearance of a person that indicates a disease or disorder, such as fever, headache or rash.",
+    "template": "synonym_sentence",
+    "source": "generated_from_synonym",
+    "word_zh": "symptom",
+    "category": "医疗",
+    "generated_at": "2026-02-17T23:20:15.584563"
+  },
+  {
+    "id": 0,
+    "word": "treatment",
+    "text": "treatment means The process or manner of treating someone or something..",
+    "template": "{word} means {definition}....",
+    "source": "api:free_dict",
+    "word_zh": "treatment",
+    "category": "医疗",
+    "generated_at": "2026-02-17T23:20:15.604619"
+  },
+  {
+    "id": 0,
+    "word": "medicine",
+    "text": "Unlike opposite, medicine implies A substance which specifically promotes healing when ingested or consumed in some way..",
+    "template": "Unlike {antonym}, {word} impli...",
+    "source": "api:free_dict",
+    "word_zh": "medicine",
+    "category": "医疗",
+    "generated_at": "2026-02-17T23:20:15.624577"
+  },
+  {
+    "id": 1,
+    "word": "drug",
+    "text": "Drug is similar to medicine, meaning A substance which specifically promotes healing when ingested or consumed in some way.",
+    "template": "synonym_sentence",
+    "source": "generated_from_synonym",
+    "word_zh": "medicine",
+    "category": "医疗",
+    "generated_at": "2026-02-17T23:20:15.624583"
+  },
+  {
+    "id": 2,
+    "word": "elixir",
+    "text": "Elixir is similar to medicine, meaning A substance which specifically promotes healing when ingested or consumed in some way.",
+    "template": "synonym_sentence",
+    "source": "generated_from_synonym",
+    "word_zh": "medicine",
+    "category": "医疗",
+    "generated_at": "2026-02-17T23:20:15.624584"
+  },
+  {
+    "id": 0,
+    "word": "diagnosis",
+    "text": "diagnosis means To determine which disease is causing a sick person's signs and symptoms; to find the diagnosis..",
+    "template": "{word} means {definition}....",
+    "source": "api:free_dict",
+    "word_zh": "diagnosis",
+    "category": "医疗",
+    "generated_at": "2026-02-17T23:20:15.643878"
+  },
+  {
+    "id": 0,
+    "word": "surgery",
+    "text": "What does surgery mean? It means A procedure involving major incisions to remove, repair, or replace a part of a body..",
+    "template": "What does {word} mean? It mean...",
+    "source": "api:free_dict",
+    "word_zh": "surgery",
+    "category": "医疗",
+    "generated_at": "2026-02-17T23:20:15.663508"
+  },
+  {
+    "id": 1,
+    "word": "office",
+    "text": "Office is similar to surgery, meaning A procedure involving major incisions to remove, repair, or replace a part of a body.",
+    "template": "synonym_sentence",
+    "source": "generated_from_synonym",
+    "word_zh": "surgery",
+    "category": "医疗",
+    "generated_at": "2026-02-17T23:20:15.663515"
+  },
+  {
+    "id": 2,
+    "word": "operation",
+    "text": "Operation is similar to surgery, meaning A procedure involving major incisions to remove, repair, or replace a part of a body.",
+    "template": "synonym_sentence",
+    "source": "generated_from_synonym",
+    "word_zh": "surgery",
+    "category": "医疗",
+    "generated_at": "2026-02-17T23:20:15.663515"
+  },
+  {
+    "id": 0,
+    "word": "hospital",
+    "text": "hospital: A large medical facility, usually in a building with multiple floors, where seriously ill or injured patients are given extensive medical and/or surgical treatment..",
+    "template": "{word}: {definition}....",
+    "source": "api:free_dict",
+    "word_zh": "hospital",
+    "category": "医疗",
+    "generated_at": "2026-02-17T23:20:15.683759"
+  },
+  {
+    "id": 1,
+    "word": "infirmary",
+    "text": "Infirmary is similar to hospital, meaning A large medical facility, usually in a building with multiple floors, where seriously ill or injured patients are given extensive medical and/or surgical treatment.",
+    "template": "synonym_sentence",
+    "source": "generated_from_synonym",
+    "word_zh": "hospital",
+    "category": "医疗",
+    "generated_at": "2026-02-17T23:20:15.683765"
+  },
+  {
+    "id": 2,
+    "word": "sickhouse",
+    "text": "Sickhouse is similar to hospital, meaning A large medical facility, usually in a building with multiple floors, where seriously ill or injured patients are given extensive medical and/or surgical treatment.",
+    "template": "synonym_sentence",
+    "source": "generated_from_synonym",
+    "word_zh": "hospital",
+    "category": "医疗",
+    "generated_at": "2026-02-17T23:20:15.683766"
+  },
+  {
+    "id": 0,
+    "word": "doctor",
+    "text": "doctor means A physician; a member of the medical profession; one who is trained and licensed to heal the sick or injured. The final examination and qualification may award a doctor degree in which case the post-nominal letters are D.O., DPM, M.D., DMD, DDS, in the US or MBBS in the UK..",
+    "template": "{word} means {definition}....",
+    "source": "api:free_dict",
+    "word_zh": "doctor",
+    "category": "医疗",
+    "generated_at": "2026-02-17T23:20:15.704284"
+  },
+  {
+    "id": 1,
+    "word": "GP",
+    "text": "Gp is similar to doctor, meaning A physician; a member of the medical profession; one who is trained and licensed to heal the sick or injured. The final examination and qualification may award a doctor degree in which case the post-nominal letters are D.O., DPM, M.D., DMD, DDS, in the US or MBBS in the UK.",
+    "template": "synonym_sentence",
+    "source": "generated_from_synonym",
+    "word_zh": "doctor",
+    "category": "医疗",
+    "generated_at": "2026-02-17T23:20:15.704289"
+  },
+  {
+    "id": 2,
+    "word": "doc",
+    "text": "Doc is similar to doctor, meaning A physician; a member of the medical profession; one who is trained and licensed to heal the sick or injured. The final examination and qualification may award a doctor degree in which case the post-nominal letters are D.O., DPM, M.D., DMD, DDS, in the US or MBBS in the UK.",
+    "template": "synonym_sentence",
+    "source": "generated_from_synonym",
+    "word_zh": "doctor",
+    "category": "医疗",
+    "generated_at": "2026-02-17T23:20:15.704294"
+  },
+  {
+    "id": 0,
+    "word": "patient",
+    "text": "Unlike agent, patient implies A person or animal who receives treatment from a doctor or other medically educated person..",
+    "template": "Unlike {antonym}, {word} impli...",
+    "source": "api:free_dict",
+    "word_zh": "patient",
+    "category": "医疗",
+    "generated_at": "2026-02-17T23:20:15.723884"
+  },
+  {
+    "id": 0,
+    "word": "therapy",
+    "text": "therapy means Attempted remediation of a health problem following a diagnosis, usually synonymous with treatment..",
+    "template": "{word} means {definition}....",
+    "source": "api:free_dict",
+    "word_zh": "therapy",
+    "category": "医疗",
+    "generated_at": "2026-02-17T23:20:15.744515"
+  },
+  {
+    "id": 0,
+    "word": "disease",
+    "text": "The term disease can be understood as An abnormal condition of a human, animal or plant that causes discomfort or dysfunction; distinct from injury insofar as the latter is usually instantaneously acquired..",
+    "template": "The term {word} can be underst...",
+    "source": "api:free_dict",
+    "word_zh": "disease",
+    "category": "医疗",
+    "generated_at": "2026-02-17T23:20:15.763604"
+  },
+  {
+    "id": 0,
+    "word": "symptom",
+    "text": "The term symptom can be understood as A perceived change in some function, sensation or appearance of a person that indicates a disease or disorder, such as fever, headache or rash..",
+    "template": "The term {word} can be underst...",
+    "source": "api:free_dict",
+    "word_zh": "symptom",
+    "category": "医疗",
+    "generated_at": "2026-02-17T23:20:15.783885"
+  },
+  {
+    "id": 1,
+    "word": "indication",
+    "text": "Indication is similar to symptom, meaning A perceived change in some function, sensation or appearance of a person that indicates a disease or disorder, such as fever, headache or rash.",
+    "template": "synonym_sentence",
+    "source": "generated_from_synonym",
+    "word_zh": "symptom",
+    "category": "医疗",
+    "generated_at": "2026-02-17T23:20:15.783890"
+  },
+  {
+    "id": 2,
+    "word": "manifestation",
+    "text": "Manifestation is similar to symptom, meaning A perceived change in some function, sensation or appearance of a person that indicates a disease or disorder, such as fever, headache or rash.",
+    "template": "synonym_sentence",
+    "source": "generated_from_synonym",
+    "word_zh": "symptom",
+    "category": "医疗",
+    "generated_at": "2026-02-17T23:20:15.783891"
+  },
+  {
+    "id": 0,
+    "word": "treatment",
+    "text": "The word \"treatment\" refers to The process or manner of treating someone or something..",
+    "template": "The word \"{word}\" refers to {d...",
+    "source": "api:free_dict",
+    "word_zh": "treatment",
+    "category": "医疗",
+    "generated_at": "2026-02-17T23:20:15.804004"
+  },
+  {
+    "id": 0,
+    "word": "medicine",
+    "text": "medicine: A substance which specifically promotes healing when ingested or consumed in some way..",
+    "template": "{word}: {definition}....",
+    "source": "api:free_dict",
+    "word_zh": "medicine",
+    "category": "医疗",
+    "generated_at": "2026-02-17T23:20:15.824249"
+  },
+  {
+    "id": 1,
+    "word": "drug",
+    "text": "Drug is similar to medicine, meaning A substance which specifically promotes healing when ingested or consumed in some way.",
+    "template": "synonym_sentence",
+    "source": "generated_from_synonym",
+    "word_zh": "medicine",
+    "category": "医疗",
+    "generated_at": "2026-02-17T23:20:15.824255"
+  },
+  {
+    "id": 2,
+    "word": "elixir",
+    "text": "Elixir is similar to medicine, meaning A substance which specifically promotes healing when ingested or consumed in some way.",
+    "template": "synonym_sentence",
+    "source": "generated_from_synonym",
+    "word_zh": "medicine",
+    "category": "医疗",
+    "generated_at": "2026-02-17T23:20:15.824256"
+  },
+  {
+    "id": 0,
+    "word": "diagnosis",
+    "text": "What does diagnosis mean? It means To determine which disease is causing a sick person's signs and symptoms; to find the diagnosis..",
+    "template": "What does {word} mean? It mean...",
+    "source": "api:free_dict",
+    "word_zh": "diagnosis",
+    "category": "医疗",
+    "generated_at": "2026-02-17T23:20:15.844053"
+  },
+  {
+    "id": 0,
+    "word": "surgery",
+    "text": "In the context of 医疗, surgery is defined as A procedure involving major incisions to remove, repair, or replace a part of a body..",
+    "template": "In the context of {domain}, {w...",
+    "source": "api:free_dict",
+    "word_zh": "surgery",
+    "category": "医疗",
+    "generated_at": "2026-02-17T23:20:15.864258"
+  },
+  {
+    "id": 1,
+    "word": "office",
+    "text": "Office is similar to surgery, meaning A procedure involving major incisions to remove, repair, or replace a part of a body.",
+    "template": "synonym_sentence",
+    "source": "generated_from_synonym",
+    "word_zh": "surgery",
+    "category": "医疗",
+    "generated_at": "2026-02-17T23:20:15.864264"
+  },
+  {
+    "id": 2,
+    "word": "operation",
+    "text": "Operation is similar to surgery, meaning A procedure involving major incisions to remove, repair, or replace a part of a body.",
+    "template": "synonym_sentence",
+    "source": "generated_from_synonym",
+    "word_zh": "surgery",
+    "category": "医疗",
+    "generated_at": "2026-02-17T23:20:15.864264"
+  },
+  {
+    "id": 0,
+    "word": "hospital",
+    "text": "hospital: A large medical facility, usually in a building with multiple floors, where seriously ill or injured patients are given extensive medical and/or surgical treatment..",
+    "template": "{word}: {definition}....",
+    "source": "api:free_dict",
+    "word_zh": "hospital",
+    "category": "医疗",
+    "generated_at": "2026-02-17T23:20:15.885242"
+  },
+  {
+    "id": 1,
+    "word": "infirmary",
+    "text": "Infirmary is similar to hospital, meaning A large medical facility, usually in a building with multiple floors, where seriously ill or injured patients are given extensive medical and/or surgical treatment.",
+    "template": "synonym_sentence",
+    "source": "generated_from_synonym",
+    "word_zh": "hospital",
+    "category": "医疗",
+    "generated_at": "2026-02-17T23:20:15.885248"
+  },
+  {
+    "id": 2,
+    "word": "sickhouse",
+    "text": "Sickhouse is similar to hospital, meaning A large medical facility, usually in a building with multiple floors, where seriously ill or injured patients are given extensive medical and/or surgical treatment.",
+    "template": "synonym_sentence",
+    "source": "generated_from_synonym",
+    "word_zh": "hospital",
+    "category": "医疗",
+    "generated_at": "2026-02-17T23:20:15.885249"
+  },
+  {
+    "id": 0,
+    "word": "doctor",
+    "text": "Unlike opposite, doctor implies A physician; a member of the medical profession; one who is trained and licensed to heal the sick or injured. The final examination and qualification may award a doctor degree in which case the post-nominal letters are D.O., DPM, M.D., DMD, DDS, in the US or MBBS in the UK..",
+    "template": "Unlike {antonym}, {word} impli...",
+    "source": "api:free_dict",
+    "word_zh": "doctor",
+    "category": "医疗",
+    "generated_at": "2026-02-17T23:20:15.906503"
+  },
+  {
+    "id": 1,
+    "word": "GP",
+    "text": "Gp is similar to doctor, meaning A physician; a member of the medical profession; one who is trained and licensed to heal the sick or injured. The final examination and qualification may award a doctor degree in which case the post-nominal letters are D.O., DPM, M.D., DMD, DDS, in the US or MBBS in the UK.",
+    "template": "synonym_sentence",
+    "source": "generated_from_synonym",
+    "word_zh": "doctor",
+    "category": "医疗",
+    "generated_at": "2026-02-17T23:20:15.906509"
+  },
+  {
+    "id": 2,
+    "word": "doc",
+    "text": "Doc is similar to doctor, meaning A physician; a member of the medical profession; one who is trained and licensed to heal the sick or injured. The final examination and qualification may award a doctor degree in which case the post-nominal letters are D.O., DPM, M.D., DMD, DDS, in the US or MBBS in the UK.",
+    "template": "synonym_sentence",
+    "source": "generated_from_synonym",
+    "word_zh": "doctor",
+    "category": "医疗",
+    "generated_at": "2026-02-17T23:20:15.906513"
+  },
+  {
+    "id": 0,
+    "word": "patient",
+    "text": "Unlike agent, patient implies A person or animal who receives treatment from a doctor or other medically educated person..",
+    "template": "Unlike {antonym}, {word} impli...",
+    "source": "api:free_dict",
+    "word_zh": "patient",
+    "category": "医疗",
+    "generated_at": "2026-02-17T23:20:15.925260"
+  },
+  {
+    "id": 0,
+    "word": "therapy",
+    "text": "therapy means Attempted remediation of a health problem following a diagnosis, usually synonymous with treatment..",
+    "template": "{word} means {definition}....",
+    "source": "api:free_dict",
+    "word_zh": "therapy",
+    "category": "医疗",
+    "generated_at": "2026-02-17T23:20:15.945578"
+  },
+  {
+    "id": 0,
+    "word": "disease",
+    "text": "The word \"disease\" refers to An abnormal condition of a human, animal or plant that causes discomfort or dysfunction; distinct from injury insofar as the latter is usually instantaneously acquired..",
+    "template": "The word \"{word}\" refers to {d...",
+    "source": "api:free_dict",
+    "word_zh": "disease",
+    "category": "医疗",
+    "generated_at": "2026-02-17T23:20:15.965442"
+  },
+  {
+    "id": 0,
+    "word": "symptom",
+    "text": "symptom means A perceived change in some function, sensation or appearance of a person that indicates a disease or disorder, such as fever, headache or rash..",
+    "template": "{word} means {definition}....",
+    "source": "api:free_dict",
+    "word_zh": "symptom",
+    "category": "医疗",
+    "generated_at": "2026-02-17T23:20:15.985099"
+  },
+  {
+    "id": 1,
+    "word": "indication",
+    "text": "Indication is similar to symptom, meaning A perceived change in some function, sensation or appearance of a person that indicates a disease or disorder, such as fever, headache or rash.",
+    "template": "synonym_sentence",
+    "source": "generated_from_synonym",
+    "word_zh": "symptom",
+    "category": "医疗",
+    "generated_at": "2026-02-17T23:20:15.985105"
+  },
+  {
+    "id": 2,
+    "word": "manifestation",
+    "text": "Manifestation is similar to symptom, meaning A perceived change in some function, sensation or appearance of a person that indicates a disease or disorder, such as fever, headache or rash.",
+    "template": "synonym_sentence",
+    "source": "generated_from_synonym",
+    "word_zh": "symptom",
+    "category": "医疗",
+    "generated_at": "2026-02-17T23:20:15.985106"
+  },
+  {
+    "id": 0,
+    "word": "treatment",
+    "text": "Unlike opposite, treatment implies The process or manner of treating someone or something..",
+    "template": "Unlike {antonym}, {word} impli...",
+    "source": "api:free_dict",
+    "word_zh": "treatment",
+    "category": "医疗",
+    "generated_at": "2026-02-17T23:20:16.005473"
+  },
+  {
+    "id": 0,
+    "word": "medicine",
+    "text": "In the context of 医疗, medicine is defined as A substance which specifically promotes healing when ingested or consumed in some way..",
+    "template": "In the context of {domain}, {w...",
+    "source": "api:free_dict",
+    "word_zh": "medicine",
+    "category": "医疗",
+    "generated_at": "2026-02-17T23:20:16.024645"
+  },
+  {
+    "id": 1,
+    "word": "drug",
+    "text": "Drug is similar to medicine, meaning A substance which specifically promotes healing when ingested or consumed in some way.",
+    "template": "synonym_sentence",
+    "source": "generated_from_synonym",
+    "word_zh": "medicine",
+    "category": "医疗",
+    "generated_at": "2026-02-17T23:20:16.024651"
+  },
+  {
+    "id": 2,
+    "word": "elixir",
+    "text": "Elixir is similar to medicine, meaning A substance which specifically promotes healing when ingested or consumed in some way.",
+    "template": "synonym_sentence",
+    "source": "generated_from_synonym",
+    "word_zh": "medicine",
+    "category": "医疗",
+    "generated_at": "2026-02-17T23:20:16.024652"
+  },
+  {
+    "id": 0,
+    "word": "diagnosis",
+    "text": "The word \"diagnosis\" refers to To determine which disease is causing a sick person's signs and symptoms; to find the diagnosis..",
+    "template": "The word \"{word}\" refers to {d...",
+    "source": "api:free_dict",
+    "word_zh": "diagnosis",
+    "category": "医疗",
+    "generated_at": "2026-02-17T23:20:16.044938"
+  },
+  {
+    "id": 0,
+    "word": "surgery",
+    "text": "In the context of 医疗, surgery is defined as A procedure involving major incisions to remove, repair, or replace a part of a body..",
+    "template": "In the context of {domain}, {w...",
+    "source": "api:free_dict",
+    "word_zh": "surgery",
+    "category": "医疗",
+    "generated_at": "2026-02-17T23:20:16.065097"
+  },
+  {
+    "id": 1,
+    "word": "office",
+    "text": "Office is similar to surgery, meaning A procedure involving major incisions to remove, repair, or replace a part of a body.",
+    "template": "synonym_sentence",
+    "source": "generated_from_synonym",
+    "word_zh": "surgery",
+    "category": "医疗",
+    "generated_at": "2026-02-17T23:20:16.065103"
+  },
+  {
+    "id": 2,
+    "word": "operation",
+    "text": "Operation is similar to surgery, meaning A procedure involving major incisions to remove, repair, or replace a part of a body.",
+    "template": "synonym_sentence",
+    "source": "generated_from_synonym",
+    "word_zh": "surgery",
+    "category": "医疗",
+    "generated_at": "2026-02-17T23:20:16.065104"
+  },
+  {
+    "id": 0,
+    "word": "hospital",
+    "text": "hospital: A large medical facility, usually in a building with multiple floors, where seriously ill or injured patients are given extensive medical and/or surgical treatment..",
+    "template": "{word}: {definition}....",
+    "source": "api:free_dict",
+    "word_zh": "hospital",
+    "category": "医疗",
+    "generated_at": "2026-02-17T23:20:16.123470"
+  },
+  {
+    "id": 1,
+    "word": "infirmary",
+    "text": "Infirmary is similar to hospital, meaning A large medical facility, usually in a building with multiple floors, where seriously ill or injured patients are given extensive medical and/or surgical treatment.",
+    "template": "synonym_sentence",
+    "source": "generated_from_synonym",
+    "word_zh": "hospital",
+    "category": "医疗",
+    "generated_at": "2026-02-17T23:20:16.123476"
+  },
+  {
+    "id": 2,
+    "word": "sickhouse",
+    "text": "Sickhouse is similar to hospital, meaning A large medical facility, usually in a building with multiple floors, where seriously ill or injured patients are given extensive medical and/or surgical treatment.",
+    "template": "synonym_sentence",
+    "source": "generated_from_synonym",
+    "word_zh": "hospital",
+    "category": "医疗",
+    "generated_at": "2026-02-17T23:20:16.123481"
+  },
+  {
+    "id": 0,
+    "word": "doctor",
+    "text": "Unlike opposite, doctor implies A physician; a member of the medical profession; one who is trained and licensed to heal the sick or injured. The final examination and qualification may award a doctor degree in which case the post-nominal letters are D.O., DPM, M.D., DMD, DDS, in the US or MBBS in the UK..",
+    "template": "Unlike {antonym}, {word} impli...",
+    "source": "api:free_dict",
+    "word_zh": "doctor",
+    "category": "医疗",
+    "generated_at": "2026-02-17T23:20:16.144742"
+  },
+  {
+    "id": 1,
+    "word": "GP",
+    "text": "Gp is similar to doctor, meaning A physician; a member of the medical profession; one who is trained and licensed to heal the sick or injured. The final examination and qualification may award a doctor degree in which case the post-nominal letters are D.O., DPM, M.D., DMD, DDS, in the US or MBBS in the UK.",
+    "template": "synonym_sentence",
+    "source": "generated_from_synonym",
+    "word_zh": "doctor",
+    "category": "医疗",
+    "generated_at": "2026-02-17T23:20:16.144747"
+  },
+  {
+    "id": 2,
+    "word": "doc",
+    "text": "Doc is similar to doctor, meaning A physician; a member of the medical profession; one who is trained and licensed to heal the sick or injured. The final examination and qualification may award a doctor degree in which case the post-nominal letters are D.O., DPM, M.D., DMD, DDS, in the US or MBBS in the UK.",
+    "template": "synonym_sentence",
+    "source": "generated_from_synonym",
+    "word_zh": "doctor",
+    "category": "医疗",
+    "generated_at": "2026-02-17T23:20:16.144748"
+  },
+  {
+    "id": 0,
+    "word": "patient",
+    "text": "In the context of 医疗, patient is defined as A person or animal who receives treatment from a doctor or other medically educated person..",
+    "template": "In the context of {domain}, {w...",
+    "source": "api:free_dict",
+    "word_zh": "patient",
+    "category": "医疗",
+    "generated_at": "2026-02-17T23:20:16.164565"
+  },
+  {
+    "id": 0,
+    "word": "therapy",
+    "text": "What does therapy mean? It means Attempted remediation of a health problem following a diagnosis, usually synonymous with treatment..",
+    "template": "What does {word} mean? It mean...",
+    "source": "api:free_dict",
+    "word_zh": "therapy",
+    "category": "医疗",
+    "generated_at": "2026-02-17T23:20:16.184500"
+  },
+  {
+    "id": 0,
+    "word": "disease",
+    "text": "In the context of 医疗, disease is defined as An abnormal condition of a human, animal or plant that causes discomfort or dysfunction; distinct from injury insofar as the latter is usually instantaneously acquired..",
+    "template": "In the context of {domain}, {w...",
+    "source": "api:free_dict",
+    "word_zh": "disease",
+    "category": "医疗",
+    "generated_at": "2026-02-17T23:20:16.204969"
+  },
+  {
+    "id": 0,
+    "word": "symptom",
+    "text": "symptom means A perceived change in some function, sensation or appearance of a person that indicates a disease or disorder, such as fever, headache or rash..",
+    "template": "{word} means {definition}....",
+    "source": "api:free_dict",
+    "word_zh": "symptom",
+    "category": "医疗",
+    "generated_at": "2026-02-17T23:20:16.224665"
+  },
+  {
+    "id": 1,
+    "word": "indication",
+    "text": "Indication is similar to symptom, meaning A perceived change in some function, sensation or appearance of a person that indicates a disease or disorder, such as fever, headache or rash.",
+    "template": "synonym_sentence",
+    "source": "generated_from_synonym",
+    "word_zh": "symptom",
+    "category": "医疗",
+    "generated_at": "2026-02-17T23:20:16.224670"
+  },
+  {
+    "id": 2,
+    "word": "manifestation",
+    "text": "Manifestation is similar to symptom, meaning A perceived change in some function, sensation or appearance of a person that indicates a disease or disorder, such as fever, headache or rash.",
+    "template": "synonym_sentence",
+    "source": "generated_from_synonym",
+    "word_zh": "symptom",
+    "category": "医疗",
+    "generated_at": "2026-02-17T23:20:16.224671"
+  },
+  {
+    "id": 0,
+    "word": "treatment",
+    "text": "Unlike opposite, treatment implies The process or manner of treating someone or something..",
+    "template": "Unlike {antonym}, {word} impli...",
+    "source": "api:free_dict",
+    "word_zh": "treatment",
+    "category": "医疗",
+    "generated_at": "2026-02-17T23:20:16.247178"
+  },
+  {
+    "id": 0,
+    "word": "medicine",
+    "text": "The term medicine can be understood as A substance which specifically promotes healing when ingested or consumed in some way..",
+    "template": "The term {word} can be underst...",
+    "source": "api:free_dict",
+    "word_zh": "medicine",
+    "category": "医疗",
+    "generated_at": "2026-02-17T23:20:16.267626"
+  },
+  {
+    "id": 1,
+    "word": "drug",
+    "text": "Drug is similar to medicine, meaning A substance which specifically promotes healing when ingested or consumed in some way.",
+    "template": "synonym_sentence",
+    "source": "generated_from_synonym",
+    "word_zh": "medicine",
+    "category": "医疗",
+    "generated_at": "2026-02-17T23:20:16.267632"
+  },
+  {
+    "id": 2,
+    "word": "elixir",
+    "text": "Elixir is similar to medicine, meaning A substance which specifically promotes healing when ingested or consumed in some way.",
+    "template": "synonym_sentence",
+    "source": "generated_from_synonym",
+    "word_zh": "medicine",
+    "category": "医疗",
+    "generated_at": "2026-02-17T23:20:16.267632"
+  },
+  {
+    "id": 0,
+    "word": "diagnosis",
+    "text": "In the context of 医疗, diagnosis is defined as To determine which disease is causing a sick person's signs and symptoms; to find the diagnosis..",
+    "template": "In the context of {domain}, {w...",
+    "source": "api:free_dict",
+    "word_zh": "diagnosis",
+    "category": "医疗",
+    "generated_at": "2026-02-17T23:20:16.288725"
+  },
+  {
+    "id": 0,
+    "word": "surgery",
+    "text": "The term surgery can be understood as A procedure involving major incisions to remove, repair, or replace a part of a body..",
+    "template": "The term {word} can be underst...",
+    "source": "api:free_dict",
+    "word_zh": "surgery",
+    "category": "医疗",
+    "generated_at": "2026-02-17T23:20:16.310055"
+  },
+  {
+    "id": 1,
+    "word": "office",
+    "text": "Office is similar to surgery, meaning A procedure involving major incisions to remove, repair, or replace a part of a body.",
+    "template": "synonym_sentence",
+    "source": "generated_from_synonym",
+    "word_zh": "surgery",
+    "category": "医疗",
+    "generated_at": "2026-02-17T23:20:16.310061"
+  },
+  {
+    "id": 2,
+    "word": "operation",
+    "text": "Operation is similar to surgery, meaning A procedure involving major incisions to remove, repair, or replace a part of a body.",
+    "template": "synonym_sentence",
+    "source": "generated_from_synonym",
+    "word_zh": "surgery",
+    "category": "医疗",
+    "generated_at": "2026-02-17T23:20:16.310062"
+  },
+  {
+    "id": 0,
+    "word": "hospital",
+    "text": "In the context of 医疗, hospital is defined as A large medical facility, usually in a building with multiple floors, where seriously ill or injured patients are given extensive medical and/or surgical treatment..",
+    "template": "In the context of {domain}, {w...",
+    "source": "api:free_dict",
+    "word_zh": "hospital",
+    "category": "医疗",
+    "generated_at": "2026-02-17T23:20:16.332027"
+  },
+  {
+    "id": 1,
+    "word": "infirmary",
+    "text": "Infirmary is similar to hospital, meaning A large medical facility, usually in a building with multiple floors, where seriously ill or injured patients are given extensive medical and/or surgical treatment.",
+    "template": "synonym_sentence",
+    "source": "generated_from_synonym",
+    "word_zh": "hospital",
+    "category": "医疗",
+    "generated_at": "2026-02-17T23:20:16.332037"
+  },
+  {
+    "id": 2,
+    "word": "sickhouse",
+    "text": "Sickhouse is similar to hospital, meaning A large medical facility, usually in a building with multiple floors, where seriously ill or injured patients are given extensive medical and/or surgical treatment.",
+    "template": "synonym_sentence",
+    "source": "generated_from_synonym",
+    "word_zh": "hospital",
+    "category": "医疗",
+    "generated_at": "2026-02-17T23:20:16.332038"
+  },
+  {
+    "id": 0,
+    "word": "doctor",
+    "text": "doctor means A physician; a member of the medical profession; one who is trained and licensed to heal the sick or injured. The final examination and qualification may award a doctor degree in which case the post-nominal letters are D.O., DPM, M.D., DMD, DDS, in the US or MBBS in the UK..",
+    "template": "{word} means {definition}....",
+    "source": "api:free_dict",
+    "word_zh": "doctor",
+    "category": "医疗",
+    "generated_at": "2026-02-17T23:20:16.351868"
+  },
+  {
+    "id": 1,
+    "word": "GP",
+    "text": "Gp is similar to doctor, meaning A physician; a member of the medical profession; one who is trained and licensed to heal the sick or injured. The final examination and qualification may award a doctor degree in which case the post-nominal letters are D.O., DPM, M.D., DMD, DDS, in the US or MBBS in the UK.",
+    "template": "synonym_sentence",
+    "source": "generated_from_synonym",
+    "word_zh": "doctor",
+    "category": "医疗",
+    "generated_at": "2026-02-17T23:20:16.351874"
+  },
+  {
+    "id": 2,
+    "word": "doc",
+    "text": "Doc is similar to doctor, meaning A physician; a member of the medical profession; one who is trained and licensed to heal the sick or injured. The final examination and qualification may award a doctor degree in which case the post-nominal letters are D.O., DPM, M.D., DMD, DDS, in the US or MBBS in the UK.",
+    "template": "synonym_sentence",
+    "source": "generated_from_synonym",
+    "word_zh": "doctor",
+    "category": "医疗",
+    "generated_at": "2026-02-17T23:20:16.351876"
+  },
+  {
+    "id": 0,
+    "word": "patient",
+    "text": "In the context of 医疗, patient is defined as A person or animal who receives treatment from a doctor or other medically educated person..",
+    "template": "In the context of {domain}, {w...",
+    "source": "api:free_dict",
+    "word_zh": "patient",
+    "category": "医疗",
+    "generated_at": "2026-02-17T23:20:16.371450"
+  },
+  {
+    "id": 0,
+    "word": "therapy",
+    "text": "therapy: Attempted remediation of a health problem following a diagnosis, usually synonymous with treatment..",
+    "template": "{word}: {definition}....",
+    "source": "api:free_dict",
+    "word_zh": "therapy",
+    "category": "医疗",
+    "generated_at": "2026-02-17T23:20:16.390904"
+  },
+  {
+    "id": 0,
+    "word": "disease",
+    "text": "disease: An abnormal condition of a human, animal or plant that causes discomfort or dysfunction; distinct from injury insofar as the latter is usually instantaneously acquired..",
+    "template": "{word}: {definition}....",
+    "source": "api:free_dict",
+    "word_zh": "disease",
+    "category": "医疗",
+    "generated_at": "2026-02-17T23:20:16.411193"
+  },
+  {
+    "id": 0,
+    "word": "symptom",
+    "text": "The word \"symptom\" refers to A perceived change in some function, sensation or appearance of a person that indicates a disease or disorder, such as fever, headache or rash..",
+    "template": "The word \"{word}\" refers to {d...",
+    "source": "api:free_dict",
+    "word_zh": "symptom",
+    "category": "医疗",
+    "generated_at": "2026-02-17T23:20:16.464512"
+  },
+  {
+    "id": 1,
+    "word": "indication",
+    "text": "Indication is similar to symptom, meaning A perceived change in some function, sensation or appearance of a person that indicates a disease or disorder, such as fever, headache or rash.",
+    "template": "synonym_sentence",
+    "source": "generated_from_synonym",
+    "word_zh": "symptom",
+    "category": "医疗",
+    "generated_at": "2026-02-17T23:20:16.464517"
+  },
+  {
+    "id": 2,
+    "word": "manifestation",
+    "text": "Manifestation is similar to symptom, meaning A perceived change in some function, sensation or appearance of a person that indicates a disease or disorder, such as fever, headache or rash.",
+    "template": "synonym_sentence",
+    "source": "generated_from_synonym",
+    "word_zh": "symptom",
+    "category": "医疗",
+    "generated_at": "2026-02-17T23:20:16.464518"
+  },
+  {
+    "id": 0,
+    "word": "treatment",
+    "text": "What does treatment mean? It means The process or manner of treating someone or something..",
+    "template": "What does {word} mean? It mean...",
+    "source": "api:free_dict",
+    "word_zh": "treatment",
+    "category": "医疗",
+    "generated_at": "2026-02-17T23:20:16.489016"
+  },
+  {
+    "id": 0,
+    "word": "medicine",
+    "text": "The word \"medicine\" refers to A substance which specifically promotes healing when ingested or consumed in some way..",
+    "template": "The word \"{word}\" refers to {d...",
+    "source": "api:free_dict",
+    "word_zh": "medicine",
+    "category": "医疗",
+    "generated_at": "2026-02-17T23:20:16.510437"
+  },
+  {
+    "id": 1,
+    "word": "drug",
+    "text": "Drug is similar to medicine, meaning A substance which specifically promotes healing when ingested or consumed in some way.",
+    "template": "synonym_sentence",
+    "source": "generated_from_synonym",
+    "word_zh": "medicine",
+    "category": "医疗",
+    "generated_at": "2026-02-17T23:20:16.510443"
+  },
+  {
+    "id": 2,
+    "word": "elixir",
+    "text": "Elixir is similar to medicine, meaning A substance which specifically promotes healing when ingested or consumed in some way.",
+    "template": "synonym_sentence",
+    "source": "generated_from_synonym",
+    "word_zh": "medicine",
+    "category": "医疗",
+    "generated_at": "2026-02-17T23:20:16.510443"
+  },
+  {
+    "id": 0,
+    "word": "diagnosis",
+    "text": "What does diagnosis mean? It means To determine which disease is causing a sick person's signs and symptoms; to find the diagnosis..",
+    "template": "What does {word} mean? It mean...",
+    "source": "api:free_dict",
+    "word_zh": "diagnosis",
+    "category": "医疗",
+    "generated_at": "2026-02-17T23:20:16.531884"
+  },
+  {
+    "id": 0,
+    "word": "surgery",
+    "text": "In the context of 医疗, surgery is defined as A procedure involving major incisions to remove, repair, or replace a part of a body..",
+    "template": "In the context of {domain}, {w...",
+    "source": "api:free_dict",
+    "word_zh": "surgery",
+    "category": "医疗",
+    "generated_at": "2026-02-17T23:20:16.551399"
+  },
+  {
+    "id": 1,
+    "word": "office",
+    "text": "Office is similar to surgery, meaning A procedure involving major incisions to remove, repair, or replace a part of a body.",
+    "template": "synonym_sentence",
+    "source": "generated_from_synonym",
+    "word_zh": "surgery",
+    "category": "医疗",
+    "generated_at": "2026-02-17T23:20:16.551404"
+  },
+  {
+    "id": 2,
+    "word": "operation",
+    "text": "Operation is similar to surgery, meaning A procedure involving major incisions to remove, repair, or replace a part of a body.",
+    "template": "synonym_sentence",
+    "source": "generated_from_synonym",
+    "word_zh": "surgery",
+    "category": "医疗",
+    "generated_at": "2026-02-17T23:20:16.551405"
+  },
+  {
+    "id": 0,
+    "word": "hospital",
+    "text": "hospital means A large medical facility, usually in a building with multiple floors, where seriously ill or injured patients are given extensive medical and/or surgical treatment..",
+    "template": "{word} means {definition}....",
+    "source": "api:free_dict",
+    "word_zh": "hospital",
+    "category": "医疗",
+    "generated_at": "2026-02-17T23:20:16.572783"
+  },
+  {
+    "id": 1,
+    "word": "infirmary",
+    "text": "Infirmary is similar to hospital, meaning A large medical facility, usually in a building with multiple floors, where seriously ill or injured patients are given extensive medical and/or surgical treatment.",
+    "template": "synonym_sentence",
+    "source": "generated_from_synonym",
+    "word_zh": "hospital",
+    "category": "医疗",
+    "generated_at": "2026-02-17T23:20:16.572789"
+  },
+  {
+    "id": 2,
+    "word": "sickhouse",
+    "text": "Sickhouse is similar to hospital, meaning A large medical facility, usually in a building with multiple floors, where seriously ill or injured patients are given extensive medical and/or surgical treatment.",
+    "template": "synonym_sentence",
+    "source": "generated_from_synonym",
+    "word_zh": "hospital",
+    "category": "医疗",
+    "generated_at": "2026-02-17T23:20:16.572790"
+  },
+  {
+    "id": 0,
+    "word": "doctor",
+    "text": "Unlike opposite, doctor implies A physician; a member of the medical profession; one who is trained and licensed to heal the sick or injured. The final examination and qualification may award a doctor degree in which case the post-nominal letters are D.O., DPM, M.D., DMD, DDS, in the US or MBBS in the UK..",
+    "template": "Unlike {antonym}, {word} impli...",
+    "source": "api:free_dict",
+    "word_zh": "doctor",
+    "category": "医疗",
+    "generated_at": "2026-02-17T23:20:16.592811"
+  },
+  {
+    "id": 1,
+    "word": "GP",
+    "text": "Gp is similar to doctor, meaning A physician; a member of the medical profession; one who is trained and licensed to heal the sick or injured. The final examination and qualification may award a doctor degree in which case the post-nominal letters are D.O., DPM, M.D., DMD, DDS, in the US or MBBS in the UK.",
+    "template": "synonym_sentence",
+    "source": "generated_from_synonym",
+    "word_zh": "doctor",
+    "category": "医疗",
+    "generated_at": "2026-02-17T23:20:16.592817"
+  },
+  {
+    "id": 2,
+    "word": "doc",
+    "text": "Doc is similar to doctor, meaning A physician; a member of the medical profession; one who is trained and licensed to heal the sick or injured. The final examination and qualification may award a doctor degree in which case the post-nominal letters are D.O., DPM, M.D., DMD, DDS, in the US or MBBS in the UK.",
+    "template": "synonym_sentence",
+    "source": "generated_from_synonym",
+    "word_zh": "doctor",
+    "category": "医疗",
+    "generated_at": "2026-02-17T23:20:16.592818"
+  },
+  {
+    "id": 0,
+    "word": "patient",
+    "text": "What does patient mean? It means A person or animal who receives treatment from a doctor or other medically educated person..",
+    "template": "What does {word} mean? It mean...",
+    "source": "api:free_dict",
+    "word_zh": "patient",
+    "category": "医疗",
+    "generated_at": "2026-02-17T23:20:16.612782"
+  },
+  {
+    "id": 0,
+    "word": "therapy",
+    "text": "What does therapy mean? It means Attempted remediation of a health problem following a diagnosis, usually synonymous with treatment..",
+    "template": "What does {word} mean? It mean...",
+    "source": "api:free_dict",
+    "word_zh": "therapy",
+    "category": "医疗",
+    "generated_at": "2026-02-17T23:20:16.636717"
+  },
+  {
+    "id": 0,
+    "word": "disease",
+    "text": "What does disease mean? It means An abnormal condition of a human, animal or plant that causes discomfort or dysfunction; distinct from injury insofar as the latter is usually instantaneously acquired..",
+    "template": "What does {word} mean? It mean...",
+    "source": "api:free_dict",
+    "word_zh": "disease",
+    "category": "医疗",
+    "generated_at": "2026-02-17T23:20:16.655309"
+  },
+  {
+    "id": 0,
+    "word": "symptom",
+    "text": "What does symptom mean? It means A perceived change in some function, sensation or appearance of a person that indicates a disease or disorder, such as fever, headache or rash..",
+    "template": "What does {word} mean? It mean...",
+    "source": "api:free_dict",
+    "word_zh": "symptom",
+    "category": "医疗",
+    "generated_at": "2026-02-17T23:20:16.674220"
+  },
+  {
+    "id": 1,
+    "word": "indication",
+    "text": "Indication is similar to symptom, meaning A perceived change in some function, sensation or appearance of a person that indicates a disease or disorder, such as fever, headache or rash.",
+    "template": "synonym_sentence",
+    "source": "generated_from_synonym",
+    "word_zh": "symptom",
+    "category": "医疗",
+    "generated_at": "2026-02-17T23:20:16.674225"
+  },
+  {
+    "id": 2,
+    "word": "manifestation",
+    "text": "Manifestation is similar to symptom, meaning A perceived change in some function, sensation or appearance of a person that indicates a disease or disorder, such as fever, headache or rash.",
+    "template": "synonym_sentence",
+    "source": "generated_from_synonym",
+    "word_zh": "symptom",
+    "category": "医疗",
+    "generated_at": "2026-02-17T23:20:16.674226"
+  },
+  {
+    "id": 0,
+    "word": "treatment",
+    "text": "treatment means The process or manner of treating someone or something..",
+    "template": "{word} means {definition}....",
+    "source": "api:free_dict",
+    "word_zh": "treatment",
+    "category": "医疗",
+    "generated_at": "2026-02-17T23:20:16.692924"
+  },
+  {
+    "id": 0,
+    "word": "medicine",
+    "text": "What does medicine mean? It means A substance which specifically promotes healing when ingested or consumed in some way..",
+    "template": "What does {word} mean? It mean...",
+    "source": "api:free_dict",
+    "word_zh": "medicine",
+    "category": "医疗",
+    "generated_at": "2026-02-17T23:20:16.711771"
+  },
+  {
+    "id": 1,
+    "word": "drug",
+    "text": "Drug is similar to medicine, meaning A substance which specifically promotes healing when ingested or consumed in some way.",
+    "template": "synonym_sentence",
+    "source": "generated_from_synonym",
+    "word_zh": "medicine",
+    "category": "医疗",
+    "generated_at": "2026-02-17T23:20:16.711776"
+  },
+  {
+    "id": 2,
+    "word": "elixir",
+    "text": "Elixir is similar to medicine, meaning A substance which specifically promotes healing when ingested or consumed in some way.",
+    "template": "synonym_sentence",
+    "source": "generated_from_synonym",
+    "word_zh": "medicine",
+    "category": "医疗",
+    "generated_at": "2026-02-17T23:20:16.711777"
+  },
+  {
+    "id": 0,
+    "word": "diagnosis",
+    "text": "What does diagnosis mean? It means To determine which disease is causing a sick person's signs and symptoms; to find the diagnosis..",
+    "template": "What does {word} mean? It mean...",
+    "source": "api:free_dict",
+    "word_zh": "diagnosis",
+    "category": "医疗",
+    "generated_at": "2026-02-17T23:20:16.730193"
+  },
+  {
+    "id": 0,
+    "word": "surgery",
+    "text": "Unlike opposite, surgery implies A procedure involving major incisions to remove, repair, or replace a part of a body..",
+    "template": "Unlike {antonym}, {word} impli...",
+    "source": "api:free_dict",
+    "word_zh": "surgery",
+    "category": "医疗",
+    "generated_at": "2026-02-17T23:20:16.748552"
+  },
+  {
+    "id": 1,
+    "word": "office",
+    "text": "Office is similar to surgery, meaning A procedure involving major incisions to remove, repair, or replace a part of a body.",
+    "template": "synonym_sentence",
+    "source": "generated_from_synonym",
+    "word_zh": "surgery",
+    "category": "医疗",
+    "generated_at": "2026-02-17T23:20:16.748557"
+  },
+  {
+    "id": 2,
+    "word": "operation",
+    "text": "Operation is similar to surgery, meaning A procedure involving major incisions to remove, repair, or replace a part of a body.",
+    "template": "synonym_sentence",
+    "source": "generated_from_synonym",
+    "word_zh": "surgery",
+    "category": "医疗",
+    "generated_at": "2026-02-17T23:20:16.748558"
+  },
+  {
+    "id": 0,
+    "word": "hospital",
+    "text": "Unlike opposite, hospital implies A large medical facility, usually in a building with multiple floors, where seriously ill or injured patients are given extensive medical and/or surgical treatment..",
+    "template": "Unlike {antonym}, {word} impli...",
+    "source": "api:free_dict",
+    "word_zh": "hospital",
+    "category": "医疗",
+    "generated_at": "2026-02-17T23:20:16.766939"
+  },
+  {
+    "id": 1,
+    "word": "infirmary",
+    "text": "Infirmary is similar to hospital, meaning A large medical facility, usually in a building with multiple floors, where seriously ill or injured patients are given extensive medical and/or surgical treatment.",
+    "template": "synonym_sentence",
+    "source": "generated_from_synonym",
+    "word_zh": "hospital",
+    "category": "医疗",
+    "generated_at": "2026-02-17T23:20:16.766946"
+  },
+  {
+    "id": 2,
+    "word": "sickhouse",
+    "text": "Sickhouse is similar to hospital, meaning A large medical facility, usually in a building with multiple floors, where seriously ill or injured patients are given extensive medical and/or surgical treatment.",
+    "template": "synonym_sentence",
+    "source": "generated_from_synonym",
+    "word_zh": "hospital",
+    "category": "医疗",
+    "generated_at": "2026-02-17T23:20:16.766947"
+  },
+  {
+    "id": 0,
+    "word": "doctor",
+    "text": "In the context of 医疗, doctor is defined as A physician; a member of the medical profession; one who is trained and licensed to heal the sick or injured. The final examination and qualification may award a doctor degree in which case the post-nominal letters are D.O., DPM, M.D., DMD, DDS, in the US or MBBS in the UK..",
+    "template": "In the context of {domain}, {w...",
+    "source": "api:free_dict",
+    "word_zh": "doctor",
+    "category": "医疗",
+    "generated_at": "2026-02-17T23:20:16.785397"
+  },
+  {
+    "id": 1,
+    "word": "GP",
+    "text": "Gp is similar to doctor, meaning A physician; a member of the medical profession; one who is trained and licensed to heal the sick or injured. The final examination and qualification may award a doctor degree in which case the post-nominal letters are D.O., DPM, M.D., DMD, DDS, in the US or MBBS in the UK.",
+    "template": "synonym_sentence",
+    "source": "generated_from_synonym",
+    "word_zh": "doctor",
+    "category": "医疗",
+    "generated_at": "2026-02-17T23:20:16.785403"
+  },
+  {
+    "id": 2,
+    "word": "doc",
+    "text": "Doc is similar to doctor, meaning A physician; a member of the medical profession; one who is trained and licensed to heal the sick or injured. The final examination and qualification may award a doctor degree in which case the post-nominal letters are D.O., DPM, M.D., DMD, DDS, in the US or MBBS in the UK.",
+    "template": "synonym_sentence",
+    "source": "generated_from_synonym",
+    "word_zh": "doctor",
+    "category": "医疗",
+    "generated_at": "2026-02-17T23:20:16.785404"
+  },
+  {
+    "id": 0,
+    "word": "patient",
+    "text": "The term patient can be understood as A person or animal who receives treatment from a doctor or other medically educated person..",
+    "template": "The term {word} can be underst...",
+    "source": "api:free_dict",
+    "word_zh": "patient",
+    "category": "医疗",
+    "generated_at": "2026-02-17T23:20:16.804301"
+  },
+  {
+    "id": 0,
+    "word": "therapy",
+    "text": "The word \"therapy\" refers to Attempted remediation of a health problem following a diagnosis, usually synonymous with treatment..",
+    "template": "The word \"{word}\" refers to {d...",
+    "source": "api:free_dict",
+    "word_zh": "therapy",
+    "category": "医疗",
+    "generated_at": "2026-02-17T23:20:16.821708"
+  },
+  {
+    "id": 0,
+    "word": "disease",
+    "text": "The term disease can be understood as An abnormal condition of a human, animal or plant that causes discomfort or dysfunction; distinct from injury insofar as the latter is usually instantaneously acquired..",
+    "template": "The term {word} can be underst...",
+    "source": "api:free_dict",
+    "word_zh": "disease",
+    "category": "医疗",
+    "generated_at": "2026-02-17T23:20:16.841211"
+  },
+  {
+    "id": 0,
+    "word": "symptom",
+    "text": "In the context of 医疗, symptom is defined as A perceived change in some function, sensation or appearance of a person that indicates a disease or disorder, such as fever, headache or rash..",
+    "template": "In the context of {domain}, {w...",
+    "source": "api:free_dict",
+    "word_zh": "symptom",
+    "category": "医疗",
+    "generated_at": "2026-02-17T23:20:16.860178"
+  },
+  {
+    "id": 1,
+    "word": "indication",
+    "text": "Indication is similar to symptom, meaning A perceived change in some function, sensation or appearance of a person that indicates a disease or disorder, such as fever, headache or rash.",
+    "template": "synonym_sentence",
+    "source": "generated_from_synonym",
+    "word_zh": "symptom",
+    "category": "医疗",
+    "generated_at": "2026-02-17T23:20:16.860184"
+  },
+  {
+    "id": 2,
+    "word": "manifestation",
+    "text": "Manifestation is similar to symptom, meaning A perceived change in some function, sensation or appearance of a person that indicates a disease or disorder, such as fever, headache or rash.",
+    "template": "synonym_sentence",
+    "source": "generated_from_synonym",
+    "word_zh": "symptom",
+    "category": "医疗",
+    "generated_at": "2026-02-17T23:20:16.860185"
+  },
+  {
+    "id": 0,
+    "word": "treatment",
+    "text": "The word \"treatment\" refers to The process or manner of treating someone or something..",
+    "template": "The word \"{word}\" refers to {d...",
+    "source": "api:free_dict",
+    "word_zh": "treatment",
+    "category": "医疗",
+    "generated_at": "2026-02-17T23:20:16.880147"
+  },
+  {
+    "id": 0,
+    "word": "medicine",
+    "text": "In the context of 医疗, medicine is defined as A substance which specifically promotes healing when ingested or consumed in some way..",
+    "template": "In the context of {domain}, {w...",
+    "source": "api:free_dict",
+    "word_zh": "medicine",
+    "category": "医疗",
+    "generated_at": "2026-02-17T23:20:16.898678"
+  },
+  {
+    "id": 1,
+    "word": "drug",
+    "text": "Drug is similar to medicine, meaning A substance which specifically promotes healing when ingested or consumed in some way.",
+    "template": "synonym_sentence",
+    "source": "generated_from_synonym",
+    "word_zh": "medicine",
+    "category": "医疗",
+    "generated_at": "2026-02-17T23:20:16.898683"
+  },
+  {
+    "id": 2,
+    "word": "elixir",
+    "text": "Elixir is similar to medicine, meaning A substance which specifically promotes healing when ingested or consumed in some way.",
+    "template": "synonym_sentence",
+    "source": "generated_from_synonym",
+    "word_zh": "medicine",
+    "category": "医疗",
+    "generated_at": "2026-02-17T23:20:16.898684"
+  },
+  {
+    "id": 0,
+    "word": "diagnosis",
+    "text": "The word \"diagnosis\" refers to To determine which disease is causing a sick person's signs and symptoms; to find the diagnosis..",
+    "template": "The word \"{word}\" refers to {d...",
+    "source": "api:free_dict",
+    "word_zh": "diagnosis",
+    "category": "医疗",
+    "generated_at": "2026-02-17T23:20:16.916816"
+  },
+  {
+    "id": 0,
+    "word": "surgery",
+    "text": "surgery: A procedure involving major incisions to remove, repair, or replace a part of a body..",
+    "template": "{word}: {definition}....",
+    "source": "api:free_dict",
+    "word_zh": "surgery",
+    "category": "医疗",
+    "generated_at": "2026-02-17T23:20:16.934967"
+  },
+  {
+    "id": 1,
+    "word": "office",
+    "text": "Office is similar to surgery, meaning A procedure involving major incisions to remove, repair, or replace a part of a body.",
+    "template": "synonym_sentence",
+    "source": "generated_from_synonym",
+    "word_zh": "surgery",
+    "category": "医疗",
+    "generated_at": "2026-02-17T23:20:16.934982"
+  },
+  {
+    "id": 2,
+    "word": "operation",
+    "text": "Operation is similar to surgery, meaning A procedure involving major incisions to remove, repair, or replace a part of a body.",
+    "template": "synonym_sentence",
+    "source": "generated_from_synonym",
+    "word_zh": "surgery",
+    "category": "医疗",
+    "generated_at": "2026-02-17T23:20:16.934984"
+  },
+  {
+    "id": 0,
+    "word": "hospital",
+    "text": "The term hospital can be understood as A large medical facility, usually in a building with multiple floors, where seriously ill or injured patients are given extensive medical and/or surgical treatment..",
+    "template": "The term {word} can be underst...",
+    "source": "api:free_dict",
+    "word_zh": "hospital",
+    "category": "医疗",
+    "generated_at": "2026-02-17T23:20:16.954560"
+  },
+  {
+    "id": 1,
+    "word": "infirmary",
+    "text": "Infirmary is similar to hospital, meaning A large medical facility, usually in a building with multiple floors, where seriously ill or injured patients are given extensive medical and/or surgical treatment.",
+    "template": "synonym_sentence",
+    "source": "generated_from_synonym",
+    "word_zh": "hospital",
+    "category": "医疗",
+    "generated_at": "2026-02-17T23:20:16.954566"
+  },
+  {
+    "id": 2,
+    "word": "sickhouse",
+    "text": "Sickhouse is similar to hospital, meaning A large medical facility, usually in a building with multiple floors, where seriously ill or injured patients are given extensive medical and/or surgical treatment.",
+    "template": "synonym_sentence",
+    "source": "generated_from_synonym",
+    "word_zh": "hospital",
+    "category": "医疗",
+    "generated_at": "2026-02-17T23:20:16.954566"
+  },
+  {
+    "id": 0,
+    "word": "doctor",
+    "text": "The word \"doctor\" refers to A physician; a member of the medical profession; one who is trained and licensed to heal the sick or injured. The final examination and qualification may award a doctor degree in which case the post-nominal letters are D.O., DPM, M.D., DMD, DDS, in the US or MBBS in the UK..",
+    "template": "The word \"{word}\" refers to {d...",
+    "source": "api:free_dict",
+    "word_zh": "doctor",
+    "category": "医疗",
+    "generated_at": "2026-02-17T23:20:16.974224"
+  },
+  {
+    "id": 1,
+    "word": "GP",
+    "text": "Gp is similar to doctor, meaning A physician; a member of the medical profession; one who is trained and licensed to heal the sick or injured. The final examination and qualification may award a doctor degree in which case the post-nominal letters are D.O., DPM, M.D., DMD, DDS, in the US or MBBS in the UK.",
+    "template": "synonym_sentence",
+    "source": "generated_from_synonym",
+    "word_zh": "doctor",
+    "category": "医疗",
+    "generated_at": "2026-02-17T23:20:16.974229"
+  },
+  {
+    "id": 2,
+    "word": "doc",
+    "text": "Doc is similar to doctor, meaning A physician; a member of the medical profession; one who is trained and licensed to heal the sick or injured. The final examination and qualification may award a doctor degree in which case the post-nominal letters are D.O., DPM, M.D., DMD, DDS, in the US or MBBS in the UK.",
+    "template": "synonym_sentence",
+    "source": "generated_from_synonym",
+    "word_zh": "doctor",
+    "category": "医疗",
+    "generated_at": "2026-02-17T23:20:16.974230"
+  },
+  {
+    "id": 0,
+    "word": "patient",
+    "text": "The term patient can be understood as A person or animal who receives treatment from a doctor or other medically educated person..",
+    "template": "The term {word} can be underst...",
+    "source": "api:free_dict",
+    "word_zh": "patient",
+    "category": "医疗",
+    "generated_at": "2026-02-17T23:20:16.993837"
+  },
+  {
+    "id": 0,
+    "word": "therapy",
+    "text": "The term therapy can be understood as Attempted remediation of a health problem following a diagnosis, usually synonymous with treatment..",
+    "template": "The term {word} can be underst...",
+    "source": "api:free_dict",
+    "word_zh": "therapy",
+    "category": "医疗",
+    "generated_at": "2026-02-17T23:20:17.011564"
+  }
+]

@@ -1,0 +1,127 @@
+{
+  "legal": {
+    "raw_count": 30,
+    "final_count": 150,
+    "quality_score": 0.897,
+    "quality_level": "high_quality",
+    "stages": {
+      "t2_control": {
+        "input": 30,
+        "output": 30,
+        "rejected": 0
+      },
+      "professional_validation": {
+        "total": 30,
+        "passed": 30,
+        "failed": 0,
+        "avg_score": 1.0,
+        "error_distribution": {}
+      },
+      "anomaly_fix": {
+        "total_samples": 30,
+        "total_fixes": 0,
+        "fixes_by_rule": {}
+      },
+      "deduplication": {
+        "input": 30,
+        "output": 30,
+        "exact_duplicates": 0,
+        "near_duplicates": 0
+      },
+      "diversity_enhance": {
+        "original_count": 30,
+        "long_tail_count": 30,
+        "augmented_count": 120,
+        "challenge_count": 21,
+        "final_count": 171,
+        "final_diversity": 0.577485380116959
+      },
+      "quality_gate": {
+        "passed": 150,
+        "failed": 31,
+        "target_level": "high_quality"
+      },
+      "audit": {
+        "overall_score": 0.7657280572963293,
+        "quality_score": 0.7386134288272155,
+        "trustworthiness_score": 0.8064,
+        "issue_count": 246,
+        "auto_fixes": 0
+      }
+    }
+  },
+  "mixed": {
+    "raw_count": 40,
+    "final_count": 51,
+    "quality_score": 0.93,
+    "quality_level": "high_quality",
+    "stages": {
+      "t2_control": {
+        "input": 40,
+        "output": 40,
+        "rejected": 0
+      },
+      "professional_validation": {
+        "total": 40,
+        "passed": 40,
+        "failed": 0,
+        "avg_score": 1.0,
+        "error_distribution": {}
+      },
+      "anomaly_fix": {
+        "total_samples": 40,
+        "total_fixes": 4,
+        "fixes_by_rule": {
+          "R007": 3,
+          "R003": 1
+        }
+      },
+      "deduplication": {
+        "input": 40,
+        "output": 36,
+        "exact_duplicates": 4,
+        "near_duplicates": 0
+      },
+      "diversity_enhance": {
+        "original_count": 36,
+        "long_tail_count": 36,
+        "augmented_count": 144,
+        "challenge_count": 27,
+        "final_count": 207,
+        "final_diversity": 0.5710702341137124
+      },
+      "quality_gate": {
+        "passed": 51,
+        "failed": 166,
+        "target_level": "high_quality"
+      },
+      "audit": {
+        "overall_score": 0.8801378784485512,
+        "quality_score": 0.9493801242116375,
+        "trustworthiness_score": 0.7762745098039215,
+        "issue_count": 28,
+        "auto_fixes": 0
+      }
+    }
+  },
+  "noisy": {
+    "count": 30,
+    "types": {
+      "truncated": 11,
+      "corrupted": 7,
+      "garbage": 4,
+      "empty": 5,
+      "mixed": 3
+    }
+  },
+  "pipeline_modules": {
+    "cads": true,
+    "dasgen": true,
+    "seed_data": true,
+    "enhanced_generator": true,
+    "knowledge_graph": true,
+    "fac": true,
+    "failure_recovery": true
+  },
+  "generated_at": "2026-02-22T02:07:46.616776"
+}

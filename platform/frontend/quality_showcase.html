@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>数据质量对比 - PureData</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <style>
+        :root {
+            --primary: #6366f1;
+            --success: #10b981;
+            --info: #3b82f6;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'PingFang SC', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8ec 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .header h1 {
+            font-size: 2.5rem;
+            color: #1f2937;
+            margin-bottom: 15px;
+        }
+        
+        .header p {
+            font-size: 1.1rem;
+            color: #6b7280;
+        }
+        
+        .quality-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+            margin-bottom: 50px;
+        }
+        
+        .quality-card {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .quality-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.15);
+        }
+        
+        .card-header {
+            padding: 20px;
+            color: white;
+            text-align: center;
+        }
+        
+        .card-header.ultra { background: linear-gradient(135deg, #10b981 0%, #059669 100%); }
+        .card-header.high { background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%); }
+        .card-header.medium { background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); }
+        .card-header.low { background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%); }
+        
+        .card-header h3 {
+            font-size: 1.4rem;
+            margin-bottom: 5px;
+        }
+        
+        .card-header .badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.2);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+        }
+        
+        .card-body {
+            padding: 20px;
+        }
+        
+        .data-item {
+            background: #f9fafb;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 12px;
+        }
+        
+        .data-item:last-child {
+            margin-bottom: 0;
+        }
+        
+        .data-item .word {
+            font-weight: 600;
+            color: #374151;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .data-item .score {
+            font-size: 0.75rem;
+            background: #e5e7eb;
+            padding: 2px 8px;
+            border-radius: 10px;
+            color: #6b7280;
+        }
+        
+        .data-item .text {
+            font-size: 0.9rem;
+            color: #4b5563;
+            line-height: 1.6;
+        }
+        
+        .features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-top: 10px;
+        }
+        
+        .features span {
+            font-size: 0.75rem;
+            background: #e0e7ff;
+            color: #4338ca;
+            padding: 3px 10px;
+            border-radius: 12px;
+        }
+        
+        /* 对比表格 */
+        .comparison-section {
+            background: white;
+            border-radius: 16px;
+            padding: 40px;
+            margin-bottom: 50px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        .comparison-section h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #1f2937;
+        }
+        
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .comparison-table th,
+        .comparison-table td {
+            padding: 16px;
+            text-align: center;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        
+        .comparison-table th {
+            background: #f9fafb;
+            font-weight: 600;
+            color: #374151;
+        }
+        
+        .comparison-table th:first-child {
+            text-align: left;
+        }
+        
+        .comparison-table td:first-child {
+            text-align: left;
+            font-weight: 500;
+        }
+        
+        .comparison-table .ultra-col { color: #10b981; font-weight: 600; }
+        .comparison-table .high-col { color: #3b82f6; font-weight: 600; }
+        .comparison-table .medium-col { color: #f59e0b; }
+        .comparison-table .low-col { color: #ef4444; }
+        
+        /* 价值主张 */
+        .value-section {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+        
+        .value-card {
+            background: white;
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        .value-card.ultra {
+            border: 2px solid #10b981;
+        }
+        
+        .value-card.high {
+            border: 2px solid #3b82f6;
+        }
+        
+        .value-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .value-card ul {
+            list-style: none;
+        }
+        
+        .value-card li {
+            padding: 10px 0;
+            border-bottom: 1px solid #f3f4f6;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .value-card li:last-child {
+            border-bottom: none;
+        }
+        
+        .value-card li i {
+            color: #10b981;
+        }
+        
+        /* CTA */
+        .cta-section {
+            text-align: center;
+            padding: 50px;
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+            border-radius: 16px;
+            color: white;
+        }
+        
+        .cta-section h2 {
+            font-size: 2rem;
+            margin-bottom: 15px;
+        }
+        
+        .cta-section p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            margin-bottom: 30px;
+        }
+        
+        .cta-btn {
+            display: inline-block;
+            background: white;
+            color: #6366f1;
+            padding: 16px 40px;
+            border-radius: 30px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .cta-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        
+        @media (max-width: 1200px) {
+            .quality-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .quality-grid {
+                grid-template-columns: 1fr;
+            }
+            .value-section {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- 头部 -->
+        <div class="header">
+            <h1>🎯 数据质量对比展示</h1>
+            <p>不同质量等级的数据有什么区别？选择最适合您需求的数据质量</p>
+        </div>
+        
+        <!-- 质量卡片 -->
+        <div class="quality-grid">
+            <!-- 最高质量 -->
+            <div class="quality-card">
+                <div class="card-header ultra">
+                    <h3>🏆 最高质量</h3>
+                    <span class="badge">Ultra · 3x价格</span>
+                </div>
+                <div class="card-body">
+                    <p style="color: #6b7280; margin-bottom: 15px; font-size: 0.9rem;">专家级审核，学术级质量</p>
+                    <div class="data-item">
+                        <div class="word">深度学习 <span class="score">0.98</span></div>
+                        <div class="text">深度学习是机器学习的一个子领域，通过构建多层神经网络来学习数据的层次化表示。其核心原理是利用反向传播算法和梯度下降优化方法，自动提取数据中的高级特征...</div>
+                        <div class="features">
+                            <span>学术级定义</span>
+                            <span>完整技术原理</span>
+                            <span>应用场景说明</span>
+                        </div>
+                    </div>
+                    <div class="data-item">
+                        <div class="word">劳动合同 <span class="score">0.96</span></div>
+                        <div class="text">劳动合同是劳动者与用人单位确立劳动关系、明确双方权利义务的协议。根据《劳动合同法》第十条规定，建立劳动关系应当订立书面劳动合同...</div>
+                        <div class="features">
+                            <span>法条引用</span>
+                            <span>必备条款列举</span>
+                            <span>分类说明</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 高质量 -->
+            <div class="quality-card">
+                <div class="card-header high">
+                    <h3>⭐ 高质量</h3>
+                    <span class="badge">High · 2x价格</span>
+                </div>
+                <div class="card-body">
+                    <p style="color: #6b7280; margin-bottom: 15px; font-size: 0.9rem;">专业级内容，准确可靠</p>
+                    <div class="data-item">
+                        <div class="word">机器学习 <span class="score">0.88</span></div>
+                        <div class="text">机器学习是人工智能的核心分支，通过算法让计算机从数据中学习规律，无需显式编程即可完成预测和决策任务。主要方法包括监督学习、无监督学习和强化学习...</div>
+                        <div class="features">
+                            <span>定义准确</span>
+                            <span>方法分类</span>
+                        </div>
+                    </div>
+                    <div class="data-item">
+                        <div class="word">试用期 <span class="score">0.85</span></div>
+                        <div class="text">试用期是用人单位和劳动者相互考察的期限。根据劳动合同法规定，试用期最长不得超过六个月，试用期工资不得低于转正后工资的80%...</div>
+                        <div class="features">
+                            <span>定义清晰</span>
+                            <span>法律规定</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 中质量 -->
+            <div class="quality-card">
+                <div class="card-header medium">
+                    <h3>📊 中质量</h3>
+                    <span class="badge">Medium · 1x价格</span>
+                </div>
+                <div class="card-body">
+                    <p style="color: #6b7280; margin-bottom: 15px; font-size: 0.9rem;">基础级内容，满足一般需求</p>
+                    <div class="data-item">
+                        <div class="word">神经网络 <span class="score">0.72</span></div>
+                        <div class="text">神经网络是模拟生物神经系统的计算模型，由大量互联的节点组成。深度神经网络能够学习复杂的非线性映射关系...</div>
+                        <div class="features">
+                            <span>基本定义</span>
+                            <span>简单说明</span>
+                        </div>
+                    </div>
+                    <div class="data-item">
+                        <div class="word">加班费 <span class="score">0.75</span></div>
+                        <div class="text">加班费是劳动者在法定工作时间之外工作获得的报酬。平日加班支付150%工资，休息日加班支付200%工资...</div>
+                        <div class="features">
+                            <span>定义正确</span>
+                            <span>标准列举</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 低质量 -->
+            <div class="quality-card">
+                <div class="card-header low">
+                    <h3>📝 低质量</h3>
+                    <span class="badge">Low · 0.5x价格</span>
+                </div>
+                <div class="card-body">
+                    <p style="color: #6b7280; margin-bottom: 15px; font-size: 0.9rem;">基础内容，适合测试场景</p>
+                    <div class="data-item">
+                        <div class="word">AI <span class="score">0.45</span></div>
+                        <div class="text">AI就是人工智能，可以让机器像人一样思考。</div>
+                        <div class="features">
+                            <span>简单描述</span>
+                        </div>
+                    </div>
+                    <div class="data-item">
+                        <div class="word">工资 <span class="score">0.38</span></div>
+                        <div class="text">工资就是干活拿钱。</div>
+                        <div class="features">
+                            <span>过于简单</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 对比表格 -->
+        <div class="comparison-section">
+            <h2>📋 质量等级详细对比</h2>
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>对比项</th>
+                        <th class="ultra-col">🏆 最高质量</th>
+                        <th class="high-col">⭐ 高质量</th>
+                        <th class="medium-col">📊 中质量</th>
+                        <th class="low-col">📝 低质量</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>内容深度</td>
+                        <td class="ultra-col">学术级完整定义</td>
+                        <td class="high-col">专业级详细说明</td>
+                        <td class="medium-col">基础级概念介绍</td>
+                        <td class="low-col">简单描述</td>
+                    </tr>
+                    <tr>
+                        <td>专业审核</td>
+                        <td class="ultra-col">✅ 专家级审核</td>
+                        <td class="high-col">✅ 专业审核</td>
+                        <td class="medium-col">⚠️ 基础审核</td>
+                        <td class="low-col">❌ 无审核</td>
+                    </tr>
+                    <tr>
+                        <td>数据准确性</td>
+                        <td class="ultra-col">99%+</td>
+                        <td class="high-col">95%+</td>
+                        <td class="medium-col">85%+</td>
+                        <td class="low-col">70%+</td>
+                    </tr>
+                    <tr>
+                        <td>适用场景</td>
+                        <td class="ultra-col">学术论文、商业决策</td>
+                        <td class="high-col">模型训练、知识库</td>
+                        <td class="medium-col">数据增强、测试</td>
+                        <td class="low-col">压力测试、鲁棒性</td>
+                    </tr>
+                    <tr>
+                        <td>推荐指数</td>
+                        <td class="ultra-col">⭐⭐⭐⭐⭐</td>
+                        <td class="high-col">⭐⭐⭐⭐</td>
+                        <td class="medium-col">⭐⭐⭐</td>
+                        <td class="low-col">⭐⭐</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <!-- 价值主张 -->
+        <div class="value-section">
+            <div class="value-card ultra">
+                <h3>🏆 为什么选择最高质量？</h3>
+                <ul>
+                    <li><i class="bi bi-check-circle-fill"></i> 学术研究必备：符合论文引用标准</li>
+                    <li><i class="bi bi-check-circle-fill"></i> 商业决策可靠：专家级内容保障</li>
+                    <li><i class="bi bi-check-circle-fill"></i> 节省审核成本：无需二次人工审核</li>
+                    <li><i class="bi bi-check-circle-fill"></i> 提升品牌形象：专业内容展示实力</li>
+                </ul>
+            </div>
+            <div class="value-card high">
+                <h3>⭐ 为什么选择高质量？</h3>
+                <ul>
+                    <li><i class="bi bi-check-circle-fill"></i> 模型训练首选：高质量数据提升模型效果</li>
+                    <li><i class="bi bi-check-circle-fill"></i> 知识库建设：专业内容增强用户体验</li>
+                    <li><i class="bi bi-check-circle-fill"></i> 性价比最优：质量与价格的完美平衡</li>
+                    <li><i class="bi bi-check-circle-fill"></i> 广泛适用：满足大多数商业场景需求</li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- CTA -->
+        <div class="cta-section">
+            <h2>🚀 立即开始生成高质量数据</h2>
+            <p>选择适合您需求的质量等级，获取专业级AI训练数据</p>
+            <a href="/" class="cta-btn">开始生成 →</a>
+        </div>
+    </div>
+</body>
+</html>

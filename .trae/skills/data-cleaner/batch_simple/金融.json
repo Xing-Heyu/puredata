@@ -1,0 +1,29 @@
+[
+  {
+    "id": "0",
+    "term": "股票",
+    "definition": "股票是金融领域的重要概念，具有广泛的应用价值。",
+    "category": "金融",
+    "domain": "金融",
+    "source": "generated",
+    "generated_at": "2026-02-17T21:44:39.251084"
+  },
+  {
+    "id": "1",
+    "term": "债券",
+    "definition": "债券是金融领域的重要概念，具有广泛的应用价值。",
+    "category": "金融",
+    "domain": "金融",
+    "source": "generated",
+    "generated_at": "2026-02-17T21:44:39.251084"
+  },
+  {
+    "id": "2",
+    "term": "基金",
+    "definition": "基金是金融领域的重要概念，具有广泛的应用价值。",
+    "category": "金融",
+    "domain": "金融",
+    "source": "generated",
+    "generated_at": "2026-02-17T21:44:39.251084"
+  }
+]

@@ -1,0 +1,366 @@
+{
+  "admin": {
+    "username": "admin",
+    "password_hash": "$2b$12$pLQOVF5B3sOv90eh4huxf.VaCKNE9Uikhj7NMLtC8e6DoZoR7e0wm",
+    "role": "admin",
+    "email": "admin@datagenpro.com",
+    "created_at": "2026-02-19T00:00:00.000000",
+    "quota_used": {
+      "daily": 10,
+      "monthly": 1674,
+      "total": 1674
+    },
+    "quota_reset": "2026-02-22T17:53:26.375279",
+    "free_quota": 999999999,
+    "invite_code": "ADMIN001",
+    "invited_by": null,
+    "invite_count": 0,
+    "invite_quota_earned": 0,
+    "tasks_completed": [],
+    "domains_tried": [],
+    "is_developer": true,
+    "login_attempts": 0,
+    "locked_until": null
+  },
+  "ai_user_5t59dr6q": {
+    "username": "ai_user_5t59dr6q",
+    "password_hash": "$2b$12$ZXIXPAlaaqZFBEPxhR6.qe52s.oD5Y5OWp8Lkz9vDfjt6Zny8qAUS",
+    "role": "free",
+    "email": "ai_user_5t59dr6q@test.com",
+    "created_at": "2026-02-19T21:55:02.721984",
+    "quota_used": {
+      "daily": 0,
+      "monthly": 0,
+      "total": 0
+    },
+    "quota_reset": "2026-02-19T21:55:02.721991",
+    "free_quota": 1000,
+    "invite_code": "A83254C6",
+    "invited_by": null,
+    "invite_count": 0,
+    "invite_quota_earned": 0,
+    "tasks_completed": [],
+    "domains_tried": []
+  },
+  "ai_user_9r4bjgaa": {
+    "username": "ai_user_9r4bjgaa",
+    "password_hash": "$2b$12$AJc22Fjw/IRhKHTt9EitIupnuc32dC035/OFYOLK51tdl09Mksxju",
+    "role": "free",
+    "email": "ai_user_9r4bjgaa@test.com",
+    "created_at": "2026-02-19T21:56:06.793365",
+    "quota_used": {
+      "daily": 0,
+      "monthly": 0,
+      "total": 0
+    },
+    "quota_reset": "2026-02-19T21:56:06.793369",
+    "free_quota": 1000,
+    "invite_code": "3EEE36CC",
+    "invited_by": null,
+    "invite_count": 0,
+    "invite_quota_earned": 0,
+    "tasks_completed": [],
+    "domains_tried": []
+  },
+  "testuser123": {
+    "username": "testuser123",
+    "password_hash": "$2b$12$p7Ywsa30lxq05WzEf.2UiuILo8VvH50qkqBqrL.ehhME6HRuE.rUG",
+    "role": "free",
+    "email": "testuser123@example.com",
+    "created_at": "2026-02-20T01:47:18.708413",
+    "quota_used": {
+      "daily": 0,
+      "monthly": 0,
+      "total": 0
+    },
+    "quota_reset": "2026-02-20T01:47:18.708413",
+    "free_quota": 1000,
+    "invite_code": "C4DD9315",
+    "invited_by": null,
+    "invite_count": 0,
+    "invite_quota_earned": 0,
+    "tasks_completed": [],
+    "domains_tried": []
+  },
+  "testuser456": {
+    "username": "testuser456",
+    "password_hash": "$2b$12$Q/vcUhvxjoc8TuEPcmOyy.MH.1eKVSvndaZOS7FpeXjpAU1RjieTi",
+    "role": "free",
+    "email": "test@example.com",
+    "phone": "",
+    "created_at": "2026-02-21T20:41:19.771697",
+    "quota_used": {
+      "daily": 0,
+      "monthly": 0,
+      "total": 0
+    },
+    "quota_reset": "2026-02-21T20:41:19.771701",
+    "free_quota": 1000,
+    "invite_code": "589A972F",
+    "invited_by": null,
+    "invite_count": 0,
+    "invite_quota_earned": 0,
+    "tasks_completed": [],
+    "domains_tried": []
+  },
+  "testuser999": {
+    "username": "testuser999",
+    "password_hash": "$2b$12$zMwfAzDlq5SE4i9J.jW1yOPFrd4mEkQ/PNPXdPTLXCJwNp5loLA26",
+    "role": "free",
+    "email": "test999@example.com",
+    "phone": "",
+    "created_at": "2026-02-21T20:45:04.755833",
+    "quota_used": {
+      "daily": 0,
+      "monthly": 0,
+      "total": 0
+    },
+    "quota_reset": "2026-02-21T20:45:04.755840",
+    "free_quota": 1000,
+    "invite_code": "9D0AC4F2",
+    "invited_by": null,
+    "invite_count": 0,
+    "invite_quota_earned": 0,
+    "tasks_completed": [],
+    "domains_tried": []
+  },
+  "testuser_abc": {
+    "username": "testuser_abc",
+    "password_hash": "$2b$12$Eu.7EzWVyCXk9tACwe41Tuc/mE0/BvQrO812cl0F.8B4iyFUnI9YW",
+    "role": "free",
+    "email": "testabc@example.com",
+    "phone": "",
+    "created_at": "2026-02-21T20:46:09.254373",
+    "quota_used": {
+      "daily": 0,
+      "monthly": 0,
+      "total": 0
+    },
+    "quota_reset": "2026-02-21T20:46:09.254378",
+    "free_quota": 1000,
+    "invite_code": "96552BCB",
+    "invited_by": null,
+    "invite_count": 0,
+    "invite_quota_earned": 0,
+    "tasks_completed": [],
+    "domains_tried": []
+  },
+  "test_v2": {
+    "username": "test_v2",
+    "password_hash": "$2b$12$rwe59vXp49KFR69BR0Ey7eLQzAU9MzVBnq58YXEgvnQBRZUQBim1K",
+    "role": "free",
+    "email": "testv2@example.com",
+    "phone": "",
+    "created_at": "2026-02-21T20:59:14.192733",
+    "quota_used": {
+      "daily": 0,
+      "monthly": 0,
+      "total": 0
+    },
+    "quota_reset": "2026-02-21T20:59:14.192739",
+    "free_quota": 1000,
+    "invite_code": "EDEEA727",
+    "invited_by": null,
+    "invite_count": 0,
+    "invite_quota_earned": 0,
+    "tasks_completed": [],
+    "domains_tried": []
+  },
+  "testuser_final2": {
+    "username": "testuser_final2",
+    "password_hash": "$2b$12$1MEfh2bu5S8bm38iB.5FNuL1lou0xIuvTcAwszpiaVKuuXp.QjWha",
+    "role": "free",
+    "email": "testfinal2@example.com",
+    "phone": "",
+    "created_at": "2026-02-21T21:04:38.941433",
+    "quota_used": {
+      "daily": 0,
+      "monthly": 0,
+      "total": 0
+    },
+    "quota_reset": "2026-02-21T21:04:38.941439",
+    "free_quota": 1000,
+    "invite_code": "AEBD504E",
+    "invited_by": null,
+    "invite_count": 0,
+    "invite_quota_earned": 0,
+    "tasks_completed": [],
+    "domains_tried": []
+  },
+  "final_test": {
+    "username": "final_test",
+    "password_hash": "$2b$12$uFkwOIpc0MknN8.lZtOSIe9dqGPmgEsp036lx42npBO/SCLg0zcxq",
+    "role": "free",
+    "email": "final@test.com",
+    "phone": "",
+    "created_at": "2026-02-21T21:24:05.178494",
+    "quota_used": {
+      "daily": 0,
+      "monthly": 0,
+      "total": 0
+    },
+    "quota_reset": "2026-02-21T21:24:05.178500",
+    "free_quota": 1000,
+    "invite_code": "B58527C5",
+    "invited_by": null,
+    "invite_count": 0,
+    "invite_quota_earned": 0,
+    "tasks_completed": [],
+    "domains_tried": []
+  },
+  "test_minimal": {
+    "username": "test_minimal",
+    "password_hash": "$2b$12$0tU54PhXPAuXUcE41wCxPeueyWEMeO0CYyxHeXiksgGy6jd/womPm",
+    "role": "free",
+    "email": "test@minimal.com",
+    "phone": "",
+    "created_at": "2026-02-21T21:26:47.963226",
+    "quota_used": {
+      "daily": 0,
+      "monthly": 0,
+      "total": 0
+    },
+    "quota_reset": "2026-02-21T21:26:47.963229",
+    "free_quota": 1000,
+    "invite_code": "AA076EA3",
+    "invited_by": null,
+    "invite_count": 0,
+    "invite_quota_earned": 0,
+    "tasks_completed": [],
+    "domains_tried": []
+  },
+  "test_fullchain": {
+    "username": "test_fullchain",
+    "password_hash": "$2b$12$CV/8TqL2XBRdWOtFp4FHieDu8UsO9fz2GggUQwC6f0FnAhm1W9ZIa",
+    "role": "free",
+    "email": "test_fullchain@example.com",
+    "phone": "",
+    "created_at": "2026-02-22T13:21:15.319246",
+    "quota_used": {
+      "daily": 49,
+      "monthly": 49,
+      "total": 49
+    },
+    "quota_reset": "2026-02-22T13:21:15.319267",
+    "free_quota": 1000,
+    "invite_code": "39B9F5BE",
+    "invited_by": null,
+    "invite_count": 0,
+    "invite_quota_earned": 0,
+    "tasks_completed": [],
+    "domains_tried": [
+      "旅游"
+    ]
+  },
+  "test_user_tourism": {
+    "username": "test_user_tourism",
+    "password_hash": "$2b$12$EOLvCscYHoQa.WpQW75m9.MXawNISvGbeoFumLBbIJhu9b/ZykgSe",
+    "role": "free",
+    "email": "test_tourism@example.com",
+    "phone": "",
+    "created_at": "2026-02-22T13:54:08.508753",
+    "quota_used": {
+      "daily": 0,
+      "monthly": 0,
+      "total": 0
+    },
+    "quota_reset": "2026-02-22T13:54:08.508757",
+    "free_quota": 1000,
+    "invite_code": "C122020B",
+    "invited_by": null,
+    "invite_count": 0,
+    "invite_quota_earned": 0,
+    "tasks_completed": [],
+    "domains_tried": []
+  },
+  "test_tourism_user": {
+    "username": "test_tourism_user",
+    "password_hash": "$2b$12$Y5A9wsmnyruryDM6do2mB.db4UffWThOtORzuy1OPtTDADOWoa6HO",
+    "role": "free",
+    "email": "test_tourism@test.com",
+    "phone": "",
+    "created_at": "2026-02-22T14:17:03.246143",
+    "quota_used": {
+      "daily": 0,
+      "monthly": 0,
+      "total": 0
+    },
+    "quota_reset": "2026-02-22T14:17:03.246167",
+    "free_quota": 1000,
+    "invite_code": "1FC0E18B",
+    "invited_by": null,
+    "invite_count": 0,
+    "invite_quota_earned": 0,
+    "tasks_completed": [],
+    "domains_tried": []
+  },
+  "test_finance_user": {
+    "username": "test_finance_user",
+    "password_hash": "$2b$12$WWqHAFMK799sgSQG.ku8NeSfjUeiv3sTAodXhjfCcn0N9bhwIlpUy",
+    "role": "free",
+    "email": "test_finance@test.com",
+    "phone": "",
+    "created_at": "2026-02-22T18:22:13.359154",
+    "quota_used": {
+      "daily": 60,
+      "monthly": 60,
+      "total": 60
+    },
+    "quota_reset": "2026-02-22T18:22:13.359158",
+    "free_quota": 1000,
+    "invite_code": "B78CB274",
+    "invited_by": null,
+    "invite_count": 0,
+    "invite_quota_earned": 0,
+    "tasks_completed": [],
+    "domains_tried": [
+      "金融"
+    ],
+    "login_attempts": 2
+  },
+  "test_bcrypt_user": {
+    "username": "test_bcrypt_user",
+    "password_hash": "$2b$12$MGkcV7SuKYZDRPOGSkp2Ru98XvmllDkyQxH8LSzf7oCGaUiDGTlR2",
+    "role": "free",
+    "email": "test@test.com",
+    "phone": "",
+    "created_at": "2026-02-23T16:33:02.422577",
+    "quota_used": {
+      "daily": 0,
+      "monthly": 0,
+      "total": 0
+    },
+    "quota_reset": "2026-02-23T16:33:02.422580",
+    "free_quota": 1000,
+    "invite_code": "D1A9C280",
+    "invited_by": null,
+    "invite_count": 0,
+    "invite_quota_earned": 0,
+    "tasks_completed": [],
+    "domains_tried": []
+  },
+  "test_flow_user": {
+    "username": "test_flow_user",
+    "password_hash": "$2b$12$I9nqZt3Ky8AjVndtjc9cIuKhPL57vXGEDS7rOe/c/7/5Ta7lp5PqC",
+    "role": "free",
+    "email": "test_flow@test.com",
+    "email_verified": false,
+    "phone": "",
+    "created_at": "2026-02-24T17:01:29.939012",
+    "quota_used": {
+      "daily": 0,
+      "monthly": 0,
+      "total": 0
+    },
+    "quota_reset": "2026-02-24T17:01:29.939022",
+    "free_quota": 1000,
+    "invite_code": "C79D0350",
+    "invited_by": null,
+    "invite_count": 0,
+    "invite_quota_earned": 0,
+    "tasks_completed": [],
+    "domains_tried": [],
+    "login_attempts": 0,
+    "locked_until": null
+  }
+}

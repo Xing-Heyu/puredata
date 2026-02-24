@@ -1,0 +1,64 @@
+version: '3.8'
+
+services:
+  datagen:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: puredata
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./backend/data:/app/backend/data
+      - ./backend/outputs:/app/backend/outputs
+      - ./backend/logs:/app/backend/logs
+    environment:
+      - PYTHONUNBUFFERED=1
+      - TZ=Asia/Shanghai
+      - QWEN_API_KEY=${QWEN_API_KEY:-}
+      - SECRET_KEY=${SECRET_KEY:-puredata-secret-key}
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    networks:
+      - puredata-network
+
+  redis:
+    image: redis:7-alpine
+    container_name: puredata-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis-data:/data
+    restart: unless-stopped
+    networks:
+      - puredata-network
+    profiles:
+      - cache
+
+  nginx:
+    image: nginx:alpine
+    container_name: puredata-nginx
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./ssl:/etc/nginx/ssl:ro
+    depends_on:
+      - datagen
+    restart: unless-stopped
+    networks:
+      - puredata-network
+    profiles:
+      - production
+
+networks:
+  puredata-network:
+    driver: bridge
+
+volumes:
+  redis-data:

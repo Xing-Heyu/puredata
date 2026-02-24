@@ -1,0 +1,29 @@
+[
+  {
+    "id": "0",
+    "term": "疾病",
+    "definition": "疾病是医疗领域的重要概念，具有广泛的应用价值。",
+    "category": "医疗",
+    "domain": "医疗",
+    "source": "generated",
+    "generated_at": "2026-02-17T21:44:39.249341"
+  },
+  {
+    "id": "1",
+    "term": "症状",
+    "definition": "症状是医疗领域的重要概念，具有广泛的应用价值。",
+    "category": "医疗",
+    "domain": "医疗",
+    "source": "generated",
+    "generated_at": "2026-02-17T21:44:39.249341"
+  },
+  {
+    "id": "2",
+    "term": "治疗",
+    "definition": "治疗是医疗领域的重要概念，具有广泛的应用价值。",
+    "category": "医疗",
+    "domain": "医疗",
+    "source": "generated",
+    "generated_at": "2026-02-17T21:44:39.249341"
+  }
+]

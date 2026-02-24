@@ -1,0 +1,81 @@
+{
+  "meta": {
+    "version": "1.0",
+    "description": "纯空白模板框架 - 无任何预填数据，可填充任意领域"
+  },
+  
+  "blank_template": {
+    "name": "{领域名称}",
+    "description": "{领域描述}",
+    
+    "behaviors": [
+      "{行为1}",
+      "{行为2}",
+      "{行为3}",
+      "{行为4}",
+      "{行为5}",
+      "{行为6}",
+      "{行为7}",
+      "{行为8}",
+      "{行为9}",
+      "{行为10}"
+    ],
+    
+    "transitions_template": {
+      "{当前行为}": {
+        "{下一行为}": "{转移概率}",
+        "{其他行为}": "{转移概率}",
+        "离开": "{离开概率}"
+      }
+    },
+    
+    "time_intervals_template": {
+      "({行为A}, {行为B})": {
+        "min_minutes": "{最小分钟数}",
+        "max_minutes": "{最大分钟数}"
+      }
+    },
+    
+    "attributes_template": {
+      "{属性名}": "{属性类型}",
+      "examples": {
+        "amount": "float - 金额类",
+        "duration": "int - 时长类",
+        "rating": "int - 评分类",
+        "count": "int - 次数类",
+        "status": "string - 状态类"
+      }
+    },
+    
+    "lifecycle_template": [
+      "{阶段1}",
+      "{阶段2}",
+      "{阶段3}",
+      "{阶段4}",
+      "{阶段5}"
+    ]
+  },
+  
+  "fill_rules": {
+    "behaviors": "填写该领域的核心行为，如：浏览、下单、支付",
+    "transitions": "根据业务逻辑填写行为之间的转移概率，总和=1.0",
+    "time_intervals": "根据真实场景填写行为间的时间间隔范围",
+    "attributes": "根据业务需要添加属性字段",
+    "lifecycle": "填写用户在该领域的生命周期阶段"
+  },
+  
+  "quick_fill_examples": {
+    "电商": {
+      "behaviors": ["浏览", "搜索", "收藏", "加购", "下单", "支付", "收货", "评价"],
+      "key_attributes": ["amount", "product_id", "rating"]
+    },
+    "医疗": {
+      "behaviors": ["挂号", "候诊", "就诊", "检查", "诊断", "开药", "取药"],
+      "key_attributes": ["symptom", "diagnosis", "prescription"]
+    },
+    "教育": {
+      "behaviors": ["注册", "选课", "学习", "作业", "考试", "证书"],
+      "key_attributes": ["course_id", "score", "duration"]
+    }
+  }
+}

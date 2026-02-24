@@ -1,0 +1,272 @@
+[
+  {
+    "id": 1,
+    "word": "合同法",
+    "text": "合同法作为法律领域的关键术语，涵盖了该领域的核心知识和实践经验。",
+    "category": "法律",
+    "quality_score": 0.7000000000000001,
+    "is_professionally_valid": true,
+    "source": "template_fallback"
+  },
+  {
+    "id": 2,
+    "word": "民法典",
+    "text": "民法典作为法律领域的关键术语，涵盖了该领域的核心知识和实践经验。",
+    "category": "法律",
+    "quality_score": 0.7000000000000001,
+    "is_professionally_valid": true,
+    "source": "template_fallback"
+  },
+  {
+    "id": 3,
+    "word": "劳动法",
+    "text": "劳动法是法律领域的核心概念，指代该领域中具有特定含义和应用价值的专业术语。",
+    "category": "法律",
+    "quality_score": 0.7000000000000001,
+    "is_professionally_valid": true,
+    "source": "template_fallback"
+  },
+  {
+    "id": 4,
+    "word": "公司法",
+    "text": "在法律领域中，公司法是一个重要概念，对于理解和实践该领域知识具有重要意义。",
+    "category": "法律",
+    "quality_score": 0.7000000000000001,
+    "is_professionally_valid": true,
+    "source": "template_fallback"
+  },
+  {
+    "id": 5,
+    "word": "知识产权",
+    "text": "知识产权是法律领域的核心概念，指代该领域中具有特定含义和应用价值的专业术语。",
+    "category": "法律",
+    "quality_score": 0.7000000000000001,
+    "is_professionally_valid": true,
+    "source": "template_fallback"
+  },
+  {
+    "id": 6,
+    "word": "商标法",
+    "text": "商标法作为法律领域的关键术语，涵盖了该领域的核心知识和实践经验。",
+    "category": "法律",
+    "quality_score": 0.7000000000000001,
+    "is_professionally_valid": true,
+    "source": "template_fallback"
+  },
+  {
+    "id": 7,
+    "word": "专利法",
+    "text": "专利法是法律领域的核心概念，指代该领域中具有特定含义和应用价值的专业术语。",
+    "category": "法律",
+    "quality_score": 0.7000000000000001,
+    "is_professionally_valid": true,
+    "source": "template_fallback"
+  },
+  {
+    "id": 8,
+    "word": "著作权",
+    "text": "在法律领域中，著作权是一个重要概念，对于理解和实践该领域知识具有重要意义。",
+    "category": "法律",
+    "quality_score": 0.7000000000000001,
+    "is_professionally_valid": true,
+    "source": "template_fallback"
+  },
+  {
+    "id": 9,
+    "word": "侵权责任",
+    "text": "侵权责任是法律领域的核心概念，指代该领域中具有特定含义和应用价值的专业术语。",
+    "category": "法律",
+    "quality_score": 0.7000000000000001,
+    "is_professionally_valid": true,
+    "source": "template_fallback"
+  },
+  {
+    "id": 10,
+    "word": "违约责任",
+    "text": "在法律领域中，违约责任是一个重要概念，对于理解和实践该领域知识具有重要意义。",
+    "category": "法律",
+    "quality_score": 0.7000000000000001,
+    "is_professionally_valid": true,
+    "source": "template_fallback"
+  },
+  {
+    "id": 11,
+    "word": "诉讼时效",
+    "text": "诉讼时效是法律领域的核心概念，指代该领域中具有特定含义和应用价值的专业术语。",
+    "category": "法律",
+    "quality_score": 0.7000000000000001,
+    "is_professionally_valid": true,
+    "source": "template_fallback"
+  },
+  {
+    "id": 12,
+    "word": "仲裁",
+    "text": "仲裁是法律领域的核心概念，指代该领域中具有特定含义和应用价值的专业术语。",
+    "category": "法律",
+    "quality_score": 0.7000000000000001,
+    "is_professionally_valid": true,
+    "source": "template_fallback"
+  },
+  {
+    "id": 13,
+    "word": "调解",
+    "text": "在法律领域中，调解是一个重要概念，对于理解和实践该领域知识具有重要意义。",
+    "category": "法律",
+    "quality_score": 0.7000000000000001,
+    "is_professionally_valid": true,
+    "source": "template_fallback"
+  },
+  {
+    "id": 14,
+    "word": "证据规则",
+    "text": "在法律领域中，证据规则是一个重要概念，对于理解和实践该领域知识具有重要意义。",
+    "category": "法律",
+    "quality_score": 0.7000000000000001,
+    "is_professionally_valid": true,
+    "source": "template_fallback"
+  },
+  {
+    "id": 15,
+    "word": "刑事辩护",
+    "text": "在法律领域中，刑事辩护是一个重要概念，对于理解和实践该领域知识具有重要意义。",
+    "category": "法律",
+    "quality_score": 0.7000000000000001,
+    "is_professionally_valid": true,
+    "source": "template_fallback"
+  },
+  {
+    "id": 16,
+    "word": "行政处罚",
+    "text": "行政处罚是法律领域的核心概念，指代该领域中具有特定含义和应用价值的专业术语。",
+    "category": "法律",
+    "quality_score": 0.7000000000000001,
+    "is_professionally_valid": true,
+    "source": "template_fallback"
+  },
+  {
+    "id": 17,
+    "word": "行政复议",
+    "text": "行政复议是法律领域的核心概念，指代该领域中具有特定含义和应用价值的专业术语。",
+    "category": "法律",
+    "quality_score": 0.7000000000000001,
+    "is_professionally_valid": true,
+    "source": "template_fallback"
+  },
+  {
+    "id": 18,
+    "word": "行政诉讼",
+    "text": "行政诉讼是法律领域的核心概念，指代该领域中具有特定含义和应用价值的专业术语。",
+    "category": "法律",
+    "quality_score": 0.7000000000000001,
+    "is_professionally_valid": true,
+    "source": "template_fallback"
+  },
+  {
+    "id": 19,
+    "word": "民事诉讼",
+    "text": "民事诉讼作为法律领域的关键术语，涵盖了该领域的核心知识和实践经验。",
+    "category": "法律",
+    "quality_score": 0.7000000000000001,
+    "is_professionally_valid": true,
+    "source": "template_fallback"
+  },
+  {
+    "id": 20,
+    "word": "执行程序",
+    "text": "执行程序是法律领域的核心概念，指代该领域中具有特定含义和应用价值的专业术语。",
+    "category": "法律",
+    "quality_score": 0.7000000000000001,
+    "is_professionally_valid": true,
+    "source": "template_fallback"
+  },
+  {
+    "id": 21,
+    "word": "合同解除",
+    "text": "在法律领域中，合同解除是一个重要概念，对于理解和实践该领域知识具有重要意义。",
+    "category": "法律",
+    "quality_score": 0.7000000000000001,
+    "is_professionally_valid": true,
+    "source": "template_fallback"
+  },
+  {
+    "id": 22,
+    "word": "合同效力",
+    "text": "在法律领域中，合同效力是一个重要概念，对于理解和实践该领域知识具有重要意义。",
+    "category": "法律",
+    "quality_score": 0.7000000000000001,
+    "is_professionally_valid": true,
+    "source": "template_fallback"
+  },
+  {
+    "id": 23,
+    "word": "缔约过失",
+    "text": "在法律领域中，缔约过失是一个重要概念，对于理解和实践该领域知识具有重要意义。",
+    "category": "法律",
+    "quality_score": 0.7000000000000001,
+    "is_professionally_valid": true,
+    "source": "template_fallback"
+  },
+  {
+    "id": 24,
+    "word": "不当得利",
+    "text": "不当得利是法律领域的核心概念，指代该领域中具有特定含义和应用价值的专业术语。",
+    "category": "法律",
+    "quality_score": 0.7000000000000001,
+    "is_professionally_valid": true,
+    "source": "template_fallback"
+  },
+  {
+    "id": 25,
+    "word": "无因管理",
+    "text": "在法律领域中，无因管理是一个重要概念，对于理解和实践该领域知识具有重要意义。",
+    "category": "法律",
+    "quality_score": 0.7000000000000001,
+    "is_professionally_valid": true,
+    "source": "template_fallback"
+  },
+  {
+    "id": 26,
+    "word": "善意取得",
+    "text": "在法律领域中，善意取得是一个重要概念，对于理解和实践该领域知识具有重要意义。",
+    "category": "法律",
+    "quality_score": 0.7000000000000001,
+    "is_professionally_valid": true,
+    "source": "template_fallback"
+  },
+  {
+    "id": 27,
+    "word": "抵押权",
+    "text": "抵押权作为法律领域的关键术语，涵盖了该领域的核心知识和实践经验。",
+    "category": "法律",
+    "quality_score": 0.7000000000000001,
+    "is_professionally_valid": true,
+    "source": "template_fallback"
+  },
+  {
+    "id": 28,
+    "word": "质权",
+    "text": "质权作为法律领域的关键术语，涵盖了该领域的核心知识和实践经验。",
+    "category": "法律",
+    "quality_score": 0.7000000000000001,
+    "is_professionally_valid": true,
+    "source": "template_fallback"
+  },
+  {
+    "id": 29,
+    "word": "留置权",
+    "text": "在法律领域中，留置权是一个重要概念，对于理解和实践该领域知识具有重要意义。",
+    "category": "法律",
+    "quality_score": 0.7000000000000001,
+    "is_professionally_valid": true,
+    "source": "template_fallback"
+  },
+  {
+    "id": 30,
+    "word": "保证合同",
+    "text": "保证合同作为法律领域的关键术语，涵盖了该领域的核心知识和实践经验。",
+    "category": "法律",
+    "quality_score": 0.7000000000000001,
+    "is_professionally_valid": true,
+    "source": "template_fallback"
+  }
+]

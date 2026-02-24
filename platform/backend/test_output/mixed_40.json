@@ -1,0 +1,362 @@
+[
+  {
+    "id": 1,
+    "word": "机器学习",
+    "text": "机器学习是人工智能的核心分支，通过算法让计算机从数据中学习规律，无需显式编程即可完成预测和决策任务。主要方法包括监督学习、无监督学习和强化学习。",
+    "category": "人工智能",
+    "quality_score": 0.8,
+    "is_professionally_valid": true,
+    "source": "knowledge_base"
+  },
+  {
+    "id": 2,
+    "word": "深度学习",
+    "text": "深度学习是机器学习的子领域，使用多层神经网络学习数据的层次化表示。在图像识别、语音处理、自然语言理解等领域取得突破性进展。",
+    "category": "人工智能",
+    "quality_score": 0.75,
+    "is_professionally_valid": true,
+    "source": "knowledge_base"
+  },
+  {
+    "id": 3,
+    "word": "神经网络",
+    "text": "神经网络是模拟生物神经系统的计算模型，由大量互联的节点组成。深度神经网络能够学习复杂的非线性映射关系。",
+    "category": "人工智能",
+    "quality_score": 0.75,
+    "is_professionally_valid": true,
+    "source": "knowledge_base"
+  },
+  {
+    "id": 4,
+    "word": "高血压",
+    "text": "高血压是医疗领域的核心概念，指代该领域中具有特定含义和应用价值的专业术语。 该概念与医保、康复密切相关。",
+    "category": "医疗",
+    "quality_score": 0.8,
+    "is_professionally_valid": true,
+    "source": "template_fallback"
+  },
+  {
+    "id": 5,
+    "word": "糖尿病",
+    "text": "在医疗领域中，糖尿病是一个重要概念，对于理解和实践该领域知识具有重要意义。",
+    "category": "医疗",
+    "quality_score": 0.7000000000000001,
+    "is_professionally_valid": true,
+    "source": "template_fallback"
+  },
+  {
+    "id": 6,
+    "word": "冠心病",
+    "text": "在医疗领域中，冠心病是一个重要概念，对于理解和实践该领域知识具有重要意义。",
+    "category": "医疗",
+    "quality_score": 0.7000000000000001,
+    "is_professionally_valid": true,
+    "source": "template_fallback"
+  },
+  {
+    "id": 7,
+    "word": "股票",
+    "text": "股票是股份公司发行的所有权凭证，代表股东对公司的部分所有权。股票投资具有高风险高收益特征，价格受公司业绩、市场环境、政策法规等多重因素影响。",
+    "category": "金融",
+    "quality_score": 0.75,
+    "is_professionally_valid": true,
+    "source": "knowledge_base"
+  },
+  {
+    "id": 8,
+    "word": "债券",
+    "text": "债券是政府、企业等发行的债务凭证，承诺按期支付利息并到期偿还本金。债券投资相对稳健，收益率通常低于股票但风险也较低。",
+    "category": "金融",
+    "quality_score": 0.75,
+    "is_professionally_valid": true,
+    "source": "knowledge_base"
+  },
+  {
+    "id": 9,
+    "word": "基金",
+    "text": "基金是一种集合投资工具，由专业管理人运作，投资者按份额享有收益。主要类型包括股票型基金、债券型基金、混合型基金、货币市场基金等。",
+    "category": "金融",
+    "quality_score": 0.75,
+    "is_professionally_valid": true,
+    "source": "knowledge_base"
+  },
+  {
+    "id": 10,
+    "word": "在线教育",
+    "text": "在线教育作为教育领域的关键术语，涵盖了该领域的核心知识和实践经验。",
+    "category": "教育",
+    "quality_score": 0.7000000000000001,
+    "is_professionally_valid": true,
+    "source": "template_fallback"
+  },
+  {
+    "id": 11,
+    "word": "职业教育",
+    "text": "职业教育是教育领域的核心概念，指代该领域中具有特定含义和应用价值的专业术语。",
+    "category": "教育",
+    "quality_score": 0.7000000000000001,
+    "is_professionally_valid": true,
+    "source": "template_fallback"
+  },
+  {
+    "id": 12,
+    "word": "素质教育",
+    "text": "在教育领域中，素质教育是一个重要概念，对于理解和实践该领域知识具有重要意义。",
+    "category": "教育",
+    "quality_score": 0.7000000000000001,
+    "is_professionally_valid": true,
+    "source": "template_fallback"
+  },
+  {
+    "id": 13,
+    "word": "直播带货",
+    "text": "直播带货是电商领域的核心概念，指代该领域中具有特定含义和应用价值的专业术语。",
+    "category": "电商",
+    "quality_score": 0.7000000000000001,
+    "is_professionally_valid": true,
+    "source": "template_fallback"
+  },
+  {
+    "id": 14,
+    "word": "跨境电商",
+    "text": "跨境电商作为电商领域的关键术语，涵盖了该领域的核心知识和实践经验。",
+    "category": "电商",
+    "quality_score": 0.7000000000000001,
+    "is_professionally_valid": true,
+    "source": "template_fallback"
+  },
+  {
+    "id": 15,
+    "word": "社交电商",
+    "text": "在电商领域中，社交电商是一个重要概念，对于理解和实践该领域知识具有重要意义。",
+    "category": "电商",
+    "quality_score": 0.7000000000000001,
+    "is_professionally_valid": true,
+    "source": "template_fallback"
+  },
+  {
+    "id": 16,
+    "word": "区块链",
+    "text": "区块链是科技领域的核心概念，指代该领域中具有特定含义和应用价值的专业术语。",
+    "category": "科技",
+    "quality_score": 0.7000000000000001,
+    "is_professionally_valid": true,
+    "source": "template_fallback"
+  },
+  {
+    "id": 17,
+    "word": "云计算",
+    "text": "云计算作为科技领域的关键术语，涵盖了该领域的核心知识和实践经验。",
+    "category": "科技",
+    "quality_score": 0.7000000000000001,
+    "is_professionally_valid": true,
+    "source": "template_fallback"
+  },
+  {
+    "id": 18,
+    "word": "物联网",
+    "text": "物联网作为科技领域的关键术语，涵盖了该领域的核心知识和实践经验。",
+    "category": "科技",
+    "quality_score": 0.7000000000000001,
+    "is_professionally_valid": true,
+    "source": "template_fallback"
+  },
+  {
+    "id": 19,
+    "word": "合同法",
+    "text": "合同法作为法律领域的关键术语，涵盖了该领域的核心知识和实践经验。",
+    "category": "法律",
+    "quality_score": 0.7000000000000001,
+    "is_professionally_valid": true,
+    "source": "template_fallback"
+  },
+  {
+    "id": 20,
+    "word": "劳动法",
+    "text": "劳动法作为法律领域的关键术语，涵盖了该领域的核心知识和实践经验。",
+    "category": "法律",
+    "quality_score": 0.7000000000000001,
+    "is_professionally_valid": true,
+    "source": "template_fallback"
+  },
+  {
+    "id": 21,
+    "word": "知识产权",
+    "text": "知识产权作为法律领域的关键术语，涵盖了该领域的核心知识和实践经验。",
+    "category": "法律",
+    "quality_score": 0.7000000000000001,
+    "is_professionally_valid": true,
+    "source": "template_fallback"
+  },
+  {
+    "id": 22,
+    "word": "自然语言处理",
+    "text": "自然语言处理是让计算机理解和生成人类语言的技术，包括文本分类、情感分析、机器翻译、问答系统等任务。大语言模型的出现带来革命性突破。",
+    "category": "人工智能",
+    "quality_score": 0.75,
+    "is_professionally_valid": true,
+    "source": "knowledge_base"
+  },
+  {
+    "id": 23,
+    "word": "计算机视觉",
+    "text": "计算机视觉是让计算机理解和处理图像视频的技术，包括图像分类、目标检测、图像分割、人脸识别等应用。深度学习极大提升了视觉任务性能。 该概念与自然语言处理、大模型密切相关。",
+    "category": "人工智能",
+    "quality_score": 0.75,
+    "is_professionally_valid": true,
+    "source": "knowledge_base"
+  },
+  {
+    "id": 24,
+    "word": "肿瘤治疗",
+    "text": "治疗是消除疾病、缓解症状、恢复健康的医疗行为。主要方式包括药物治疗、手术治疗、物理治疗、心理治疗等。",
+    "category": "医疗",
+    "quality_score": 0.7000000000000001,
+    "is_professionally_valid": true,
+    "source": "knowledge_base"
+  },
+  {
+    "id": 25,
+    "word": "基因检测",
+    "text": "在医疗领域中，基因检测是一个重要概念，对于理解和实践该领域知识具有重要意义。",
+    "category": "医疗",
+    "quality_score": 0.7000000000000001,
+    "is_professionally_valid": true,
+    "source": "template_fallback"
+  },
+  {
+    "id": 26,
+    "word": "风险管理",
+    "text": "风险管理是金融领域的核心概念，指代该领域中具有特定含义和应用价值的专业术语。",
+    "category": "金融",
+    "quality_score": 0.7000000000000001,
+    "is_professionally_valid": true,
+    "source": "template_fallback"
+  },
+  {
+    "id": 27,
+    "word": "投资组合",
+    "text": "投资是指将资金投入到各种资产中，以期获得未来收益的经济行为。主要包括股票投资、债券投资、基金投资、房地产投资等形式。投资的核心在于风险与收益的平衡，投资者需要根据自身风险承受能力和投资目标选择合适的投资品种。",
+    "category": "金融",
+    "quality_score": 0.75,
+    "is_professionally_valid": true,
+    "source": "knowledge_base"
+  },
+  {
+    "id": 28,
+    "word": "劳动合同解除",
+    "text": "劳动合同解除是提前终止劳动合同效力的行为。包括协商解除、劳动者单方解除、用人单位单方解除等情形。 该概念与劳动仲裁、劳动合同终止密切相关。",
+    "category": "劳动合同",
+    "quality_score": 0.8,
+    "is_professionally_valid": true,
+    "source": "knowledge_base"
+  },
+  {
+    "id": 29,
+    "word": "工伤认定",
+    "text": "工伤是劳动者在工作时间和工作场所内因工作原因受到的事故伤害。工伤认定后，劳动者享有工伤保险待遇。",
+    "category": "劳动合同",
+    "quality_score": 0.7000000000000001,
+    "is_professionally_valid": true,
+    "source": "knowledge_base"
+  },
+  {
+    "id": 30,
+    "word": "高考改革",
+    "text": "在教育领域中，高考改革是一个重要概念，对于理解和实践该领域知识具有重要意义。",
+    "category": "教育",
+    "quality_score": 0.7000000000000001,
+    "is_professionally_valid": true,
+    "source": "template_fallback"
+  },
+  {
+    "id": 31,
+    "word": "双减政策",
+    "text": "双减政策作为教育领域的关键术语，涵盖了该领域的核心知识和实践经验。",
+    "category": "教育",
+    "quality_score": 0.7000000000000001,
+    "is_professionally_valid": true,
+    "source": "template_fallback"
+  },
+  {
+    "id": 32,
+    "word": "供应链管理",
+    "text": "供应链管理作为电商领域的关键术语，涵盖了该领域的核心知识和实践经验。",
+    "category": "电商",
+    "quality_score": 0.7000000000000001,
+    "is_professionally_valid": true,
+    "source": "template_fallback"
+  },
+  {
+    "id": 33,
+    "word": "用户画像",
+    "text": "用户画像是电商领域的核心概念，指代该领域中具有特定含义和应用价值的专业术语。",
+    "category": "电商",
+    "quality_score": 0.7000000000000001,
+    "is_professionally_valid": true,
+    "source": "template_fallback"
+  },
+  {
+    "id": 34,
+    "word": "5G技术",
+    "text": "5G技术作为科技领域的关键术语，涵盖了该领域的核心知识和实践经验。",
+    "category": "科技",
+    "quality_score": 0.7000000000000001,
+    "is_professionally_valid": true,
+    "source": "template_fallback"
+  },
+  {
+    "id": 35,
+    "word": "人工智能芯片",
+    "text": "人工智能芯片作为科技领域的关键术语，涵盖了该领域的核心知识和实践经验。",
+    "category": "科技",
+    "quality_score": 0.7000000000000001,
+    "is_professionally_valid": true,
+    "source": "template_fallback"
+  },
+  {
+    "id": 36,
+    "word": "公司法",
+    "text": "在法律领域中，公司法是一个重要概念，对于理解和实践该领域知识具有重要意义。",
+    "category": "法律",
+    "quality_score": 0.7000000000000001,
+    "is_professionally_valid": true,
+    "source": "template_fallback"
+  },
+  {
+    "id": 37,
+    "word": "证券法",
+    "text": "在法律领域中，证券法是一个重要概念，对于理解和实践该领域知识具有重要意义。",
+    "category": "法律",
+    "quality_score": 0.7000000000000001,
+    "is_professionally_valid": true,
+    "source": "template_fallback"
+  },
+  {
+    "id": 38,
+    "word": "强化学习",
+    "text": "强化学习是智能体通过与环境交互学习最优策略的机器学习方法。在游戏AI、机器人控制、推荐系统等领域有广泛应用。",
+    "category": "人工智能",
+    "quality_score": 0.75,
+    "is_professionally_valid": true,
+    "source": "knowledge_base"
+  },
+  {
+    "id": 39,
+    "word": "迁移学习",
+    "text": "迁移学习是将一个领域的知识迁移到另一个领域的学习方法，能够解决数据稀缺问题，提高模型训练效率。 该概念与推荐系统、联邦学习密切相关。",
+    "category": "人工智能",
+    "quality_score": 0.75,
+    "is_professionally_valid": true,
+    "source": "knowledge_base"
+  },
+  {
+    "id": 40,
+    "word": "远程医疗",
+    "text": "在医疗领域中，远程医疗是一个重要概念，对于理解和实践该领域知识具有重要意义。",
+    "category": "医疗",
+    "quality_score": 0.7000000000000001,
+    "is_professionally_valid": true,
+    "source": "template_fallback"
+  }
+]

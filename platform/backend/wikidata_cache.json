@@ -1,0 +1,774 @@
+{
+  "zh_机器学习": {
+    "id": "Q2539",
+    "title": "Q2539",
+    "pageid": 3507,
+    "concepturi": "http://www.wikidata.org/entity/Q2539",
+    "repository": "wikidata",
+    "url": "//www.wikidata.org/wiki/Q2539",
+    "display": {
+      "label": {
+        "value": "machine learning",
+        "language": "en"
+      },
+      "description": {
+        "value": "scientific study of algorithms and statistical models that computer systems use to perform tasks without explicit instructions",
+        "language": "en"
+      }
+    },
+    "label": "machine learning",
+    "description": "scientific study of algorithms and statistical models that computer systems use to perform tasks without explicit instructions",
+    "match": {
+      "type": "label",
+      "language": "zh",
+      "text": "机器学习"
+    },
+    "aliases": [
+      "机器学习"
+    ]
+  },
+  "zh_人工智能": {
+    "id": "Q11660",
+    "title": "Q11660",
+    "pageid": 13192,
+    "concepturi": "http://www.wikidata.org/entity/Q11660",
+    "repository": "wikidata",
+    "url": "//www.wikidata.org/wiki/Q11660",
+    "display": {
+      "label": {
+        "value": "artificial intelligence",
+        "language": "en"
+      },
+      "description": {
+        "value": "field of computer science that develops and studies software enabling machines to exhibit intelligent behavior",
+        "language": "en"
+      }
+    },
+    "label": "artificial intelligence",
+    "description": "field of computer science that develops and studies software enabling machines to exhibit intelligent behavior",
+    "match": {
+      "type": "label",
+      "language": "zh",
+      "text": "人工智能"
+    },
+    "aliases": [
+      "人工智能"
+    ]
+  },
+  "zh_深度学习": {
+    "id": "Q197536",
+    "title": "Q197536",
+    "pageid": 195031,
+    "concepturi": "http://www.wikidata.org/entity/Q197536",
+    "repository": "wikidata",
+    "url": "//www.wikidata.org/wiki/Q197536",
+    "display": {
+      "label": {
+        "value": "deep learning",
+        "language": "en"
+      },
+      "description": {
+        "value": "branch of machine learning",
+        "language": "en"
+      }
+    },
+    "label": "deep learning",
+    "description": "branch of machine learning",
+    "match": {
+      "type": "label",
+      "language": "zh",
+      "text": "深度学习"
+    },
+    "aliases": [
+      "深度学习"
+    ]
+  },
+  "zh_神经网络": {
+    "id": "Q192776",
+    "title": "Q192776",
+    "pageid": 190911,
+    "concepturi": "http://www.wikidata.org/entity/Q192776",
+    "repository": "wikidata",
+    "url": "//www.wikidata.org/wiki/Q192776",
+    "display": {
+      "label": {
+        "value": "artificial neural network",
+        "language": "en"
+      },
+      "description": {
+        "value": "computational model used in machine learning, based on connected, hierarchical functions",
+        "language": "en"
+      }
+    },
+    "label": "artificial neural network",
+    "description": "computational model used in machine learning, based on connected, hierarchical functions",
+    "match": {
+      "type": "alias",
+      "language": "zh",
+      "text": "神经网络"
+    },
+    "aliases": [
+      "神经网络"
+    ]
+  },
+  "zh_blockchain": {
+    "id": "Q20514253",
+    "title": "Q20514253",
+    "pageid": 22262329,
+    "concepturi": "http://www.wikidata.org/entity/Q20514253",
+    "repository": "wikidata",
+    "url": "//www.wikidata.org/wiki/Q20514253",
+    "display": {
+      "label": {
+        "value": "blockchain",
+        "language": "en"
+      },
+      "description": {
+        "value": "distributed data store for digital transactions",
+        "language": "en"
+      }
+    },
+    "label": "blockchain",
+    "description": "distributed data store for digital transactions",
+    "match": {
+      "type": "label",
+      "language": "en",
+      "text": "blockchain"
+    }
+  },
+  "zh_API": {
+    "id": "Q646807",
+    "title": "Q646807",
+    "pageid": 608687,
+    "concepturi": "http://www.wikidata.org/entity/Q646807",
+    "repository": "wikidata",
+    "url": "//www.wikidata.org/wiki/Q646807",
+    "display": {
+      "label": {
+        "value": "Gruppo API",
+        "language": "en"
+      },
+      "description": {
+        "value": "Italian petrol company",
+        "language": "en"
+      }
+    },
+    "label": "Gruppo API",
+    "description": "Italian petrol company",
+    "match": {
+      "type": "alias",
+      "language": "zh",
+      "text": "API"
+    },
+    "aliases": [
+      "API"
+    ]
+  },
+  "zh_自然语言处理": {
+    "id": "Q30642",
+    "title": "Q30642",
+    "pageid": 33714,
+    "concepturi": "http://www.wikidata.org/entity/Q30642",
+    "repository": "wikidata",
+    "url": "//www.wikidata.org/wiki/Q30642",
+    "display": {
+      "label": {
+        "value": "natural language processing",
+        "language": "en"
+      },
+      "description": {
+        "value": "field of computer science and linguistics",
+        "language": "en"
+      }
+    },
+    "label": "natural language processing",
+    "description": "field of computer science and linguistics",
+    "match": {
+      "type": "label",
+      "language": "zh",
+      "text": "自然语言处理"
+    },
+    "aliases": [
+      "自然语言处理"
+    ]
+  },
+  "zh_计算机视觉": {
+    "id": "Q844240",
+    "title": "Q844240",
+    "pageid": 796354,
+    "concepturi": "http://www.wikidata.org/entity/Q844240",
+    "repository": "wikidata",
+    "url": "//www.wikidata.org/wiki/Q844240",
+    "display": {
+      "label": {
+        "value": "computer vision",
+        "language": "en"
+      },
+      "description": {
+        "value": "computerized information extraction from images",
+        "language": "en"
+      }
+    },
+    "label": "computer vision",
+    "description": "computerized information extraction from images",
+    "match": {
+      "type": "label",
+      "language": "zh",
+      "text": "计算机视觉"
+    },
+    "aliases": [
+      "计算机视觉"
+    ]
+  },
+  "zh_区块链": {
+    "id": "Q20514253",
+    "title": "Q20514253",
+    "pageid": 22262329,
+    "concepturi": "http://www.wikidata.org/entity/Q20514253",
+    "repository": "wikidata",
+    "url": "//www.wikidata.org/wiki/Q20514253",
+    "display": {
+      "label": {
+        "value": "blockchain",
+        "language": "en"
+      },
+      "description": {
+        "value": "distributed data store for digital transactions",
+        "language": "en"
+      }
+    },
+    "label": "blockchain",
+    "description": "distributed data store for digital transactions",
+    "match": {
+      "type": "label",
+      "language": "zh",
+      "text": "区块链"
+    },
+    "aliases": [
+      "区块链"
+    ]
+  },
+  "zh_云计算": {
+    "id": "Q483639",
+    "title": "Q483639",
+    "pageid": 455219,
+    "concepturi": "http://www.wikidata.org/entity/Q483639",
+    "repository": "wikidata",
+    "url": "//www.wikidata.org/wiki/Q483639",
+    "display": {
+      "label": {
+        "value": "cloud computing",
+        "language": "en"
+      },
+      "description": {
+        "value": "form of Internet-based computing, whereby shared resources, software and information are provided to computers and other devices",
+        "language": "en"
+      }
+    },
+    "label": "cloud computing",
+    "description": "form of Internet-based computing, whereby shared resources, software and information are provided to computers and other devices",
+    "match": {
+      "type": "alias",
+      "language": "zh",
+      "text": "云计算"
+    },
+    "aliases": [
+      "云计算"
+    ]
+  },
+  "zh_大数据": {
+    "id": "Q858810",
+    "title": "Q858810",
+    "pageid": 810400,
+    "concepturi": "http://www.wikidata.org/entity/Q858810",
+    "repository": "wikidata",
+    "url": "//www.wikidata.org/wiki/Q858810",
+    "display": {
+      "label": {
+        "value": "big data",
+        "language": "en"
+      },
+      "description": {
+        "value": "information assets characterized by such a high volume, velocity, and variety to require specific technology and analytical methods for its transformation into value",
+        "language": "en"
+      }
+    },
+    "label": "big data",
+    "description": "information assets characterized by such a high volume, velocity, and variety to require specific technology and analytical methods for its transformation into value",
+    "match": {
+      "type": "alias",
+      "language": "zh",
+      "text": "大数据"
+    },
+    "aliases": [
+      "大数据"
+    ]
+  },
+  "zh_物联网": {
+    "id": "Q251212",
+    "title": "Q251212",
+    "pageid": 243832,
+    "concepturi": "http://www.wikidata.org/entity/Q251212",
+    "repository": "wikidata",
+    "url": "//www.wikidata.org/wiki/Q251212",
+    "display": {
+      "label": {
+        "value": "Internet of things",
+        "language": "en"
+      },
+      "description": {
+        "value": "Internet-like structure connecting everyday physical objects",
+        "language": "en"
+      }
+    },
+    "label": "Internet of things",
+    "description": "Internet-like structure connecting everyday physical objects",
+    "match": {
+      "type": "label",
+      "language": "zh",
+      "text": "物联网"
+    },
+    "aliases": [
+      "物联网"
+    ]
+  },
+  "zh_量子计算": {
+    "id": "Q17995793",
+    "title": "Q17995793",
+    "pageid": 19530246,
+    "concepturi": "http://www.wikidata.org/entity/Q17995793",
+    "repository": "wikidata",
+    "url": "//www.wikidata.org/wiki/Q17995793",
+    "display": {
+      "label": {
+        "value": "quantum computing",
+        "language": "en"
+      },
+      "description": {
+        "value": "study of a model of computation",
+        "language": "en"
+      }
+    },
+    "label": "quantum computing",
+    "description": "study of a model of computation",
+    "match": {
+      "type": "label",
+      "language": "zh",
+      "text": "量子计算"
+    },
+    "aliases": [
+      "量子计算"
+    ]
+  },
+  "zh_投资": {
+    "id": "Q4290",
+    "title": "Q4290",
+    "pageid": 5212,
+    "concepturi": "http://www.wikidata.org/entity/Q4290",
+    "repository": "wikidata",
+    "url": "//www.wikidata.org/wiki/Q4290",
+    "display": {
+      "label": {
+        "value": "investment",
+        "language": "en"
+      },
+      "description": {
+        "value": "commitment of resources to achieve later benefits",
+        "language": "en"
+      }
+    },
+    "label": "investment",
+    "description": "commitment of resources to achieve later benefits",
+    "match": {
+      "type": "label",
+      "language": "zh",
+      "text": "投资"
+    },
+    "aliases": [
+      "投资"
+    ]
+  },
+  "zh_理财": {
+    "id": "Q1416374",
+    "title": "Q1416374",
+    "pageid": 1355194,
+    "concepturi": "http://www.wikidata.org/entity/Q1416374",
+    "repository": "wikidata",
+    "url": "//www.wikidata.org/wiki/Q1416374",
+    "display": {
+      "label": {
+        "value": "financial literacy",
+        "language": "en"
+      },
+      "description": {
+        "value": "possession of skills and knowledge to make informed and effective personal financial decisions",
+        "language": "en"
+      }
+    },
+    "label": "financial literacy",
+    "description": "possession of skills and knowledge to make informed and effective personal financial decisions",
+    "match": {
+      "type": "alias",
+      "language": "zh",
+      "text": "理财教育"
+    },
+    "aliases": [
+      "理财教育"
+    ]
+  },
+  "zh_股票": {
+    "id": "Q1196314",
+    "title": "Q1196314",
+    "pageid": 1139873,
+    "concepturi": "http://www.wikidata.org/entity/Q1196314",
+    "repository": "wikidata",
+    "url": "//www.wikidata.org/wiki/Q1196314",
+    "display": {
+      "label": {
+        "value": "stock",
+        "language": "en"
+      },
+      "description": {
+        "value": "collective financial capital of a shared corporation",
+        "language": "en"
+      }
+    },
+    "label": "stock",
+    "description": "collective financial capital of a shared corporation",
+    "match": {
+      "type": "label",
+      "language": "zh",
+      "text": "股票"
+    },
+    "aliases": [
+      "股票"
+    ]
+  },
+  "zh_基金": {
+    "id": "Q2620430",
+    "title": "Q2620430",
+    "pageid": 2527146,
+    "concepturi": "http://www.wikidata.org/entity/Q2620430",
+    "repository": "wikidata",
+    "url": "//www.wikidata.org/wiki/Q2620430",
+    "display": {
+      "label": {
+        "value": "financial endowment",
+        "language": "en"
+      },
+      "description": {
+        "value": "legal structure for managing a pool of investments for a specific purpose according to the will of its founders and donors",
+        "language": "en"
+      }
+    },
+    "label": "financial endowment",
+    "description": "legal structure for managing a pool of investments for a specific purpose according to the will of its founders and donors",
+    "match": {
+      "type": "label",
+      "language": "zh",
+      "text": "基金"
+    },
+    "aliases": [
+      "基金"
+    ]
+  },
+  "zh_债券": {
+    "id": "Q11693",
+    "title": "Q11693",
+    "pageid": 13232,
+    "concepturi": "http://www.wikidata.org/entity/Q11693",
+    "repository": "wikidata",
+    "url": "//www.wikidata.org/wiki/Q11693",
+    "display": {
+      "label": {
+        "value": "bond",
+        "language": "en"
+      },
+      "description": {
+        "value": "instrument of indebtedness",
+        "language": "en"
+      }
+    },
+    "label": "bond",
+    "description": "instrument of indebtedness",
+    "match": {
+      "type": "label",
+      "language": "zh",
+      "text": "债券"
+    },
+    "aliases": [
+      "债券"
+    ]
+  },
+  "zh_诊断": {
+    "id": "Q177719",
+    "title": "Q177719",
+    "pageid": 177233,
+    "concepturi": "http://www.wikidata.org/entity/Q177719",
+    "repository": "wikidata",
+    "url": "//www.wikidata.org/wiki/Q177719",
+    "display": {
+      "label": {
+        "value": "medical diagnosis",
+        "language": "en"
+      },
+      "description": {
+        "value": "conclusion resulting from diagnostic procedure to determine a disease or disorder",
+        "language": "en"
+      }
+    },
+    "label": "medical diagnosis",
+    "description": "conclusion resulting from diagnostic procedure to determine a disease or disorder",
+    "match": {
+      "type": "label",
+      "language": "zh",
+      "text": "诊断"
+    },
+    "aliases": [
+      "诊断"
+    ]
+  },
+  "zh_治疗": {
+    "id": "Q179661",
+    "title": "Q179661",
+    "pageid": 178968,
+    "concepturi": "http://www.wikidata.org/entity/Q179661",
+    "repository": "wikidata",
+    "url": "//www.wikidata.org/wiki/Q179661",
+    "display": {
+      "label": {
+        "value": "medical treatment",
+        "language": "en"
+      },
+      "description": {
+        "value": "attempted medical remediation of a health problem, usually following a diagnosis",
+        "language": "en"
+      }
+    },
+    "label": "medical treatment",
+    "description": "attempted medical remediation of a health problem, usually following a diagnosis",
+    "match": {
+      "type": "alias",
+      "language": "zh",
+      "text": "治疗"
+    },
+    "aliases": [
+      "治疗"
+    ]
+  },
+  "zh_药物": {
+    "id": "Q8386",
+    "title": "Q8386",
+    "pageid": 9686,
+    "concepturi": "http://www.wikidata.org/entity/Q8386",
+    "repository": "wikidata",
+    "url": "//www.wikidata.org/wiki/Q8386",
+    "display": {
+      "label": {
+        "value": "drug",
+        "language": "en"
+      },
+      "description": {
+        "value": "chemical substance having an effect on the body",
+        "language": "en"
+      }
+    },
+    "label": "drug",
+    "description": "chemical substance having an effect on the body",
+    "match": {
+      "type": "label",
+      "language": "zh",
+      "text": "药物"
+    },
+    "aliases": [
+      "药物"
+    ]
+  },
+  "zh_疫苗": {
+    "id": "Q134808",
+    "title": "Q134808",
+    "pageid": 136513,
+    "concepturi": "http://www.wikidata.org/entity/Q134808",
+    "repository": "wikidata",
+    "url": "//www.wikidata.org/wiki/Q134808",
+    "display": {
+      "label": {
+        "value": "vaccine",
+        "language": "en"
+      },
+      "description": {
+        "value": "substance used to stimulate the production of antibodies and provide immunity against one or several diseases, agent of a disease, its products, or a synthetic substitute",
+        "language": "en"
+      }
+    },
+    "label": "vaccine",
+    "description": "substance used to stimulate the production of antibodies and provide immunity against one or several diseases, agent of a disease, its products, or a synthetic substitute",
+    "match": {
+      "type": "label",
+      "language": "zh",
+      "text": "疫苗"
+    },
+    "aliases": [
+      "疫苗"
+    ]
+  },
+  "zh_康复": {
+    "id": "Q2795791",
+    "title": "Q2795791",
+    "pageid": 2679626,
+    "concepturi": "http://www.wikidata.org/entity/Q2795791",
+    "repository": "wikidata",
+    "url": "//www.wikidata.org/wiki/Q2795791",
+    "display": {
+      "label": {
+        "value": "rehabilitation",
+        "language": "en"
+      },
+      "description": {
+        "value": "process to return a person to their formerly existing mental and health condition",
+        "language": "en"
+      }
+    },
+    "label": "rehabilitation",
+    "description": "process to return a person to their formerly existing mental and health condition",
+    "match": {
+      "type": "label",
+      "language": "zh",
+      "text": "康复"
+    },
+    "aliases": [
+      "康复"
+    ]
+  },
+  "zh_劳动合同": {
+    "id": "Q6467400",
+    "title": "Q6467400",
+    "pageid": 6284519,
+    "concepturi": "http://www.wikidata.org/entity/Q6467400",
+    "repository": "wikidata",
+    "url": "//www.wikidata.org/wiki/Q6467400",
+    "display": {
+      "label": {
+        "value": "Labour Contract Law of the People's Republic of China",
+        "language": "en"
+      },
+      "description": {
+        "value": "law of China",
+        "language": "en"
+      }
+    },
+    "label": "Labour Contract Law of the People's Republic of China",
+    "description": "law of China",
+    "match": {
+      "type": "alias",
+      "language": "zh",
+      "text": "劳动合同法"
+    },
+    "aliases": [
+      "劳动合同法"
+    ]
+  },
+  "en_劳动合同": {
+    "id": "Q6467400",
+    "title": "Q6467400",
+    "pageid": 6284519,
+    "concepturi": "http://www.wikidata.org/entity/Q6467400",
+    "repository": "wikidata",
+    "url": "//www.wikidata.org/wiki/Q6467400",
+    "display": {
+      "label": {
+        "value": "Labour Contract Law of the People's Republic of China",
+        "language": "en"
+      },
+      "description": {
+        "value": "law of China",
+        "language": "en"
+      }
+    },
+    "label": "Labour Contract Law of the People's Republic of China",
+    "description": "law of China",
+    "match": {
+      "type": "alias",
+      "language": "zh",
+      "text": "劳动合同法"
+    },
+    "aliases": [
+      "劳动合同法"
+    ]
+  },
+  "en_cloud computing": {
+    "id": "Q483639",
+    "title": "Q483639",
+    "pageid": 455219,
+    "concepturi": "http://www.wikidata.org/entity/Q483639",
+    "repository": "wikidata",
+    "url": "//www.wikidata.org/wiki/Q483639",
+    "display": {
+      "label": {
+        "value": "cloud computing",
+        "language": "en"
+      },
+      "description": {
+        "value": "form of Internet-based computing, whereby shared resources, software and information are provided to computers and other devices",
+        "language": "en"
+      }
+    },
+    "label": "cloud computing",
+    "description": "form of Internet-based computing, whereby shared resources, software and information are provided to computers and other devices",
+    "match": {
+      "type": "label",
+      "language": "en",
+      "text": "cloud computing"
+    }
+  },
+  "zh_machine learning": {
+    "id": "Q2539",
+    "title": "Q2539",
+    "pageid": 3507,
+    "concepturi": "http://www.wikidata.org/entity/Q2539",
+    "repository": "wikidata",
+    "url": "//www.wikidata.org/wiki/Q2539",
+    "display": {
+      "label": {
+        "value": "machine learning",
+        "language": "en"
+      },
+      "description": {
+        "value": "scientific study of algorithms and statistical models that computer systems use to perform tasks without explicit instructions",
+        "language": "en"
+      }
+    },
+    "label": "machine learning",
+    "description": "scientific study of algorithms and statistical models that computer systems use to perform tasks without explicit instructions",
+    "match": {
+      "type": "label",
+      "language": "en",
+      "text": "machine learning"
+    }
+  },
+  "zh_deep learning": {
+    "id": "Q197536",
+    "title": "Q197536",
+    "pageid": 195031,
+    "concepturi": "http://www.wikidata.org/entity/Q197536",
+    "repository": "wikidata",
+    "url": "//www.wikidata.org/wiki/Q197536",
+    "display": {
+      "label": {
+        "value": "deep learning",
+        "language": "en"
+      },
+      "description": {
+        "value": "branch of machine learning",
+        "language": "en"
+      }
+    },
+    "label": "deep learning",
+    "description": "branch of machine learning",
+    "match": {
+      "type": "label",
+      "language": "en",
+      "text": "deep learning"
+    }
+  }
+}

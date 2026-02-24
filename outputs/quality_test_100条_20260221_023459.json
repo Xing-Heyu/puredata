@@ -1,0 +1,2302 @@
+[
+  {
+    "id": 1,
+    "word": "劳动争议",
+    "text": "劳动争议是劳动者与用人单位之间因劳动权利义务发生的纠纷。劳动争议可以通过协商、调解、仲裁、诉讼等方式解决。",
+    "category": "劳动合同",
+    "quality_score": 0.896,
+    "type": "clean",
+    "source": "knowledge_base",
+    "lineage": {
+      "seed_source": "knowledge_base",
+      "transformations": [
+        "quality_filter"
+      ],
+      "quality_checks": [
+        "length_check",
+        "language_check"
+      ],
+      "parent_id": null,
+      "created_at": "2026-02-21T02:34:59.418103",
+      "version": "2.0.0",
+      "chain_hash": "d880c2afa6bcce80"
+    }
+  },
+  {
+    "id": 2,
+    "word": "词向量",
+    "text": "词向量是将词语映射到连续向量空间的技术，能够捕捉词语之间的语义关系。Word2Vec和GloVe是经典的词向量方法。",
+    "category": "人工智能",
+    "quality_score": 0.967,
+    "type": "clean",
+    "source": "knowledge_base",
+    "lineage": {
+      "seed_source": "knowledge_base",
+      "transformations": [
+        "quality_filter"
+      ],
+      "quality_checks": [
+        "length_check",
+        "language_check"
+      ],
+      "parent_id": null,
+      "created_at": "2026-02-21T02:34:59.418173",
+      "version": "2.0.0",
+      "chain_hash": "d880c2afa6bcce80"
+    }
+  },
+  {
+    "id": 3,
+    "word": "5G",
+    "text": "5G是第五代移动通信技术。5G具有高速率、低延迟、大连接的特点。",
+    "category": "科技",
+    "quality_score": 0.9,
+    "type": "clean",
+    "source": "knowledge_base",
+    "lineage": {
+      "seed_source": "knowledge_base",
+      "transformations": [
+        "quality_filter"
+      ],
+      "quality_checks": [
+        "length_check",
+        "language_check"
+      ],
+      "parent_id": null,
+      "created_at": "2026-02-21T02:34:59.418209",
+      "version": "2.0.0",
+      "chain_hash": "d880c2afa6bcce80"
+    }
+  },
+  {
+    "id": 4,
+    "word": "量子计算",
+    "text": "量子计算是利用量子力学原理进行计算的技术。量子计算有望解决传统计算机难以处理的问题。",
+    "category": "科技",
+    "quality_score": 0.911,
+    "type": "clean",
+    "source": "knowledge_base",
+    "lineage": {
+      "seed_source": "knowledge_base",
+      "transformations": [
+        "quality_filter"
+      ],
+      "quality_checks": [
+        "length_check",
+        "language_check"
+      ],
+      "parent_id": null,
+      "created_at": "2026-02-21T02:34:59.418240",
+      "version": "2.0.0",
+      "chain_hash": "d880c2afa6bcce80"
+    }
+  },
+  {
+    "id": 5,
+    "word": "培训协议",
+    "text": "培训协议是用人单位为劳动者提供专项培训，劳动者承诺服务期限的协议。劳动者违反服务期约定应当支付违约金。",
+    "category": "劳动合同",
+    "quality_score": 0.882,
+    "type": "clean",
+    "source": "knowledge_base",
+    "lineage": {
+      "seed_source": "knowledge_base",
+      "transformations": [
+        "quality_filter"
+      ],
+      "quality_checks": [
+        "length_check",
+        "language_check"
+      ],
+      "parent_id": null,
+      "created_at": "2026-02-21T02:34:59.418251",
+      "version": "2.0.0",
+      "chain_hash": "d880c2afa6bcce80"
+    }
+  },
+  {
+    "id": 6,
+    "word": "工伤认定",
+    "text": "工伤认定是社会保险行政部门确认劳动者所受伤害是否属于工伤的行政行为。工伤认定是享受工伤保险待遇的前提。",
+    "category": "劳动合同",
+    "quality_score": 0.913,
+    "type": "clean",
+    "source": "knowledge_base",
+    "lineage": {
+      "seed_source": "knowledge_base",
+      "transformations": [
+        "quality_filter"
+      ],
+      "quality_checks": [
+        "length_check",
+        "language_check"
+      ],
+      "parent_id": null,
+      "created_at": "2026-02-21T02:34:59.418257",
+      "version": "2.0.0",
+      "chain_hash": "d880c2afa6bcce80"
+    }
+  },
+  {
+    "id": 7,
+    "word": "对抗训练",
+    "text": "对抗训练是通过对抗样本增强模型鲁棒性的训练方法，在图像分类、文本分类等任务中广泛应用。",
+    "category": "人工智能",
+    "quality_score": 0.915,
+    "type": "clean",
+    "source": "knowledge_base",
+    "lineage": {
+      "seed_source": "knowledge_base",
+      "transformations": [
+        "quality_filter"
+      ],
+      "quality_checks": [
+        "length_check",
+        "language_check"
+      ],
+      "parent_id": null,
+      "created_at": "2026-02-21T02:34:59.418263",
+      "version": "2.0.0",
+      "chain_hash": "d880c2afa6bcce80"
+    }
+  },
+  {
+    "id": 8,
+    "word": "直播带货",
+    "text": "直播带货是通过直播形式销售商品的模式。直播带货成为电商增长的新动力。",
+    "category": "电商",
+    "quality_score": 0.913,
+    "type": "clean",
+    "source": "knowledge_base",
+    "lineage": {
+      "seed_source": "knowledge_base",
+      "transformations": [
+        "quality_filter"
+      ],
+      "quality_checks": [
+        "length_check",
+        "language_check"
+      ],
+      "parent_id": null,
+      "created_at": "2026-02-21T02:34:59.418269",
+      "version": "2.0.0",
+      "chain_hash": "d880c2afa6bcce80"
+    }
+  },
+  {
+    "id": 9,
+    "word": "期货",
+    "text": "期货是标准化的远期合约，约定在未来特定时间以特定价格买卖特定资产。期货交易具有杠杆效应，风险较高，主要用于套期保值和投机交易。",
+    "category": "金融",
+    "quality_score": 0.968,
+    "type": "clean",
+    "source": "knowledge_base",
+    "lineage": {
+      "seed_source": "knowledge_base",
+      "transformations": [
+        "quality_filter"
+      ],
+      "quality_checks": [
+        "length_check",
+        "language_check"
+      ],
+      "parent_id": null,
+      "created_at": "2026-02-21T02:34:59.418275",
+      "version": "2.0.0",
+      "chain_hash": "d880c2afa6bcce80"
+    }
+  },
+  {
+    "id": 10,
+    "word": "知识产权",
+    "text": "知识产权是人们对其智力创造成果享有的专有权利。包括专利权、商标权、著作权等类型。",
+    "category": "法律",
+    "quality_score": 0.938,
+    "type": "clean",
+    "source": "knowledge_base",
+    "lineage": {
+      "seed_source": "knowledge_base",
+      "transformations": [
+        "quality_filter"
+      ],
+      "quality_checks": [
+        "length_check",
+        "language_check"
+      ],
+      "parent_id": null,
+      "created_at": "2026-02-21T02:34:59.418280",
+      "version": "2.0.0",
+      "chain_hash": "d880c2afa6bcce80"
+    }
+  },
+  {
+    "id": 11,
+    "word": "公司法",
+    "text": "公司法是规范公司的组织和行为的法律。公司法规定了公司的设立、组织机构、股权转让、合并分立等制度。",
+    "category": "法律",
+    "quality_score": 0.891,
+    "type": "clean",
+    "source": "knowledge_base",
+    "lineage": {
+      "seed_source": "knowledge_base",
+      "transformations": [
+        "quality_filter"
+      ],
+      "quality_checks": [
+        "length_check",
+        "language_check"
+      ],
+      "parent_id": null,
+      "created_at": "2026-02-21T02:34:59.418287",
+      "version": "2.0.0",
+      "chain_hash": "d880c2afa6bcce80"
+    }
+  },
+  {
+    "id": 12,
+    "word": "营销",
+    "text": "营销是推广商品和服务吸引消费者的活动。数字营销是电商营销的主要方式。",
+    "category": "电商",
+    "quality_score": 0.953,
+    "type": "clean",
+    "source": "knowledge_base",
+    "lineage": {
+      "seed_source": "knowledge_base",
+      "transformations": [
+        "quality_filter"
+      ],
+      "quality_checks": [
+        "length_check",
+        "language_check"
+      ],
+      "parent_id": null,
+      "created_at": "2026-02-21T02:34:59.418294",
+      "version": "2.0.0",
+      "chain_hash": "d880c2afa6bcce80"
+    }
+  },
+  {
+    "id": 13,
+    "word": "混合学习",
+    "text": "混合学习是将线上和线下教学相结合的模式。混合学习发挥两种教学模式的优势。",
+    "category": "教育",
+    "quality_score": 0.941,
+    "type": "clean",
+    "source": "knowledge_base",
+    "lineage": {
+      "seed_source": "knowledge_base",
+      "transformations": [
+        "quality_filter"
+      ],
+      "quality_checks": [
+        "length_check",
+        "language_check"
+      ],
+      "parent_id": null,
+      "created_at": "2026-02-21T02:34:59.418299",
+      "version": "2.0.0",
+      "chain_hash": "d880c2afa6bcce80"
+    }
+  },
+  {
+    "id": 14,
+    "word": "词向量",
+    "text": "词向量是将词语映射到连续向量空间的技术，能够捕捉词语之间的语义关系。Word2Vec和GloVe是经典的词向量方法。",
+    "category": "人工智能",
+    "quality_score": 0.97,
+    "type": "clean",
+    "source": "knowledge_base",
+    "lineage": {
+      "seed_source": "knowledge_base",
+      "transformations": [
+        "quality_filter"
+      ],
+      "quality_checks": [
+        "length_check",
+        "language_check"
+      ],
+      "parent_id": null,
+      "created_at": "2026-02-21T02:34:59.418304",
+      "version": "2.0.0",
+      "chain_hash": "d880c2afa6bcce80"
+    }
+  },
+  {
+    "id": 15,
+    "word": "劳动合同法",
+    "text": "劳动合同法是规范劳动合同订立、履行、变更、解除和终止的法律。是劳动法律体系的重要组成部分。",
+    "category": "劳动合同",
+    "quality_score": 0.884,
+    "type": "clean",
+    "source": "knowledge_base",
+    "lineage": {
+      "seed_source": "knowledge_base",
+      "transformations": [
+        "quality_filter"
+      ],
+      "quality_checks": [
+        "length_check",
+        "language_check"
+      ],
+      "parent_id": null,
+      "created_at": "2026-02-21T02:34:59.418310",
+      "version": "2.0.0",
+      "chain_hash": "d880c2afa6bcce80"
+    }
+  },
+  {
+    "id": 16,
+    "word": "电子商务",
+    "text": "电子商务是通过互联网进行商品交易的商业活动。电子商务改变了传统的商业模式，创造了新的商业机会。",
+    "category": "电商",
+    "quality_score": 0.932,
+    "type": "clean",
+    "source": "knowledge_base",
+    "lineage": {
+      "seed_source": "knowledge_base",
+      "transformations": [
+        "quality_filter"
+      ],
+      "quality_checks": [
+        "length_check",
+        "language_check"
+      ],
+      "parent_id": null,
+      "created_at": "2026-02-21T02:34:59.418315",
+      "version": "2.0.0",
+      "chain_hash": "d880c2afa6bcce80"
+    }
+  },
+  {
+    "id": 17,
+    "word": "产假",
+    "text": "产假是女职工生育期间享有的假期。女职工生育享受98天产假，难产的增加15天，多胞胎生育的每多生育一个婴儿增加15天。",
+    "category": "劳动合同",
+    "quality_score": 0.923,
+    "type": "clean",
+    "source": "knowledge_base",
+    "lineage": {
+      "seed_source": "knowledge_base",
+      "transformations": [
+        "quality_filter"
+      ],
+      "quality_checks": [
+        "length_check",
+        "language_check"
+      ],
+      "parent_id": null,
+      "created_at": "2026-02-21T02:34:59.418439",
+      "version": "2.0.0",
+      "chain_hash": "d880c2afa6bcce80"
+    }
+  },
+  {
+    "id": 18,
+    "word": "终身学习",
+    "text": "终身学习是人一生持续学习的理念。终身学习是适应社会发展的必要能力。",
+    "category": "教育",
+    "quality_score": 0.911,
+    "type": "clean",
+    "source": "knowledge_base",
+    "lineage": {
+      "seed_source": "knowledge_base",
+      "transformations": [
+        "quality_filter"
+      ],
+      "quality_checks": [
+        "length_check",
+        "language_check"
+      ],
+      "parent_id": null,
+      "created_at": "2026-02-21T02:34:59.418449",
+      "version": "2.0.0",
+      "chain_hash": "d880c2afa6bcce80"
+    }
+  },
+  {
+    "id": 19,
+    "word": "提示工程",
+    "text": "提示工程是设计和优化输入提示以引导大语言模型输出的技术。是高效使用大模型的重要技能。",
+    "category": "人工智能",
+    "quality_score": 0.97,
+    "type": "clean",
+    "source": "knowledge_base",
+    "lineage": {
+      "seed_source": "knowledge_base",
+      "transformations": [
+        "quality_filter"
+      ],
+      "quality_checks": [
+        "length_check",
+        "language_check"
+      ],
+      "parent_id": null,
+      "created_at": "2026-02-21T02:34:59.418456",
+      "version": "2.0.0",
+      "chain_hash": "d880c2afa6bcce80"
+    }
+  },
+  {
+    "id": 20,
+    "word": "调解",
+    "text": "调解是通过第三方协调解决纠纷的方式。调解达成的协议具有法律约束力。",
+    "category": "法律",
+    "quality_score": 0.913,
+    "type": "clean",
+    "source": "knowledge_base",
+    "lineage": {
+      "seed_source": "knowledge_base",
+      "transformations": [
+        "quality_filter"
+      ],
+      "quality_checks": [
+        "length_check",
+        "language_check"
+      ],
+      "parent_id": null,
+      "created_at": "2026-02-21T02:34:59.418462",
+      "version": "2.0.0",
+      "chain_hash": "d880c2afa6bcce80"
+    }
+  },
+  {
+    "id": 21,
+    "word": "尽职调查",
+    "text": "尽职调查是对交易标的进行全面调查的活动。尽职调查是并购交易的重要环节。",
+    "category": "法律",
+    "quality_score": 0.893,
+    "type": "clean",
+    "source": "knowledge_base",
+    "lineage": {
+      "seed_source": "knowledge_base",
+      "transformations": [
+        "quality_filter"
+      ],
+      "quality_checks": [
+        "length_check",
+        "language_check"
+      ],
+      "parent_id": null,
+      "created_at": "2026-02-21T02:34:59.418469",
+      "version": "2.0.0",
+      "chain_hash": "d880c2afa6bcce80"
+    }
+  },
+  {
+    "id": 22,
+    "word": "客服",
+    "text": "客服是为消费者提供咨询和售后服务的活动。良好的客服是提升用户体验的关键。",
+    "category": "电商",
+    "quality_score": 0.948,
+    "type": "clean",
+    "source": "knowledge_base",
+    "lineage": {
+      "seed_source": "knowledge_base",
+      "transformations": [
+        "quality_filter"
+      ],
+      "quality_checks": [
+        "length_check",
+        "language_check"
+      ],
+      "parent_id": null,
+      "created_at": "2026-02-21T02:34:59.418474",
+      "version": "2.0.0",
+      "chain_hash": "d880c2afa6bcce80"
+    }
+  },
+  {
+    "id": 23,
+    "word": "医学教育",
+    "text": "医学教育是培养医学人才的教育活动。包括医学院教育、毕业后教育、继续教育等阶段。",
+    "category": "医疗",
+    "quality_score": 0.937,
+    "type": "clean",
+    "source": "knowledge_base",
+    "lineage": {
+      "seed_source": "knowledge_base",
+      "transformations": [
+        "quality_filter"
+      ],
+      "quality_checks": [
+        "length_check",
+        "language_check"
+      ],
+      "parent_id": null,
+      "created_at": "2026-02-21T02:34:59.418479",
+      "version": "2.0.0",
+      "chain_hash": "d880c2afa6bcce80"
+    }
+  },
+  {
+    "id": 24,
+    "word": "直播带货",
+    "text": "直播带货是通过直播形式销售商品的模式。直播带货成为电商增长的新动力。",
+    "category": "电商",
+    "quality_score": 0.963,
+    "type": "clean",
+    "source": "knowledge_base",
+    "lineage": {
+      "seed_source": "knowledge_base",
+      "transformations": [
+        "quality_filter"
+      ],
+      "quality_checks": [
+        "length_check",
+        "language_check"
+      ],
+      "parent_id": null,
+      "created_at": "2026-02-21T02:34:59.418484",
+      "version": "2.0.0",
+      "chain_hash": "d880c2afa6bcce80"
+    }
+  },
+  {
+    "id": 25,
+    "word": "侵权责任",
+    "text": "侵权责任是侵害他人民事权益应当承担的法律责任。侵权责任的承担方式包括停止侵害、赔偿损失等。",
+    "category": "法律",
+    "quality_score": 0.901,
+    "type": "clean",
+    "source": "knowledge_base",
+    "lineage": {
+      "seed_source": "knowledge_base",
+      "transformations": [
+        "quality_filter"
+      ],
+      "quality_checks": [
+        "length_check",
+        "language_check"
+      ],
+      "parent_id": null,
+      "created_at": "2026-02-21T02:34:59.418489",
+      "version": "2.0.0",
+      "chain_hash": "d880c2afa6bcce80"
+    }
+  },
+  {
+    "id": 26,
+    "word": "个性化学习",
+    "text": "个性化学习是根据学习者特点定制学习内容和方法的教学模式。AI技术使个性化学习更加可行。",
+    "category": "教育",
+    "quality_score": 0.924,
+    "type": "clean",
+    "source": "knowledge_base",
+    "lineage": {
+      "seed_source": "knowledge_base",
+      "transformations": [
+        "quality_filter"
+      ],
+      "quality_checks": [
+        "length_check",
+        "language_check"
+      ],
+      "parent_id": null,
+      "created_at": "2026-02-21T02:34:59.418494",
+      "version": "2.0.0",
+      "chain_hash": "d880c2afa6bcce80"
+    }
+  },
+  {
+    "id": 27,
+    "word": "劳动关系",
+    "text": "劳动关系是劳动者与用人单位在劳动过程中发生的社会关系。劳动关系的建立、变更、终止受劳动法调整。",
+    "category": "劳动合同",
+    "quality_score": 0.927,
+    "type": "clean",
+    "source": "knowledge_base",
+    "lineage": {
+      "seed_source": "knowledge_base",
+      "transformations": [
+        "quality_filter"
+      ],
+      "quality_checks": [
+        "length_check",
+        "language_check"
+      ],
+      "parent_id": null,
+      "created_at": "2026-02-21T02:34:59.418500",
+      "version": "2.0.0",
+      "chain_hash": "d880c2afa6bcce80"
+    }
+  },
+  {
+    "id": 28,
+    "word": "基层医疗",
+    "text": "基层医疗是社区卫生服务中心等基层机构提供的医疗服务。是医疗卫生服务体系的基础。",
+    "category": "医疗",
+    "quality_score": 0.888,
+    "type": "clean",
+    "source": "knowledge_base",
+    "lineage": {
+      "seed_source": "knowledge_base",
+      "transformations": [
+        "quality_filter"
+      ],
+      "quality_checks": [
+        "length_check",
+        "language_check"
+      ],
+      "parent_id": null,
+      "created_at": "2026-02-21T02:34:59.418505",
+      "version": "2.0.0",
+      "chain_hash": "d880c2afa6bcce80"
+    }
+  },
+  {
+    "id": 29,
+    "word": "课程设计",
+    "text": "课程设计是规划课程内容、教学方法和评价方式的活动。良好的课程设计是教学成功的基础。",
+    "category": "教育",
+    "quality_score": 0.962,
+    "type": "clean",
+    "source": "knowledge_base",
+    "lineage": {
+      "seed_source": "knowledge_base",
+      "transformations": [
+        "quality_filter"
+      ],
+      "quality_checks": [
+        "length_check",
+        "language_check"
+      ],
+      "parent_id": null,
+      "created_at": "2026-02-21T02:34:59.418511",
+      "version": "2.0.0",
+      "chain_hash": "d880c2afa6bcce80"
+    }
+  },
+  {
+    "id": 30,
+    "word": "工会",
+    "text": "工会是职工自愿结合的工人阶级群众组织。工会代表职工利益，维护职工合法权益。",
+    "category": "劳动合同",
+    "quality_score": 0.911,
+    "type": "clean",
+    "source": "knowledge_base",
+    "lineage": {
+      "seed_source": "knowledge_base",
+      "transformations": [
+        "quality_filter"
+      ],
+      "quality_checks": [
+        "length_check",
+        "language_check"
+      ],
+      "parent_id": null,
+      "created_at": "2026-02-21T02:34:59.418516",
+      "version": "2.0.0",
+      "chain_hash": "d880c2afa6bcce80"
+    }
+  },
+  {
+    "id": 31,
+    "word": "工伤",
+    "text": "工伤是劳动者在工作时间和工作场所内因工作原因受到的事故伤害。工伤认定后，劳动者享有工伤保险待遇。",
+    "category": "劳动合同",
+    "quality_score": 0.882,
+    "type": "clean",
+    "source": "knowledge_base",
+    "lineage": {
+      "seed_source": "knowledge_base",
+      "transformations": [
+        "quality_filter"
+      ],
+      "quality_checks": [
+        "length_check",
+        "language_check"
+      ],
+      "parent_id": null,
+      "created_at": "2026-02-21T02:34:59.418522",
+      "version": "2.0.0",
+      "chain_hash": "d880c2afa6bcce80"
+    }
+  },
+  {
+    "id": 32,
+    "word": "劳务派遣",
+    "text": "劳务派遣是劳务派遣单位将劳动者派遣到用工单位工作的用工形式。劳务派遣应当符合法律规定的条件和程序。",
+    "category": "劳动合同",
+    "quality_score": 0.941,
+    "type": "clean",
+    "source": "knowledge_base",
+    "lineage": {
+      "seed_source": "knowledge_base",
+      "transformations": [
+        "quality_filter"
+      ],
+      "quality_checks": [
+        "length_check",
+        "language_check"
+      ],
+      "parent_id": null,
+      "created_at": "2026-02-21T02:34:59.418527",
+      "version": "2.0.0",
+      "chain_hash": "d880c2afa6bcce80"
+    }
+  },
+  {
+    "id": 33,
+    "word": "问答系统",
+    "text": "问答系统是能够回答用户问题的智能系统，包括知识库问答、阅读理解问答等类型。大语言模型使问答系统更加智能。",
+    "category": "人工智能",
+    "quality_score": 0.921,
+    "type": "clean",
+    "source": "knowledge_base",
+    "lineage": {
+      "seed_source": "knowledge_base",
+      "transformations": [
+        "quality_filter"
+      ],
+      "quality_checks": [
+        "length_check",
+        "language_check"
+      ],
+      "parent_id": null,
+      "created_at": "2026-02-21T02:34:59.418532",
+      "version": "2.0.0",
+      "chain_hash": "d880c2afa6bcce80"
+    }
+  },
+  {
+    "id": 34,
+    "word": "劳动调解",
+    "text": "嗯...劳动调解是通过第三方调解劳动争议的活动。劳动调解是解决劳动争议的重要方式。",
+    "category": "劳动合同",
+    "quality_score": 0.834,
+    "type": "noisy",
+    "source": "knowledge_base_with_noise",
+    "lineage": {
+      "seed_source": "knowledge_base",
+      "transformations": [
+        "noise_injection",
+        "realism_enhance"
+      ],
+      "quality_checks": [
+        "length_check"
+      ],
+      "parent_id": null,
+      "created_at": "2026-02-21T02:34:59.418797",
+      "version": "2.0.0",
+      "chain_hash": "ab0c318b8635d631"
+    }
+  },
+  {
+    "id": 35,
+    "word": "情感分析",
+    "text": "情感分析是识别文本中情感倾向的技术，广泛应用于舆情监控、产品评价分析等场景。是自然语言处理的重要应用方向。",
+    "category": "人工智能",
+    "quality_score": 0.77,
+    "type": "noisy",
+    "source": "knowledge_base_with_noise",
+    "lineage": {
+      "seed_source": "knowledge_base",
+      "transformations": [
+        "noise_injection",
+        "realism_enhance"
+      ],
+      "quality_checks": [
+        "length_check"
+      ],
+      "parent_id": null,
+      "created_at": "2026-02-21T02:34:59.418826",
+      "version": "2.0.0",
+      "chain_hash": "ab0c318b8635d631"
+    }
+  },
+  {
+    "id": 36,
+    "word": "竞业协议",
+    "text": "竞业协议是劳动者承诺在离职后一定期限内不从事与原单位有竞争关系的工作。竞业限制期限不得超过两年，用人单位应当支付经济补偿。",
+    "category": "劳动合同",
+    "quality_score": 0.848,
+    "type": "noisy",
+    "source": "knowledge_base_with_noise",
+    "lineage": {
+      "seed_source": "knowledge_base",
+      "transformations": [
+        "noise_injection",
+        "realism_enhance"
+      ],
+      "quality_checks": [
+        "length_check"
+      ],
+      "parent_id": null,
+      "created_at": "2026-02-21T02:34:59.418838",
+      "version": "2.0.0",
+      "chain_hash": "ab0c318b8635d631"
+    }
+  },
+  {
+    "id": 37,
+    "word": "个性化学习",
+    "text": "个性化学习是根据学习者特点定制学习内容和方法的教学模式。AI技术使个性化学习更加可行。",
+    "category": "教育",
+    "quality_score": 0.825,
+    "type": "noisy",
+    "source": "knowledge_base_with_noise",
+    "lineage": {
+      "seed_source": "knowledge_base",
+      "transformations": [
+        "noise_injection",
+        "realism_enhance"
+      ],
+      "quality_checks": [
+        "length_check"
+      ],
+      "parent_id": null,
+      "created_at": "2026-02-21T02:34:59.418846",
+      "version": "2.0.0",
+      "chain_hash": "ab0c318b8635d631"
+    }
+  },
+  {
+    "id": 38,
+    "word": "物联网",
+    "text": "这个...物联网是将物品连接到互联网的技术。物联网实现了物与物、人与物的智能连接。",
+    "category": "科技",
+    "quality_score": 0.826,
+    "type": "noisy",
+    "source": "knowledge_base_with_noise",
+    "lineage": {
+      "seed_source": "knowledge_base",
+      "transformations": [
+        "noise_injection",
+        "realism_enhance"
+      ],
+      "quality_checks": [
+        "length_check"
+      ],
+      "parent_id": null,
+      "created_at": "2026-02-21T02:34:59.418854",
+      "version": "2.0.0",
+      "chain_hash": "ab0c318b8635d631"
+    }
+  },
+  {
+    "id": 39,
+    "word": "合规",
+    "text": "合规是企业遵守法律法规和行业规范的活动。合规管理是企业风险管理的重要组成部分。",
+    "category": "法律",
+    "quality_score": 0.807,
+    "type": "noisy",
+    "source": "knowledge_base_with_noise",
+    "lineage": {
+      "seed_source": "knowledge_base",
+      "transformations": [
+        "noise_injection",
+        "realism_enhance"
+      ],
+      "quality_checks": [
+        "length_check"
+      ],
+      "parent_id": null,
+      "created_at": "2026-02-21T02:34:59.418860",
+      "version": "2.0.0",
+      "chain_hash": "ab0c318b8635d631"
+    }
+  },
+  {
+    "id": 40,
+    "word": "劳动争议",
+    "text": "这个...劳动争议是劳动者与用人单位之间因劳动权利义务发生的纠纷。劳动争议可以通过协商、调解、仲裁、诉讼等方式解决。",
+    "category": "劳动合同",
+    "quality_score": 0.735,
+    "type": "noisy",
+    "source": "knowledge_base_with_noise",
+    "lineage": {
+      "seed_source": "knowledge_base",
+      "transformations": [
+        "noise_injection",
+        "realism_enhance"
+      ],
+      "quality_checks": [
+        "length_check"
+      ],
+      "parent_id": null,
+      "created_at": "2026-02-21T02:34:59.418869",
+      "version": "2.0.0",
+      "chain_hash": "ab0c318b8635d631"
+    }
+  },
+  {
+    "id": 41,
+    "word": "互联网医疗",
+    "text": "互联网医疗是将互联网技术应用于医疗服务的模式。包括在线问诊、药品配送、健康管理等应用。",
+    "category": "医疗",
+    "quality_score": 0.77,
+    "type": "noisy",
+    "source": "knowledge_base_with_noise",
+    "lineage": {
+      "seed_source": "knowledge_base",
+      "transformations": [
+        "noise_injection",
+        "realism_enhance"
+      ],
+      "quality_checks": [
+        "length_check"
+      ],
+      "parent_id": null,
+      "created_at": "2026-02-21T02:34:59.418875",
+      "version": "2.0.0",
+      "chain_hash": "ab0c318b8635d631"
+    }
+  },
+  {
+    "id": 42,
+    "word": "融资",
+    "text": "融资是企业或个人获取资金的行为，包括股权融资、债权融资、混合融资等方式。融资渠道的选择影响企业资本结构和经营成本。",
+    "category": "金融",
+    "quality_score": 0.842,
+    "type": "noisy",
+    "source": "knowledge_base_with_noise",
+    "lineage": {
+      "seed_source": "knowledge_base",
+      "transformations": [
+        "noise_injection",
+        "realism_enhance"
+      ],
+      "quality_checks": [
+        "length_check"
+      ],
+      "parent_id": null,
+      "created_at": "2026-02-21T02:34:59.418881",
+      "version": "2.0.0",
+      "chain_hash": "ab0c318b8635d631"
+    }
+  },
+  {
+    "id": 43,
+    "word": "收益率",
+    "text": "收益率是投资收益与投资成本的比率。不同投资品种有不同的收益率计算方法，是衡量投资效果的重要指标。",
+    "category": "金融",
+    "quality_score": 0.745,
+    "type": "noisy",
+    "source": "knowledge_base_with_noise",
+    "lineage": {
+      "seed_source": "knowledge_base",
+      "transformations": [
+        "noise_injection",
+        "realism_enhance"
+      ],
+      "quality_checks": [
+        "length_check"
+      ],
+      "parent_id": null,
+      "created_at": "2026-02-21T02:34:59.418887",
+      "version": "2.0.0",
+      "chain_hash": "ab0c318b8635d631"
+    }
+  },
+  {
+    "id": 44,
+    "word": "客服",
+    "text": "客服是为消费者提供咨询和售后服务的活动。良好的客服是提升用户体验的关键。",
+    "category": "电商",
+    "quality_score": 0.835,
+    "type": "noisy",
+    "source": "knowledge_base_with_noise",
+    "lineage": {
+      "seed_source": "knowledge_base",
+      "transformations": [
+        "noise_injection",
+        "realism_enhance"
+      ],
+      "quality_checks": [
+        "length_check"
+      ],
+      "parent_id": null,
+      "created_at": "2026-02-21T02:34:59.418892",
+      "version": "2.0.0",
+      "chain_hash": "ab0c318b8635d631"
+    }
+  },
+  {
+    "id": 45,
+    "word": "5G",
+    "text": "5G是第五代移动通信技术。5G具有高速率、低延迟、大连接的特点。",
+    "category": "科技",
+    "quality_score": 0.8,
+    "type": "noisy",
+    "source": "knowledge_base_with_noise",
+    "lineage": {
+      "seed_source": "knowledge_base",
+      "transformations": [
+        "noise_injection",
+        "realism_enhance"
+      ],
+      "quality_checks": [
+        "length_check"
+      ],
+      "parent_id": null,
+      "created_at": "2026-02-21T02:34:59.418898",
+      "version": "2.0.0",
+      "chain_hash": "ab0c318b8635d631"
+    }
+  },
+  {
+    "id": 46,
+    "word": "支付",
+    "text": "支付是完成交易的资金转移过程。电子支付是电商交易的重要环节。",
+    "category": "电商",
+    "quality_score": 0.78,
+    "type": "noisy",
+    "source": "knowledge_base_with_noise",
+    "lineage": {
+      "seed_source": "knowledge_base",
+      "transformations": [
+        "noise_injection",
+        "realism_enhance"
+      ],
+      "quality_checks": [
+        "length_check"
+      ],
+      "parent_id": null,
+      "created_at": "2026-02-21T02:34:59.418904",
+      "version": "2.0.0",
+      "chain_hash": "ab0c318b8635d631"
+    }
+  },
+  {
+    "id": 47,
+    "word": "社交电商",
+    "text": "那个...社交电商是通过社交网络进行商品销售的模式。社交电商利用社交关系促进交易。",
+    "category": "电商",
+    "quality_score": 0.727,
+    "type": "noisy",
+    "source": "knowledge_base_with_noise",
+    "lineage": {
+      "seed_source": "knowledge_base",
+      "transformations": [
+        "noise_injection",
+        "realism_enhance"
+      ],
+      "quality_checks": [
+        "length_check"
+      ],
+      "parent_id": null,
+      "created_at": "2026-02-21T02:34:59.418914",
+      "version": "2.0.0",
+      "chain_hash": "ab0c318b8635d631"
+    }
+  },
+  {
+    "id": 48,
+    "word": "仲裁",
+    "text": "仲裁是由仲裁机构裁决纠纷的法律程序。仲裁具有一裁终局、保密性强等特点。",
+    "category": "法律",
+    "quality_score": 0.832,
+    "type": "noisy",
+    "source": "knowledge_base_with_noise",
+    "lineage": {
+      "seed_source": "knowledge_base",
+      "transformations": [
+        "noise_injection",
+        "realism_enhance"
+      ],
+      "quality_checks": [
+        "length_check"
+      ],
+      "parent_id": null,
+      "created_at": "2026-02-21T02:34:59.418920",
+      "version": "2.0.0",
+      "chain_hash": "ab0c318b8635d631"
+    }
+  },
+  {
+    "id": 49,
+    "word": "调解",
+    "text": "调解是通过第三方协调解决纠纷的方式。调解达成的协议具有法律约束力。",
+    "category": "法律",
+    "quality_score": 0.708,
+    "type": "noisy",
+    "source": "knowledge_base_with_noise",
+    "lineage": {
+      "seed_source": "knowledge_base",
+      "transformations": [
+        "noise_injection",
+        "realism_enhance"
+      ],
+      "quality_checks": [
+        "length_check"
+      ],
+      "parent_id": null,
+      "created_at": "2026-02-21T02:34:59.418927",
+      "version": "2.0.0",
+      "chain_hash": "ab0c318b8635d631"
+    }
+  },
+  {
+    "id": 50,
+    "word": "学习评估",
+    "text": "学习评估是对学生学习效果进行评价的活动。评估方式包括考试、作业、项目等。",
+    "category": "教育",
+    "quality_score": 0.813,
+    "type": "noisy",
+    "source": "knowledge_base_with_noise",
+    "lineage": {
+      "seed_source": "knowledge_base",
+      "transformations": [
+        "noise_injection",
+        "realism_enhance"
+      ],
+      "quality_checks": [
+        "length_check"
+      ],
+      "parent_id": null,
+      "created_at": "2026-02-21T02:34:59.418934",
+      "version": "2.0.0",
+      "chain_hash": "ab0c318b8635d631"
+    }
+  },
+  {
+    "id": 51,
+    "word": "劳动合同终止",
+    "text": "那个...劳动合同终止是劳动合同因法定事由而失效。包括合同期满、劳动者退休、用人单位主体资格消灭等情形。",
+    "category": "劳动合同",
+    "quality_score": 0.8,
+    "type": "noisy",
+    "source": "knowledge_base_with_noise",
+    "lineage": {
+      "seed_source": "knowledge_base",
+      "transformations": [
+        "noise_injection",
+        "realism_enhance"
+      ],
+      "quality_checks": [
+        "length_check"
+      ],
+      "parent_id": null,
+      "created_at": "2026-02-21T02:34:59.418940",
+      "version": "2.0.0",
+      "chain_hash": "ab0c318b8635d631"
+    }
+  },
+  {
+    "id": 52,
+    "word": "集体合同",
+    "text": "嗯...集体合同是工会代表职工与企业就劳动报酬、工作时间等事项签订的协议。集体合同对企业和全体职工具有约束力。",
+    "category": "劳动合同",
+    "quality_score": 0.817,
+    "type": "noisy",
+    "source": "knowledge_base_with_noise",
+    "lineage": {
+      "seed_source": "knowledge_base",
+      "transformations": [
+        "noise_injection",
+        "realism_enhance"
+      ],
+      "quality_checks": [
+        "length_check"
+      ],
+      "parent_id": null,
+      "created_at": "2026-02-21T02:34:59.418946",
+      "version": "2.0.0",
+      "chain_hash": "ab0c318b8635d631"
+    }
+  },
+  {
+    "id": 53,
+    "word": "外科",
+    "text": "外科是以手术为主要治疗手段的医学专科。包括普通外科、骨科、神经外科、心胸外科等多个亚专科。",
+    "category": "医疗",
+    "quality_score": 0.836,
+    "type": "noisy",
+    "source": "knowledge_base_with_noise",
+    "lineage": {
+      "seed_source": "knowledge_base",
+      "transformations": [
+        "noise_injection",
+        "realism_enhance"
+      ],
+      "quality_checks": [
+        "length_check"
+      ],
+      "parent_id": null,
+      "created_at": "2026-02-21T02:34:59.418963",
+      "version": "2.0.0",
+      "chain_hash": "ab0c318b8635d631"
+    }
+  },
+  {
+    "id": 54,
+    "word": "客服",
+    "text": "就是...客服是为消费者提供咨询和售后服务的活动。良好的客服是提升用户体验的关键。",
+    "category": "电商",
+    "quality_score": 0.828,
+    "type": "noisy",
+    "source": "knowledge_base_with_noise",
+    "lineage": {
+      "seed_source": "knowledge_base",
+      "transformations": [
+        "noise_injection",
+        "realism_enhance"
+      ],
+      "quality_checks": [
+        "length_check"
+      ],
+      "parent_id": null,
+      "created_at": "2026-02-21T02:34:59.418970",
+      "version": "2.0.0",
+      "chain_hash": "ab0c318b8635d631"
+    }
+  },
+  {
+    "id": 55,
+    "word": "机器人",
+    "text": "机器人是能够自动执行任务的机器系统，结合AI技术实现智能化。工业机器人、服务机器人是主要应用类型。",
+    "category": "人工智能",
+    "quality_score": 0.756,
+    "type": "noisy",
+    "source": "knowledge_base_with_noise",
+    "lineage": {
+      "seed_source": "knowledge_base",
+      "transformations": [
+        "noise_injection",
+        "realism_enhance"
+      ],
+      "quality_checks": [
+        "length_check"
+      ],
+      "parent_id": null,
+      "created_at": "2026-02-21T02:34:59.418977",
+      "version": "2.0.0",
+      "chain_hash": "ab0c318b8635d631"
+    }
+  },
+  {
+    "id": 56,
+    "word": "在线教育",
+    "text": "就是...在线教育是通过互联网进行教学活动的教育模式。在线教育打破了时空限制，使学习更加便捷。",
+    "category": "教育",
+    "quality_score": 0.795,
+    "type": "noisy",
+    "source": "knowledge_base_with_noise",
+    "lineage": {
+      "seed_source": "knowledge_base",
+      "transformations": [
+        "noise_injection",
+        "realism_enhance"
+      ],
+      "quality_checks": [
+        "length_check"
+      ],
+      "parent_id": null,
+      "created_at": "2026-02-21T02:34:59.418983",
+      "version": "2.0.0",
+      "chain_hash": "ab0c318b8635d631"
+    }
+  },
+  {
+    "id": 57,
+    "word": "物联网",
+    "text": "物联网是将物品连接到互联网的技术。物联网实现了物与物、人与物的智能连接。",
+    "category": "科技",
+    "quality_score": 0.741,
+    "type": "noisy",
+    "source": "knowledge_base_with_noise",
+    "lineage": {
+      "seed_source": "knowledge_base",
+      "transformations": [
+        "noise_injection",
+        "realism_enhance"
+      ],
+      "quality_checks": [
+        "length_check"
+      ],
+      "parent_id": null,
+      "created_at": "2026-02-21T02:34:59.418989",
+      "version": "2.0.0",
+      "chain_hash": "ab0c318b8635d631"
+    }
+  },
+  {
+    "id": 58,
+    "word": "操作系统",
+    "text": "这个...操作系统是管理计算机硬件和软件资源的系统软件。操作系统是计算机运行的基础。",
+    "category": "科技",
+    "quality_score": 0.825,
+    "type": "noisy",
+    "source": "knowledge_base_with_noise",
+    "lineage": {
+      "seed_source": "knowledge_base",
+      "transformations": [
+        "noise_injection",
+        "realism_enhance"
+      ],
+      "quality_checks": [
+        "length_check"
+      ],
+      "parent_id": null,
+      "created_at": "2026-02-21T02:34:59.418995",
+      "version": "2.0.0",
+      "chain_hash": "ab0c318b8635d631"
+    }
+  },
+  {
+    "id": 59,
+    "word": "对抗训练",
+    "text": "对抗训练是通过对抗样本增强模型鲁棒性的训练方法，在图像分类、文本分类等任务中广泛应用。",
+    "category": "人工智能",
+    "quality_score": 0.792,
+    "type": "noisy",
+    "source": "knowledge_base_with_noise",
+    "lineage": {
+      "seed_source": "knowledge_base",
+      "transformations": [
+        "noise_injection",
+        "realism_enhance"
+      ],
+      "quality_checks": [
+        "length_check"
+      ],
+      "parent_id": null,
+      "created_at": "2026-02-21T02:34:59.419001",
+      "version": "2.0.0",
+      "chain_hash": "ab0c318b8635d631"
+    }
+  },
+  {
+    "id": 60,
+    "word": "营销",
+    "text": "这个...营销是推广商品和服务吸引消费者的活动。数字营销是电商营销的主要方式。",
+    "category": "电商",
+    "quality_score": 0.753,
+    "type": "noisy",
+    "source": "knowledge_base_with_noise",
+    "lineage": {
+      "seed_source": "knowledge_base",
+      "transformations": [
+        "noise_injection",
+        "realism_enhance"
+      ],
+      "quality_checks": [
+        "length_check"
+      ],
+      "parent_id": null,
+      "created_at": "2026-02-21T02:34:59.419013",
+      "version": "2.0.0",
+      "chain_hash": "ab0c318b8635d631"
+    }
+  },
+  {
+    "id": 61,
+    "word": "违约责任",
+    "text": "违约责任是合同当事人不履行合同义务应当承担的法律责任。违约责任的承担方式包括继续履行、赔偿损失等。",
+    "category": "法律",
+    "quality_score": 0.783,
+    "type": "noisy",
+    "source": "knowledge_base_with_noise",
+    "lineage": {
+      "seed_source": "knowledge_base",
+      "transformations": [
+        "noise_injection",
+        "realism_enhance"
+      ],
+      "quality_checks": [
+        "length_check"
+      ],
+      "parent_id": null,
+      "created_at": "2026-02-21T02:34:59.419019",
+      "version": "2.0.0",
+      "chain_hash": "ab0c318b8635d631"
+    }
+  },
+  {
+    "id": 62,
+    "word": "休假",
+    "text": "休假是劳动者依法享有的休息时间，包括法定节假日、年休假、婚假、产假等。劳动者在休假期间享有工资待遇。",
+    "category": "劳动合同",
+    "quality_score": 0.736,
+    "type": "noisy",
+    "source": "knowledge_base_with_noise",
+    "lineage": {
+      "seed_source": "knowledge_base",
+      "transformations": [
+        "noise_injection",
+        "realism_enhance"
+      ],
+      "quality_checks": [
+        "length_check"
+      ],
+      "parent_id": null,
+      "created_at": "2026-02-21T02:34:59.419025",
+      "version": "2.0.0",
+      "chain_hash": "ab0c318b8635d631"
+    }
+  },
+  {
+    "id": 63,
+    "word": "操作系统",
+    "text": "这个...操作系统是管理计算机硬件和软件资源的系统软件。操作系统是计算机运行的基础。",
+    "category": "科技",
+    "quality_score": 0.746,
+    "type": "noisy",
+    "source": "knowledge_base_with_noise",
+    "lineage": {
+      "seed_source": "knowledge_base",
+      "transformations": [
+        "noise_injection",
+        "realism_enhance"
+      ],
+      "quality_checks": [
+        "length_check"
+      ],
+      "parent_id": null,
+      "created_at": "2026-02-21T02:34:59.419031",
+      "version": "2.0.0",
+      "chain_hash": "ab0c318b8635d631"
+    }
+  },
+  {
+    "id": 64,
+    "word": "个性化学习",
+    "text": "个性化学习是根据学习者特点定制学习内容和方法的教学模式。AI技术使个性化学习更加可行。",
+    "category": "教育",
+    "quality_score": 0.783,
+    "type": "noisy",
+    "source": "knowledge_base_with_noise",
+    "lineage": {
+      "seed_source": "knowledge_base",
+      "transformations": [
+        "noise_injection",
+        "realism_enhance"
+      ],
+      "quality_checks": [
+        "length_check"
+      ],
+      "parent_id": null,
+      "created_at": "2026-02-21T02:34:59.419037",
+      "version": "2.0.0",
+      "chain_hash": "ab0c318b8635d631"
+    }
+  },
+  {
+    "id": 65,
+    "word": "个性化学习",
+    "text": "这个...个性化学习是根据学习者特点定制学习内容和方法的教学模式。AI技术使个性化学习更加可行。",
+    "category": "教育",
+    "quality_score": 0.747,
+    "type": "noisy",
+    "source": "knowledge_base_with_noise",
+    "lineage": {
+      "seed_source": "knowledge_base",
+      "transformations": [
+        "noise_injection",
+        "realism_enhance"
+      ],
+      "quality_checks": [
+        "length_check"
+      ],
+      "parent_id": null,
+      "created_at": "2026-02-21T02:34:59.419042",
+      "version": "2.0.0",
+      "chain_hash": "ab0c318b8635d631"
+    }
+  },
+  {
+    "id": 66,
+    "word": "门诊",
+    "text": "门诊是医院提供非住院医疗服务的诊疗形式。门诊服务包括初诊、复诊、专科门诊等多种类型。",
+    "category": "医疗",
+    "quality_score": 0.846,
+    "type": "noisy",
+    "source": "knowledge_base_with_noise",
+    "lineage": {
+      "seed_source": "knowledge_base",
+      "transformations": [
+        "noise_injection",
+        "realism_enhance"
+      ],
+      "quality_checks": [
+        "length_check"
+      ],
+      "parent_id": null,
+      "created_at": "2026-02-21T02:34:59.419049",
+      "version": "2.0.0",
+      "chain_hash": "ab0c318b8635d631"
+    }
+  },
+  {
+    "id": 67,
+    "word": "刑法",
+    "text": "【法律】刑法\n定义：刑法是规定犯罪和刑罚的法律。刑法的目的是惩罚犯罪、保护人民，维护社会秩序。\n应用场景：该概念在法律领域有广泛应用。",
+    "category": "法律",
+    "quality_score": 0.928,
+    "type": "structured",
+    "source": "knowledge_base_structured",
+    "lineage": {
+      "seed_source": "knowledge_base",
+      "transformations": [
+        "structure_format"
+      ],
+      "quality_checks": [
+        "length_check",
+        "format_check"
+      ],
+      "parent_id": null,
+      "created_at": "2026-02-21T02:34:59.419136",
+      "version": "2.0.0",
+      "chain_hash": "8b6fa20f4157cbac"
+    }
+  },
+  {
+    "id": 68,
+    "word": "商标",
+    "text": "【法律】商标\n定义：商标是区分商品或服务来源的标志。商标注册人享有商标专用权，受法律保护。\n应用场景：该概念在法律领域有广泛应用。",
+    "category": "法律",
+    "quality_score": 0.867,
+    "type": "structured",
+    "source": "knowledge_base_structured",
+    "lineage": {
+      "seed_source": "knowledge_base",
+      "transformations": [
+        "structure_format"
+      ],
+      "quality_checks": [
+        "length_check",
+        "format_check"
+      ],
+      "parent_id": null,
+      "created_at": "2026-02-21T02:34:59.419148",
+      "version": "2.0.0",
+      "chain_hash": "8b6fa20f4157cbac"
+    }
+  },
+  {
+    "id": 69,
+    "word": "合同法",
+    "text": "【法律】合同法\n定义：合同法是调整合同关系的法律规范的总称。合同是平等主体的自然人、法人、其他组织之间设立、变更、终止民事权利义务关系的协议。\n应用场景：该概念在法律领域有广泛应用。",
+    "category": "法律",
+    "quality_score": 0.912,
+    "type": "structured",
+    "source": "knowledge_base_structured",
+    "lineage": {
+      "seed_source": "knowledge_base",
+      "transformations": [
+        "structure_format"
+      ],
+      "quality_checks": [
+        "length_check",
+        "format_check"
+      ],
+      "parent_id": null,
+      "created_at": "2026-02-21T02:34:59.419155",
+      "version": "2.0.0",
+      "chain_hash": "8b6fa20f4157cbac"
+    }
+  },
+  {
+    "id": 70,
+    "word": "病理",
+    "text": "【医疗】病理\n定义：病理是研究疾病发生发展规律的医学学科，通过检查组织标本确定疾病性质。病理诊断是许多疾病的最终诊断。\n应用场景：该概念在医疗领域有广泛应用。",
+    "category": "医疗",
+    "quality_score": 0.826,
+    "type": "structured",
+    "source": "knowledge_base_structured",
+    "lineage": {
+      "seed_source": "knowledge_base",
+      "transformations": [
+        "structure_format"
+      ],
+      "quality_checks": [
+        "length_check",
+        "format_check"
+      ],
+      "parent_id": null,
+      "created_at": "2026-02-21T02:34:59.419162",
+      "version": "2.0.0",
+      "chain_hash": "8b6fa20f4157cbac"
+    }
+  },
+  {
+    "id": 71,
+    "word": "信用评级",
+    "text": "【金融】信用评级\n定义：信用评级是对债务人偿还债务能力和意愿的评估。信用评级是债券发行和投资的重要参考，影响融资成本。\n应用场景：该概念在金融领域有广泛应用。",
+    "category": "金融",
+    "quality_score": 0.858,
+    "type": "structured",
+    "source": "knowledge_base_structured",
+    "lineage": {
+      "seed_source": "knowledge_base",
+      "transformations": [
+        "structure_format"
+      ],
+      "quality_checks": [
+        "length_check",
+        "format_check"
+      ],
+      "parent_id": null,
+      "created_at": "2026-02-21T02:34:59.419168",
+      "version": "2.0.0",
+      "chain_hash": "8b6fa20f4157cbac"
+    }
+  },
+  {
+    "id": 72,
+    "word": "医学研究",
+    "text": "【医疗】医学研究\n定义：医学研究是探索疾病规律和防治方法的科学活动。基础研究、临床研究、转化研究是主要类型。\n应用场景：该概念在医疗领域有广泛应用。",
+    "category": "医疗",
+    "quality_score": 0.933,
+    "type": "structured",
+    "source": "knowledge_base_structured",
+    "lineage": {
+      "seed_source": "knowledge_base",
+      "transformations": [
+        "structure_format"
+      ],
+      "quality_checks": [
+        "length_check",
+        "format_check"
+      ],
+      "parent_id": null,
+      "created_at": "2026-02-21T02:34:59.419173",
+      "version": "2.0.0",
+      "chain_hash": "8b6fa20f4157cbac"
+    }
+  },
+  {
+    "id": 73,
+    "word": "大数据",
+    "text": "【科技】大数据\n定义：大数据是海量、多样、高速的数据集合。大数据分析帮助企业做出更好的决策。\n应用场景：该概念在科技领域有广泛应用。",
+    "category": "科技",
+    "quality_score": 0.933,
+    "type": "structured",
+    "source": "knowledge_base_structured",
+    "lineage": {
+      "seed_source": "knowledge_base",
+      "transformations": [
+        "structure_format"
+      ],
+      "quality_checks": [
+        "length_check",
+        "format_check"
+      ],
+      "parent_id": null,
+      "created_at": "2026-02-21T02:34:59.419178",
+      "version": "2.0.0",
+      "chain_hash": "8b6fa20f4157cbac"
+    }
+  },
+  {
+    "id": 74,
+    "word": "法律顾问",
+    "text": "【法律】法律顾问\n定义：法律顾问是为企业或个人提供法律咨询服务的专业人员。法律顾问帮助企业防范法律风险。\n应用场景：该概念在法律领域有广泛应用。",
+    "category": "法律",
+    "quality_score": 0.882,
+    "type": "structured",
+    "source": "knowledge_base_structured",
+    "lineage": {
+      "seed_source": "knowledge_base",
+      "transformations": [
+        "structure_format"
+      ],
+      "quality_checks": [
+        "length_check",
+        "format_check"
+      ],
+      "parent_id": null,
+      "created_at": "2026-02-21T02:34:59.419184",
+      "version": "2.0.0",
+      "chain_hash": "8b6fa20f4157cbac"
+    }
+  },
+  {
+    "id": 75,
+    "word": "教学方法",
+    "text": "【教育】教学方法\n定义：教学方法是教师进行教学活动的具体方式。常见的教学方法有讲授法、讨论法、案例法等。\n应用场景：该概念在教育领域有广泛应用。",
+    "category": "教育",
+    "quality_score": 0.946,
+    "type": "structured",
+    "source": "knowledge_base_structured",
+    "lineage": {
+      "seed_source": "knowledge_base",
+      "transformations": [
+        "structure_format"
+      ],
+      "quality_checks": [
+        "length_check",
+        "format_check"
+      ],
+      "parent_id": null,
+      "created_at": "2026-02-21T02:34:59.419189",
+      "version": "2.0.0",
+      "chain_hash": "8b6fa20f4157cbac"
+    }
+  },
+  {
+    "id": 76,
+    "word": "法律顾问",
+    "text": "【法律】法律顾问\n定义：法律顾问是为企业或个人提供法律咨询服务的专业人员。法律顾问帮助企业防范法律风险。\n应用场景：该概念在法律领域有广泛应用。",
+    "category": "法律",
+    "quality_score": 0.835,
+    "type": "structured",
+    "source": "knowledge_base_structured",
+    "lineage": {
+      "seed_source": "knowledge_base",
+      "transformations": [
+        "structure_format"
+      ],
+      "quality_checks": [
+        "length_check",
+        "format_check"
+      ],
+      "parent_id": null,
+      "created_at": "2026-02-21T02:34:59.419194",
+      "version": "2.0.0",
+      "chain_hash": "8b6fa20f4157cbac"
+    }
+  },
+  {
+    "id": 77,
+    "word": "BERT",
+    "text": "【人工智能】BERT\n定义：BERT是双向编码器表示模型，通过掩码语言模型和下一句预测任务进行预训练。在多项自然语言处理任务上取得突破。\n应用场景：该概念在人工智能领域有广泛应用。",
+    "category": "人工智能",
+    "quality_score": 0.884,
+    "type": "structured",
+    "source": "knowledge_base_structured",
+    "lineage": {
+      "seed_source": "knowledge_base",
+      "transformations": [
+        "structure_format"
+      ],
+      "quality_checks": [
+        "length_check",
+        "format_check"
+      ],
+      "parent_id": null,
+      "created_at": "2026-02-21T02:34:59.419200",
+      "version": "2.0.0",
+      "chain_hash": "8b6fa20f4157cbac"
+    }
+  },
+  {
+    "id": 78,
+    "word": "风控",
+    "text": "【金融】风控\n定义：风控即风险控制，是金融机构识别、评估、监控和控制风险的过程。现代风控体系包括信用风险、市场风险、操作风险等多个维度，运用大数据和AI技术提升风控效率。\n应用场景：该概念在金融领域有广泛应用。",
+    "category": "金融",
+    "quality_score": 0.839,
+    "type": "structured",
+    "source": "knowledge_base_structured",
+    "lineage": {
+      "seed_source": "knowledge_base",
+      "transformations": [
+        "structure_format"
+      ],
+      "quality_checks": [
+        "length_check",
+        "format_check"
+      ],
+      "parent_id": null,
+      "created_at": "2026-02-21T02:34:59.419206",
+      "version": "2.0.0",
+      "chain_hash": "8b6fa20f4157cbac"
+    }
+  },
+  {
+    "id": 79,
+    "word": "民法",
+    "text": "【法律】民法\n定义：民法是调整平等主体之间人身关系和财产关系的法律规范。民法典是民事法律的基本法，保护民事主体的合法权益。\n应用场景：该概念在法律领域有广泛应用。",
+    "category": "法律",
+    "quality_score": 0.949,
+    "type": "structured",
+    "source": "knowledge_base_structured",
+    "lineage": {
+      "seed_source": "knowledge_base",
+      "transformations": [
+        "structure_format"
+      ],
+      "quality_checks": [
+        "length_check",
+        "format_check"
+      ],
+      "parent_id": null,
+      "created_at": "2026-02-21T02:34:59.419212",
+      "version": "2.0.0",
+      "chain_hash": "8b6fa20f4157cbac"
+    }
+  },
+  {
+    "id": 80,
+    "word": "自动驾驶",
+    "text": "【人工智能】自动驾驶\n定义：自动驾驶是利用AI技术实现车辆自主驾驶的技术，涉及感知、决策、控制等多个环节。是AI应用的标志性领域。\n应用场景：该概念在人工智能领域有广泛应用。",
+    "category": "人工智能",
+    "quality_score": 0.919,
+    "type": "structured",
+    "source": "knowledge_base_structured",
+    "lineage": {
+      "seed_source": "knowledge_base",
+      "transformations": [
+        "structure_format"
+      ],
+      "quality_checks": [
+        "length_check",
+        "format_check"
+      ],
+      "parent_id": null,
+      "created_at": "2026-02-21T02:34:59.419218",
+      "version": "2.0.0",
+      "chain_hash": "8b6fa20f4157cbac"
+    }
+  },
+  {
+    "id": 81,
+    "word": "用工风险",
+    "text": "【劳动合同】用工风险\n定义：用工风险是用人单位在用工过程中可能面临的法律风险。包括违法解雇、工伤事故、劳动争议等风险。\n应用场景：该概念在劳动合同领域有广泛应用。",
+    "category": "劳动合同",
+    "quality_score": 0.869,
+    "type": "structured",
+    "source": "knowledge_base_structured",
+    "lineage": {
+      "seed_source": "knowledge_base",
+      "transformations": [
+        "structure_format"
+      ],
+      "quality_checks": [
+        "length_check",
+        "format_check"
+      ],
+      "parent_id": null,
+      "created_at": "2026-02-21T02:34:59.419223",
+      "version": "2.0.0",
+      "chain_hash": "8b6fa20f4157cbac"
+    }
+  },
+  {
+    "id": 82,
+    "word": "区块链",
+    "text": "【科技】区块链\n定义：区块链是分布式账本技术。区块链具有去中心化、不可篡改的特点。\n应用场景：该概念在科技领域有广泛应用。",
+    "category": "科技",
+    "quality_score": 0.932,
+    "type": "structured",
+    "source": "knowledge_base_structured",
+    "lineage": {
+      "seed_source": "knowledge_base",
+      "transformations": [
+        "structure_format"
+      ],
+      "quality_checks": [
+        "length_check",
+        "format_check"
+      ],
+      "parent_id": null,
+      "created_at": "2026-02-21T02:34:59.419228",
+      "version": "2.0.0",
+      "chain_hash": "8b6fa20f4157cbac"
+    }
+  },
+  {
+    "id": 83,
+    "word": "供应链",
+    "text": "【电商】供应链\n定义：供应链是从原材料到最终产品的完整链条。供应链管理是电商运营的核心能力。\n应用场景：该概念在电商领域有广泛应用。",
+    "category": "电商",
+    "quality_score": 0.894,
+    "type": "structured",
+    "source": "knowledge_base_structured",
+    "lineage": {
+      "seed_source": "knowledge_base",
+      "transformations": [
+        "structure_format"
+      ],
+      "quality_checks": [
+        "length_check",
+        "format_check"
+      ],
+      "parent_id": null,
+      "created_at": "2026-02-21T02:34:59.419233",
+      "version": "2.0.0",
+      "chain_hash": "8b6fa20f4157cbac"
+    }
+  },
+  {
+    "id": 84,
+    "word": "普惠金融",
+    "text": "【金融】普惠金融\n定义：普惠金融是为社会各阶层和群体提供适当、有效的金融服务。普惠金融旨在解决金融服务覆盖不足的问题，促进金融包容性发展。\n应用场景：该概念在金融领域有广泛应用。",
+    "category": "金融",
+    "quality_score": 0.945,
+    "type": "structured",
+    "source": "knowledge_base_structured",
+    "lineage": {
+      "seed_source": "knowledge_base",
+      "transformations": [
+        "structure_format"
+      ],
+      "quality_checks": [
+        "length_check",
+        "format_check"
+      ],
+      "parent_id": null,
+      "created_at": "2026-02-21T02:34:59.419239",
+      "version": "2.0.0",
+      "chain_hash": "8b6fa20f4157cbac"
+    }
+  },
+  {
+    "id": 85,
+    "word": "AI安全",
+    "text": "【人工智能】AI安全\n定义：AI安全是确保人工智能系统安全可靠的研究领域。包括对抗攻击防御、模型鲁棒性、安全对齐等方向。\n应用场景：该概念在人工智能领域有广泛应用。",
+    "category": "人工智能",
+    "quality_score": 0.847,
+    "type": "structured",
+    "source": "knowledge_base_structured",
+    "lineage": {
+      "seed_source": "knowledge_base",
+      "transformations": [
+        "structure_format"
+      ],
+      "quality_checks": [
+        "length_check",
+        "format_check"
+      ],
+      "parent_id": null,
+      "created_at": "2026-02-21T02:34:59.419244",
+      "version": "2.0.0",
+      "chain_hash": "8b6fa20f4157cbac"
+    }
+  },
+  {
+    "id": 86,
+    "word": "劳动合同法",
+    "text": "【劳动合同】劳动合同法\n定义：劳动合同法是规范劳动合同订立、履行、变更、解除和终止的法律。是劳动法律体系的重要组成部分。\n应用场景：该概念在劳动合同领域有广泛应用。",
+    "category": "劳动合同",
+    "quality_score": 0.906,
+    "type": "structured",
+    "source": "knowledge_base_structured",
+    "lineage": {
+      "seed_source": "knowledge_base",
+      "transformations": [
+        "structure_format"
+      ],
+      "quality_checks": [
+        "length_check",
+        "format_check"
+      ],
+      "parent_id": null,
+      "created_at": "2026-02-21T02:34:59.419249",
+      "version": "2.0.0",
+      "chain_hash": "8b6fa20f4157cbac"
+    }
+  },
+  {
+    "id": 87,
+    "word": "临床试验",
+    "text": "【医疗】临床试验\n定义：临床试验是在人体上验证新药或新疗法安全性和有效性的研究。是药物上市前的必经环节，遵循严格的伦理规范。\n应用场景：该概念在医疗领域有广泛应用。",
+    "category": "医疗",
+    "quality_score": 0.843,
+    "type": "structured",
+    "source": "knowledge_base_structured",
+    "lineage": {
+      "seed_source": "knowledge_base",
+      "transformations": [
+        "structure_format"
+      ],
+      "quality_checks": [
+        "length_check",
+        "format_check"
+      ],
+      "parent_id": null,
+      "created_at": "2026-02-21T02:34:59.419256",
+      "version": "2.0.0",
+      "chain_hash": "8b6fa20f4157cbac"
+    }
+  },
+  {
+    "id": 88,
+    "word": "知识图谱",
+    "text": "【人工智能】知识图谱\n定义：知识图谱是以图结构表示知识的系统，由实体、关系和属性组成。能够支持知识推理和问答，是AI认知能力的重要基础。\n应用场景：该概念在人工智能领域有广泛应用。",
+    "category": "人工智能",
+    "quality_score": 0.82,
+    "type": "structured",
+    "source": "knowledge_base_structured",
+    "lineage": {
+      "seed_source": "knowledge_base",
+      "transformations": [
+        "structure_format"
+      ],
+      "quality_checks": [
+        "length_check",
+        "format_check"
+      ],
+      "parent_id": null,
+      "created_at": "2026-02-21T02:34:59.419261",
+      "version": "2.0.0",
+      "chain_hash": "8b6fa20f4157cbac"
+    }
+  },
+  {
+    "id": 89,
+    "word": "网络安全",
+    "text": "【科技】网络安全\n定义：网络安全是保护网络系统免受攻击的技术和措施。网络安全是信息化时代的重要议题。\n应用场景：该概念在科技领域有广泛应用。",
+    "category": "科技",
+    "quality_score": 0.881,
+    "type": "structured",
+    "source": "knowledge_base_structured",
+    "lineage": {
+      "seed_source": "knowledge_base",
+      "transformations": [
+        "structure_format"
+      ],
+      "quality_checks": [
+        "length_check",
+        "format_check"
+      ],
+      "parent_id": null,
+      "created_at": "2026-02-21T02:34:59.419266",
+      "version": "2.0.0",
+      "chain_hash": "8b6fa20f4157cbac"
+    }
+  },
+  {
+    "id": 90,
+    "word": "上市",
+    "text": "【金融】上市\n定义：上市是指公司股票在证券交易所公开交易的过程。上市可以为企业筹集资金、提升知名度，但也需要履行信息披露等义务。\n应用场景：该概念在金融领域有广泛应用。",
+    "category": "金融",
+    "quality_score": 0.857,
+    "type": "structured",
+    "source": "knowledge_base_structured",
+    "lineage": {
+      "seed_source": "knowledge_base",
+      "transformations": [
+        "structure_format"
+      ],
+      "quality_checks": [
+        "length_check",
+        "format_check"
+      ],
+      "parent_id": null,
+      "created_at": "2026-02-21T02:34:59.419271",
+      "version": "2.0.0",
+      "chain_hash": "8b6fa20f4157cbac"
+    }
+  },
+  {
+    "id": 91,
+    "word": "律师",
+    "text": "【法律】律师\n定义：律师是依法取得执业证书，为当事人提供法律服务的专业人员。律师在维护当事人合法权益方面发挥重要作用。\n应用场景：该概念在法律领域有广泛应用。",
+    "category": "法律",
+    "quality_score": 0.829,
+    "type": "structured",
+    "source": "knowledge_base_structured",
+    "lineage": {
+      "seed_source": "knowledge_base",
+      "transformations": [
+        "structure_format"
+      ],
+      "quality_checks": [
+        "length_check",
+        "format_check"
+      ],
+      "parent_id": null,
+      "created_at": "2026-02-21T02:34:59.419277",
+      "version": "2.0.0",
+      "chain_hash": "8b6fa20f4157cbac"
+    }
+  },
+  {
+    "id": 92,
+    "word": "劳动合同法",
+    "text": "【劳动合同】劳动合同法\n定义：劳动合同法是规范劳动合同订立、履行、变更、解除和终止的法律。是劳动法律体系的重要组成部分。\n应用场景：该概念在劳动合同领域有广泛应用。",
+    "category": "劳动合同",
+    "quality_score": 0.922,
+    "type": "structured",
+    "source": "knowledge_base_structured",
+    "lineage": {
+      "seed_source": "knowledge_base",
+      "transformations": [
+        "structure_format"
+      ],
+      "quality_checks": [
+        "length_check",
+        "format_check"
+      ],
+      "parent_id": null,
+      "created_at": "2026-02-21T02:34:59.419282",
+      "version": "2.0.0",
+      "chain_hash": "8b6fa20f4157cbac"
+    }
+  },
+  {
+    "id": 93,
+    "word": "职业病",
+    "text": "【劳动合同】职业病\n定义：职业病是劳动者在职业活动中因接触职业病危害因素引起的疾病。职业病诊断需要由专门机构进行。\n应用场景：该概念在劳动合同领域有广泛应用。",
+    "category": "劳动合同",
+    "quality_score": 0.835,
+    "type": "structured",
+    "source": "knowledge_base_structured",
+    "lineage": {
+      "seed_source": "knowledge_base",
+      "transformations": [
+        "structure_format"
+      ],
+      "quality_checks": [
+        "length_check",
+        "format_check"
+      ],
+      "parent_id": null,
+      "created_at": "2026-02-21T02:34:59.419288",
+      "version": "2.0.0",
+      "chain_hash": "8b6fa20f4157cbac"
+    }
+  },
+  {
+    "id": 94,
+    "word": "劳动纪律",
+    "text": "【劳动合同】劳动纪律\n定义：劳动纪律是用人单位制定的规范员工行为的规则。严重违反劳动纪律的，用人单位可以解除劳动合同。\n应用场景：该概念在劳动合同领域有广泛应用。",
+    "category": "劳动合同",
+    "quality_score": 0.839,
+    "type": "structured",
+    "source": "knowledge_base_structured",
+    "lineage": {
+      "seed_source": "knowledge_base",
+      "transformations": [
+        "structure_format"
+      ],
+      "quality_checks": [
+        "length_check",
+        "format_check"
+      ],
+      "parent_id": null,
+      "created_at": "2026-02-21T02:34:59.419294",
+      "version": "2.0.0",
+      "chain_hash": "8b6fa20f4157cbac"
+    }
+  },
+  {
+    "id": 95,
+    "word": "行政法",
+    "text": "【法律】行政法\n定义：行政法是调整行政关系的法律规范。行政法规范行政机关的权力行使，保护公民、法人和其他组织的合法权益。\n应用场景：该概念在法律领域有广泛应用。",
+    "category": "法律",
+    "quality_score": 0.829,
+    "type": "structured",
+    "source": "knowledge_base_structured",
+    "lineage": {
+      "seed_source": "knowledge_base",
+      "transformations": [
+        "structure_format"
+      ],
+      "quality_checks": [
+        "length_check",
+        "format_check"
+      ],
+      "parent_id": null,
+      "created_at": "2026-02-21T02:34:59.419299",
+      "version": "2.0.0",
+      "chain_hash": "8b6fa20f4157cbac"
+    }
+  },
+  {
+    "id": 96,
+    "word": "外科",
+    "text": "【医疗】外科\n定义：外科是以手术为主要治疗手段的医学专科。包括普通外科、骨科、神经外科、心胸外科等多个亚专科。\n应用场景：该概念在医疗领域有广泛应用。",
+    "category": "医疗",
+    "quality_score": 0.897,
+    "type": "structured",
+    "source": "knowledge_base_structured",
+    "lineage": {
+      "seed_source": "knowledge_base",
+      "transformations": [
+        "structure_format"
+      ],
+      "quality_checks": [
+        "length_check",
+        "format_check"
+      ],
+      "parent_id": null,
+      "created_at": "2026-02-21T02:34:59.419305",
+      "version": "2.0.0",
+      "chain_hash": "8b6fa20f4157cbac"
+    }
+  },
+  {
+    "id": 97,
+    "word": "律师",
+    "text": "【法律】律师\n定义：律师是依法取得执业证书，为当事人提供法律服务的专业人员。律师在维护当事人合法权益方面发挥重要作用。\n应用场景：该概念在法律领域有广泛应用。",
+    "category": "法律",
+    "quality_score": 0.836,
+    "type": "structured",
+    "source": "knowledge_base_structured",
+    "lineage": {
+      "seed_source": "knowledge_base",
+      "transformations": [
+        "structure_format"
+      ],
+      "quality_checks": [
+        "length_check",
+        "format_check"
+      ],
+      "parent_id": null,
+      "created_at": "2026-02-21T02:34:59.419310",
+      "version": "2.0.0",
+      "chain_hash": "8b6fa20f4157cbac"
+    }
+  },
+  {
+    "id": 98,
+    "word": "仲裁",
+    "text": "【法律】仲裁\n定义：仲裁是由仲裁机构裁决纠纷的法律程序。仲裁具有一裁终局、保密性强等特点。\n应用场景：该概念在法律领域有广泛应用。",
+    "category": "法律",
+    "quality_score": 0.943,
+    "type": "structured",
+    "source": "knowledge_base_structured",
+    "lineage": {
+      "seed_source": "knowledge_base",
+      "transformations": [
+        "structure_format"
+      ],
+      "quality_checks": [
+        "length_check",
+        "format_check"
+      ],
+      "parent_id": null,
+      "created_at": "2026-02-21T02:34:59.419315",
+      "version": "2.0.0",
+      "chain_hash": "8b6fa20f4157cbac"
+    }
+  },
+  {
+    "id": 99,
+    "word": "操作系统",
+    "text": "【科技】操作系统\n定义：操作系统是管理计算机硬件和软件资源的系统软件。操作系统是计算机运行的基础。\n应用场景：该概念在科技领域有广泛应用。",
+    "category": "科技",
+    "quality_score": 0.83,
+    "type": "structured",
+    "source": "knowledge_base_structured",
+    "lineage": {
+      "seed_source": "knowledge_base",
+      "transformations": [
+        "structure_format"
+      ],
+      "quality_checks": [
+        "length_check",
+        "format_check"
+      ],
+      "parent_id": null,
+      "created_at": "2026-02-21T02:34:59.419320",
+      "version": "2.0.0",
+      "chain_hash": "8b6fa20f4157cbac"
+    }
+  },
+  {
+    "id": 100,
+    "word": "财政政策",
+    "text": "【金融】财政政策\n定义：财政政策是政府通过税收和支出调节经济活动的政策。包括扩张性财政政策、紧缩性财政政策等类型，是宏观经济调控的重要手段。\n应用场景：该概念在金融领域有广泛应用。",
+    "category": "金融",
+    "quality_score": 0.915,
+    "type": "structured",
+    "source": "knowledge_base_structured",
+    "lineage": {
+      "seed_source": "knowledge_base",
+      "transformations": [
+        "structure_format"
+      ],
+      "quality_checks": [
+        "length_check",
+        "format_check"
+      ],
+      "parent_id": null,
+      "created_at": "2026-02-21T02:34:59.419325",
+      "version": "2.0.0",
+      "chain_hash": "8b6fa20f4157cbac"
+    }
+  }
+]

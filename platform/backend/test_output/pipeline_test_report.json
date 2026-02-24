@@ -1,0 +1,55 @@
+{
+  "test_time": "2026-02-22T16:25:21.733722",
+  "stages": {
+    "templates": {
+      "domains": [
+        "旅游",
+        "教育",
+        "法律",
+        "人工智能",
+        "餐饮",
+        "劳动合同",
+        "科技",
+        "医疗",
+        "电商",
+        "金融"
+      ],
+      "templates_count": 160,
+      "variations_count": 155,
+      "structures_count": 80,
+      "status": "OK"
+    },
+    "generation": {
+      "count": 5,
+      "domain": "人工智能",
+      "sample": "【AI知识】参考:。",
+      "status": "OK"
+    },
+    "quality_control": {
+      "input_count": 5,
+      "output_count": 5,
+      "pass_rate": 1.0,
+      "status": "OK"
+    },
+    "deduplication": {
+      "status": "SKIPPED",
+      "reason": "模块未安装"
+    },
+    "sanitization": {
+      "input_count": 5,
+      "output_count": 5,
+      "status": "OK"
+    },
+    "format_conversion": {
+      "pretrain_count": 5,
+      "instruction_count": 5,
+      "status": "OK"
+    },
+    "lineage": {
+      "count": 5,
+      "status": "OK"
+    }
+  },
+  "errors": [],
+  "success": true
+}

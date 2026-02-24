@@ -1,0 +1,47 @@
+[
+  {
+    "id": "0",
+    "term": "AI",
+    "definition": "AI是人工智能领域的重要概念，具有广泛的应用价值。",
+    "category": "人工智能",
+    "domain": "人工智能",
+    "source": "sample",
+    "generated_at": "2026-02-17T21:41:45.267312"
+  },
+  {
+    "id": "1",
+    "term": "机器学习",
+    "definition": "机器学习是人工智能领域的重要概念，具有广泛的应用价值。",
+    "category": "人工智能",
+    "domain": "人工智能",
+    "source": "sample",
+    "generated_at": "2026-02-17T21:41:45.267312"
+  },
+  {
+    "id": "2",
+    "term": "深度学习",
+    "definition": "深度学习是人工智能领域的重要概念，具有广泛的应用价值。",
+    "category": "人工智能",
+    "domain": "人工智能",
+    "source": "sample",
+    "generated_at": "2026-02-17T21:41:45.267312"
+  },
+  {
+    "id": "3",
+    "term": "神经网络",
+    "definition": "神经网络是人工智能领域的重要概念，具有广泛的应用价值。",
+    "category": "人工智能",
+    "domain": "人工智能",
+    "source": "sample",
+    "generated_at": "2026-02-17T21:41:45.267312"
+  },
+  {
+    "id": "4",
+    "term": "自然语言处理",
+    "definition": "自然语言处理是人工智能领域的重要概念，具有广泛的应用价值。",
+    "category": "人工智能",
+    "domain": "人工智能",
+    "source": "sample",
+    "generated_at": "2026-02-17T21:41:45.267312"
+  }
+]

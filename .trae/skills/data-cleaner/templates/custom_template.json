@@ -1,0 +1,12 @@
+{
+  "name": "自定义模板",
+  "format": "json",
+  "template": {
+    "id": "{{id}}",
+    "word": "{{word}}",
+    "definition": "{{definition}}",
+    "category": "{{category}}",
+    "source": "{{source}}",
+    "generated_at": "{{generated_at}}"
+  }
+}

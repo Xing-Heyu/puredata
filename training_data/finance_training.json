@@ -1,0 +1,1302 @@
+[
+  {
+    "id": 0,
+    "word": "stock",
+    "text": "stock means stock is an important concept..",
+    "template": "{word} means {definition}....",
+    "source": "generated",
+    "word_zh": "stock",
+    "category": "金融",
+    "generated_at": "2026-02-17T23:20:19.136450"
+  },
+  {
+    "id": 0,
+    "word": "bond",
+    "text": "bond means Evidence of a long-term debt, by which the bond issuer (the borrower) is obliged to pay interest when due, and repay the principal at maturity, as specified on the face of the bond certificate. The rights of the holder are specified in the bond indenture, which contains the legal terms and conditions under which the bond was issued. Bonds are available in two forms: registered bonds, and bearer bonds..",
+    "template": "{word} means {definition}....",
+    "source": "api:free_dict",
+    "word_zh": "bond",
+    "category": "金融",
+    "generated_at": "2026-02-17T23:20:19.160565"
+  },
+  {
+    "id": 0,
+    "word": "investment",
+    "text": "investment means The act of investing, or state of being invested..",
+    "template": "{word} means {definition}....",
+    "source": "api:free_dict",
+    "word_zh": "investment",
+    "category": "金融",
+    "generated_at": "2026-02-17T23:20:19.181883"
+  },
+  {
+    "id": 0,
+    "word": "banking",
+    "text": "Unlike opposite, banking implies To deal with a bank or financial institution, or for an institution to provide financial services to a client..",
+    "template": "Unlike {antonym}, {word} impli...",
+    "source": "api:free_dict",
+    "word_zh": "banking",
+    "category": "金融",
+    "generated_at": "2026-02-17T23:20:19.202869"
+  },
+  {
+    "id": 0,
+    "word": "finance",
+    "text": "The word \"finance\" refers to The management of money and other assets..",
+    "template": "The word \"{word}\" refers to {d...",
+    "source": "api:free_dict",
+    "word_zh": "finance",
+    "category": "金融",
+    "generated_at": "2026-02-17T23:20:19.224336"
+  },
+  {
+    "id": 0,
+    "word": "trading",
+    "text": "trading means trading is an important concept..",
+    "template": "{word} means {definition}....",
+    "source": "generated",
+    "word_zh": "trading",
+    "category": "金融",
+    "generated_at": "2026-02-17T23:20:20.878253"
+  },
+  {
+    "id": 0,
+    "word": "asset",
+    "text": "What does asset mean? It means Something or someone of any value; any portion of one's property or effects so considered..",
+    "template": "What does {word} mean? It mean...",
+    "source": "api:free_dict",
+    "word_zh": "asset",
+    "category": "金融",
+    "generated_at": "2026-02-17T23:20:20.910315"
+  },
+  {
+    "id": 0,
+    "word": "portfolio",
+    "text": "portfolio means A case for carrying papers, drawings, photographs, maps and other flat documents..",
+    "template": "{word} means {definition}....",
+    "source": "api:free_dict",
+    "word_zh": "portfolio",
+    "category": "金融",
+    "generated_at": "2026-02-17T23:20:20.941662"
+  },
+  {
+    "id": 1,
+    "word": "ministry",
+    "text": "Ministry is similar to portfolio, meaning A case for carrying papers, drawings, photographs, maps and other flat documents.",
+    "template": "synonym_sentence",
+    "source": "generated_from_synonym",
+    "word_zh": "portfolio",
+    "category": "金融",
+    "generated_at": "2026-02-17T23:20:20.941669"
+  },
+  {
+    "id": 0,
+    "word": "dividend",
+    "text": "dividend means A number or expression that is to be divided by another..",
+    "template": "{word} means {definition}....",
+    "source": "api:free_dict",
+    "word_zh": "dividend",
+    "category": "金融",
+    "generated_at": "2026-02-17T23:20:20.969194"
+  },
+  {
+    "id": 0,
+    "word": "interest",
+    "text": "What does interest mean? It means The price paid for obtaining, or price received for providing, money or goods in a credit transaction, calculated as a fraction of the amount or value of what was borrowed..",
+    "template": "What does {word} mean? It mean...",
+    "source": "api:free_dict",
+    "word_zh": "interest",
+    "category": "金融",
+    "generated_at": "2026-02-17T23:20:20.990895"
+  },
+  {
+    "id": 1,
+    "word": "cost of money",
+    "text": "Cost of money is similar to interest, meaning The price paid for obtaining, or price received for providing, money or goods in a credit transaction, calculated as a fraction of the amount or value of what was borrowed.",
+    "template": "synonym_sentence",
+    "source": "generated_from_synonym",
+    "word_zh": "interest",
+    "category": "金融",
+    "generated_at": "2026-02-17T23:20:20.990901"
+  },
+  {
+    "id": 2,
+    "word": "oker",
+    "text": "Oker is similar to interest, meaning The price paid for obtaining, or price received for providing, money or goods in a credit transaction, calculated as a fraction of the amount or value of what was borrowed.",
+    "template": "synonym_sentence",
+    "source": "generated_from_synonym",
+    "word_zh": "interest",
+    "category": "金融",
+    "generated_at": "2026-02-17T23:20:20.990902"
+  },
+  {
+    "id": 0,
+    "word": "stock",
+    "text": "The term stock can be understood as stock is an important concept..",
+    "template": "The term {word} can be underst...",
+    "source": "generated",
+    "word_zh": "stock",
+    "category": "金融",
+    "generated_at": "2026-02-17T23:20:21.972613"
+  },
+  {
+    "id": 0,
+    "word": "bond",
+    "text": "bond: Evidence of a long-term debt, by which the bond issuer (the borrower) is obliged to pay interest when due, and repay the principal at maturity, as specified on the face of the bond certificate. The rights of the holder are specified in the bond indenture, which contains the legal terms and conditions under which the bond was issued. Bonds are available in two forms: registered bonds, and bearer bonds..",
+    "template": "{word}: {definition}....",
+    "source": "api:free_dict",
+    "word_zh": "bond",
+    "category": "金融",
+    "generated_at": "2026-02-17T23:20:21.998035"
+  },
+  {
+    "id": 0,
+    "word": "investment",
+    "text": "investment: The act of investing, or state of being invested..",
+    "template": "{word}: {definition}....",
+    "source": "api:free_dict",
+    "word_zh": "investment",
+    "category": "金融",
+    "generated_at": "2026-02-17T23:20:22.020775"
+  },
+  {
+    "id": 0,
+    "word": "banking",
+    "text": "Unlike opposite, banking implies To deal with a bank or financial institution, or for an institution to provide financial services to a client..",
+    "template": "Unlike {antonym}, {word} impli...",
+    "source": "api:free_dict",
+    "word_zh": "banking",
+    "category": "金融",
+    "generated_at": "2026-02-17T23:20:22.042477"
+  },
+  {
+    "id": 0,
+    "word": "finance",
+    "text": "finance: The management of money and other assets..",
+    "template": "{word}: {definition}....",
+    "source": "api:free_dict",
+    "word_zh": "finance",
+    "category": "金融",
+    "generated_at": "2026-02-17T23:20:22.063713"
+  },
+  {
+    "id": 0,
+    "word": "trading",
+    "text": "trading: trading is an important concept..",
+    "template": "{word}: {definition}....",
+    "source": "generated",
+    "word_zh": "trading",
+    "category": "金融",
+    "generated_at": "2026-02-17T23:20:22.554835"
+  },
+  {
+    "id": 0,
+    "word": "asset",
+    "text": "The term asset can be understood as Something or someone of any value; any portion of one's property or effects so considered..",
+    "template": "The term {word} can be underst...",
+    "source": "api:free_dict",
+    "word_zh": "asset",
+    "category": "金融",
+    "generated_at": "2026-02-17T23:20:22.579641"
+  },
+  {
+    "id": 0,
+    "word": "portfolio",
+    "text": "Unlike opposite, portfolio implies A case for carrying papers, drawings, photographs, maps and other flat documents..",
+    "template": "Unlike {antonym}, {word} impli...",
+    "source": "api:free_dict",
+    "word_zh": "portfolio",
+    "category": "金融",
+    "generated_at": "2026-02-17T23:20:22.601358"
+  },
+  {
+    "id": 1,
+    "word": "ministry",
+    "text": "Ministry is similar to portfolio, meaning A case for carrying papers, drawings, photographs, maps and other flat documents.",
+    "template": "synonym_sentence",
+    "source": "generated_from_synonym",
+    "word_zh": "portfolio",
+    "category": "金融",
+    "generated_at": "2026-02-17T23:20:22.601363"
+  },
+  {
+    "id": 0,
+    "word": "dividend",
+    "text": "dividend: A number or expression that is to be divided by another..",
+    "template": "{word}: {definition}....",
+    "source": "api:free_dict",
+    "word_zh": "dividend",
+    "category": "金融",
+    "generated_at": "2026-02-17T23:20:22.621658"
+  },
+  {
+    "id": 0,
+    "word": "interest",
+    "text": "What does interest mean? It means The price paid for obtaining, or price received for providing, money or goods in a credit transaction, calculated as a fraction of the amount or value of what was borrowed..",
+    "template": "What does {word} mean? It mean...",
+    "source": "api:free_dict",
+    "word_zh": "interest",
+    "category": "金融",
+    "generated_at": "2026-02-17T23:20:22.642186"
+  },
+  {
+    "id": 1,
+    "word": "cost of money",
+    "text": "Cost of money is similar to interest, meaning The price paid for obtaining, or price received for providing, money or goods in a credit transaction, calculated as a fraction of the amount or value of what was borrowed.",
+    "template": "synonym_sentence",
+    "source": "generated_from_synonym",
+    "word_zh": "interest",
+    "category": "金融",
+    "generated_at": "2026-02-17T23:20:22.642193"
+  },
+  {
+    "id": 2,
+    "word": "oker",
+    "text": "Oker is similar to interest, meaning The price paid for obtaining, or price received for providing, money or goods in a credit transaction, calculated as a fraction of the amount or value of what was borrowed.",
+    "template": "synonym_sentence",
+    "source": "generated_from_synonym",
+    "word_zh": "interest",
+    "category": "金融",
+    "generated_at": "2026-02-17T23:20:22.642194"
+  },
+  {
+    "id": 0,
+    "word": "stock",
+    "text": "The word \"stock\" refers to stock is an important concept..",
+    "template": "The word \"{word}\" refers to {d...",
+    "source": "generated",
+    "word_zh": "stock",
+    "category": "金融",
+    "generated_at": "2026-02-17T23:20:25.335232"
+  },
+  {
+    "id": 0,
+    "word": "bond",
+    "text": "The term bond can be understood as Evidence of a long-term debt, by which the bond issuer (the borrower) is obliged to pay interest when due, and repay the principal at maturity, as specified on the face of the bond certificate. The rights of the holder are specified in the bond indenture, which contains the legal terms and conditions under which the bond was issued. Bonds are available in two forms: registered bonds, and bearer bonds..",
+    "template": "The term {word} can be underst...",
+    "source": "api:free_dict",
+    "word_zh": "bond",
+    "category": "金融",
+    "generated_at": "2026-02-17T23:20:25.364961"
+  },
+  {
+    "id": 0,
+    "word": "investment",
+    "text": "The term investment can be understood as The act of investing, or state of being invested..",
+    "template": "The term {word} can be underst...",
+    "source": "api:free_dict",
+    "word_zh": "investment",
+    "category": "金融",
+    "generated_at": "2026-02-17T23:20:25.386380"
+  },
+  {
+    "id": 0,
+    "word": "banking",
+    "text": "The term banking can be understood as To deal with a bank or financial institution, or for an institution to provide financial services to a client..",
+    "template": "The term {word} can be underst...",
+    "source": "api:free_dict",
+    "word_zh": "banking",
+    "category": "金融",
+    "generated_at": "2026-02-17T23:20:25.410487"
+  },
+  {
+    "id": 0,
+    "word": "finance",
+    "text": "In the context of 金融, finance is defined as The management of money and other assets..",
+    "template": "In the context of {domain}, {w...",
+    "source": "api:free_dict",
+    "word_zh": "finance",
+    "category": "金融",
+    "generated_at": "2026-02-17T23:20:25.431230"
+  },
+  {
+    "id": 0,
+    "word": "trading",
+    "text": "The word \"trading\" refers to trading is an important concept..",
+    "template": "The word \"{word}\" refers to {d...",
+    "source": "generated",
+    "word_zh": "trading",
+    "category": "金融",
+    "generated_at": "2026-02-17T23:20:25.987656"
+  },
+  {
+    "id": 0,
+    "word": "asset",
+    "text": "What does asset mean? It means Something or someone of any value; any portion of one's property or effects so considered..",
+    "template": "What does {word} mean? It mean...",
+    "source": "api:free_dict",
+    "word_zh": "asset",
+    "category": "金融",
+    "generated_at": "2026-02-17T23:20:26.009475"
+  },
+  {
+    "id": 0,
+    "word": "portfolio",
+    "text": "portfolio means A case for carrying papers, drawings, photographs, maps and other flat documents..",
+    "template": "{word} means {definition}....",
+    "source": "api:free_dict",
+    "word_zh": "portfolio",
+    "category": "金融",
+    "generated_at": "2026-02-17T23:20:26.030160"
+  },
+  {
+    "id": 1,
+    "word": "ministry",
+    "text": "Ministry is similar to portfolio, meaning A case for carrying papers, drawings, photographs, maps and other flat documents.",
+    "template": "synonym_sentence",
+    "source": "generated_from_synonym",
+    "word_zh": "portfolio",
+    "category": "金融",
+    "generated_at": "2026-02-17T23:20:26.030167"
+  },
+  {
+    "id": 0,
+    "word": "dividend",
+    "text": "What does dividend mean? It means A number or expression that is to be divided by another..",
+    "template": "What does {word} mean? It mean...",
+    "source": "api:free_dict",
+    "word_zh": "dividend",
+    "category": "金融",
+    "generated_at": "2026-02-17T23:20:26.051417"
+  },
+  {
+    "id": 0,
+    "word": "interest",
+    "text": "The word \"interest\" refers to The price paid for obtaining, or price received for providing, money or goods in a credit transaction, calculated as a fraction of the amount or value of what was borrowed..",
+    "template": "The word \"{word}\" refers to {d...",
+    "source": "api:free_dict",
+    "word_zh": "interest",
+    "category": "金融",
+    "generated_at": "2026-02-17T23:20:26.071689"
+  },
+  {
+    "id": 1,
+    "word": "cost of money",
+    "text": "Cost of money is similar to interest, meaning The price paid for obtaining, or price received for providing, money or goods in a credit transaction, calculated as a fraction of the amount or value of what was borrowed.",
+    "template": "synonym_sentence",
+    "source": "generated_from_synonym",
+    "word_zh": "interest",
+    "category": "金融",
+    "generated_at": "2026-02-17T23:20:26.071695"
+  },
+  {
+    "id": 2,
+    "word": "oker",
+    "text": "Oker is similar to interest, meaning The price paid for obtaining, or price received for providing, money or goods in a credit transaction, calculated as a fraction of the amount or value of what was borrowed.",
+    "template": "synonym_sentence",
+    "source": "generated_from_synonym",
+    "word_zh": "interest",
+    "category": "金融",
+    "generated_at": "2026-02-17T23:20:26.071696"
+  },
+  {
+    "id": 0,
+    "word": "stock",
+    "text": "The word \"stock\" refers to stock is an important concept..",
+    "template": "The word \"{word}\" refers to {d...",
+    "source": "generated",
+    "word_zh": "stock",
+    "category": "金融",
+    "generated_at": "2026-02-17T23:20:26.784720"
+  },
+  {
+    "id": 0,
+    "word": "bond",
+    "text": "The word \"bond\" refers to Evidence of a long-term debt, by which the bond issuer (the borrower) is obliged to pay interest when due, and repay the principal at maturity, as specified on the face of the bond certificate. The rights of the holder are specified in the bond indenture, which contains the legal terms and conditions under which the bond was issued. Bonds are available in two forms: registered bonds, and bearer bonds..",
+    "template": "The word \"{word}\" refers to {d...",
+    "source": "api:free_dict",
+    "word_zh": "bond",
+    "category": "金融",
+    "generated_at": "2026-02-17T23:20:27.974605"
+  },
+  {
+    "id": 0,
+    "word": "investment",
+    "text": "Unlike divestment, investment implies The act of investing, or state of being invested..",
+    "template": "Unlike {antonym}, {word} impli...",
+    "source": "api:free_dict",
+    "word_zh": "investment",
+    "category": "金融",
+    "generated_at": "2026-02-17T23:20:27.997020"
+  },
+  {
+    "id": 0,
+    "word": "banking",
+    "text": "In the context of 金融, banking is defined as To deal with a bank or financial institution, or for an institution to provide financial services to a client..",
+    "template": "In the context of {domain}, {w...",
+    "source": "api:free_dict",
+    "word_zh": "banking",
+    "category": "金融",
+    "generated_at": "2026-02-17T23:20:28.016926"
+  },
+  {
+    "id": 0,
+    "word": "finance",
+    "text": "finance means The management of money and other assets..",
+    "template": "{word} means {definition}....",
+    "source": "api:free_dict",
+    "word_zh": "finance",
+    "category": "金融",
+    "generated_at": "2026-02-17T23:20:28.040543"
+  },
+  {
+    "id": 0,
+    "word": "trading",
+    "text": "In the context of 金融, trading is defined as trading is an important concept..",
+    "template": "In the context of {domain}, {w...",
+    "source": "generated",
+    "word_zh": "trading",
+    "category": "金融",
+    "generated_at": "2026-02-17T23:20:28.600265"
+  },
+  {
+    "id": 0,
+    "word": "asset",
+    "text": "In the context of 金融, asset is defined as Something or someone of any value; any portion of one's property or effects so considered..",
+    "template": "In the context of {domain}, {w...",
+    "source": "api:free_dict",
+    "word_zh": "asset",
+    "category": "金融",
+    "generated_at": "2026-02-17T23:20:28.631096"
+  },
+  {
+    "id": 0,
+    "word": "portfolio",
+    "text": "portfolio means A case for carrying papers, drawings, photographs, maps and other flat documents..",
+    "template": "{word} means {definition}....",
+    "source": "api:free_dict",
+    "word_zh": "portfolio",
+    "category": "金融",
+    "generated_at": "2026-02-17T23:20:28.652466"
+  },
+  {
+    "id": 1,
+    "word": "ministry",
+    "text": "Ministry is similar to portfolio, meaning A case for carrying papers, drawings, photographs, maps and other flat documents.",
+    "template": "synonym_sentence",
+    "source": "generated_from_synonym",
+    "word_zh": "portfolio",
+    "category": "金融",
+    "generated_at": "2026-02-17T23:20:28.652471"
+  },
+  {
+    "id": 0,
+    "word": "dividend",
+    "text": "What does dividend mean? It means A number or expression that is to be divided by another..",
+    "template": "What does {word} mean? It mean...",
+    "source": "api:free_dict",
+    "word_zh": "dividend",
+    "category": "金融",
+    "generated_at": "2026-02-17T23:20:28.672598"
+  },
+  {
+    "id": 0,
+    "word": "interest",
+    "text": "interest: The price paid for obtaining, or price received for providing, money or goods in a credit transaction, calculated as a fraction of the amount or value of what was borrowed..",
+    "template": "{word}: {definition}....",
+    "source": "api:free_dict",
+    "word_zh": "interest",
+    "category": "金融",
+    "generated_at": "2026-02-17T23:20:28.692575"
+  },
+  {
+    "id": 1,
+    "word": "cost of money",
+    "text": "Cost of money is similar to interest, meaning The price paid for obtaining, or price received for providing, money or goods in a credit transaction, calculated as a fraction of the amount or value of what was borrowed.",
+    "template": "synonym_sentence",
+    "source": "generated_from_synonym",
+    "word_zh": "interest",
+    "category": "金融",
+    "generated_at": "2026-02-17T23:20:28.692580"
+  },
+  {
+    "id": 2,
+    "word": "oker",
+    "text": "Oker is similar to interest, meaning The price paid for obtaining, or price received for providing, money or goods in a credit transaction, calculated as a fraction of the amount or value of what was borrowed.",
+    "template": "synonym_sentence",
+    "source": "generated_from_synonym",
+    "word_zh": "interest",
+    "category": "金融",
+    "generated_at": "2026-02-17T23:20:28.692581"
+  },
+  {
+    "id": 0,
+    "word": "stock",
+    "text": "stock: stock is an important concept..",
+    "template": "{word}: {definition}....",
+    "source": "generated",
+    "word_zh": "stock",
+    "category": "金融",
+    "generated_at": "2026-02-17T23:20:29.720999"
+  },
+  {
+    "id": 0,
+    "word": "bond",
+    "text": "bond means Evidence of a long-term debt, by which the bond issuer (the borrower) is obliged to pay interest when due, and repay the principal at maturity, as specified on the face of the bond certificate. The rights of the holder are specified in the bond indenture, which contains the legal terms and conditions under which the bond was issued. Bonds are available in two forms: registered bonds, and bearer bonds..",
+    "template": "{word} means {definition}....",
+    "source": "api:free_dict",
+    "word_zh": "bond",
+    "category": "金融",
+    "generated_at": "2026-02-17T23:20:29.745550"
+  },
+  {
+    "id": 0,
+    "word": "investment",
+    "text": "What does investment mean? It means The act of investing, or state of being invested..",
+    "template": "What does {word} mean? It mean...",
+    "source": "api:free_dict",
+    "word_zh": "investment",
+    "category": "金融",
+    "generated_at": "2026-02-17T23:20:29.768560"
+  },
+  {
+    "id": 0,
+    "word": "banking",
+    "text": "banking: To deal with a bank or financial institution, or for an institution to provide financial services to a client..",
+    "template": "{word}: {definition}....",
+    "source": "api:free_dict",
+    "word_zh": "banking",
+    "category": "金融",
+    "generated_at": "2026-02-17T23:20:29.790127"
+  },
+  {
+    "id": 0,
+    "word": "finance",
+    "text": "finance: The management of money and other assets..",
+    "template": "{word}: {definition}....",
+    "source": "api:free_dict",
+    "word_zh": "finance",
+    "category": "金融",
+    "generated_at": "2026-02-17T23:20:29.811466"
+  },
+  {
+    "id": 0,
+    "word": "trading",
+    "text": "The term trading can be understood as trading is an important concept..",
+    "template": "The term {word} can be underst...",
+    "source": "generated",
+    "word_zh": "trading",
+    "category": "金融",
+    "generated_at": "2026-02-17T23:20:30.606915"
+  },
+  {
+    "id": 0,
+    "word": "asset",
+    "text": "asset means Something or someone of any value; any portion of one's property or effects so considered..",
+    "template": "{word} means {definition}....",
+    "source": "api:free_dict",
+    "word_zh": "asset",
+    "category": "金融",
+    "generated_at": "2026-02-17T23:20:30.628751"
+  },
+  {
+    "id": 0,
+    "word": "portfolio",
+    "text": "The word \"portfolio\" refers to A case for carrying papers, drawings, photographs, maps and other flat documents..",
+    "template": "The word \"{word}\" refers to {d...",
+    "source": "api:free_dict",
+    "word_zh": "portfolio",
+    "category": "金融",
+    "generated_at": "2026-02-17T23:20:30.650715"
+  },
+  {
+    "id": 1,
+    "word": "ministry",
+    "text": "Ministry is similar to portfolio, meaning A case for carrying papers, drawings, photographs, maps and other flat documents.",
+    "template": "synonym_sentence",
+    "source": "generated_from_synonym",
+    "word_zh": "portfolio",
+    "category": "金融",
+    "generated_at": "2026-02-17T23:20:30.650721"
+  },
+  {
+    "id": 0,
+    "word": "dividend",
+    "text": "What does dividend mean? It means A number or expression that is to be divided by another..",
+    "template": "What does {word} mean? It mean...",
+    "source": "api:free_dict",
+    "word_zh": "dividend",
+    "category": "金融",
+    "generated_at": "2026-02-17T23:20:30.669211"
+  },
+  {
+    "id": 0,
+    "word": "interest",
+    "text": "Unlike opposite, interest implies The price paid for obtaining, or price received for providing, money or goods in a credit transaction, calculated as a fraction of the amount or value of what was borrowed..",
+    "template": "Unlike {antonym}, {word} impli...",
+    "source": "api:free_dict",
+    "word_zh": "interest",
+    "category": "金融",
+    "generated_at": "2026-02-17T23:20:30.686692"
+  },
+  {
+    "id": 1,
+    "word": "cost of money",
+    "text": "Cost of money is similar to interest, meaning The price paid for obtaining, or price received for providing, money or goods in a credit transaction, calculated as a fraction of the amount or value of what was borrowed.",
+    "template": "synonym_sentence",
+    "source": "generated_from_synonym",
+    "word_zh": "interest",
+    "category": "金融",
+    "generated_at": "2026-02-17T23:20:30.686697"
+  },
+  {
+    "id": 2,
+    "word": "oker",
+    "text": "Oker is similar to interest, meaning The price paid for obtaining, or price received for providing, money or goods in a credit transaction, calculated as a fraction of the amount or value of what was borrowed.",
+    "template": "synonym_sentence",
+    "source": "generated_from_synonym",
+    "word_zh": "interest",
+    "category": "金融",
+    "generated_at": "2026-02-17T23:20:30.686698"
+  },
+  {
+    "id": 0,
+    "word": "stock",
+    "text": "The term stock can be understood as stock is an important concept..",
+    "template": "The term {word} can be underst...",
+    "source": "generated",
+    "word_zh": "stock",
+    "category": "金融",
+    "generated_at": "2026-02-17T23:20:31.303908"
+  },
+  {
+    "id": 0,
+    "word": "bond",
+    "text": "What does bond mean? It means Evidence of a long-term debt, by which the bond issuer (the borrower) is obliged to pay interest when due, and repay the principal at maturity, as specified on the face of the bond certificate. The rights of the holder are specified in the bond indenture, which contains the legal terms and conditions under which the bond was issued. Bonds are available in two forms: registered bonds, and bearer bonds..",
+    "template": "What does {word} mean? It mean...",
+    "source": "api:free_dict",
+    "word_zh": "bond",
+    "category": "金融",
+    "generated_at": "2026-02-17T23:20:31.328945"
+  },
+  {
+    "id": 0,
+    "word": "investment",
+    "text": "The word \"investment\" refers to The act of investing, or state of being invested..",
+    "template": "The word \"{word}\" refers to {d...",
+    "source": "api:free_dict",
+    "word_zh": "investment",
+    "category": "金融",
+    "generated_at": "2026-02-17T23:20:31.351974"
+  },
+  {
+    "id": 0,
+    "word": "banking",
+    "text": "What does banking mean? It means To deal with a bank or financial institution, or for an institution to provide financial services to a client..",
+    "template": "What does {word} mean? It mean...",
+    "source": "api:free_dict",
+    "word_zh": "banking",
+    "category": "金融",
+    "generated_at": "2026-02-17T23:20:31.371207"
+  },
+  {
+    "id": 0,
+    "word": "finance",
+    "text": "What does finance mean? It means The management of money and other assets..",
+    "template": "What does {word} mean? It mean...",
+    "source": "api:free_dict",
+    "word_zh": "finance",
+    "category": "金融",
+    "generated_at": "2026-02-17T23:20:31.390118"
+  },
+  {
+    "id": 0,
+    "word": "trading",
+    "text": "trading: trading is an important concept..",
+    "template": "{word}: {definition}....",
+    "source": "generated",
+    "word_zh": "trading",
+    "category": "金融",
+    "generated_at": "2026-02-17T23:20:32.051208"
+  },
+  {
+    "id": 0,
+    "word": "asset",
+    "text": "What does asset mean? It means Something or someone of any value; any portion of one's property or effects so considered..",
+    "template": "What does {word} mean? It mean...",
+    "source": "api:free_dict",
+    "word_zh": "asset",
+    "category": "金融",
+    "generated_at": "2026-02-17T23:20:32.074966"
+  },
+  {
+    "id": 0,
+    "word": "portfolio",
+    "text": "portfolio means A case for carrying papers, drawings, photographs, maps and other flat documents..",
+    "template": "{word} means {definition}....",
+    "source": "api:free_dict",
+    "word_zh": "portfolio",
+    "category": "金融",
+    "generated_at": "2026-02-17T23:20:32.097830"
+  },
+  {
+    "id": 1,
+    "word": "ministry",
+    "text": "Ministry is similar to portfolio, meaning A case for carrying papers, drawings, photographs, maps and other flat documents.",
+    "template": "synonym_sentence",
+    "source": "generated_from_synonym",
+    "word_zh": "portfolio",
+    "category": "金融",
+    "generated_at": "2026-02-17T23:20:32.097835"
+  },
+  {
+    "id": 0,
+    "word": "dividend",
+    "text": "In the context of 金融, dividend is defined as A number or expression that is to be divided by another..",
+    "template": "In the context of {domain}, {w...",
+    "source": "api:free_dict",
+    "word_zh": "dividend",
+    "category": "金融",
+    "generated_at": "2026-02-17T23:20:32.117642"
+  },
+  {
+    "id": 0,
+    "word": "interest",
+    "text": "The word \"interest\" refers to The price paid for obtaining, or price received for providing, money or goods in a credit transaction, calculated as a fraction of the amount or value of what was borrowed..",
+    "template": "The word \"{word}\" refers to {d...",
+    "source": "api:free_dict",
+    "word_zh": "interest",
+    "category": "金融",
+    "generated_at": "2026-02-17T23:20:32.137477"
+  },
+  {
+    "id": 1,
+    "word": "cost of money",
+    "text": "Cost of money is similar to interest, meaning The price paid for obtaining, or price received for providing, money or goods in a credit transaction, calculated as a fraction of the amount or value of what was borrowed.",
+    "template": "synonym_sentence",
+    "source": "generated_from_synonym",
+    "word_zh": "interest",
+    "category": "金融",
+    "generated_at": "2026-02-17T23:20:32.137483"
+  },
+  {
+    "id": 2,
+    "word": "oker",
+    "text": "Oker is similar to interest, meaning The price paid for obtaining, or price received for providing, money or goods in a credit transaction, calculated as a fraction of the amount or value of what was borrowed.",
+    "template": "synonym_sentence",
+    "source": "generated_from_synonym",
+    "word_zh": "interest",
+    "category": "金融",
+    "generated_at": "2026-02-17T23:20:32.137484"
+  },
+  {
+    "id": 0,
+    "word": "stock",
+    "text": "What does stock mean? It means stock is an important concept..",
+    "template": "What does {word} mean? It mean...",
+    "source": "generated",
+    "word_zh": "stock",
+    "category": "金融",
+    "generated_at": "2026-02-17T23:20:32.777553"
+  },
+  {
+    "id": 0,
+    "word": "bond",
+    "text": "bond: Evidence of a long-term debt, by which the bond issuer (the borrower) is obliged to pay interest when due, and repay the principal at maturity, as specified on the face of the bond certificate. The rights of the holder are specified in the bond indenture, which contains the legal terms and conditions under which the bond was issued. Bonds are available in two forms: registered bonds, and bearer bonds..",
+    "template": "{word}: {definition}....",
+    "source": "api:free_dict",
+    "word_zh": "bond",
+    "category": "金融",
+    "generated_at": "2026-02-17T23:20:32.805151"
+  },
+  {
+    "id": 0,
+    "word": "investment",
+    "text": "The term investment can be understood as The act of investing, or state of being invested..",
+    "template": "The term {word} can be underst...",
+    "source": "api:free_dict",
+    "word_zh": "investment",
+    "category": "金融",
+    "generated_at": "2026-02-17T23:20:32.828723"
+  },
+  {
+    "id": 0,
+    "word": "banking",
+    "text": "The term banking can be understood as To deal with a bank or financial institution, or for an institution to provide financial services to a client..",
+    "template": "The term {word} can be underst...",
+    "source": "api:free_dict",
+    "word_zh": "banking",
+    "category": "金融",
+    "generated_at": "2026-02-17T23:20:32.847685"
+  },
+  {
+    "id": 0,
+    "word": "finance",
+    "text": "The word \"finance\" refers to The management of money and other assets..",
+    "template": "The word \"{word}\" refers to {d...",
+    "source": "api:free_dict",
+    "word_zh": "finance",
+    "category": "金融",
+    "generated_at": "2026-02-17T23:20:32.891060"
+  },
+  {
+    "id": 0,
+    "word": "trading",
+    "text": "The term trading can be understood as trading is an important concept..",
+    "template": "The term {word} can be underst...",
+    "source": "generated",
+    "word_zh": "trading",
+    "category": "金融",
+    "generated_at": "2026-02-17T23:20:34.198469"
+  },
+  {
+    "id": 0,
+    "word": "asset",
+    "text": "What does asset mean? It means Something or someone of any value; any portion of one's property or effects so considered..",
+    "template": "What does {word} mean? It mean...",
+    "source": "api:free_dict",
+    "word_zh": "asset",
+    "category": "金融",
+    "generated_at": "2026-02-17T23:20:34.221915"
+  },
+  {
+    "id": 0,
+    "word": "portfolio",
+    "text": "The word \"portfolio\" refers to A case for carrying papers, drawings, photographs, maps and other flat documents..",
+    "template": "The word \"{word}\" refers to {d...",
+    "source": "api:free_dict",
+    "word_zh": "portfolio",
+    "category": "金融",
+    "generated_at": "2026-02-17T23:20:34.249798"
+  },
+  {
+    "id": 1,
+    "word": "ministry",
+    "text": "Ministry is similar to portfolio, meaning A case for carrying papers, drawings, photographs, maps and other flat documents.",
+    "template": "synonym_sentence",
+    "source": "generated_from_synonym",
+    "word_zh": "portfolio",
+    "category": "金融",
+    "generated_at": "2026-02-17T23:20:34.249807"
+  },
+  {
+    "id": 0,
+    "word": "dividend",
+    "text": "The word \"dividend\" refers to A number or expression that is to be divided by another..",
+    "template": "The word \"{word}\" refers to {d...",
+    "source": "api:free_dict",
+    "word_zh": "dividend",
+    "category": "金融",
+    "generated_at": "2026-02-17T23:20:34.282546"
+  },
+  {
+    "id": 0,
+    "word": "interest",
+    "text": "interest means The price paid for obtaining, or price received for providing, money or goods in a credit transaction, calculated as a fraction of the amount or value of what was borrowed..",
+    "template": "{word} means {definition}....",
+    "source": "api:free_dict",
+    "word_zh": "interest",
+    "category": "金融",
+    "generated_at": "2026-02-17T23:20:34.311447"
+  },
+  {
+    "id": 1,
+    "word": "cost of money",
+    "text": "Cost of money is similar to interest, meaning The price paid for obtaining, or price received for providing, money or goods in a credit transaction, calculated as a fraction of the amount or value of what was borrowed.",
+    "template": "synonym_sentence",
+    "source": "generated_from_synonym",
+    "word_zh": "interest",
+    "category": "金融",
+    "generated_at": "2026-02-17T23:20:34.311454"
+  },
+  {
+    "id": 2,
+    "word": "oker",
+    "text": "Oker is similar to interest, meaning The price paid for obtaining, or price received for providing, money or goods in a credit transaction, calculated as a fraction of the amount or value of what was borrowed.",
+    "template": "synonym_sentence",
+    "source": "generated_from_synonym",
+    "word_zh": "interest",
+    "category": "金融",
+    "generated_at": "2026-02-17T23:20:34.311455"
+  },
+  {
+    "id": 0,
+    "word": "stock",
+    "text": "The word \"stock\" refers to stock is an important concept..",
+    "template": "The word \"{word}\" refers to {d...",
+    "source": "generated",
+    "word_zh": "stock",
+    "category": "金融",
+    "generated_at": "2026-02-17T23:20:34.838488"
+  },
+  {
+    "id": 0,
+    "word": "bond",
+    "text": "What does bond mean? It means Evidence of a long-term debt, by which the bond issuer (the borrower) is obliged to pay interest when due, and repay the principal at maturity, as specified on the face of the bond certificate. The rights of the holder are specified in the bond indenture, which contains the legal terms and conditions under which the bond was issued. Bonds are available in two forms: registered bonds, and bearer bonds..",
+    "template": "What does {word} mean? It mean...",
+    "source": "api:free_dict",
+    "word_zh": "bond",
+    "category": "金融",
+    "generated_at": "2026-02-17T23:20:34.865488"
+  },
+  {
+    "id": 0,
+    "word": "investment",
+    "text": "The word \"investment\" refers to The act of investing, or state of being invested..",
+    "template": "The word \"{word}\" refers to {d...",
+    "source": "api:free_dict",
+    "word_zh": "investment",
+    "category": "金融",
+    "generated_at": "2026-02-17T23:20:34.886950"
+  },
+  {
+    "id": 0,
+    "word": "banking",
+    "text": "The word \"banking\" refers to To deal with a bank or financial institution, or for an institution to provide financial services to a client..",
+    "template": "The word \"{word}\" refers to {d...",
+    "source": "api:free_dict",
+    "word_zh": "banking",
+    "category": "金融",
+    "generated_at": "2026-02-17T23:20:34.909358"
+  },
+  {
+    "id": 0,
+    "word": "finance",
+    "text": "finance means The management of money and other assets..",
+    "template": "{word} means {definition}....",
+    "source": "api:free_dict",
+    "word_zh": "finance",
+    "category": "金融",
+    "generated_at": "2026-02-17T23:20:34.939832"
+  },
+  {
+    "id": 0,
+    "word": "trading",
+    "text": "trading means trading is an important concept..",
+    "template": "{word} means {definition}....",
+    "source": "generated",
+    "word_zh": "trading",
+    "category": "金融",
+    "generated_at": "2026-02-17T23:20:37.703794"
+  },
+  {
+    "id": 0,
+    "word": "asset",
+    "text": "In the context of 金融, asset is defined as Something or someone of any value; any portion of one's property or effects so considered..",
+    "template": "In the context of {domain}, {w...",
+    "source": "api:free_dict",
+    "word_zh": "asset",
+    "category": "金融",
+    "generated_at": "2026-02-17T23:20:37.728679"
+  },
+  {
+    "id": 0,
+    "word": "portfolio",
+    "text": "The term portfolio can be understood as A case for carrying papers, drawings, photographs, maps and other flat documents..",
+    "template": "The term {word} can be underst...",
+    "source": "api:free_dict",
+    "word_zh": "portfolio",
+    "category": "金融",
+    "generated_at": "2026-02-17T23:20:37.755929"
+  },
+  {
+    "id": 1,
+    "word": "ministry",
+    "text": "Ministry is similar to portfolio, meaning A case for carrying papers, drawings, photographs, maps and other flat documents.",
+    "template": "synonym_sentence",
+    "source": "generated_from_synonym",
+    "word_zh": "portfolio",
+    "category": "金融",
+    "generated_at": "2026-02-17T23:20:37.755935"
+  },
+  {
+    "id": 0,
+    "word": "dividend",
+    "text": "What does dividend mean? It means A number or expression that is to be divided by another..",
+    "template": "What does {word} mean? It mean...",
+    "source": "api:free_dict",
+    "word_zh": "dividend",
+    "category": "金融",
+    "generated_at": "2026-02-17T23:20:37.777616"
+  },
+  {
+    "id": 0,
+    "word": "interest",
+    "text": "The term interest can be understood as The price paid for obtaining, or price received for providing, money or goods in a credit transaction, calculated as a fraction of the amount or value of what was borrowed..",
+    "template": "The term {word} can be underst...",
+    "source": "api:free_dict",
+    "word_zh": "interest",
+    "category": "金融",
+    "generated_at": "2026-02-17T23:20:37.798753"
+  },
+  {
+    "id": 1,
+    "word": "cost of money",
+    "text": "Cost of money is similar to interest, meaning The price paid for obtaining, or price received for providing, money or goods in a credit transaction, calculated as a fraction of the amount or value of what was borrowed.",
+    "template": "synonym_sentence",
+    "source": "generated_from_synonym",
+    "word_zh": "interest",
+    "category": "金融",
+    "generated_at": "2026-02-17T23:20:37.798759"
+  },
+  {
+    "id": 2,
+    "word": "oker",
+    "text": "Oker is similar to interest, meaning The price paid for obtaining, or price received for providing, money or goods in a credit transaction, calculated as a fraction of the amount or value of what was borrowed.",
+    "template": "synonym_sentence",
+    "source": "generated_from_synonym",
+    "word_zh": "interest",
+    "category": "金融",
+    "generated_at": "2026-02-17T23:20:37.798759"
+  },
+  {
+    "id": 0,
+    "word": "stock",
+    "text": "Unlike opposite, stock implies stock is an important concept..",
+    "template": "Unlike {antonym}, {word} impli...",
+    "source": "generated",
+    "word_zh": "stock",
+    "category": "金融",
+    "generated_at": "2026-02-17T23:20:39.153226"
+  },
+  {
+    "id": 0,
+    "word": "bond",
+    "text": "bond means Evidence of a long-term debt, by which the bond issuer (the borrower) is obliged to pay interest when due, and repay the principal at maturity, as specified on the face of the bond certificate. The rights of the holder are specified in the bond indenture, which contains the legal terms and conditions under which the bond was issued. Bonds are available in two forms: registered bonds, and bearer bonds..",
+    "template": "{word} means {definition}....",
+    "source": "api:free_dict",
+    "word_zh": "bond",
+    "category": "金融",
+    "generated_at": "2026-02-17T23:20:39.176992"
+  },
+  {
+    "id": 0,
+    "word": "investment",
+    "text": "The term investment can be understood as The act of investing, or state of being invested..",
+    "template": "The term {word} can be underst...",
+    "source": "api:free_dict",
+    "word_zh": "investment",
+    "category": "金融",
+    "generated_at": "2026-02-17T23:20:39.198090"
+  },
+  {
+    "id": 0,
+    "word": "banking",
+    "text": "The term banking can be understood as To deal with a bank or financial institution, or for an institution to provide financial services to a client..",
+    "template": "The term {word} can be underst...",
+    "source": "api:free_dict",
+    "word_zh": "banking",
+    "category": "金融",
+    "generated_at": "2026-02-17T23:20:39.218623"
+  },
+  {
+    "id": 0,
+    "word": "finance",
+    "text": "The word \"finance\" refers to The management of money and other assets..",
+    "template": "The word \"{word}\" refers to {d...",
+    "source": "api:free_dict",
+    "word_zh": "finance",
+    "category": "金融",
+    "generated_at": "2026-02-17T23:20:39.239049"
+  },
+  {
+    "id": 0,
+    "word": "trading",
+    "text": "trading means trading is an important concept..",
+    "template": "{word} means {definition}....",
+    "source": "generated",
+    "word_zh": "trading",
+    "category": "金融",
+    "generated_at": "2026-02-17T23:20:43.859824"
+  },
+  {
+    "id": 0,
+    "word": "asset",
+    "text": "The term asset can be understood as Something or someone of any value; any portion of one's property or effects so considered..",
+    "template": "The term {word} can be underst...",
+    "source": "api:free_dict",
+    "word_zh": "asset",
+    "category": "金融",
+    "generated_at": "2026-02-17T23:20:43.886121"
+  },
+  {
+    "id": 0,
+    "word": "portfolio",
+    "text": "The word \"portfolio\" refers to A case for carrying papers, drawings, photographs, maps and other flat documents..",
+    "template": "The word \"{word}\" refers to {d...",
+    "source": "api:free_dict",
+    "word_zh": "portfolio",
+    "category": "金融",
+    "generated_at": "2026-02-17T23:20:43.910711"
+  },
+  {
+    "id": 1,
+    "word": "ministry",
+    "text": "Ministry is similar to portfolio, meaning A case for carrying papers, drawings, photographs, maps and other flat documents.",
+    "template": "synonym_sentence",
+    "source": "generated_from_synonym",
+    "word_zh": "portfolio",
+    "category": "金融",
+    "generated_at": "2026-02-17T23:20:43.910716"
+  },
+  {
+    "id": 0,
+    "word": "dividend",
+    "text": "dividend: A number or expression that is to be divided by another..",
+    "template": "{word}: {definition}....",
+    "source": "api:free_dict",
+    "word_zh": "dividend",
+    "category": "金融",
+    "generated_at": "2026-02-17T23:20:43.932957"
+  },
+  {
+    "id": 0,
+    "word": "interest",
+    "text": "interest means The price paid for obtaining, or price received for providing, money or goods in a credit transaction, calculated as a fraction of the amount or value of what was borrowed..",
+    "template": "{word} means {definition}....",
+    "source": "api:free_dict",
+    "word_zh": "interest",
+    "category": "金融",
+    "generated_at": "2026-02-17T23:20:43.954056"
+  },
+  {
+    "id": 1,
+    "word": "cost of money",
+    "text": "Cost of money is similar to interest, meaning The price paid for obtaining, or price received for providing, money or goods in a credit transaction, calculated as a fraction of the amount or value of what was borrowed.",
+    "template": "synonym_sentence",
+    "source": "generated_from_synonym",
+    "word_zh": "interest",
+    "category": "金融",
+    "generated_at": "2026-02-17T23:20:43.954062"
+  },
+  {
+    "id": 2,
+    "word": "oker",
+    "text": "Oker is similar to interest, meaning The price paid for obtaining, or price received for providing, money or goods in a credit transaction, calculated as a fraction of the amount or value of what was borrowed.",
+    "template": "synonym_sentence",
+    "source": "generated_from_synonym",
+    "word_zh": "interest",
+    "category": "金融",
+    "generated_at": "2026-02-17T23:20:43.954063"
+  },
+  {
+    "id": 0,
+    "word": "stock",
+    "text": "The term stock can be understood as stock is an important concept..",
+    "template": "The term {word} can be underst...",
+    "source": "generated",
+    "word_zh": "stock",
+    "category": "金融",
+    "generated_at": "2026-02-17T23:20:45.298822"
+  },
+  {
+    "id": 0,
+    "word": "bond",
+    "text": "What does bond mean? It means Evidence of a long-term debt, by which the bond issuer (the borrower) is obliged to pay interest when due, and repay the principal at maturity, as specified on the face of the bond certificate. The rights of the holder are specified in the bond indenture, which contains the legal terms and conditions under which the bond was issued. Bonds are available in two forms: registered bonds, and bearer bonds..",
+    "template": "What does {word} mean? It mean...",
+    "source": "api:free_dict",
+    "word_zh": "bond",
+    "category": "金融",
+    "generated_at": "2026-02-17T23:20:45.332936"
+  },
+  {
+    "id": 0,
+    "word": "investment",
+    "text": "investment: The act of investing, or state of being invested..",
+    "template": "{word}: {definition}....",
+    "source": "api:free_dict",
+    "word_zh": "investment",
+    "category": "金融",
+    "generated_at": "2026-02-17T23:20:45.353886"
+  },
+  {
+    "id": 0,
+    "word": "banking",
+    "text": "The term banking can be understood as To deal with a bank or financial institution, or for an institution to provide financial services to a client..",
+    "template": "The term {word} can be underst...",
+    "source": "api:free_dict",
+    "word_zh": "banking",
+    "category": "金融",
+    "generated_at": "2026-02-17T23:20:45.379975"
+  },
+  {
+    "id": 0,
+    "word": "finance",
+    "text": "What does finance mean? It means The management of money and other assets..",
+    "template": "What does {word} mean? It mean...",
+    "source": "api:free_dict",
+    "word_zh": "finance",
+    "category": "金融",
+    "generated_at": "2026-02-17T23:20:45.402433"
+  },
+  {
+    "id": 0,
+    "word": "trading",
+    "text": "Unlike opposite, trading implies trading is an important concept..",
+    "template": "Unlike {antonym}, {word} impli...",
+    "source": "generated",
+    "word_zh": "trading",
+    "category": "金融",
+    "generated_at": "2026-02-17T23:20:46.934885"
+  },
+  {
+    "id": 0,
+    "word": "asset",
+    "text": "The word \"asset\" refers to Something or someone of any value; any portion of one's property or effects so considered..",
+    "template": "The word \"{word}\" refers to {d...",
+    "source": "api:free_dict",
+    "word_zh": "asset",
+    "category": "金融",
+    "generated_at": "2026-02-17T23:20:47.103527"
+  },
+  {
+    "id": 0,
+    "word": "portfolio",
+    "text": "In the context of 金融, portfolio is defined as A case for carrying papers, drawings, photographs, maps and other flat documents..",
+    "template": "In the context of {domain}, {w...",
+    "source": "api:free_dict",
+    "word_zh": "portfolio",
+    "category": "金融",
+    "generated_at": "2026-02-17T23:20:47.122507"
+  },
+  {
+    "id": 1,
+    "word": "ministry",
+    "text": "Ministry is similar to portfolio, meaning A case for carrying papers, drawings, photographs, maps and other flat documents.",
+    "template": "synonym_sentence",
+    "source": "generated_from_synonym",
+    "word_zh": "portfolio",
+    "category": "金融",
+    "generated_at": "2026-02-17T23:20:47.122512"
+  },
+  {
+    "id": 0,
+    "word": "dividend",
+    "text": "dividend: A number or expression that is to be divided by another..",
+    "template": "{word}: {definition}....",
+    "source": "api:free_dict",
+    "word_zh": "dividend",
+    "category": "金融",
+    "generated_at": "2026-02-17T23:20:47.140723"
+  },
+  {
+    "id": 0,
+    "word": "interest",
+    "text": "The term interest can be understood as The price paid for obtaining, or price received for providing, money or goods in a credit transaction, calculated as a fraction of the amount or value of what was borrowed..",
+    "template": "The term {word} can be underst...",
+    "source": "api:free_dict",
+    "word_zh": "interest",
+    "category": "金融",
+    "generated_at": "2026-02-17T23:20:47.160205"
+  },
+  {
+    "id": 1,
+    "word": "cost of money",
+    "text": "Cost of money is similar to interest, meaning The price paid for obtaining, or price received for providing, money or goods in a credit transaction, calculated as a fraction of the amount or value of what was borrowed.",
+    "template": "synonym_sentence",
+    "source": "generated_from_synonym",
+    "word_zh": "interest",
+    "category": "金融",
+    "generated_at": "2026-02-17T23:20:47.160210"
+  },
+  {
+    "id": 2,
+    "word": "oker",
+    "text": "Oker is similar to interest, meaning The price paid for obtaining, or price received for providing, money or goods in a credit transaction, calculated as a fraction of the amount or value of what was borrowed.",
+    "template": "synonym_sentence",
+    "source": "generated_from_synonym",
+    "word_zh": "interest",
+    "category": "金融",
+    "generated_at": "2026-02-17T23:20:47.160212"
+  }
+]

@@ -1,0 +1,72 @@
+{
+  "templates": {
+    "电商购物": {
+      "description": "电商平台用户购物行为序列",
+      "prompt": "生成电商用户购物行为序列，包含：浏览、搜索、收藏、加购、下单、支付、收货、评价、复购、退货等行为，以及合理的转移概率和时间间隔",
+      "behaviors": ["浏览", "搜索", "收藏", "加购", "下单", "支付", "收货", "评价", "复购", "退货"],
+      "attributes": ["amount", "product_id", "rating", "sentiment"],
+      "lifecycle": ["新手", "活跃", "稳定", "沉默", "流失", "回归"]
+    },
+    "在线医疗": {
+      "description": "在线医疗平台用户就诊行为序列",
+      "prompt": "生成在线医疗用户就诊行为序列，包含：挂号、候诊、就诊、检查、诊断、开药、取药、服药、复诊、康复等行为，以及合理的转移概率和时间间隔",
+      "behaviors": ["挂号", "候诊", "就诊", "检查", "诊断", "开药", "取药", "服药", "复诊", "康复"],
+      "attributes": ["symptom_severity", "diagnosis_type", "prescription_cost"],
+      "lifecycle": ["初诊", "复诊", "康复", "慢病管理", "失访"]
+    },
+    "社交互动": {
+      "description": "社交平台用户互动行为序列",
+      "prompt": "生成社交平台用户互动行为序列，包含：注册、完善资料、浏览、关注、发帖、评论、点赞、私信、拉黑、投诉等行为，以及合理的转移概率和时间间隔",
+      "behaviors": ["注册", "完善资料", "浏览", "关注", "发帖", "评论", "点赞", "私信", "拉黑", "投诉"],
+      "attributes": ["content_type", "interaction_count", "sentiment"],
+      "lifecycle": ["新用户", "活跃", "稳定", "沉默", "流失", "回归"]
+    },
+    "在线教育": {
+      "description": "在线教育平台学习行为序列",
+      "prompt": "生成在线教育用户学习行为序列，包含：注册、选课、观看视频、做作业、参加测验、考试、获得证书、续费、退课等行为",
+      "behaviors": ["注册", "选课", "观看视频", "做作业", "参加测验", "考试", "获得证书", "续费", "退课"],
+      "attributes": ["course_id", "progress", "score", "duration"],
+      "lifecycle": ["试学", "正式学员", "活跃", "休学", "毕业", "流失"]
+    },
+    "金融理财": {
+      "description": "金融理财平台投资行为序列",
+      "prompt": "生成金融理财用户投资行为序列，包含：开户、风险评估、浏览产品、收藏、买入、持有、赎回、复投、转出等行为",
+      "behaviors": ["开户", "风险评估", "浏览产品", "收藏", "买入", "持有", "赎回", "复投", "转出"],
+      "attributes": ["product_type", "amount", "return_rate", "risk_level"],
+      "lifecycle": ["新手", "小额投资", "活跃投资", "大额投资", "沉默", "流失"]
+    },
+    "出行交通": {
+      "description": "出行平台用户行为序列",
+      "prompt": "生成出行平台用户行为序列，包含：注册、搜索路线、预订、支付、出行、评价、投诉、退款等行为",
+      "behaviors": ["注册", "搜索路线", "预订", "支付", "出行", "评价", "投诉", "退款"],
+      "attributes": ["trip_type", "distance", "cost", "rating"],
+      "lifecycle": ["新用户", "活跃", "高频", "沉默", "流失"]
+    },
+    "外卖订餐": {
+      "description": "外卖平台用户订餐行为序列",
+      "prompt": "生成外卖平台用户订餐行为序列，包含：浏览、搜索、收藏店铺、加购、下单、支付、收餐、评价、投诉、退款等行为",
+      "behaviors": ["浏览", "搜索", "收藏店铺", "加购", "下单", "支付", "收餐", "评价", "投诉", "退款"],
+      "attributes": ["restaurant_id", "order_amount", "delivery_time", "rating"],
+      "lifecycle": ["新用户", "活跃", "高频", "沉默", "流失", "回归"]
+    },
+    "游戏娱乐": {
+      "description": "游戏平台用户行为序列",
+      "prompt": "生成游戏平台用户行为序列，包含：注册、下载、登录、玩游戏、充值、购买道具、社交互动、退出、回归等行为",
+      "behaviors": ["注册", "下载", "登录", "玩游戏", "充值", "购买道具", "社交互动", "退出", "回归"],
+      "attributes": ["game_id", "play_duration", "spend_amount", "level"],
+      "lifecycle": ["新手", "活跃", "核心玩家", "休闲玩家", "流失", "回归"]
+    }
+  },
+  "custom_prompt_template": {
+    "description": "自定义领域提示词模板",
+    "structure": "生成{domain}用户行为序列，包含：{behaviors}等行为，以及合理的转移概率和时间间隔",
+    "required_fields": ["domain", "behaviors"],
+    "optional_fields": ["attributes", "lifecycle", "time_scale"]
+  },
+  "generation_config": {
+    "default_user_count": 100,
+    "default_avg_length": 10,
+    "cache_threshold": 5,
+    "cache_ttl_days": 30
+  }
+}

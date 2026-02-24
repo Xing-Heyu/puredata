@@ -1,0 +1,162 @@
+[
+  {
+    "id": 1,
+    "text": "金融相关数据示例_1",
+    "domain": "金融",
+    "quality_tier": "high",
+    "source": "synthetic",
+    "task_id": "67d8686f"
+  },
+  {
+    "id": 2,
+    "text": "金融相关数据示例_2",
+    "domain": "金融",
+    "quality_tier": "medium",
+    "source": "synthetic",
+    "task_id": "67d8686f"
+  },
+  {
+    "id": 3,
+    "text": "金融相关数据示例_3",
+    "domain": "金融",
+    "quality_tier": "medium",
+    "source": "synthetic",
+    "task_id": "67d8686f"
+  },
+  {
+    "id": 4,
+    "text": "金融相关数据示例_4",
+    "domain": "金融",
+    "quality_tier": "high",
+    "source": "synthetic",
+    "task_id": "67d8686f"
+  },
+  {
+    "id": 5,
+    "text": "金融相关数据示例_5",
+    "domain": "金融",
+    "quality_tier": "medium",
+    "source": "synthetic",
+    "task_id": "67d8686f"
+  },
+  {
+    "id": 6,
+    "text": "金融相关数据示例_6",
+    "domain": "金融",
+    "quality_tier": "medium",
+    "source": "synthetic",
+    "task_id": "67d8686f"
+  },
+  {
+    "id": 7,
+    "text": "金融相关数据示例_7",
+    "domain": "金融",
+    "quality_tier": "high",
+    "source": "synthetic",
+    "task_id": "67d8686f"
+  },
+  {
+    "id": 8,
+    "text": "金融相关数据示例_8",
+    "domain": "金融",
+    "quality_tier": "medium",
+    "source": "synthetic",
+    "task_id": "67d8686f"
+  },
+  {
+    "id": 9,
+    "text": "金融相关数据示例_9",
+    "domain": "金融",
+    "quality_tier": "medium",
+    "source": "synthetic",
+    "task_id": "67d8686f"
+  },
+  {
+    "id": 10,
+    "text": "金融相关数据示例_10",
+    "domain": "金融",
+    "quality_tier": "high",
+    "source": "synthetic",
+    "task_id": "67d8686f"
+  },
+  {
+    "id": 11,
+    "text": "金融相关数据示例_11",
+    "domain": "金融",
+    "quality_tier": "medium",
+    "source": "synthetic",
+    "task_id": "67d8686f"
+  },
+  {
+    "id": 12,
+    "text": "金融相关数据示例_12",
+    "domain": "金融",
+    "quality_tier": "medium",
+    "source": "synthetic",
+    "task_id": "67d8686f"
+  },
+  {
+    "id": 13,
+    "text": "金融相关数据示例_13",
+    "domain": "金融",
+    "quality_tier": "high",
+    "source": "synthetic",
+    "task_id": "67d8686f"
+  },
+  {
+    "id": 14,
+    "text": "金融相关数据示例_14",
+    "domain": "金融",
+    "quality_tier": "medium",
+    "source": "synthetic",
+    "task_id": "67d8686f"
+  },
+  {
+    "id": 15,
+    "text": "金融相关数据示例_15",
+    "domain": "金融",
+    "quality_tier": "medium",
+    "source": "synthetic",
+    "task_id": "67d8686f"
+  },
+  {
+    "id": 16,
+    "text": "金融相关数据示例_16",
+    "domain": "金融",
+    "quality_tier": "high",
+    "source": "synthetic",
+    "task_id": "67d8686f"
+  },
+  {
+    "id": 17,
+    "text": "金融相关数据示例_17",
+    "domain": "金融",
+    "quality_tier": "medium",
+    "source": "synthetic",
+    "task_id": "67d8686f"
+  },
+  {
+    "id": 18,
+    "text": "金融相关数据示例_18",
+    "domain": "金融",
+    "quality_tier": "medium",
+    "source": "synthetic",
+    "task_id": "67d8686f"
+  },
+  {
+    "id": 19,
+    "text": "金融相关数据示例_19",
+    "domain": "金融",
+    "quality_tier": "high",
+    "source": "synthetic",
+    "task_id": "67d8686f"
+  },
+  {
+    "id": 20,
+    "text": "金融相关数据示例_20",
+    "domain": "金融",
+    "quality_tier": "medium",
+    "source": "synthetic",
+    "task_id": "67d8686f"
+  }
+]

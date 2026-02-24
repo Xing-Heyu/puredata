@@ -1,0 +1,14 @@
+{
+  "dict_path": "./dicts",
+  "synonym_path": "./synonyms.json",
+  "template_path": "./templates.json",
+  "fuzzy_threshold": 80,
+  "qianwen": {
+    "model": "qwen-plus",
+    "api_key_env": "QIANWEN_API_KEY",
+    "base_url": "https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions"
+  },
+  "cache_enabled": true,
+  "cache_expire_days": 30,
+  "default_count": 100
+}

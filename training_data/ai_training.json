@@ -1,0 +1,1102 @@
+[
+  {
+    "id": 0,
+    "word": "machine learning",
+    "text": "The term machine learning can be understood as A field of study concerned with the design and development of algorithms and techniques that allow computers to learn..",
+    "template": "The term {word} can be underst...",
+    "source": "api:free_dict",
+    "word_zh": "machine learning",
+    "category": "人工智能",
+    "generated_at": "2026-02-17T23:18:50.148000"
+  },
+  {
+    "id": 0,
+    "word": "deep learning",
+    "text": "deep learning: A form of machine learning based on the interpretation of the structure of data..",
+    "template": "{word}: {definition}....",
+    "source": "api:free_dict",
+    "word_zh": "deep learning",
+    "category": "人工智能",
+    "generated_at": "2026-02-17T23:18:50.173688"
+  },
+  {
+    "id": 0,
+    "word": "neural network",
+    "text": "Unlike opposite, neural network implies A real or virtual computer system designed to emulate the brain in its ability to \"learn\" to assess imprecise data..",
+    "template": "Unlike {antonym}, {word} impli...",
+    "source": "api:free_dict",
+    "word_zh": "neural network",
+    "category": "人工智能",
+    "generated_at": "2026-02-17T23:18:50.193083"
+  },
+  {
+    "id": 1,
+    "word": "neural net",
+    "text": "Neural net is similar to neural network, meaning A real or virtual computer system designed to emulate the brain in its ability to \"learn\" to assess imprecise data.",
+    "template": "synonym_sentence",
+    "source": "generated_from_synonym",
+    "word_zh": "neural network",
+    "category": "人工智能",
+    "generated_at": "2026-02-17T23:18:50.193088"
+  },
+  {
+    "id": 0,
+    "word": "NLP",
+    "text": "In the context of 人工智能, NLP is defined as NLP is an important concept..",
+    "template": "In the context of {domain}, {w...",
+    "source": "generated",
+    "word_zh": "NLP",
+    "category": "人工智能",
+    "generated_at": "2026-02-17T23:18:50.797412"
+  },
+  {
+    "id": 0,
+    "word": "computer vision",
+    "text": "What does computer vision mean? It means computer vision is an important concept..",
+    "template": "What does {word} mean? It mean...",
+    "source": "generated",
+    "word_zh": "computer vision",
+    "category": "人工智能",
+    "generated_at": "2026-02-17T23:18:51.377209"
+  },
+  {
+    "id": 0,
+    "word": "reinforcement learning",
+    "text": "reinforcement learning: reinforcement learning is an important concept..",
+    "template": "{word}: {definition}....",
+    "source": "generated",
+    "word_zh": "reinforcement learning",
+    "category": "人工智能",
+    "generated_at": "2026-02-17T23:18:51.888884"
+  },
+  {
+    "id": 0,
+    "word": "transformer",
+    "text": "What does transformer mean? It means (toys) A toy in the Transformers toyline which has mechanical parts that allow it to be altered in appearance from its original form as a humanoid robot action figure to another form, usually a vehicle, depending on the toy..",
+    "template": "What does {word} mean? It mean...",
+    "source": "api:free_dict",
+    "word_zh": "transformer",
+    "category": "人工智能",
+    "generated_at": "2026-02-17T23:18:51.911083"
+  },
+  {
+    "id": 0,
+    "word": "GAN",
+    "text": "What does GAN mean? It means GAN is an important concept..",
+    "template": "What does {word} mean? It mean...",
+    "source": "generated",
+    "word_zh": "GAN",
+    "category": "人工智能",
+    "generated_at": "2026-02-17T23:18:52.481100"
+  },
+  {
+    "id": 0,
+    "word": "CNN",
+    "text": "CNN: CNN is an important concept..",
+    "template": "{word}: {definition}....",
+    "source": "generated",
+    "word_zh": "CNN",
+    "category": "人工智能",
+    "generated_at": "2026-02-17T23:18:53.079561"
+  },
+  {
+    "id": 0,
+    "word": "RNN",
+    "text": "RNN: RNN is an important concept..",
+    "template": "{word}: {definition}....",
+    "source": "generated",
+    "word_zh": "RNN",
+    "category": "人工智能",
+    "generated_at": "2026-02-17T23:18:53.591416"
+  },
+  {
+    "id": 0,
+    "word": "machine learning",
+    "text": "What does machine learning mean? It means A field of study concerned with the design and development of algorithms and techniques that allow computers to learn..",
+    "template": "What does {word} mean? It mean...",
+    "source": "api:free_dict",
+    "word_zh": "machine learning",
+    "category": "人工智能",
+    "generated_at": "2026-02-17T23:18:53.618269"
+  },
+  {
+    "id": 0,
+    "word": "deep learning",
+    "text": "deep learning means A form of machine learning based on the interpretation of the structure of data..",
+    "template": "{word} means {definition}....",
+    "source": "api:free_dict",
+    "word_zh": "deep learning",
+    "category": "人工智能",
+    "generated_at": "2026-02-17T23:18:53.639370"
+  },
+  {
+    "id": 0,
+    "word": "neural network",
+    "text": "The word \"neural network\" refers to A real or virtual computer system designed to emulate the brain in its ability to \"learn\" to assess imprecise data..",
+    "template": "The word \"{word}\" refers to {d...",
+    "source": "api:free_dict",
+    "word_zh": "neural network",
+    "category": "人工智能",
+    "generated_at": "2026-02-17T23:18:53.657832"
+  },
+  {
+    "id": 1,
+    "word": "neural net",
+    "text": "Neural net is similar to neural network, meaning A real or virtual computer system designed to emulate the brain in its ability to \"learn\" to assess imprecise data.",
+    "template": "synonym_sentence",
+    "source": "generated_from_synonym",
+    "word_zh": "neural network",
+    "category": "人工智能",
+    "generated_at": "2026-02-17T23:18:53.657837"
+  },
+  {
+    "id": 0,
+    "word": "NLP",
+    "text": "The term NLP can be understood as NLP is an important concept..",
+    "template": "The term {word} can be underst...",
+    "source": "generated",
+    "word_zh": "NLP",
+    "category": "人工智能",
+    "generated_at": "2026-02-17T23:18:54.493698"
+  },
+  {
+    "id": 0,
+    "word": "computer vision",
+    "text": "computer vision means computer vision is an important concept..",
+    "template": "{word} means {definition}....",
+    "source": "generated",
+    "word_zh": "computer vision",
+    "category": "人工智能",
+    "generated_at": "2026-02-17T23:18:54.987224"
+  },
+  {
+    "id": 0,
+    "word": "reinforcement learning",
+    "text": "Unlike opposite, reinforcement learning implies reinforcement learning is an important concept..",
+    "template": "Unlike {antonym}, {word} impli...",
+    "source": "generated",
+    "word_zh": "reinforcement learning",
+    "category": "人工智能",
+    "generated_at": "2026-02-17T23:18:55.722389"
+  },
+  {
+    "id": 0,
+    "word": "transformer",
+    "text": "The term transformer can be understood as (toys) A toy in the Transformers toyline which has mechanical parts that allow it to be altered in appearance from its original form as a humanoid robot action figure to another form, usually a vehicle, depending on the toy..",
+    "template": "The term {word} can be underst...",
+    "source": "api:free_dict",
+    "word_zh": "transformer",
+    "category": "人工智能",
+    "generated_at": "2026-02-17T23:18:55.751779"
+  },
+  {
+    "id": 0,
+    "word": "GAN",
+    "text": "The term GAN can be understood as GAN is an important concept..",
+    "template": "The term {word} can be underst...",
+    "source": "generated",
+    "word_zh": "GAN",
+    "category": "人工智能",
+    "generated_at": "2026-02-17T23:18:56.327646"
+  },
+  {
+    "id": 0,
+    "word": "CNN",
+    "text": "Unlike opposite, CNN implies CNN is an important concept..",
+    "template": "Unlike {antonym}, {word} impli...",
+    "source": "generated",
+    "word_zh": "CNN",
+    "category": "人工智能",
+    "generated_at": "2026-02-17T23:18:57.026718"
+  },
+  {
+    "id": 0,
+    "word": "RNN",
+    "text": "RNN means RNN is an important concept..",
+    "template": "{word} means {definition}....",
+    "source": "generated",
+    "word_zh": "RNN",
+    "category": "人工智能",
+    "generated_at": "2026-02-17T23:18:57.511852"
+  },
+  {
+    "id": 0,
+    "word": "machine learning",
+    "text": "The word \"machine learning\" refers to A field of study concerned with the design and development of algorithms and techniques that allow computers to learn..",
+    "template": "The word \"{word}\" refers to {d...",
+    "source": "api:free_dict",
+    "word_zh": "machine learning",
+    "category": "人工智能",
+    "generated_at": "2026-02-17T23:18:57.536224"
+  },
+  {
+    "id": 0,
+    "word": "deep learning",
+    "text": "The word \"deep learning\" refers to A form of machine learning based on the interpretation of the structure of data..",
+    "template": "The word \"{word}\" refers to {d...",
+    "source": "api:free_dict",
+    "word_zh": "deep learning",
+    "category": "人工智能",
+    "generated_at": "2026-02-17T23:18:57.556656"
+  },
+  {
+    "id": 0,
+    "word": "neural network",
+    "text": "The word \"neural network\" refers to A real or virtual computer system designed to emulate the brain in its ability to \"learn\" to assess imprecise data..",
+    "template": "The word \"{word}\" refers to {d...",
+    "source": "api:free_dict",
+    "word_zh": "neural network",
+    "category": "人工智能",
+    "generated_at": "2026-02-17T23:18:57.576477"
+  },
+  {
+    "id": 1,
+    "word": "neural net",
+    "text": "Neural net is similar to neural network, meaning A real or virtual computer system designed to emulate the brain in its ability to \"learn\" to assess imprecise data.",
+    "template": "synonym_sentence",
+    "source": "generated_from_synonym",
+    "word_zh": "neural network",
+    "category": "人工智能",
+    "generated_at": "2026-02-17T23:18:57.576482"
+  },
+  {
+    "id": 0,
+    "word": "NLP",
+    "text": "Unlike opposite, NLP implies NLP is an important concept..",
+    "template": "Unlike {antonym}, {word} impli...",
+    "source": "generated",
+    "word_zh": "NLP",
+    "category": "人工智能",
+    "generated_at": "2026-02-17T23:18:58.344435"
+  },
+  {
+    "id": 0,
+    "word": "computer vision",
+    "text": "computer vision means computer vision is an important concept..",
+    "template": "{word} means {definition}....",
+    "source": "generated",
+    "word_zh": "computer vision",
+    "category": "人工智能",
+    "generated_at": "2026-02-17T23:18:58.900358"
+  },
+  {
+    "id": 0,
+    "word": "reinforcement learning",
+    "text": "The term reinforcement learning can be understood as reinforcement learning is an important concept..",
+    "template": "The term {word} can be underst...",
+    "source": "generated",
+    "word_zh": "reinforcement learning",
+    "category": "人工智能",
+    "generated_at": "2026-02-17T23:19:00.447370"
+  },
+  {
+    "id": 0,
+    "word": "transformer",
+    "text": "transformer means (toys) A toy in the Transformers toyline which has mechanical parts that allow it to be altered in appearance from its original form as a humanoid robot action figure to another form, usually a vehicle, depending on the toy..",
+    "template": "{word} means {definition}....",
+    "source": "api:free_dict",
+    "word_zh": "transformer",
+    "category": "人工智能",
+    "generated_at": "2026-02-17T23:19:00.471344"
+  },
+  {
+    "id": 0,
+    "word": "GAN",
+    "text": "The term GAN can be understood as GAN is an important concept..",
+    "template": "The term {word} can be underst...",
+    "source": "generated",
+    "word_zh": "GAN",
+    "category": "人工智能",
+    "generated_at": "2026-02-17T23:19:00.989927"
+  },
+  {
+    "id": 0,
+    "word": "CNN",
+    "text": "Unlike opposite, CNN implies CNN is an important concept..",
+    "template": "Unlike {antonym}, {word} impli...",
+    "source": "generated",
+    "word_zh": "CNN",
+    "category": "人工智能",
+    "generated_at": "2026-02-17T23:19:03.259839"
+  },
+  {
+    "id": 0,
+    "word": "RNN",
+    "text": "The term RNN can be understood as RNN is an important concept..",
+    "template": "The term {word} can be underst...",
+    "source": "generated",
+    "word_zh": "RNN",
+    "category": "人工智能",
+    "generated_at": "2026-02-17T23:19:03.794109"
+  },
+  {
+    "id": 0,
+    "word": "machine learning",
+    "text": "machine learning: A field of study concerned with the design and development of algorithms and techniques that allow computers to learn..",
+    "template": "{word}: {definition}....",
+    "source": "api:free_dict",
+    "word_zh": "machine learning",
+    "category": "人工智能",
+    "generated_at": "2026-02-17T23:19:03.817501"
+  },
+  {
+    "id": 0,
+    "word": "deep learning",
+    "text": "Unlike opposite, deep learning implies A form of machine learning based on the interpretation of the structure of data..",
+    "template": "Unlike {antonym}, {word} impli...",
+    "source": "api:free_dict",
+    "word_zh": "deep learning",
+    "category": "人工智能",
+    "generated_at": "2026-02-17T23:19:03.839397"
+  },
+  {
+    "id": 0,
+    "word": "neural network",
+    "text": "neural network: A real or virtual computer system designed to emulate the brain in its ability to \"learn\" to assess imprecise data..",
+    "template": "{word}: {definition}....",
+    "source": "api:free_dict",
+    "word_zh": "neural network",
+    "category": "人工智能",
+    "generated_at": "2026-02-17T23:19:03.858234"
+  },
+  {
+    "id": 1,
+    "word": "neural net",
+    "text": "Neural net is similar to neural network, meaning A real or virtual computer system designed to emulate the brain in its ability to \"learn\" to assess imprecise data.",
+    "template": "synonym_sentence",
+    "source": "generated_from_synonym",
+    "word_zh": "neural network",
+    "category": "人工智能",
+    "generated_at": "2026-02-17T23:19:03.858239"
+  },
+  {
+    "id": 0,
+    "word": "NLP",
+    "text": "NLP means NLP is an important concept..",
+    "template": "{word} means {definition}....",
+    "source": "generated",
+    "word_zh": "NLP",
+    "category": "人工智能",
+    "generated_at": "2026-02-17T23:19:05.254353"
+  },
+  {
+    "id": 0,
+    "word": "computer vision",
+    "text": "Unlike opposite, computer vision implies computer vision is an important concept..",
+    "template": "Unlike {antonym}, {word} impli...",
+    "source": "generated",
+    "word_zh": "computer vision",
+    "category": "人工智能",
+    "generated_at": "2026-02-17T23:19:05.844544"
+  },
+  {
+    "id": 0,
+    "word": "reinforcement learning",
+    "text": "In the context of 人工智能, reinforcement learning is defined as reinforcement learning is an important concept..",
+    "template": "In the context of {domain}, {w...",
+    "source": "generated",
+    "word_zh": "reinforcement learning",
+    "category": "人工智能",
+    "generated_at": "2026-02-17T23:19:07.337066"
+  },
+  {
+    "id": 0,
+    "word": "transformer",
+    "text": "transformer means (toys) A toy in the Transformers toyline which has mechanical parts that allow it to be altered in appearance from its original form as a humanoid robot action figure to another form, usually a vehicle, depending on the toy..",
+    "template": "{word} means {definition}....",
+    "source": "api:free_dict",
+    "word_zh": "transformer",
+    "category": "人工智能",
+    "generated_at": "2026-02-17T23:19:07.360201"
+  },
+  {
+    "id": 0,
+    "word": "GAN",
+    "text": "In the context of 人工智能, GAN is defined as GAN is an important concept..",
+    "template": "In the context of {domain}, {w...",
+    "source": "generated",
+    "word_zh": "GAN",
+    "category": "人工智能",
+    "generated_at": "2026-02-17T23:19:08.143820"
+  },
+  {
+    "id": 0,
+    "word": "CNN",
+    "text": "The word \"CNN\" refers to CNN is an important concept..",
+    "template": "The word \"{word}\" refers to {d...",
+    "source": "generated",
+    "word_zh": "CNN",
+    "category": "人工智能",
+    "generated_at": "2026-02-17T23:19:19.348743"
+  },
+  {
+    "id": 0,
+    "word": "RNN",
+    "text": "RNN means RNN is an important concept..",
+    "template": "{word} means {definition}....",
+    "source": "generated",
+    "word_zh": "RNN",
+    "category": "人工智能",
+    "generated_at": "2026-02-17T23:19:19.931084"
+  },
+  {
+    "id": 0,
+    "word": "machine learning",
+    "text": "What does machine learning mean? It means A field of study concerned with the design and development of algorithms and techniques that allow computers to learn..",
+    "template": "What does {word} mean? It mean...",
+    "source": "api:free_dict",
+    "word_zh": "machine learning",
+    "category": "人工智能",
+    "generated_at": "2026-02-17T23:19:19.954108"
+  },
+  {
+    "id": 0,
+    "word": "deep learning",
+    "text": "In the context of 人工智能, deep learning is defined as A form of machine learning based on the interpretation of the structure of data..",
+    "template": "In the context of {domain}, {w...",
+    "source": "api:free_dict",
+    "word_zh": "deep learning",
+    "category": "人工智能",
+    "generated_at": "2026-02-17T23:19:19.974622"
+  },
+  {
+    "id": 0,
+    "word": "neural network",
+    "text": "neural network: A real or virtual computer system designed to emulate the brain in its ability to \"learn\" to assess imprecise data..",
+    "template": "{word}: {definition}....",
+    "source": "api:free_dict",
+    "word_zh": "neural network",
+    "category": "人工智能",
+    "generated_at": "2026-02-17T23:19:19.993591"
+  },
+  {
+    "id": 1,
+    "word": "neural net",
+    "text": "Neural net is similar to neural network, meaning A real or virtual computer system designed to emulate the brain in its ability to \"learn\" to assess imprecise data.",
+    "template": "synonym_sentence",
+    "source": "generated_from_synonym",
+    "word_zh": "neural network",
+    "category": "人工智能",
+    "generated_at": "2026-02-17T23:19:19.993596"
+  },
+  {
+    "id": 0,
+    "word": "NLP",
+    "text": "In the context of 人工智能, NLP is defined as NLP is an important concept..",
+    "template": "In the context of {domain}, {w...",
+    "source": "generated",
+    "word_zh": "NLP",
+    "category": "人工智能",
+    "generated_at": "2026-02-17T23:19:20.553685"
+  },
+  {
+    "id": 0,
+    "word": "computer vision",
+    "text": "In the context of 人工智能, computer vision is defined as computer vision is an important concept..",
+    "template": "In the context of {domain}, {w...",
+    "source": "generated",
+    "word_zh": "computer vision",
+    "category": "人工智能",
+    "generated_at": "2026-02-17T23:19:21.103623"
+  },
+  {
+    "id": 0,
+    "word": "reinforcement learning",
+    "text": "The term reinforcement learning can be understood as reinforcement learning is an important concept..",
+    "template": "The term {word} can be underst...",
+    "source": "generated",
+    "word_zh": "reinforcement learning",
+    "category": "人工智能",
+    "generated_at": "2026-02-17T23:19:21.684405"
+  },
+  {
+    "id": 0,
+    "word": "transformer",
+    "text": "In the context of 人工智能, transformer is defined as (toys) A toy in the Transformers toyline which has mechanical parts that allow it to be altered in appearance from its original form as a humanoid robot action figure to another form, usually a vehicle, depending on the toy..",
+    "template": "In the context of {domain}, {w...",
+    "source": "api:free_dict",
+    "word_zh": "transformer",
+    "category": "人工智能",
+    "generated_at": "2026-02-17T23:19:21.707175"
+  },
+  {
+    "id": 0,
+    "word": "GAN",
+    "text": "What does GAN mean? It means GAN is an important concept..",
+    "template": "What does {word} mean? It mean...",
+    "source": "generated",
+    "word_zh": "GAN",
+    "category": "人工智能",
+    "generated_at": "2026-02-17T23:19:24.636331"
+  },
+  {
+    "id": 0,
+    "word": "CNN",
+    "text": "The word \"CNN\" refers to CNN is an important concept..",
+    "template": "The word \"{word}\" refers to {d...",
+    "source": "generated",
+    "word_zh": "CNN",
+    "category": "人工智能",
+    "generated_at": "2026-02-17T23:19:26.379979"
+  },
+  {
+    "id": 0,
+    "word": "RNN",
+    "text": "What does RNN mean? It means RNN is an important concept..",
+    "template": "What does {word} mean? It mean...",
+    "source": "generated",
+    "word_zh": "RNN",
+    "category": "人工智能",
+    "generated_at": "2026-02-17T23:19:27.984977"
+  },
+  {
+    "id": 0,
+    "word": "machine learning",
+    "text": "machine learning: A field of study concerned with the design and development of algorithms and techniques that allow computers to learn..",
+    "template": "{word}: {definition}....",
+    "source": "api:free_dict",
+    "word_zh": "machine learning",
+    "category": "人工智能",
+    "generated_at": "2026-02-17T23:19:28.006799"
+  },
+  {
+    "id": 0,
+    "word": "deep learning",
+    "text": "What does deep learning mean? It means A form of machine learning based on the interpretation of the structure of data..",
+    "template": "What does {word} mean? It mean...",
+    "source": "api:free_dict",
+    "word_zh": "deep learning",
+    "category": "人工智能",
+    "generated_at": "2026-02-17T23:19:28.026657"
+  },
+  {
+    "id": 0,
+    "word": "neural network",
+    "text": "What does neural network mean? It means A real or virtual computer system designed to emulate the brain in its ability to \"learn\" to assess imprecise data..",
+    "template": "What does {word} mean? It mean...",
+    "source": "api:free_dict",
+    "word_zh": "neural network",
+    "category": "人工智能",
+    "generated_at": "2026-02-17T23:19:28.049018"
+  },
+  {
+    "id": 1,
+    "word": "neural net",
+    "text": "Neural net is similar to neural network, meaning A real or virtual computer system designed to emulate the brain in its ability to \"learn\" to assess imprecise data.",
+    "template": "synonym_sentence",
+    "source": "generated_from_synonym",
+    "word_zh": "neural network",
+    "category": "人工智能",
+    "generated_at": "2026-02-17T23:19:28.049023"
+  },
+  {
+    "id": 0,
+    "word": "NLP",
+    "text": "Unlike opposite, NLP implies NLP is an important concept..",
+    "template": "Unlike {antonym}, {word} impli...",
+    "source": "generated",
+    "word_zh": "NLP",
+    "category": "人工智能",
+    "generated_at": "2026-02-17T23:19:34.377141"
+  },
+  {
+    "id": 0,
+    "word": "computer vision",
+    "text": "The word \"computer vision\" refers to computer vision is an important concept..",
+    "template": "The word \"{word}\" refers to {d...",
+    "source": "generated",
+    "word_zh": "computer vision",
+    "category": "人工智能",
+    "generated_at": "2026-02-17T23:19:40.067615"
+  },
+  {
+    "id": 0,
+    "word": "reinforcement learning",
+    "text": "reinforcement learning: reinforcement learning is an important concept..",
+    "template": "{word}: {definition}....",
+    "source": "generated",
+    "word_zh": "reinforcement learning",
+    "category": "人工智能",
+    "generated_at": "2026-02-17T23:19:40.785070"
+  },
+  {
+    "id": 0,
+    "word": "transformer",
+    "text": "What does transformer mean? It means (toys) A toy in the Transformers toyline which has mechanical parts that allow it to be altered in appearance from its original form as a humanoid robot action figure to another form, usually a vehicle, depending on the toy..",
+    "template": "What does {word} mean? It mean...",
+    "source": "api:free_dict",
+    "word_zh": "transformer",
+    "category": "人工智能",
+    "generated_at": "2026-02-17T23:19:40.807937"
+  },
+  {
+    "id": 0,
+    "word": "GAN",
+    "text": "GAN means GAN is an important concept..",
+    "template": "{word} means {definition}....",
+    "source": "generated",
+    "word_zh": "GAN",
+    "category": "人工智能",
+    "generated_at": "2026-02-17T23:19:44.190252"
+  },
+  {
+    "id": 0,
+    "word": "CNN",
+    "text": "The word \"CNN\" refers to CNN is an important concept..",
+    "template": "The word \"{word}\" refers to {d...",
+    "source": "generated",
+    "word_zh": "CNN",
+    "category": "人工智能",
+    "generated_at": "2026-02-17T23:19:45.753510"
+  },
+  {
+    "id": 0,
+    "word": "RNN",
+    "text": "What does RNN mean? It means RNN is an important concept..",
+    "template": "What does {word} mean? It mean...",
+    "source": "generated",
+    "word_zh": "RNN",
+    "category": "人工智能",
+    "generated_at": "2026-02-17T23:19:46.542564"
+  },
+  {
+    "id": 0,
+    "word": "machine learning",
+    "text": "machine learning means A field of study concerned with the design and development of algorithms and techniques that allow computers to learn..",
+    "template": "{word} means {definition}....",
+    "source": "api:free_dict",
+    "word_zh": "machine learning",
+    "category": "人工智能",
+    "generated_at": "2026-02-17T23:19:46.563983"
+  },
+  {
+    "id": 0,
+    "word": "deep learning",
+    "text": "deep learning: A form of machine learning based on the interpretation of the structure of data..",
+    "template": "{word}: {definition}....",
+    "source": "api:free_dict",
+    "word_zh": "deep learning",
+    "category": "人工智能",
+    "generated_at": "2026-02-17T23:19:46.585920"
+  },
+  {
+    "id": 0,
+    "word": "neural network",
+    "text": "neural network: A real or virtual computer system designed to emulate the brain in its ability to \"learn\" to assess imprecise data..",
+    "template": "{word}: {definition}....",
+    "source": "api:free_dict",
+    "word_zh": "neural network",
+    "category": "人工智能",
+    "generated_at": "2026-02-17T23:19:46.606038"
+  },
+  {
+    "id": 1,
+    "word": "neural net",
+    "text": "Neural net is similar to neural network, meaning A real or virtual computer system designed to emulate the brain in its ability to \"learn\" to assess imprecise data.",
+    "template": "synonym_sentence",
+    "source": "generated_from_synonym",
+    "word_zh": "neural network",
+    "category": "人工智能",
+    "generated_at": "2026-02-17T23:19:46.606052"
+  },
+  {
+    "id": 0,
+    "word": "NLP",
+    "text": "In the context of 人工智能, NLP is defined as NLP is an important concept..",
+    "template": "In the context of {domain}, {w...",
+    "source": "generated",
+    "word_zh": "NLP",
+    "category": "人工智能",
+    "generated_at": "2026-02-17T23:19:47.410692"
+  },
+  {
+    "id": 0,
+    "word": "computer vision",
+    "text": "computer vision means computer vision is an important concept..",
+    "template": "{word} means {definition}....",
+    "source": "generated",
+    "word_zh": "computer vision",
+    "category": "人工智能",
+    "generated_at": "2026-02-17T23:19:50.111349"
+  },
+  {
+    "id": 0,
+    "word": "reinforcement learning",
+    "text": "The word \"reinforcement learning\" refers to reinforcement learning is an important concept..",
+    "template": "The word \"{word}\" refers to {d...",
+    "source": "generated",
+    "word_zh": "reinforcement learning",
+    "category": "人工智能",
+    "generated_at": "2026-02-17T23:19:51.946429"
+  },
+  {
+    "id": 0,
+    "word": "transformer",
+    "text": "Unlike opposite, transformer implies (toys) A toy in the Transformers toyline which has mechanical parts that allow it to be altered in appearance from its original form as a humanoid robot action figure to another form, usually a vehicle, depending on the toy..",
+    "template": "Unlike {antonym}, {word} impli...",
+    "source": "api:free_dict",
+    "word_zh": "transformer",
+    "category": "人工智能",
+    "generated_at": "2026-02-17T23:19:51.969526"
+  },
+  {
+    "id": 0,
+    "word": "GAN",
+    "text": "What does GAN mean? It means GAN is an important concept..",
+    "template": "What does {word} mean? It mean...",
+    "source": "generated",
+    "word_zh": "GAN",
+    "category": "人工智能",
+    "generated_at": "2026-02-17T23:19:53.892294"
+  },
+  {
+    "id": 0,
+    "word": "CNN",
+    "text": "CNN: CNN is an important concept..",
+    "template": "{word}: {definition}....",
+    "source": "generated",
+    "word_zh": "CNN",
+    "category": "人工智能",
+    "generated_at": "2026-02-17T23:19:55.286388"
+  },
+  {
+    "id": 0,
+    "word": "RNN",
+    "text": "Unlike opposite, RNN implies RNN is an important concept..",
+    "template": "Unlike {antonym}, {word} impli...",
+    "source": "generated",
+    "word_zh": "RNN",
+    "category": "人工智能",
+    "generated_at": "2026-02-17T23:19:55.942339"
+  },
+  {
+    "id": 0,
+    "word": "machine learning",
+    "text": "In the context of 人工智能, machine learning is defined as A field of study concerned with the design and development of algorithms and techniques that allow computers to learn..",
+    "template": "In the context of {domain}, {w...",
+    "source": "api:free_dict",
+    "word_zh": "machine learning",
+    "category": "人工智能",
+    "generated_at": "2026-02-17T23:19:56.064196"
+  },
+  {
+    "id": 0,
+    "word": "deep learning",
+    "text": "In the context of 人工智能, deep learning is defined as A form of machine learning based on the interpretation of the structure of data..",
+    "template": "In the context of {domain}, {w...",
+    "source": "api:free_dict",
+    "word_zh": "deep learning",
+    "category": "人工智能",
+    "generated_at": "2026-02-17T23:19:56.082923"
+  },
+  {
+    "id": 0,
+    "word": "neural network",
+    "text": "Unlike opposite, neural network implies A real or virtual computer system designed to emulate the brain in its ability to \"learn\" to assess imprecise data..",
+    "template": "Unlike {antonym}, {word} impli...",
+    "source": "api:free_dict",
+    "word_zh": "neural network",
+    "category": "人工智能",
+    "generated_at": "2026-02-17T23:19:56.102252"
+  },
+  {
+    "id": 1,
+    "word": "neural net",
+    "text": "Neural net is similar to neural network, meaning A real or virtual computer system designed to emulate the brain in its ability to \"learn\" to assess imprecise data.",
+    "template": "synonym_sentence",
+    "source": "generated_from_synonym",
+    "word_zh": "neural network",
+    "category": "人工智能",
+    "generated_at": "2026-02-17T23:19:56.102291"
+  },
+  {
+    "id": 0,
+    "word": "NLP",
+    "text": "In the context of 人工智能, NLP is defined as NLP is an important concept..",
+    "template": "In the context of {domain}, {w...",
+    "source": "generated",
+    "word_zh": "NLP",
+    "category": "人工智能",
+    "generated_at": "2026-02-17T23:19:56.852684"
+  },
+  {
+    "id": 0,
+    "word": "computer vision",
+    "text": "Unlike opposite, computer vision implies computer vision is an important concept..",
+    "template": "Unlike {antonym}, {word} impli...",
+    "source": "generated",
+    "word_zh": "computer vision",
+    "category": "人工智能",
+    "generated_at": "2026-02-17T23:19:57.338021"
+  },
+  {
+    "id": 0,
+    "word": "reinforcement learning",
+    "text": "Unlike opposite, reinforcement learning implies reinforcement learning is an important concept..",
+    "template": "Unlike {antonym}, {word} impli...",
+    "source": "generated",
+    "word_zh": "reinforcement learning",
+    "category": "人工智能",
+    "generated_at": "2026-02-17T23:19:57.944941"
+  },
+  {
+    "id": 0,
+    "word": "transformer",
+    "text": "In the context of 人工智能, transformer is defined as (toys) A toy in the Transformers toyline which has mechanical parts that allow it to be altered in appearance from its original form as a humanoid robot action figure to another form, usually a vehicle, depending on the toy..",
+    "template": "In the context of {domain}, {w...",
+    "source": "api:free_dict",
+    "word_zh": "transformer",
+    "category": "人工智能",
+    "generated_at": "2026-02-17T23:19:57.967472"
+  },
+  {
+    "id": 0,
+    "word": "GAN",
+    "text": "Unlike opposite, GAN implies GAN is an important concept..",
+    "template": "Unlike {antonym}, {word} impli...",
+    "source": "generated",
+    "word_zh": "GAN",
+    "category": "人工智能",
+    "generated_at": "2026-02-17T23:19:58.754263"
+  },
+  {
+    "id": 0,
+    "word": "CNN",
+    "text": "The term CNN can be understood as CNN is an important concept..",
+    "template": "The term {word} can be underst...",
+    "source": "generated",
+    "word_zh": "CNN",
+    "category": "人工智能",
+    "generated_at": "2026-02-17T23:19:59.238531"
+  },
+  {
+    "id": 0,
+    "word": "RNN",
+    "text": "In the context of 人工智能, RNN is defined as RNN is an important concept..",
+    "template": "In the context of {domain}, {w...",
+    "source": "generated",
+    "word_zh": "RNN",
+    "category": "人工智能",
+    "generated_at": "2026-02-17T23:19:59.782618"
+  },
+  {
+    "id": 0,
+    "word": "machine learning",
+    "text": "Unlike opposite, machine learning implies A field of study concerned with the design and development of algorithms and techniques that allow computers to learn..",
+    "template": "Unlike {antonym}, {word} impli...",
+    "source": "api:free_dict",
+    "word_zh": "machine learning",
+    "category": "人工智能",
+    "generated_at": "2026-02-17T23:19:59.804716"
+  },
+  {
+    "id": 0,
+    "word": "deep learning",
+    "text": "The word \"deep learning\" refers to A form of machine learning based on the interpretation of the structure of data..",
+    "template": "The word \"{word}\" refers to {d...",
+    "source": "api:free_dict",
+    "word_zh": "deep learning",
+    "category": "人工智能",
+    "generated_at": "2026-02-17T23:19:59.842946"
+  },
+  {
+    "id": 0,
+    "word": "neural network",
+    "text": "Unlike opposite, neural network implies A real or virtual computer system designed to emulate the brain in its ability to \"learn\" to assess imprecise data..",
+    "template": "Unlike {antonym}, {word} impli...",
+    "source": "api:free_dict",
+    "word_zh": "neural network",
+    "category": "人工智能",
+    "generated_at": "2026-02-17T23:19:59.863971"
+  },
+  {
+    "id": 1,
+    "word": "neural net",
+    "text": "Neural net is similar to neural network, meaning A real or virtual computer system designed to emulate the brain in its ability to \"learn\" to assess imprecise data.",
+    "template": "synonym_sentence",
+    "source": "generated_from_synonym",
+    "word_zh": "neural network",
+    "category": "人工智能",
+    "generated_at": "2026-02-17T23:19:59.863977"
+  },
+  {
+    "id": 0,
+    "word": "NLP",
+    "text": "NLP: NLP is an important concept..",
+    "template": "{word}: {definition}....",
+    "source": "generated",
+    "word_zh": "NLP",
+    "category": "人工智能",
+    "generated_at": "2026-02-17T23:20:00.619301"
+  },
+  {
+    "id": 0,
+    "word": "computer vision",
+    "text": "computer vision means computer vision is an important concept..",
+    "template": "{word} means {definition}....",
+    "source": "generated",
+    "word_zh": "computer vision",
+    "category": "人工智能",
+    "generated_at": "2026-02-17T23:20:02.288895"
+  },
+  {
+    "id": 0,
+    "word": "reinforcement learning",
+    "text": "The term reinforcement learning can be understood as reinforcement learning is an important concept..",
+    "template": "The term {word} can be underst...",
+    "source": "generated",
+    "word_zh": "reinforcement learning",
+    "category": "人工智能",
+    "generated_at": "2026-02-17T23:20:03.927062"
+  },
+  {
+    "id": 0,
+    "word": "transformer",
+    "text": "The word \"transformer\" refers to (toys) A toy in the Transformers toyline which has mechanical parts that allow it to be altered in appearance from its original form as a humanoid robot action figure to another form, usually a vehicle, depending on the toy..",
+    "template": "The word \"{word}\" refers to {d...",
+    "source": "api:free_dict",
+    "word_zh": "transformer",
+    "category": "人工智能",
+    "generated_at": "2026-02-17T23:20:03.946875"
+  },
+  {
+    "id": 0,
+    "word": "GAN",
+    "text": "The word \"GAN\" refers to GAN is an important concept..",
+    "template": "The word \"{word}\" refers to {d...",
+    "source": "generated",
+    "word_zh": "GAN",
+    "category": "人工智能",
+    "generated_at": "2026-02-17T23:20:06.589148"
+  },
+  {
+    "id": 0,
+    "word": "CNN",
+    "text": "The word \"CNN\" refers to CNN is an important concept..",
+    "template": "The word \"{word}\" refers to {d...",
+    "source": "generated",
+    "word_zh": "CNN",
+    "category": "人工智能",
+    "generated_at": "2026-02-17T23:20:07.268169"
+  },
+  {
+    "id": 0,
+    "word": "RNN",
+    "text": "In the context of 人工智能, RNN is defined as RNN is an important concept..",
+    "template": "In the context of {domain}, {w...",
+    "source": "generated",
+    "word_zh": "RNN",
+    "category": "人工智能",
+    "generated_at": "2026-02-17T23:20:08.070940"
+  },
+  {
+    "id": 0,
+    "word": "machine learning",
+    "text": "machine learning: A field of study concerned with the design and development of algorithms and techniques that allow computers to learn..",
+    "template": "{word}: {definition}....",
+    "source": "api:free_dict",
+    "word_zh": "machine learning",
+    "category": "人工智能",
+    "generated_at": "2026-02-17T23:20:08.095507"
+  },
+  {
+    "id": 0,
+    "word": "deep learning",
+    "text": "What does deep learning mean? It means A form of machine learning based on the interpretation of the structure of data..",
+    "template": "What does {word} mean? It mean...",
+    "source": "api:free_dict",
+    "word_zh": "deep learning",
+    "category": "人工智能",
+    "generated_at": "2026-02-17T23:20:08.115345"
+  },
+  {
+    "id": 0,
+    "word": "neural network",
+    "text": "What does neural network mean? It means A real or virtual computer system designed to emulate the brain in its ability to \"learn\" to assess imprecise data..",
+    "template": "What does {word} mean? It mean...",
+    "source": "api:free_dict",
+    "word_zh": "neural network",
+    "category": "人工智能",
+    "generated_at": "2026-02-17T23:20:08.134490"
+  },
+  {
+    "id": 1,
+    "word": "neural net",
+    "text": "Neural net is similar to neural network, meaning A real or virtual computer system designed to emulate the brain in its ability to \"learn\" to assess imprecise data.",
+    "template": "synonym_sentence",
+    "source": "generated_from_synonym",
+    "word_zh": "neural network",
+    "category": "人工智能",
+    "generated_at": "2026-02-17T23:20:08.134495"
+  },
+  {
+    "id": 0,
+    "word": "NLP",
+    "text": "Unlike opposite, NLP implies NLP is an important concept..",
+    "template": "Unlike {antonym}, {word} impli...",
+    "source": "generated",
+    "word_zh": "NLP",
+    "category": "人工智能",
+    "generated_at": "2026-02-17T23:20:08.712887"
+  },
+  {
+    "id": 0,
+    "word": "computer vision",
+    "text": "The term computer vision can be understood as computer vision is an important concept..",
+    "template": "The term {word} can be underst...",
+    "source": "generated",
+    "word_zh": "computer vision",
+    "category": "人工智能",
+    "generated_at": "2026-02-17T23:20:10.378534"
+  },
+  {
+    "id": 0,
+    "word": "reinforcement learning",
+    "text": "The term reinforcement learning can be understood as reinforcement learning is an important concept..",
+    "template": "The term {word} can be underst...",
+    "source": "generated",
+    "word_zh": "reinforcement learning",
+    "category": "人工智能",
+    "generated_at": "2026-02-17T23:20:11.198629"
+  },
+  {
+    "id": 0,
+    "word": "transformer",
+    "text": "The term transformer can be understood as (toys) A toy in the Transformers toyline which has mechanical parts that allow it to be altered in appearance from its original form as a humanoid robot action figure to another form, usually a vehicle, depending on the toy..",
+    "template": "The term {word} can be underst...",
+    "source": "api:free_dict",
+    "word_zh": "transformer",
+    "category": "人工智能",
+    "generated_at": "2026-02-17T23:20:11.221263"
+  },
+  {
+    "id": 0,
+    "word": "GAN",
+    "text": "What does GAN mean? It means GAN is an important concept..",
+    "template": "What does {word} mean? It mean...",
+    "source": "generated",
+    "word_zh": "GAN",
+    "category": "人工智能",
+    "generated_at": "2026-02-17T23:20:12.323887"
+  },
+  {
+    "id": 0,
+    "word": "CNN",
+    "text": "The term CNN can be understood as CNN is an important concept..",
+    "template": "The term {word} can be underst...",
+    "source": "generated",
+    "word_zh": "CNN",
+    "category": "人工智能",
+    "generated_at": "2026-02-17T23:20:12.921828"
+  },
+  {
+    "id": 0,
+    "word": "RNN",
+    "text": "The word \"RNN\" refers to RNN is an important concept..",
+    "template": "The word \"{word}\" refers to {d...",
+    "source": "generated",
+    "word_zh": "RNN",
+    "category": "人工智能",
+    "generated_at": "2026-02-17T23:20:14.881006"
+  }
+]

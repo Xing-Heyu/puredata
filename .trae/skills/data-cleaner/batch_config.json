@@ -1,0 +1,34 @@
+{
+  "output_dir": "./training_data",
+  "output_file": "all_training_data.json",
+  "default_count": 50,
+  "default_format": "json",
+  "api": "free_dict",
+  "tasks": [
+    {
+      "topic": "人工智能",
+      "keywords": ["machine learning", "deep learning", "neural network", "natural language processing", "computer vision", "reinforcement learning", "transformer", "convolutional network", "recurrent network", "artificial intelligence"],
+      "count": 50
+    },
+    {
+      "topic": "医疗",
+      "keywords": ["disease", "symptom", "treatment", "medicine", "diagnosis", "surgery", "hospital", "doctor", "patient", "therapy"],
+      "count": 50
+    },
+    {
+      "topic": "金融",
+      "keywords": ["stock", "bond", "investment", "banking", "finance", "trading", "asset", "portfolio", "dividend", "interest"],
+      "count": 50
+    },
+    {
+      "topic": "科技",
+      "keywords": ["technology", "computer", "software", "hardware", "internet", "programming", "algorithm", "database", "cloud computing", "cybersecurity"],
+      "count": 50
+    },
+    {
+      "topic": "教育",
+      "keywords": ["education", "learning", "teaching", "student", "school", "curriculum", "knowledge", "training", "course", "examination"],
+      "count": 50
+    }
+  ]
+}

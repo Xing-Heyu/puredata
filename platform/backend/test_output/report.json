@@ -1,0 +1,37 @@
+{
+  "input_count": 1,
+  "quality": "clean",
+  "formats": {
+    "pretrain": {
+      "count": 1,
+      "ready": true,
+      "stats": {
+        "total": 1,
+        "total_chars": 198,
+        "avg_chars": 198.0
+      }
+    },
+    "instruction": {
+      "count": 1,
+      "ready": true,
+      "stats": {
+        "total": 1,
+        "empty_input_ratio": 1.0
+      }
+    },
+    "conversation": {
+      "count": 1,
+      "ready": true,
+      "stats": {
+        "total": 1,
+        "avg_turns": 5.0
+      }
+    },
+    "sharegpt": {
+      "count": 1
+    }
+  },
+  "all_ready": true,
+  "output_dir": "d:\\skill\\skill3\\platform\\backend\\test_output",
+  "processed_at": "1771439812.6813726"
+}
