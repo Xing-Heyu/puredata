@@ -3,7 +3,6 @@
 """
 
 import os
-from urllib.parse import unquote
 
 def handle_static_routes(handler, path, context):
     """

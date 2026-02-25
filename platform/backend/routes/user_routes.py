@@ -3,9 +3,7 @@
 完整版 - 包含所有用户相关的API处理逻辑
 """
 
-import json
 import re
-from datetime import datetime
 
 def handle_user_routes(handler, path, method, body, context):
     """

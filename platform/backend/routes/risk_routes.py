@@ -2,9 +2,6 @@
 风控相关路由处理
 """
 
-import json
-from datetime import datetime
-
 def handle_risk_routes(handler, path, method, body, context):
     """
     处理风控相关请求

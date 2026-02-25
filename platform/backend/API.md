@@ -167,6 +167,140 @@
 
 ---
 
+### 密码重置
+
+**POST** `/api/password/reset`
+
+**请求体**:
+```json
+{
+    "email": "user@example.com",
+    "code": "123456",
+    "new_password": "NewPassword123"
+}
+```
+
+**响应**:
+```json
+{
+    "success": true,
+    "message": "密码重置成功，请重新登录"
+}
+```
+
+---
+
+### 发送验证码
+
+**POST** `/api/otp/send`
+
+**请求体**:
+```json
+{
+    "target": "user@example.com",
+    "type": "email"
+}
+```
+
+**响应**:
+```json
+{
+    "success": true,
+    "message": "验证码已发送"
+}
+```
+
+---
+
+### 获取用户信息
+
+**GET** `/api/user/info`
+
+**请求头**: `Authorization: Bearer {token}`
+
+**响应**:
+```json
+{
+    "username": "user123",
+    "email": "user@example.com",
+    "role": "user",
+    "quota": {
+        "daily": 100,
+        "monthly": 1000,
+        "used_daily": 10,
+        "used_monthly": 100
+    }
+}
+```
+
+---
+
+## 管理员API
+
+### 管理员登录
+
+**POST** `/api/admin/login`
+
+**请求体**:
+```json
+{
+    "username": "admin",
+    "password": "AdminPassword123"
+}
+```
+
+**响应**:
+```json
+{
+    "success": true,
+    "token": "admin_token_xxx"
+}
+```
+
+---
+
+### 获取用户列表
+
+**GET** `/api/admin/users`
+
+**请求头**: `Authorization: Bearer {admin_token}`
+
+**响应**:
+```json
+{
+    "users": [
+        {
+            "username": "user1",
+            "email": "user1@example.com",
+            "role": "user",
+            "created_at": "2025-01-01T00:00:00"
+        }
+    ]
+}
+```
+
+---
+
+### 更新用户角色
+
+**POST** `/api/admin/users/update`
+
+**请求头**: `Authorization: Bearer {admin_token}`
+
+**请求体**:
+```json
+{
+    "username": "user1",
+    "updates": {
+        "role": "premium"
+    }
+}
+```
+
+**注意**: 所有管理员POST操作需要CSRF Token，通过请求体 `_csrf` 或请求头 `X-CSRF-Token` 传递。
+
+---
+
 ## 健康检查
 
 ### 服务状态

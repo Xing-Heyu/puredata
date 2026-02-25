@@ -209,6 +209,58 @@ docker exec -it puredata curl https://dashscope.aliyuncs.com/api/v1/services/aig
 4. **定期备份**：每天自动备份
 5. **更新依赖**：定期更新安全补丁
 
+### 生产环境必配环境变量
+
+创建 `.env` 文件：
+
+```bash
+# 必须配置 - 安全相关
+SECRET_KEY=your-random-secret-key-at-least-32-characters
+PUREDATA_SECRET_KEY=another-random-key-for-encryption
+DATAGEN_SECRET_KEY=third-key-for-data-encryption
+
+# 必须配置 - API密钥
+QWEN_API_KEY=sk-your-qwen-api-key
+
+# 可选配置 - 会话超时
+SESSION_TIMEOUT=3600
+
+# 可选配置 - 日志级别
+LOG_LEVEL=INFO
+```
+
+### 生成安全密钥
+
+```bash
+# 生成32位随机密钥
+python -c "import secrets; print(secrets.token_urlsafe(32))"
+```
+
+### 防火墙配置
+
+```bash
+# Ubuntu UFW配置
+sudo ufw allow 22/tcp    # SSH
+sudo ufw allow 80/tcp    # HTTP
+sudo ufw allow 443/tcp   # HTTPS
+sudo ufw enable
+```
+
+### 性能优化
+
+```bash
+# 增加文件描述符限制
+echo "* soft nofile 65535" >> /etc/security/limits.conf
+echo "* hard nofile 65535" >> /etc/security/limits.conf
+
+# 优化内核参数
+cat >> /etc/sysctl.conf << EOF
+net.core.somaxconn = 1024
+net.ipv4.tcp_max_syn_backlog = 1024
+EOF
+sysctl -p
+```
+
 ---
 
 ## 八、成本估算
