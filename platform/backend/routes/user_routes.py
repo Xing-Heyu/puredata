@@ -88,7 +88,7 @@ def handle_user_routes(handler, path, method, body, context):
             import traceback
             print(f"[ERROR] 注册异常: {e}")
             print(f"[ERROR] 详细堆栈: {traceback.format_exc()}")
-            handler._send_json(500, {"success": False, "error": str(e)})
+            handler._send_json(500, {"success": False, "error": "服务器内部错误，请稍后重试"})
         return True
     
     elif path == '/api/logout':

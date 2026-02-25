@@ -16,7 +16,7 @@ services:
       - PYTHONUNBUFFERED=1
       - TZ=Asia/Shanghai
       - QWEN_API_KEY=${QWEN_API_KEY:-}
-      - SECRET_KEY=${SECRET_KEY:-puredata-secret-key}
+      - SECRET_KEY=${SECRET_KEY:?SECRET_KEY must be set in production}
     restart: unless-stopped
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8000/health"]

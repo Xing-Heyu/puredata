@@ -140,7 +140,7 @@ def handle_generate_routes(handler, path, method, body, context):
                 rc = get_risk_control()
                 if rc:
                     rc.log_action("generate", None, client_ip, {"error": str(e)}, "failed")
-            handler._send_json(500, {"success": False, "error": str(e)})
+            handler._send_json(500, {"success": False, "error": "数据生成失败，请稍后重试"})
         
         return True
     
@@ -180,7 +180,7 @@ def handle_generate_routes(handler, path, method, body, context):
             handler._send_json(200, {"success": True, "task_id": task_id, "message": "序列生成任务已创建"})
             
         except Exception as e:
-            handler._send_json(500, {"success": False, "error": str(e)})
+            handler._send_json(500, {"success": False, "error": "序列生成任务创建失败"})
         
         return True
     
@@ -428,7 +428,7 @@ def handle_generate_routes(handler, path, method, body, context):
             print(f"[下载] 错误: {e}")
             import traceback
             traceback.print_exc()
-            handler._send_json(500, {"success": False, "error": str(e)})
+            handler._send_json(500, {"success": False, "error": "文件下载失败"})
         
         return True
     

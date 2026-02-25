@@ -27,6 +27,8 @@ class SecurityProtocol:
         "login": {"requests": 5, "window": 300}
     }
     
+    RATE_LIMIT_FILE = os.path.join(os.path.dirname(__file__), 'rate_limits.json')
+    
     def __init__(self):
         self.request_counts = defaultdict(list)
         self.blocked_ips = set()
@@ -34,6 +36,31 @@ class SecurityProtocol:
         self.lock = threading.Lock()
         self._init_secret_key()
         self._init_audit_log()
+        self._load_rate_limits()
+    
+    def _load_rate_limits(self):
+        """加载速率限制数据"""
+        if os.path.exists(self.RATE_LIMIT_FILE):
+            try:
+                with open(self.RATE_LIMIT_FILE, 'r', encoding='utf-8') as f:
+                    data = json.load(f)
+                    for key, timestamps in data.get('request_counts', {}).items():
+                        self.request_counts[key] = timestamps
+                    self.blocked_ips = set(data.get('blocked_ips', []))
+            except Exception:
+                pass
+    
+    def _save_rate_limits(self):
+        """保存速率限制数据"""
+        try:
+            data = {
+                'request_counts': dict(self.request_counts),
+                'blocked_ips': list(self.blocked_ips)
+            }
+            with open(self.RATE_LIMIT_FILE, 'w', encoding='utf-8') as f:
+                json.dump(data, f)
+        except Exception:
+            pass
     
     def _init_audit_log(self):
         """初始化审计日志 - 从文件加载"""
@@ -124,6 +151,7 @@ class SecurityProtocol:
                 return False
             
             requests.append(now)
+            self._save_rate_limits()
             return True
     
     def sanitize_input(self, text):
@@ -209,19 +237,67 @@ class SecurityProtocol:
         return False, None
     
     def encrypt_sensitive(self, data):
-        """敏感数据加密（简化版）"""
-        import base64
-        json_str = json.dumps(data)
-        return base64.b64encode(json_str.encode()).decode()
+        """敏感数据加密 - 使用AES-256 (Fernet)"""
+        try:
+            from cryptography.fernet import Fernet
+            from cryptography.hazmat.primitives import hashes
+            from cryptography.hazmat.primitives.kdf.pbkdf2 import PBKDF2HMAC
+            import base64
+            
+            key = self._get_or_create_secret_key().encode()
+            salt = b'PureDataSalt2024'
+            kdf = PBKDF2HMAC(
+                algorithm=hashes.SHA256(),
+                length=32,
+                salt=salt,
+                iterations=100000,
+            )
+            fernet_key = base64.urlsafe_b64encode(kdf.derive(key))
+            fernet = Fernet(fernet_key)
+            
+            json_str = json.dumps(data)
+            return fernet.encrypt(json_str.encode()).decode()
+        except ImportError:
+            import base64
+            json_str = json.dumps(data)
+            return base64.b64encode(json_str.encode()).decode()
     
     def decrypt_sensitive(self, encrypted):
-        """敏感数据解密（简化版）"""
-        import base64
+        """敏感数据解密 - 使用AES-256 (Fernet)"""
         try:
-            json_str = base64.b64decode(encrypted.encode()).decode()
+            from cryptography.fernet import Fernet
+            from cryptography.hazmat.primitives import hashes
+            from cryptography.hazmat.primitives.kdf.pbkdf2 import PBKDF2HMAC
+            import base64
+            
+            key = self._get_or_create_secret_key().encode()
+            salt = b'PureDataSalt2024'
+            kdf = PBKDF2HMAC(
+                algorithm=hashes.SHA256(),
+                length=32,
+                salt=salt,
+                iterations=100000,
+            )
+            fernet_key = base64.urlsafe_b64encode(kdf.derive(key))
+            fernet = Fernet(fernet_key)
+            
+            json_str = fernet.decrypt(encrypted.encode()).decode()
             return json.loads(json_str)
-        except:
+        except ImportError:
+            import base64
+            try:
+                json_str = base64.b64decode(encrypted.encode()).decode()
+                return json.loads(json_str)
+            except:
+                return None
+        except Exception:
             return None
+    
+    def _get_or_create_secret_key(self):
+        """获取或创建密钥"""
+        if self._SECRET_KEY is None:
+            self._SECRET_KEY = os.environ.get("PUREDATA_SECRET_KEY", "puredata-default-key-change-in-production")
+        return self._SECRET_KEY
 
 
 security = SecurityProtocol()

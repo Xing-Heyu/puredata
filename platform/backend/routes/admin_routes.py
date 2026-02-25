@@ -4,7 +4,20 @@
 """
 
 import json
+import secrets
 from datetime import datetime
+
+CSRF_TOKENS = {}
+
+def generate_csrf_token(session_id):
+    token = secrets.token_urlsafe(32)
+    CSRF_TOKENS[session_id] = token
+    return token
+
+def validate_csrf_token(session_id, token):
+    if session_id not in CSRF_TOKENS:
+        return False
+    return CSRF_TOKENS[session_id] == token
 
 def handle_admin_routes(handler, path, method, body, context):
     """
@@ -28,6 +41,15 @@ def handle_admin_routes(handler, path, method, body, context):
         if not admin_auth:
             return False
         return admin_auth.validate_token(token) is not None
+    
+    def _check_csrf(token):
+        if not token:
+            return False
+        admin = admin_auth.validate_token(token) if admin_auth else None
+        if not admin:
+            return False
+        csrf_token = body.get('_csrf') or handler.headers.get('X-CSRF-Token', '')
+        return validate_csrf_token(token, csrf_token)
     
     if path == '/api/admin/login':
         if method != 'POST':

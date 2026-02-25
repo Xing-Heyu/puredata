@@ -163,6 +163,12 @@ class SQLiteStorage:
             raise ValueError(f"Invalid table name: {table}")
         return table
     
+    def _validate_column(self, table: str, column: str) -> str:
+        allowed_columns = self._get_table_columns(table)
+        if column not in allowed_columns:
+            raise ValueError(f"Invalid column name: {column} for table: {table}")
+        return column
+    
     def _init_tables(self):
         with self.pool.connection() as conn:
             conn.executescript("""
@@ -265,6 +271,8 @@ class SQLiteStorage:
         self._validate_table(table)
         if key_column is None:
             key_column = self._get_primary_key(table)
+        else:
+            self._validate_column(table, key_column)
         
         with self.rwlock.read():
             with self.pool.connection() as conn:
@@ -320,6 +328,8 @@ class SQLiteStorage:
         self._validate_table(table)
         if key_column is None:
             key_column = self._get_primary_key(table)
+        else:
+            self._validate_column(table, key_column)
         
         with self.rwlock.write():
             with self.pool.connection() as conn:
@@ -361,6 +371,8 @@ class SQLiteStorage:
         self._validate_table(table)
         if key_column is None:
             key_column = self._get_primary_key(table)
+        else:
+            self._validate_column(table, key_column)
         
         with self.rwlock.read():
             with self.pool.connection() as conn:

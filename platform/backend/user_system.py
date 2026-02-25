@@ -114,7 +114,7 @@ TASK_REWARDS = {
 class UserManager:
     """用户管理器"""
     
-    SESSION_TIMEOUT = 3600  # 1小时
+    SESSION_TIMEOUT = int(os.environ.get("SESSION_TIMEOUT", "3600"))  # 可配置，默认1小时
     
     def __init__(self):
         self.users = {}

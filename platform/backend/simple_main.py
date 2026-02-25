@@ -2824,6 +2824,14 @@ class Handler(BaseHTTPRequestHandler):
         path = unquote(urlparse(self.path).path)
         client_ip = self._get_client_ip()
         
+        PROTECTED_FILES = {'users.json', 'sessions.json', 'admin_sessions.json', 
+                          'otp_codes.json', 'orders.json', 'invoices.json',
+                          '管理员配置.json', 'api_stats.json'}
+        for protected in PROTECTED_FILES:
+            if protected in path:
+                self._send_json(403, {"error": "Access denied"})
+                return
+        
         if ROUTES_AVAILABLE:
             context = {
                 'user_manager': user_manager if USER_SYSTEM_AVAILABLE else None,

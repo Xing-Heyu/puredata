@@ -156,7 +156,11 @@ class DataEncryptor:
     
     def __init__(self, secret_key: str = None):
         if secret_key is None:
-            secret_key = os.environ.get("DATAGEN_SECRET_KEY", "default-secret-key-change-in-production")
+            secret_key = os.environ.get("DATAGEN_SECRET_KEY")
+            if not secret_key:
+                import secrets
+                secret_key = secrets.token_urlsafe(32)
+                print("[WARNING] DATAGEN_SECRET_KEY not set, using random key. Set environment variable for production!")
         
         self.secret_key = secret_key
         self._fernet = None

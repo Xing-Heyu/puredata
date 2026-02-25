@@ -207,4 +207,4 @@ if __name__ == "__main__":
         print(f"验证密钥: {validated}")
         
         keys = api_key_manager.list_keys("test_user")
-        print(f"密钥列表: {keys}")
+        print(f"密钥数量: {len(keys.get('keys', []))}")

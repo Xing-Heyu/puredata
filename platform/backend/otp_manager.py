@@ -135,7 +135,7 @@ class OTPManager:
         config = self.PROVIDER_CONFIG["tencent"]
         
         if not config["secret_id"] or not config["secret_key"]:
-            print(f"[OTP] 腾讯云短信未配置，验证码: {code}")
+            print(f"[OTP] 腾讯云短信未配置")
             return False
         
         try:
@@ -159,7 +159,7 @@ class OTPManager:
             return True
             
         except ImportError:
-            print(f"[OTP] 腾讯云SDK未安装，验证码: {code}")
+            print(f"[OTP] 腾讯云SDK未安装")
             return False
         except Exception as e:
             print(f"[OTP] 腾讯云短信发送失败: {e}")
@@ -170,7 +170,7 @@ class OTPManager:
         config = self.PROVIDER_CONFIG["aliyun"]
         
         if not config["access_key_id"] or not config["access_key_secret"]:
-            print(f"[OTP] 阿里云短信未配置，验证码: {code}")
+            print(f"[OTP] 阿里云短信未配置")
             return False
         
         try:
@@ -198,7 +198,7 @@ class OTPManager:
             return True
             
         except ImportError:
-            print(f"[OTP] 阿里云SDK未安装，验证码: {code}")
+            print(f"[OTP] 阿里云SDK未安装")
             return False
         except Exception as e:
             print(f"[OTP] 阿里云短信发送失败: {e}")
@@ -209,11 +209,11 @@ class OTPManager:
         config = self.PROVIDER_CONFIG["tencent"]
         
         if not config["secret_id"] or not config["secret_key"]:
-            print(f"[OTP] 腾讯云邮件未配置，验证码: {code}")
+            print(f"[OTP] 腾讯云邮件未配置")
             return False
         
         try:
-            print(f"[OTP] 腾讯云邮件发送成功: {self._mask_email(email)}, 验证码: {code}")
+            print(f"[OTP] 腾讯云邮件发送成功: {self._mask_email(email)}")
             return True
         except Exception as e:
             print(f"[OTP] 腾讯云邮件发送失败: {e}")
@@ -224,11 +224,11 @@ class OTPManager:
         config = self.PROVIDER_CONFIG["aliyun"]
         
         if not config["access_key_id"] or not config["access_key_secret"]:
-            print(f"[OTP] 阿里云邮件未配置，验证码: {code}")
+            print(f"[OTP] 阿里云邮件未配置")
             return False
         
         try:
-            print(f"[OTP] 阿里云邮件发送成功: {self._mask_email(email)}, 验证码: {code}")
+            print(f"[OTP] 阿里云邮件发送成功: {self._mask_email(email)}")
             return True
         except Exception as e:
             print(f"[OTP] 阿里云邮件发送失败: {e}")
@@ -239,7 +239,7 @@ class OTPManager:
         config = self.PROVIDER_CONFIG["smtp"]
         
         if not config["user"] or not config["password"]:
-            print(f"[OTP] SMTP未配置，验证码: {code}")
+            print(f"[OTP] SMTP未配置")
             return False
         
         try:
@@ -302,7 +302,7 @@ class OTPManager:
         elif provider == "aliyun":
             return self._send_sms_aliyun(phone, code)
         else:
-            print(f"[OTP] 模拟短信发送: {self._mask_phone(phone)}, 验证码: {code}")
+            print(f"[OTP] 模拟短信发送: {self._mask_phone(phone)}")
             return True
     
     def _send_email(self, email: str, code: str, otp_type: str) -> bool:
@@ -316,7 +316,7 @@ class OTPManager:
         elif provider == "smtp":
             return self._send_email_smtp(email, code, otp_type)
         else:
-            print(f"[OTP] 模拟邮件发送: {self._mask_email(email)}, 验证码: {code}")
+            print(f"[OTP] 模拟邮件发送: {self._mask_email(email)}")
             return True
     
     def send_code(self, target: str, otp_type: OTPType, channel: OTPChannel = None) -> Dict:

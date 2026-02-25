@@ -109,7 +109,6 @@ class EmailVerifier:
             self._save()
             
             print(f"\n[邮箱验证] 发送到 {email}")
-            print(f"  验证码: {code}")
             print(f"  有效期: {VERIFICATION_CODE_EXPIRY}秒\n")
             
             return {
