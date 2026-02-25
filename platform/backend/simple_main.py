@@ -2485,6 +2485,13 @@ def generate_data_streaming(domain, count, task_id, quality_mode="standard", out
                         enable_quality_gate=True,
                         enable_audit=True,
                         enable_anomaly_fix=True,
+                        enable_data_lineage=True,
+                        enable_smart_diversity=True if quality_mode in ["high", "ultra"] else False,
+                        enable_calibrated_enhance=True if quality_mode == "ultra" else False,
+                        enable_cads=True if quality_mode == "ultra" else False,
+                        enable_dasgen=True if quality_mode == "ultra" else False,
+                        enable_fac=True if quality_mode == "ultra" else False,
+                        enable_failure_recovery=True if quality_mode in ["high", "ultra"] else False,
                         min_quality_score=min_quality_score,
                         target_quality_level="high_quality" if quality_mode in ["high", "ultra"] else "medium_quality",
                         verbose=False
@@ -2654,6 +2661,42 @@ def generate_data_streaming(domain, count, task_id, quality_mode="standard", out
                 except Exception as e:
                     print(f"[多样性] 处理失败: {e}")
             
+            try:
+                from domain_specialists import get_specialist
+                specialist = get_specialist(domain)
+                if specialist:
+                    specialist_data = specialist.generate(min(100, len(batch_data)), quality="clean")
+                    if specialist_data:
+                        for i, item in enumerate(batch_data):
+                            if i < len(specialist_data):
+                                item["domain_validated"] = True
+                                item["domain_info"] = specialist.get_domain_info()
+                        stats["domain_specialist_enhanced"] = stats.get("domain_specialist_enhanced", 0) + len(batch_data)
+                        print(f"[领域专家] 验证完成: {len(batch_data)} 条 ({domain})")
+            except Exception as e:
+                print(f"[领域专家] 处理失败: {e}")
+            
+            try:
+                from filters.data_lineage import data_lineage
+                if data_lineage:
+                    for item in batch_data:
+                        lineage_record = data_lineage.record(
+                            data_id=item.get("id", 0),
+                            source=item.get("source", "generated"),
+                            transformations=[{
+                                "stage": "streaming_generation",
+                                "domain": domain,
+                                "quality_mode": quality_mode,
+                                "timestamp": datetime.now().isoformat()
+                            }],
+                            quality_score=item.get("quality_score", 0.7)
+                        )
+                        item["lineage_id"] = lineage_record.record_id if hasattr(lineage_record, 'record_id') else str(uuid.uuid4())[:8]
+                    stats["lineage_recorded"] = stats.get("lineage_recorded", 0) + len(batch_data)
+                    print(f"[数据血缘] 记录完成: {len(batch_data)} 条")
+            except Exception as e:
+                print(f"[数据血缘] 处理失败: {e}")
+            
             for item in batch_data:
                 item["id"] = batch_start + batch_data.index(item) + 1
                 f.write(json.dumps(item, ensure_ascii=False) + '\n')
@@ -2691,6 +2734,8 @@ def generate_data_streaming(domain, count, task_id, quality_mode="standard", out
     print(f"流水线处理: {stats['pipeline_processed']} 条")
     print(f"T²处理: {stats['t2_processed']} 条")
     print(f"多样性增强: {stats['diversity_enhanced']} 条")
+    print(f"领域专家: {stats.get('domain_specialist_enhanced', 0)} 条")
+    print(f"数据血缘: {stats.get('lineage_recorded', 0)} 条")
     print(f"输出文件: {output_file}")
     print(f"{'='*60}")
     
