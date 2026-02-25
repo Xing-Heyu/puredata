@@ -484,8 +484,8 @@ class StorageManager:
         if user and 'data' in user and user['data']:
             try:
                 user['data'] = json.loads(user['data'])
-            except:
-                pass
+            except json.JSONDecodeError as e:
+                print(f"[WARN] 用户数据JSON解析失败: {e}")
         return user
     
     def set_user(self, username: str, data: Dict) -> bool:

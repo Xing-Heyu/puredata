@@ -77,6 +77,7 @@ def handle_all_post_routes(handler, path, body, context):
             print(f"[ERROR] {name} 处理异常: {e}")
             import traceback
             traceback.print_exc()
+            handler._send_json(500, {"success": False, "error": "服务器内部错误"})
             return True
     
     print(f"[DEBUG] 没有处理器匹配")

@@ -199,11 +199,58 @@ def handle_generate_routes(handler, path, method, body, context):
             return True
         
         task_id = path.split('/task/')[-1]
-        if task_id in tasks:
-            handler._send_json(200, {"success": True, "task": tasks[task_id]})
-        else:
+        if task_id not in tasks:
             handler._send_json(404, {"success": False, "error": "任务不存在"})
-        return True
+            return True
+        
+        accept_header = handler.headers.get('Accept', '')
+        if 'text/event-stream' in accept_header:
+            handler.send_response(200)
+            handler.send_header('Content-Type', 'text/event-stream')
+            handler.send_header('Cache-Control', 'no-cache')
+            handler.send_header('Connection', 'keep-alive')
+            handler.send_header('Access-Control-Allow-Origin', '*')
+            handler.end_headers()
+            
+            import time
+            last_progress = -1
+            last_status = None
+            
+            try:
+                while True:
+                    task = tasks.get(task_id, {})
+                    current_progress = task.get('progress', 0)
+                    current_status = task.get('status', 'unknown')
+                    
+                    if current_progress != last_progress or current_status != last_status:
+                        data = {
+                            "id": task_id,
+                            "progress": current_progress,
+                            "status": current_status,
+                            "total": task.get('total', 0),
+                            "completed": task.get('completed', 0),
+                            "timestamp": datetime.now().isoformat()
+                        }
+                        handler.wfile.write(f"data: {json.dumps(data)}\n\n".encode('utf-8'))
+                        handler.wfile.flush()
+                        
+                        last_progress = current_progress
+                        last_status = current_status
+                    
+                    if current_status in ['completed', 'failed']:
+                        break
+                    
+                    time.sleep(0.5)
+                    
+            except (BrokenPipeError, ConnectionResetError):
+                pass
+            except Exception as e:
+                print(f"[SSE] 推送异常: {e}")
+            
+            return True
+        else:
+            handler._send_json(200, {"success": True, "task": tasks[task_id]})
+            return True
     
     elif path == '/domains':
         if method != 'GET':
@@ -230,72 +277,6 @@ def handle_generate_routes(handler, path, method, body, context):
             })
         handler._send_json(200, {"success": True, "quality_modes": modes})
         return True
-    
-    elif path.startswith('/task/'):
-        # SSE实时任务进度推送
-        if method != 'GET':
-            handler._send_json(405, {"success": False, "error": "Method not allowed"})
-            return True
-        
-        task_id = path.split('/task/')[-1]
-        if task_id not in tasks:
-            handler._send_json(404, {"success": False, "error": "任务不存在"})
-            return True
-        
-        # 检查是否是SSE请求
-        accept_header = handler.headers.get('Accept', '')
-        if 'text/event-stream' in accept_header:
-            # SSE实时推送
-            handler.send_response(200)
-            handler.send_header('Content-Type', 'text/event-stream')
-            handler.send_header('Cache-Control', 'no-cache')
-            handler.send_header('Connection', 'keep-alive')
-            handler.send_header('Access-Control-Allow-Origin', '*')
-            handler.end_headers()
-            
-            import time
-            last_progress = -1
-            last_status = None
-            
-            try:
-                while True:
-                    task = tasks.get(task_id, {})
-                    current_progress = task.get('progress', 0)
-                    current_status = task.get('status', 'unknown')
-                    
-                    # 只在进度或状态变化时推送
-                    if current_progress != last_progress or current_status != last_status:
-                        data = {
-                            "id": task_id,
-                            "progress": current_progress,
-                            "status": current_status,
-                            "total": task.get('total', 0),
-                            "completed": task.get('completed', 0),
-                            "timestamp": datetime.now().isoformat()
-                        }
-                        handler.wfile.write(f"data: {json.dumps(data)}\n\n".encode('utf-8'))
-                        handler.wfile.flush()
-                        
-                        last_progress = current_progress
-                        last_status = current_status
-                    
-                    # 任务完成或失败时结束推送
-                    if current_status in ['completed', 'failed']:
-                        break
-                    
-                    time.sleep(0.5)  # 每500ms检查一次
-                    
-            except (BrokenPipeError, ConnectionResetError):
-                # 客户端断开连接
-                pass
-            except Exception as e:
-                print(f"[SSE] 推送异常: {e}")
-            
-            return True
-        else:
-            # 普通JSON查询
-            handler._send_json(200, {"success": True, "task": tasks[task_id]})
-            return True
     
     elif path.startswith('/download/'):
         """下载生成结果，支持多种格式"""

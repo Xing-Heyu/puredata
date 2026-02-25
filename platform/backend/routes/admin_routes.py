@@ -105,6 +105,10 @@ def handle_admin_routes(handler, path, method, body, context):
             handler._send_json(401, {"error": "未登录"})
             return True
         
+        if not _check_csrf(token):
+            handler._send_json(403, {"error": "CSRF验证失败"})
+            return True
+        
         old_password = body.get('old_password', '')
         new_password = body.get('new_password', '')
         
@@ -136,6 +140,10 @@ def handle_admin_routes(handler, path, method, body, context):
             handler._send_json(403, {"error": "权限不足"})
             return True
         
+        if not _check_csrf(token):
+            handler._send_json(403, {"error": "CSRF验证失败"})
+            return True
+        
         if not admin_auth:
             handler._send_json(500, {"error": "管理员系统不可用"})
             return True
@@ -152,6 +160,10 @@ def handle_admin_routes(handler, path, method, body, context):
         token = handler._get_token_from_request()
         if not _is_admin(token):
             handler._send_json(403, {"error": "权限不足"})
+            return True
+        
+        if not _check_csrf(token):
+            handler._send_json(403, {"error": "CSRF验证失败"})
             return True
         
         if not admin_auth:
@@ -187,6 +199,10 @@ def handle_admin_routes(handler, path, method, body, context):
             handler._send_json(403, {"error": "权限不足"})
             return True
         
+        if not _check_csrf(token):
+            handler._send_json(403, {"error": "CSRF验证失败"})
+            return True
+        
         if not user_manager:
             handler._send_json(500, {"error": "用户系统不可用"})
             return True
@@ -206,6 +222,10 @@ def handle_admin_routes(handler, path, method, body, context):
         token = handler._get_token_from_request()
         if not _is_admin(token):
             handler._send_json(403, {"error": "权限不足"})
+            return True
+        
+        if not _check_csrf(token):
+            handler._send_json(403, {"error": "CSRF验证失败"})
             return True
         
         if not user_manager:

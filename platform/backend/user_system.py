@@ -638,6 +638,19 @@ class UserManager:
             self._save()
             return True
     
+    def add_paid_quota(self, username: str, quota: int) -> Dict:
+        """添加付费配额"""
+        with self.lock:
+            if username not in self.users:
+                return {"success": False, "error": "用户不存在"}
+            
+            user = self.users[username]
+            user["paid_quota"] = user.get("paid_quota", 0) + quota
+            user["total_paid"] = user.get("total_paid", 0) + quota
+            
+            self._save()
+            return {"success": True, "paid_quota": user["paid_quota"], "added": quota}
+    
     def _check_tasks(self, user):
         total_used = user["quota_used"].get("total", 0)
         domains_tried = user.get("domains_tried", [])

@@ -59,8 +59,6 @@ def handle_user_routes(handler, path, method, body, context):
             account = body.get('account', body.get('email', ''))
             invite_code = body.get('invite_code')
             
-            print(f"[DEBUG] 注册请求: username={username}, account={account}")
-            
             is_phone = re.match(r'^1[3-9]\d{9}$', account)
             is_email = re.match(r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$', account)
             
@@ -71,9 +69,7 @@ def handle_user_routes(handler, path, method, body, context):
             email = account if is_email else ''
             phone = account if is_phone else ''
             
-            print(f"[DEBUG] 调用 user_manager.register...")
             result = user_manager.register(username, password, email, phone=phone, invite_code=invite_code)
-            print(f"[DEBUG] 注册结果: {result}")
             
             if result.get('success') and ANTI_ABUSE_AVAILABLE and get_anti_abuse:
                 try:
@@ -160,14 +156,15 @@ def handle_user_routes(handler, path, method, body, context):
             handler._send_json(405, {"error": "Method not allowed"})
             return True
         
-        token = body.get('token', '')
+        email = body.get('email', '')
+        code = body.get('code', '')
         new_password = body.get('new_password', '')
         
         if not user_manager:
             handler._send_json(500, {"error": "用户系统不可用"})
             return True
         
-        result = user_manager.reset_password(token, new_password)
+        result = user_manager.reset_password(email, code, new_password)
         handler._send_json(200, result)
         return True
     

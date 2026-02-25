@@ -296,7 +296,11 @@ class SecurityProtocol:
     def _get_or_create_secret_key(self):
         """获取或创建密钥"""
         if self._SECRET_KEY is None:
-            self._SECRET_KEY = os.environ.get("PUREDATA_SECRET_KEY", "puredata-default-key-change-in-production")
+            self._SECRET_KEY = os.environ.get("PUREDATA_SECRET_KEY")
+            if not self._SECRET_KEY:
+                import secrets
+                self._SECRET_KEY = secrets.token_urlsafe(32)
+                print("[WARNING] PUREDATA_SECRET_KEY not set, using random key. Set environment variable for production!")
         return self._SECRET_KEY
 
 
