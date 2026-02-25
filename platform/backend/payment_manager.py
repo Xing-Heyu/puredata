@@ -29,16 +29,16 @@ class InvoiceStatus(Enum):
     REJECTED = "rejected"
     ISSUED = "issued"
 
-PLANS = {
-    "basic_monthly": {"name": "基础版月付", "price": 9999, "quota": 200000, "duration": 30},
-    "basic_yearly": {"name": "基础版年付", "price": 99999, "quota": 2400000, "duration": 365},
-    "pro_monthly": {"name": "专业版月付", "price": 29999, "quota": 1000000, "duration": 30},
-    "pro_yearly": {"name": "专业版年付", "price": 299999, "quota": 12000000, "duration": 365},
-    "enterprise_monthly": {"name": "企业版月付", "price": 49999, "quota": 5000000, "duration": 30},
-    "enterprise_yearly": {"name": "企业版年付", "price": 499999, "quota": 60000000, "duration": 365},
-    "gold_combo": {"name": "黄金组合", "price": 399999, "quota": 12000000, "duration": 365},
-    "diamond_combo": {"name": "钻石组合", "price": 699999, "quota": 60000000, "duration": 365},
-}
+from pricing_config import PRICING_PLANS, PAYG_PACKAGES
+
+PLANS = {plan_id: {
+    "name": plan["name"],
+    "price": plan["price"],
+    "quota": plan["quota"],
+    "duration": plan["duration"] or 36500
+} for plan_id, plan in PRICING_PLANS.items() if plan["price"] > 0}
+
+PAYG = PAYG_PACKAGES
 
 class PaymentManager:
     """支付管理器"""

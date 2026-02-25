@@ -88,17 +88,19 @@ QUALITY_LEVEL_PERMISSIONS = {
     "robustness_quality": Permission.ROBUSTNESS_QUALITY
 }
 
+from pricing_config import ROLE_QUOTA_LIMITS, ROLE_OVERAGE_PRICES
+
 QUOTA_LIMITS = {
-    UserRole.ADMIN: {"daily": 5000000, "monthly": 50000000},
-    UserRole.PREMIUM: {"daily": 500000, "monthly": 5000000},
-    UserRole.STANDARD: {"daily": 100000, "monthly": 1000000},
-    UserRole.FREE: {"daily": 100, "monthly": 1000}
+    UserRole.ADMIN: ROLE_QUOTA_LIMITS["admin"],
+    UserRole.PREMIUM: ROLE_QUOTA_LIMITS["premium"],
+    UserRole.STANDARD: ROLE_QUOTA_LIMITS["standard"],
+    UserRole.FREE: ROLE_QUOTA_LIMITS["free"]
 }
 
 OVERAGE_PRICES = {
-    UserRole.PREMIUM: 0.03,
-    UserRole.STANDARD: 0.05,
-    UserRole.FREE: 0.08
+    UserRole.PREMIUM: ROLE_OVERAGE_PRICES["premium"],
+    UserRole.STANDARD: ROLE_OVERAGE_PRICES["standard"],
+    UserRole.FREE: ROLE_OVERAGE_PRICES["free"]
 }
 
 INVITE_REWARD = 500
