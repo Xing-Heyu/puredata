@@ -16,6 +16,7 @@ import uuid
 import threading
 import hashlib
 import random
+import asyncio
 import concurrent.futures
 from datetime import datetime, timedelta
 from urllib.parse import urlparse, parse_qs, unquote, quote
@@ -3554,6 +3555,17 @@ class Handler(BaseHTTPRequestHandler):
                 noise_level = int(body.get('noise_level', 2))
                 quality_mode = body.get('quality_mode', 'standard')
                 advanced_noise = body.get('advanced_noise')
+                output_type = body.get('output_type', 'text')
+                image_style = body.get('image_style', 'realistic')
+                voice_id = body.get('voice_id', 'zh-CN-XiaoxiaoNeural')
+                
+                if output_type not in ['text', 'image', 'audio', 'multimodal']:
+                    self._send_json(400, {"success": False, "error": "output_type must be text/image/audio/multimodal"})
+                    return
+                
+                if output_type in ['image', 'multimodal'] and user and user.get('role') == 'free':
+                    self._send_json(403, {"success": False, "error": "图片生成仅限付费用户使用"})
+                    return
                 
                 if advanced_noise:
                     if not user or user.get('role') not in ['premium', 'developer', 'admin']:
@@ -3608,11 +3620,14 @@ class Handler(BaseHTTPRequestHandler):
                         "noise_level": noise_level,
                         "advanced_noise": advanced_noise,
                         "quality_mode": quality_mode,
+                        "output_type": output_type,
+                        "image_style": image_style,
+                        "voice_id": voice_id,
                         "created_at": datetime.now().isoformat(),
                         "username": username
                     }
                 
-                thread = threading.Thread(target=self._run_task, args=(task_id, domain, count, format_type, mode, username, noise_level, quality_mode, advanced_noise), daemon=True)
+                thread = threading.Thread(target=self._run_task, args=(task_id, domain, count, format_type, mode, username, noise_level, quality_mode, advanced_noise, output_type, image_style, voice_id), daemon=True)
                 thread.start()
                 
                 if RISK_CONTROL_AVAILABLE:
@@ -4122,13 +4137,14 @@ class Handler(BaseHTTPRequestHandler):
                     return
             self._send_json(404, {"success": False, "error": "未找到"})
     
-    def _run_task(self, task_id, domain, count, format_type, mode="hybrid", username=None, noise_level=2, quality_mode="standard", advanced_noise=None):
+    def _run_task(self, task_id, domain, count, format_type, mode="hybrid", username=None, noise_level=2, quality_mode="standard", advanced_noise=None, output_type="text", image_style="realistic", voice_id="zh-CN-XiaoxiaoNeural"):
         global tasks
         try:
             with task_lock:
                 tasks[task_id]["status"] = "processing"
             noise_info = f"噪音等级: {noise_level}" + (f" (高级配置)" if advanced_noise else "")
-            print(f"[{task_id}] 开始生成: {domain}, {count}条, 模式: {mode}, {noise_info}, 质量模式: {quality_mode}")
+            output_info = f"输出类型: {output_type}" if output_type != "text" else ""
+            print(f"[{task_id}] 开始生成: {domain}, {count}条, 模式: {mode}, {noise_info}, 质量模式: {quality_mode}, {output_info}")
             
             start_time = time.time()
             
@@ -4303,6 +4319,19 @@ class Handler(BaseHTTPRequestHandler):
                         print(f"[{task_id}] 质量评分: {report.score.overall} ({report.grade})")
                     except Exception as e:
                         print(f"[{task_id}] 质量分析失败: {e}")
+                
+                if output_type != "text":
+                    try:
+                        from multimodal_converter import convert_to_multimodal
+                        print(f"[{task_id}] 开始多模态转换: {output_type}")
+                        data = asyncio.run(convert_to_multimodal(
+                            data, output_type, image_style, voice_id
+                        ))
+                        print(f"[{task_id}] 多模态转换完成")
+                    except ImportError:
+                        print(f"[{task_id}] 多模态模块未安装，跳过转换")
+                    except Exception as e:
+                        print(f"[{task_id}] 多模态转换失败: {e}")
                 
                 filename = f"{task_id}_{domain}_{count}.{format_type}"
                 filepath = os.path.join(OUTPUT_DIR, filename)

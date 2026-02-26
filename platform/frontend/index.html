@@ -1707,6 +1707,46 @@
                             </div>
                             
                             <div class="form-group">
+                                <label class="form-label">
+                                    输出类型
+                                    <span v-if="!canUseMultimodal" style="color: var(--warning); font-size: 11px;">（图片/音频需付费）</span>
+                                </label>
+                                <select class="form-select" v-model="outputType" @change="onOutputTypeChange">
+                                    <option value="text">纯文本（默认）</option>
+                                    <option value="audio" :disabled="!canUseMultimodal">文本 + 音频 {{ !canUseMultimodal ? '（付费功能）' : '' }}</option>
+                                    <option value="image" :disabled="!canUseMultimodal">文本 + 图片 {{ !canUseMultimodal ? '（付费功能）' : '' }}</option>
+                                    <option value="multimodal" :disabled="!canUseMultimodal">文本 + 图片 + 音频 {{ !canUseMultimodal ? '（付费功能）' : '' }}</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group" v-if="outputType === 'image' || outputType === 'multimodal'">
+                                <label class="form-label">图片风格</label>
+                                <select class="form-select" v-model="imageStyle">
+                                    <option value="realistic">写实风格（推荐）</option>
+                                    <option value="anime">动漫风格</option>
+                                    <option value="oil_painting">油画风格</option>
+                                    <option value="watercolor">水彩风格</option>
+                                    <option value="3d_render">3D渲染</option>
+                                    <option value="minimalist">极简风格</option>
+                                    <option value="cyberpunk">赛博朋克</option>
+                                    <option value="fantasy">奇幻风格</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group" v-if="outputType === 'audio' || outputType === 'multimodal'">
+                                <label class="form-label">语音声线</label>
+                                <select class="form-select" v-model="voiceId">
+                                    <optgroup label="Azure 中文声线">
+                                        <option value="zh-CN-XiaoxiaoNeural">晓晓（女声，自然亲切）</option>
+                                        <option value="zh-CN-YunxiNeural">云希（男声，阳光活力）</option>
+                                        <option value="zh-CN-YunyangNeural">云扬（男声，专业新闻）</option>
+                                        <option value="zh-CN-XiaoyiNeural">晓伊（女声，温柔甜美）</option>
+                                        <option value="zh-CN-YunjianNeural">云健（男声，沉稳大气）</option>
+                                    </optgroup>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
                                 <label class="form-label">预计费用</label>
                                 <div style="padding: 12px; background: var(--gray-50); border-radius: 8px; font-size: 14px; color: var(--gray-700);">
                                     <span v-if="!currentUser">请先登录</span>
@@ -2765,6 +2805,9 @@
                         { id: 'ultra', name: '超高质量', description: '95%高质量 - 高端训练场景', roles: ['admin'] },
                         { id: 'mixed', name: '混合可调', description: '自定义质量分布', roles: ['admin'] }
                     ],
+                    outputType: 'text',
+                    imageStyle: 'realistic',
+                    voiceId: 'zh-CN-XiaoxiaoNeural',
                     generating: false,
                     taskId: '',
                     taskStatus: '',
@@ -2838,10 +2881,20 @@
                 canUseAdvancedNoise() {
                     if (!this.currentUser) return false;
                     return ['premium', 'developer', 'admin'].includes(this.currentUser.role);
+                },
+                canUseMultimodal() {
+                    if (!this.currentUser) return false;
+                    return ['standard', 'premium', 'developer', 'admin'].includes(this.currentUser.role);
                 }
             },
             mounted() { this.checkLogin(); this.loadContactInfo(); },
             methods: {
+                onOutputTypeChange() {
+                    if ((this.outputType === 'image' || this.outputType === 'multimodal') && !this.canUseMultimodal) {
+                        this.outputType = 'text';
+                        this.showToast('图片生成需要付费用户', 'warning');
+                    }
+                },
                 canUseQualityMode(mode) {
                     const userRole = this.currentUser?.role || 'free';
                     return mode.roles.includes(userRole);
@@ -3160,7 +3213,10 @@
                                 format: this.format, 
                                 mode: this.mode,
                                 noise_level: parseInt(this.noiseLevel),
-                                quality_mode: this.qualityMode
+                                quality_mode: this.qualityMode,
+                                output_type: this.outputType,
+                                image_style: this.imageStyle,
+                                voice_id: this.voiceId
                             };
                             
                             if (this.useAdvancedNoise && this.canUseAdvancedNoise) {
