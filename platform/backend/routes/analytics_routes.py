@@ -31,12 +31,12 @@ def handle_analytics_routes(handler, path, method, body, context):
         token = handler._get_token_from_request()
         user = handler._get_current_user(token) if hasattr(handler, '_get_current_user') else None
         if not user:
-            handler._send_json(401, {"error": "请先登录"})
+            handler._send_json(401, {"success": False, "error": "请先登录"})
             return True
         
         data = body.get('data', [])
         if not data:
-            handler._send_json(400, {"error": "请提供数据"})
+            handler._send_json(400, {"success": False, "error": "请提供数据"})
             return True
         
         analysis = {
@@ -96,7 +96,7 @@ def handle_analytics_routes(handler, path, method, body, context):
             
             handler._send_json(200, detailed_stats)
         except Exception as e:
-            handler._send_json(500, {"error": str(e)})
+            handler._send_json(500, {"success": False, "error": str(e)})
         return True
     
     elif path == '/api/policies':

@@ -1280,7 +1280,7 @@
                 
                 <section class="cta-section">
                     <h2 class="cta-title">准备好开始了吗？</h2>
-                    <p class="cta-subtitle">立即注册，免费体验100条数据生成</p>
+                    <p class="cta-subtitle">立即注册，免费体验1000条数据生成</p>
                     <button class="btn-hero" @click="currentUser ? (currentPage = 'generate') : (showRegisterModal = true)">免费开始</button>
                 </section>
             </div>
@@ -1527,17 +1527,130 @@
                             </div>
                             
                             <div class="form-group" v-if="mode === 'noisy'">
-                                <label class="form-label">噪音等级</label>
-                                <select class="form-select" v-model="noiseLevel">
-                                    <option value="0">Level 0 - 无噪音（干净数据）</option>
-                                    <option value="1">Level 1 - 轻微噪音（5%错误率）</option>
-                                    <option value="2" selected>Level 2 - 中等噪音（15%错误率）</option>
-                                    <option value="3">Level 3 - 较重噪音（30%错误率）</option>
-                                    <option value="4">Level 4 - 极重噪音（50%错误率）</option>
-                                </select>
-                                <div style="font-size: 12px; color: var(--gray-500); margin-top: 4px;">
-                                    噪音类型：OCR错误、ASR错误、拼写错误、格式混乱、口语化插入
+                                <label class="form-label">
+                                    噪音配置 
+                                    <span v-if="!canUseAdvancedNoise" style="color: var(--warning); font-size: 11px;">（高级版解锁自定义）</span>
+                                </label>
+                                
+                                <!-- 简单模式：预设等级 -->
+                                <div v-if="!useAdvancedNoise">
+                                    <select class="form-select" v-model="noiseLevel">
+                                        <option value="0">Level 0 - 无噪音（干净数据）</option>
+                                        <option value="1">Level 1 - 轻微噪音（5%错误率）</option>
+                                        <option value="2" selected>Level 2 - 中等噪音（15%错误率）</option>
+                                        <option value="3">Level 3 - 较重噪音（30%错误率）</option>
+                                        <option value="4">Level 4 - 极重噪音（50%错误率）</option>
+                                    </select>
+                                    <div style="font-size: 12px; color: var(--gray-500); margin-top: 4px;">
+                                        噪音类型：OCR错误、ASR错误、拼写错误、格式混乱、口语化插入
+                                    </div>
                                 </div>
+                                
+                                <!-- 高级模式：自定义配置 -->
+                                <div v-else style="background: var(--gray-50); padding: 16px; border-radius: 8px; margin-top: 8px;">
+                                    <div style="margin-bottom: 16px;">
+                                        <label style="font-size: 13px; font-weight: 500; display: flex; justify-content: space-between;">
+                                            <span>总体噪音强度</span>
+                                            <span style="color: var(--primary);">{{ advancedNoise.intensity }}%</span>
+                                        </label>
+                                        <input type="range" min="0" max="100" v-model="advancedNoise.intensity" 
+                                               style="width: 100%; margin-top: 8px;">
+                                        <div style="display: flex; justify-content: space-between; font-size: 11px; color: var(--gray-500);">
+                                            <span>0% 干净</span>
+                                            <span>100% 极重</span>
+                                        </div>
+                                    </div>
+                                    
+                                    <div style="border-top: 1px solid var(--gray-200); padding-top: 12px; margin-top: 12px;">
+                                        <label style="font-size: 13px; font-weight: 500; margin-bottom: 8px; display: block;">
+                                            噪音类型选择
+                                        </label>
+                                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
+                                            <label style="display: flex; align-items: center; font-size: 12px; cursor: pointer;">
+                                                <input type="checkbox" v-model="advancedNoise.types.ocr" style="margin-right: 6px;">
+                                                OCR识别错误
+                                            </label>
+                                            <label style="display: flex; align-items: center; font-size: 12px; cursor: pointer;">
+                                                <input type="checkbox" v-model="advancedNoise.types.asr" style="margin-right: 6px;">
+                                                ASR语音错误
+                                            </label>
+                                            <label style="display: flex; align-items: center; font-size: 12px; cursor: pointer;">
+                                                <input type="checkbox" v-model="advancedNoise.types.spelling" style="margin-right: 6px;">
+                                                拼写错误
+                                            </label>
+                                            <label style="display: flex; align-items: center; font-size: 12px; cursor: pointer;">
+                                                <input type="checkbox" v-model="advancedNoise.types.format" style="margin-right: 6px;">
+                                                格式混乱
+                                            </label>
+                                            <label style="display: flex; align-items: center; font-size: 12px; cursor: pointer;">
+                                                <input type="checkbox" v-model="advancedNoise.types.colloquial" style="margin-right: 6px;">
+                                                口语化插入
+                                            </label>
+                                            <label style="display: flex; align-items: center; font-size: 12px; cursor: pointer;">
+                                                <input type="checkbox" v-model="advancedNoise.types.punctuation" style="margin-right: 6px;">
+                                                标点错误
+                                            </label>
+                                        </div>
+                                    </div>
+                                    
+                                    <div style="border-top: 1px solid var(--gray-200); padding-top: 12px; margin-top: 12px;">
+                                        <label style="font-size: 13px; font-weight: 500; margin-bottom: 8px; display: block;">
+                                            各类型比例微调
+                                        </label>
+                                        <div style="display: grid; gap: 8px;">
+                                            <div v-if="advancedNoise.types.ocr">
+                                                <label style="font-size: 11px; display: flex; justify-content: space-between;">
+                                                    <span>OCR错误</span>
+                                                    <span>{{ advancedNoise.ratios.ocr }}%</span>
+                                                </label>
+                                                <input type="range" min="0" max="100" v-model="advancedNoise.ratios.ocr" style="width: 100%;">
+                                            </div>
+                                            <div v-if="advancedNoise.types.asr">
+                                                <label style="font-size: 11px; display: flex; justify-content: space-between;">
+                                                    <span>ASR错误</span>
+                                                    <span>{{ advancedNoise.ratios.asr }}%</span>
+                                                </label>
+                                                <input type="range" min="0" max="100" v-model="advancedNoise.ratios.asr" style="width: 100%;">
+                                            </div>
+                                            <div v-if="advancedNoise.types.spelling">
+                                                <label style="font-size: 11px; display: flex; justify-content: space-between;">
+                                                    <span>拼写错误</span>
+                                                    <span>{{ advancedNoise.ratios.spelling }}%</span>
+                                                </label>
+                                                <input type="range" min="0" max="100" v-model="advancedNoise.ratios.spelling" style="width: 100%;">
+                                            </div>
+                                            <div v-if="advancedNoise.types.format">
+                                                <label style="font-size: 11px; display: flex; justify-content: space-between;">
+                                                    <span>格式混乱</span>
+                                                    <span>{{ advancedNoise.ratios.format }}%</span>
+                                                </label>
+                                                <input type="range" min="0" max="100" v-model="advancedNoise.ratios.format" style="width: 100%;">
+                                            </div>
+                                            <div v-if="advancedNoise.types.colloquial">
+                                                <label style="font-size: 11px; display: flex; justify-content: space-between;">
+                                                    <span>口语化插入</span>
+                                                    <span>{{ advancedNoise.ratios.colloquial }}%</span>
+                                                </label>
+                                                <input type="range" min="0" max="100" v-model="advancedNoise.ratios.colloquial" style="width: 100%;">
+                                            </div>
+                                            <div v-if="advancedNoise.types.punctuation">
+                                                <label style="font-size: 11px; display: flex; justify-content: space-between;">
+                                                    <span>标点错误</span>
+                                                    <span>{{ advancedNoise.ratios.punctuation }}%</span>
+                                                </label>
+                                                <input type="range" min="0" max="100" v-model="advancedNoise.ratios.punctuation" style="width: 100%;">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- 切换按钮 -->
+                                <button v-if="canUseAdvancedNoise" 
+                                        type="button" 
+                                        @click="useAdvancedNoise = !useAdvancedNoise"
+                                        style="margin-top: 8px; font-size: 12px; color: var(--primary); background: none; border: none; cursor: pointer; padding: 4px 0;">
+                                    {{ useAdvancedNoise ? '← 切换到简单模式' : '切换到高级自定义模式 →' }}
+                                </button>
                             </div>
                             
                             <div class="form-group">
@@ -1645,6 +1758,7 @@
                                 下载数据 ({{ actualCount }}条)
                             </button>
                             <span v-if="taskBatches > 1" style="font-size: 13px; color: var(--success);">✓ 已合并 {{ taskBatches }} 批数据</span>
+                            <span style="font-size: 12px; color: var(--warning);">⏰ 请在90天内下载，过期文件将自动清理</span>
                         </div>
                     </div>
                 </div>
@@ -1805,6 +1919,10 @@
                     <p class="page-subtitle">查看和管理已生成的数据</p>
                 </div>
                 
+                <div class="alert alert-warning" style="margin-bottom: 16px; padding: 12px 16px; border-radius: 8px; background: rgba(245, 158, 11, 0.1); border: 1px solid rgba(245, 158, 11, 0.3);">
+                    <span style="color: var(--warning);">⏰ 提示：生成的数据文件保留90天，超过90天将自动清理，请及时下载。</span>
+                </div>
+                
                 <div class="card content-wrapper">
                     <div class="card-header">
                         <h2 class="card-title">任务列表</h2>
@@ -1908,13 +2026,12 @@
                     
                     <div class="pricing-card">
                         <div class="pricing-name">入门版</div>
-                        <div class="pricing-price">¥1,199<span>/月</span></div>
+                        <div class="pricing-price">¥2,999<span>/月</span></div>
                         <div class="pricing-desc">适合个人开发者、小项目试用</div>
                         <ul class="pricing-features">
                             <li><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg><strong>1万条/月</strong> 生成配额</li>
-                            <li><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>通用领域</li>
+                            <li><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>全部垂直领域</li>
                             <li><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>标准质量模式</li>
-                            <li><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>超量：¥0.12/条</li>
                             <li style="color: var(--gray-400);"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" style="color: var(--gray-400);"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>无高质量模式</li>
                         </ul>
                         <button class="btn btn-secondary pricing-btn" @click="showComingSoon('入门版订阅')">立即订阅</button>
@@ -1923,13 +2040,12 @@
                     <div class="pricing-card featured">
                         <div class="pricing-badge">🔥 主力推荐</div>
                         <div class="pricing-name">基础版</div>
-                        <div class="pricing-price">¥11,999<span>/月</span></div>
+                        <div class="pricing-price">¥19,999<span>/月</span></div>
                         <div class="pricing-desc">适合小团队、初创公司</div>
                         <ul class="pricing-features">
                             <li><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg><strong>5万条/月</strong> 生成配额</li>
-                            <li><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>通用领域</li>
+                            <li><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>全部垂直领域</li>
                             <li><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>标准质量模式</li>
-                            <li><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>超量：¥0.24/条</li>
                             <li style="color: var(--gray-400);"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" style="color: var(--gray-400);"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>无高质量模式</li>
                         </ul>
                         <button class="btn btn-primary pricing-btn" @click="showComingSoon('基础版订阅')">立即订阅</button>
@@ -1938,17 +2054,16 @@
                     <div class="pricing-card" style="border-color: var(--warning);">
                         <div class="pricing-badge" style="background: var(--warning);">💎 企业首选</div>
                         <div class="pricing-name">专业版</div>
-                        <div class="pricing-price">¥29,999<span>/月</span></div>
+                        <div class="pricing-price">¥49,999<span>/月</span></div>
                         <div class="pricing-desc">适合中型团队，性价比最高</div>
                         <ul class="pricing-features">
                             <li><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg><strong>20万条/月</strong> 生成配额</li>
                             <li><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>全部垂直领域</li>
-                            <li><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>标准/高质量模式</li>
-                            <li><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>超量：¥0.15/条</li>
+                            <li><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>标准+高质量模式</li>
                             <li><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>优先生成队列</li>
                         </ul>
                         <div style="padding: 8px; background: rgba(245, 158, 11, 0.1); border-radius: 8px; margin-bottom: 12px; font-size: 13px; color: var(--warning);">
-                            年付 ¥299,990（省¥59,998）
+                            年付 ¥499,990（250万条/年）
                         </div>
                         <button class="btn btn-secondary pricing-btn" style="border-color: var(--warning); color: var(--warning);" @click="showComingSoon('专业版订阅')">立即订阅</button>
                     </div>
@@ -1963,10 +2078,10 @@
                             <div style="padding: 24px; background: linear-gradient(135deg, rgba(245, 158, 11, 0.1), rgba(99, 102, 241, 0.05)); border-radius: 16px; border: 2px solid var(--warning);">
                                 <div style="font-size: 11px; color: var(--warning); margin-bottom: 4px;">💎 企业首选</div>
                                 <h3 style="font-size: 20px; font-weight: 600; margin-bottom: 8px;">企业版</h3>
-                                <div style="font-size: 32px; font-weight: 700; color: var(--warning); margin-bottom: 8px;">¥699,990<span style="font-size: 14px; font-weight: 400; color: var(--gray-500);">/年</span></div>
+                                <div style="font-size: 32px; font-weight: 700; color: var(--warning); margin-bottom: 8px;">¥799,990<span style="font-size: 14px; font-weight: 400; color: var(--gray-500);">/年</span></div>
                                 <p style="font-size: 14px; color: var(--gray-600); margin-bottom: 16px;">单一垂直领域定制（金融/医疗/法律等）</p>
                                 <ul style="font-size: 14px; color: var(--gray-600); margin-bottom: 16px; padding-left: 20px;">
-                                    <li><strong>80万条/年</strong> 生成配额</li>
+                                    <li><strong>100万条/年</strong> 生成配额</li>
                                     <li>单一垂直领域深度定制</li>
                                     <li>高质量模式默认开启</li>
                                     <li>专属技术支持</li>
@@ -1976,10 +2091,10 @@
                             <div style="padding: 24px; background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(16, 185, 129, 0.1)); border-radius: 16px; border: 2px solid var(--success);">
                                 <div style="font-size: 11px; color: var(--success); margin-bottom: 4px;">🚀 大客户首选</div>
                                 <h3 style="font-size: 20px; font-weight: 600; margin-bottom: 8px;">旗舰版</h3>
-                                <div style="font-size: 32px; font-weight: 700; color: var(--success); margin-bottom: 8px;">¥1,999,990<span style="font-size: 14px; font-weight: 400; color: var(--gray-500);">/年</span></div>
+                                <div style="font-size: 32px; font-weight: 700; color: var(--success); margin-bottom: 8px;">¥1,199,990<span style="font-size: 14px; font-weight: 400; color: var(--gray-500);">/年</span></div>
                                 <p style="font-size: 14px; color: var(--gray-600); margin-bottom: 16px;">多领域混合生成，灵活配置</p>
                                 <ul style="font-size: 14px; color: var(--gray-600); margin-bottom: 16px; padding-left: 20px;">
-                                    <li><strong>300万条/年</strong> 生成配额</li>
+                                    <li><strong>200万条/年</strong> 生成配额</li>
                                     <li>多领域混合生成</li>
                                     <li>超高质量模式（90%+）</li>
                                     <li>专属客户经理</li>
@@ -2005,14 +2120,14 @@
                             </div>
                             <div style="padding: 16px; background: linear-gradient(135deg, rgba(245, 158, 11, 0.1), rgba(99, 102, 241, 0.1)); border-radius: 12px; border: 2px solid var(--warning);">
                                 <h3 style="font-size: 16px; font-weight: 600; margin-bottom: 8px;">企业版+高质量</h3>
-                                <div style="font-size: 24px; font-weight: 700; color: var(--warning); margin-bottom: 8px;">¥99,999<span style="font-size: 12px; font-weight: 400; color: var(--gray-500);">/年</span></div>
-                                <p style="font-size: 13px; color: var(--gray-600);">80万条/年，80%高质量</p>
+                                <div style="font-size: 24px; font-weight: 700; color: var(--warning); margin-bottom: 8px;">¥799,990<span style="font-size: 12px; font-weight: 400; color: var(--gray-500);">/年</span></div>
+                                <p style="font-size: 13px; color: var(--gray-600);">100万条/年，80%高质量</p>
                                 <p style="font-size: 11px; color: var(--success);">高精度垂直任务</p>
                             </div>
                             <div style="padding: 16px; background: var(--gray-50); border-radius: 12px; border: 2px solid var(--success);">
                                 <h3 style="font-size: 16px; font-weight: 600; margin-bottom: 8px;">旗舰版+高质量</h3>
-                                <div style="font-size: 24px; font-weight: 700; color: var(--success); margin-bottom: 8px;">询价<span style="font-size: 12px; font-weight: 400; color: var(--gray-500);"></span></div>
-                                <p style="font-size: 13px; color: var(--gray-600);">300万条/年，90%+高质量</p>
+                                <div style="font-size: 24px; font-weight: 700; color: var(--success); margin-bottom: 8px;">¥1,199,990<span style="font-size: 12px; font-weight: 400; color: var(--gray-500);">/年</span></div>
+                                <p style="font-size: 13px; color: var(--gray-600);">200万条/年，90%+高质量</p>
                                 <p style="font-size: 11px; color: var(--success);">多领域复杂模型</p>
                             </div>
                         </div>
@@ -2025,38 +2140,50 @@
                     </div>
                     <div class="card-body">
                         <p style="color: var(--gray-600); margin-bottom: 16px;">不想订阅？按需购买，用完再买。按需包单价高于订阅，建议长期用户选择订阅更划算。</p>
-                        <div style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px;">
-                            <div style="padding: 16px; background: var(--gray-50); border-radius: 12px; text-align: center;">
-                                <div style="font-size: 18px; font-weight: 700; color: var(--gray-900);">¥2,999</div>
-                                <div style="font-size: 13px; color: var(--gray-600); margin: 6px 0;">1万条</div>
-                                <div style="font-size: 11px; color: var(--gray-400); margin-bottom: 8px;">¥0.30/条</div>
-                                <button class="btn btn-secondary" style="width: 100%; font-size: 11px; padding: 4px 8px;" @click="showComingSoon('购买1万条包')">立即购买</button>
+                        <div style="display: grid; grid-template-columns: repeat(7, 1fr); gap: 8px;">
+                            <div style="padding: 12px; background: var(--gray-50); border-radius: 12px; text-align: center;">
+                                <div style="font-size: 16px; font-weight: 700; color: var(--gray-900);">¥3,999</div>
+                                <div style="font-size: 12px; color: var(--gray-600); margin: 4px 0;">1万条</div>
+                                <div style="font-size: 10px; color: var(--gray-400); margin-bottom: 6px;">¥0.40/条</div>
+                                <button class="btn btn-secondary" style="width: 100%; font-size: 10px; padding: 3px 6px;" @click="showComingSoon('购买1万条包')">购买</button>
                             </div>
-                            <div style="padding: 16px; background: var(--gray-50); border-radius: 12px; text-align: center;">
-                                <div style="font-size: 18px; font-weight: 700; color: var(--gray-900);">¥9,999</div>
-                                <div style="font-size: 13px; color: var(--gray-600); margin: 6px 0;">5万条</div>
-                                <div style="font-size: 11px; color: var(--gray-400); margin-bottom: 8px;">¥0.20/条</div>
-                                <button class="btn btn-secondary" style="width: 100%; font-size: 11px; padding: 4px 8px;" @click="showComingSoon('购买5万条包')">立即购买</button>
+                            <div style="padding: 12px; background: var(--gray-50); border-radius: 12px; text-align: center;">
+                                <div style="font-size: 16px; font-weight: 700; color: var(--gray-900);">¥14,999</div>
+                                <div style="font-size: 12px; color: var(--gray-600); margin: 4px 0;">5万条</div>
+                                <div style="font-size: 10px; color: var(--gray-400); margin-bottom: 6px;">¥0.30/条</div>
+                                <button class="btn btn-secondary" style="width: 100%; font-size: 10px; padding: 3px 6px;" @click="showComingSoon('购买5万条包')">购买</button>
                             </div>
-                            <div style="padding: 16px; background: rgba(16, 185, 129, 0.1); border-radius: 12px; text-align: center; border: 2px solid var(--success);">
-                                <div style="font-size: 11px; color: var(--success); margin-bottom: 2px;">🔥 最受欢迎</div>
-                                <div style="font-size: 18px; font-weight: 700; color: var(--success);">¥29,999</div>
-                                <div style="font-size: 13px; color: var(--gray-600); margin: 6px 0;">20万条</div>
-                                <div style="font-size: 11px; color: var(--success); margin-bottom: 8px;">¥0.15/条</div>
-                                <button class="btn btn-success" style="width: 100%; font-size: 11px; padding: 4px 8px;" @click="showComingSoon('购买20万条包')">立即购买</button>
+                            <div style="padding: 12px; background: rgba(16, 185, 129, 0.1); border-radius: 12px; text-align: center; border: 2px solid var(--success);">
+                                <div style="font-size: 10px; color: var(--success); margin-bottom: 2px;">🔥 热销</div>
+                                <div style="font-size: 16px; font-weight: 700; color: var(--success);">¥49,999</div>
+                                <div style="font-size: 12px; color: var(--gray-600); margin: 4px 0;">20万条</div>
+                                <div style="font-size: 10px; color: var(--success); margin-bottom: 6px;">¥0.25/条</div>
+                                <button class="btn btn-success" style="width: 100%; font-size: 10px; padding: 3px 6px;" @click="showComingSoon('购买20万条包')">购买</button>
                             </div>
-                            <div style="padding: 16px; background: var(--gray-50); border-radius: 12px; text-align: center;">
-                                <div style="font-size: 18px; font-weight: 700; color: var(--gray-900);">¥79,999</div>
-                                <div style="font-size: 13px; color: var(--gray-600); margin: 6px 0;">80万条</div>
-                                <div style="font-size: 11px; color: var(--gray-400); margin-bottom: 8px;">¥0.10/条</div>
-                                <button class="btn btn-secondary" style="width: 100%; font-size: 11px; padding: 4px 8px;" @click="showComingSoon('购买80万条包')">立即购买</button>
+                            <div style="padding: 12px; background: var(--gray-50); border-radius: 12px; text-align: center;">
+                                <div style="font-size: 16px; font-weight: 700; color: var(--gray-900);">¥99,999</div>
+                                <div style="font-size: 12px; color: var(--gray-600); margin: 4px 0;">50万条</div>
+                                <div style="font-size: 10px; color: var(--gray-400); margin-bottom: 6px;">¥0.20/条</div>
+                                <button class="btn btn-secondary" style="width: 100%; font-size: 10px; padding: 3px 6px;" @click="showComingSoon('购买50万条包')">购买</button>
                             </div>
-                            <div style="padding: 16px; background: rgba(245, 158, 11, 0.1); border-radius: 12px; text-align: center; border: 2px solid var(--warning);">
-                                <div style="font-size: 11px; color: var(--warning); margin-bottom: 2px;">💎 企业首选</div>
-                                <div style="font-size: 18px; font-weight: 700; color: var(--warning);">¥199,999</div>
-                                <div style="font-size: 13px; color: var(--gray-600); margin: 6px 0;">300万条</div>
-                                <div style="font-size: 11px; color: var(--warning); margin-bottom: 8px;">¥0.067/条</div>
-                                <button class="btn btn-primary" style="width: 100%; font-size: 11px; padding: 4px 8px;" @click="showComingSoon('购买300万条包')">立即购买</button>
+                            <div style="padding: 12px; background: var(--gray-50); border-radius: 12px; text-align: center;">
+                                <div style="font-size: 16px; font-weight: 700; color: var(--gray-900);">¥159,999</div>
+                                <div style="font-size: 12px; color: var(--gray-600); margin: 4px 0;">80万条</div>
+                                <div style="font-size: 10px; color: var(--gray-400); margin-bottom: 6px;">¥0.20/条</div>
+                                <button class="btn btn-secondary" style="width: 100%; font-size: 10px; padding: 3px 6px;" @click="showComingSoon('购买80万条包')">购买</button>
+                            </div>
+                            <div style="padding: 12px; background: var(--gray-50); border-radius: 12px; text-align: center;">
+                                <div style="font-size: 16px; font-weight: 700; color: var(--gray-900);">¥179,999</div>
+                                <div style="font-size: 12px; color: var(--gray-600); margin: 4px 0;">100万条</div>
+                                <div style="font-size: 10px; color: var(--gray-400); margin-bottom: 6px;">¥0.18/条</div>
+                                <button class="btn btn-secondary" style="width: 100%; font-size: 10px; padding: 3px 6px;" @click="showComingSoon('购买100万条包')">购买</button>
+                            </div>
+                            <div style="padding: 12px; background: rgba(245, 158, 11, 0.1); border-radius: 12px; text-align: center; border: 2px solid var(--warning);">
+                                <div style="font-size: 10px; color: var(--warning); margin-bottom: 2px;">💎 企业</div>
+                                <div style="font-size: 16px; font-weight: 700; color: var(--warning);">¥499,999</div>
+                                <div style="font-size: 12px; color: var(--gray-600); margin: 4px 0;">300万条</div>
+                                <div style="font-size: 10px; color: var(--warning); margin-bottom: 6px;">¥0.17/条</div>
+                                <button class="btn btn-primary" style="width: 100%; font-size: 10px; padding: 3px 6px;" @click="showComingSoon('购买300万条包')">购买</button>
                             </div>
                         </div>
                     </div>
@@ -2070,20 +2197,20 @@
                         <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;">
                             <div style="padding: 20px; background: var(--gray-50); border-radius: 12px; border: 2px solid var(--primary);">
                                 <h3 style="font-size: 16px; font-weight: 600; margin-bottom: 8px;">专业版年付</h3>
-                                <div style="font-size: 24px; font-weight: 700; color: var(--primary); margin-bottom: 8px;">¥299,990<span style="font-size: 12px; font-weight: 400; color: var(--gray-500);">/年</span></div>
+                                <div style="font-size: 24px; font-weight: 700; color: var(--primary); margin-bottom: 8px;">¥499,990<span style="font-size: 12px; font-weight: 400; color: var(--gray-500);">/年</span></div>
                                 <ul style="font-size: 13px; color: var(--gray-600); margin-bottom: 12px; padding-left: 16px;">
-                                    <li>20万条/月生成配额</li>
+                                    <li>250万条/年生成配额</li>
                                     <li>标准/高质量模式</li>
-                                    <li>比月付省¥59,998</li>
+                                    <li>专属技术支持</li>
                                 </ul>
                                 <button class="btn btn-primary" style="width: 100%;" @click="showComingSoon('专业版年付')">立即购买</button>
                             </div>
                             <div style="padding: 20px; background: linear-gradient(135deg, rgba(245, 158, 11, 0.1), rgba(99, 102, 241, 0.1)); border-radius: 12px; border: 2px solid var(--warning);">
                                 <div style="font-size: 11px; color: var(--warning); margin-bottom: 4px;">💎 企业首选</div>
                                 <h3 style="font-size: 16px; font-weight: 600; margin-bottom: 8px;">企业版年付</h3>
-                                <div style="font-size: 24px; font-weight: 700; color: var(--warning); margin-bottom: 8px;">¥699,990<span style="font-size: 12px; font-weight: 400; color: var(--gray-500);">/年</span></div>
+                                <div style="font-size: 24px; font-weight: 700; color: var(--warning); margin-bottom: 8px;">¥799,990<span style="font-size: 12px; font-weight: 400; color: var(--gray-500);">/年</span></div>
                                 <ul style="font-size: 13px; color: var(--gray-600); margin-bottom: 12px; padding-left: 16px;">
-                                    <li>80万条/年生成配额</li>
+                                    <li>100万条/年生成配额</li>
                                     <li>单一垂直领域定制</li>
                                     <li>高质量模式默认</li>
                                 </ul>
@@ -2092,9 +2219,9 @@
                             <div style="padding: 20px; background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(16, 185, 129, 0.1)); border-radius: 12px; border: 2px solid var(--success);">
                                 <div style="font-size: 11px; color: var(--success); margin-bottom: 4px;">🚀 大客户首选</div>
                                 <h3 style="font-size: 16px; font-weight: 600; margin-bottom: 8px;">旗舰版年付</h3>
-                                <div style="font-size: 24px; font-weight: 700; color: var(--success); margin-bottom: 8px;">¥1,999,990<span style="font-size: 12px; font-weight: 400; color: var(--gray-500);">/年</span></div>
+                                <div style="font-size: 24px; font-weight: 700; color: var(--success); margin-bottom: 8px;">¥1,199,990<span style="font-size: 12px; font-weight: 400; color: var(--gray-500);">/年</span></div>
                                 <ul style="font-size: 13px; color: var(--gray-600); margin-bottom: 12px; padding-left: 16px;">
-                                    <li>300万条/年生成配额</li>
+                                    <li>200万条/年生成配额</li>
                                     <li>多领域混合生成</li>
                                     <li>超高质量模式（90%+）</li>
                                 </ul>
@@ -2122,19 +2249,19 @@
                                 <tr>
                                     <td><strong>方案A</strong></td>
                                     <td>专业版月付（12个月）</td>
-                                    <td style="color: var(--danger);">¥359,988</td>
+                                    <td style="color: var(--danger);">¥599,988</td>
                                     <td>—</td>
                                 </tr>
                                 <tr style="background: rgba(16, 185, 129, 0.05);">
                                     <td><strong>方案B</strong></td>
                                     <td>专业版年付（一次性）</td>
-                                    <td style="color: var(--success);">¥299,999</td>
-                                    <td><strong style="color: var(--success);">¥59,989</strong></td>
+                                    <td style="color: var(--success);">¥499,990</td>
+                                    <td><strong style="color: var(--success);">¥99,998</strong></td>
                                 </tr>
                             </tbody>
                         </table>
                         <p style="margin-top: 16px; font-size: 14px; color: var(--gray-600);">
-                            <strong>话术：</strong>"年付比月付省6万，相当于打83折。长期用户建议直接年付。"
+                            <strong>话术：</strong>"年付比月付省10万，相当于打83折。长期用户建议直接年付。"
                         </p>
                     </div>
                 </div>
@@ -2154,7 +2281,7 @@
                             <tbody>
                                 <tr>
                                     <td>单价</td>
-                                    <td><strong style="color: var(--success);">¥0.03-0.08/条</strong>（按套餐）</td>
+                                    <td><strong style="color: var(--success);">¥0.17-0.40/条</strong>（按套餐）</td>
                                 </tr>
                                 <tr>
                                     <td>生成速度</td>
@@ -2611,6 +2738,26 @@
                     format: 'jsonl',
                     mode: 'hybrid',
                     noiseLevel: '2',
+                    useAdvancedNoise: false,
+                    advancedNoise: {
+                        intensity: 15,
+                        types: {
+                            ocr: true,
+                            asr: true,
+                            spelling: true,
+                            format: true,
+                            colloquial: true,
+                            punctuation: true
+                        },
+                        ratios: {
+                            ocr: 50,
+                            asr: 50,
+                            spelling: 50,
+                            format: 50,
+                            colloquial: 50,
+                            punctuation: 50
+                        }
+                    },
                     qualityMode: 'standard',
                     qualityModes: [
                         { id: 'standard', name: '标准', description: '50%高质量 - 数据增强、一般训练', roles: ['standard', 'premium', 'admin'] },
@@ -2687,6 +2834,10 @@
                 availableQualityModes() {
                     const userRole = this.currentUser?.role || 'free';
                     return this.qualityModes.filter(m => m.roles.includes(userRole));
+                },
+                canUseAdvancedNoise() {
+                    if (!this.currentUser) return false;
+                    return ['premium', 'developer', 'admin'].includes(this.currentUser.role);
                 }
             },
             mounted() { this.checkLogin(); this.loadContactInfo(); },
@@ -3003,14 +3154,24 @@
                             this.isStreamingDownload = true;
                             this.showToast('success', '任务已创建', `正在生成 ${this.count.toLocaleString()} 条数据，完成后可直接下载`);
                         } else {
-                            const res = await axios.post('/generate', { 
+                            const payload = { 
                                 domain: this.selectedDomain, 
                                 count: this.count, 
                                 format: this.format, 
                                 mode: this.mode,
                                 noise_level: parseInt(this.noiseLevel),
                                 quality_mode: this.qualityMode
-                            }, {
+                            };
+                            
+                            if (this.useAdvancedNoise && this.canUseAdvancedNoise) {
+                                payload.advanced_noise = {
+                                    intensity: this.advancedNoise.intensity / 100,
+                                    types: this.advancedNoise.types,
+                                    ratios: this.advancedNoise.ratios
+                                };
+                            }
+                            
+                            const res = await axios.post('/generate', payload, {
                                 headers: { 'Authorization': 'Bearer ' + token }
                             });
                             this.taskId = res.data.task_id;
@@ -3027,7 +3188,7 @@
                         if (!this.taskId) return;
                         try {
                             const res = await axios.get(`/task/${this.taskId}`);
-                            const task = res.data;
+                            const task = res.data.task || res.data;
                             this.taskStatus = task.status;
                             this.taskProgress = task.progress || 0;
                             if (task.status === 'completed') {
@@ -3052,7 +3213,7 @@
                 downloadFile() { 
                     if (this.downloadUrl) {
                         const link = document.createElement('a');
-                        link.href = encodeURI(this.downloadUrl);
+                        link.href = this.downloadUrl;
                         link.download = '';
                         document.body.appendChild(link);
                         link.click();
@@ -3062,7 +3223,7 @@
                 redownload(task) {
                     const filename = `${task.id}_${task.domain}_${task.count}.json`;
                     const link = document.createElement('a');
-                    link.href = encodeURI(`/download/${filename}`);
+                    link.href = `/download/${encodeURIComponent(filename)}`;
                     link.download = filename;
                     document.body.appendChild(link);
                     link.click();

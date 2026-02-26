@@ -17,6 +17,8 @@ BLANK_TEMPLATE_FILE = os.path.join(os.path.dirname(__file__), 'blank_template.js
 class PromptTemplateManager:
     """提示词模板管理器"""
     
+    MAX_CACHE_SIZE = 500
+    
     def __init__(self):
         self.templates = {}
         self.cache = {}
@@ -129,6 +131,12 @@ class PromptTemplateManager:
     
     def cache_template(self, domain, template):
         """缓存模板"""
+        if len(self.cache) >= self.MAX_CACHE_SIZE:
+            oldest_key = min(self.cache.keys(), 
+                key=lambda k: self.cache[k].get("cached_at", ""))
+            del self.cache[oldest_key]
+            print(f"[模板管理器] 缓存已满，移除最旧模板: {oldest_key}")
+        
         template["cached_at"] = datetime.now().isoformat()
         self.cache[domain] = template
         self._save_cache()

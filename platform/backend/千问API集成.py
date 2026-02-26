@@ -75,8 +75,8 @@ class CostController:
                     self.stats.total_cost = data.get('total_cost', 0.0)
                     self.stats.cache_hits = data.get('cache_hits', 0)
                     self.daily_usage = data.get('daily_usage', {})
-            except:
-                pass
+            except (json.JSONDecodeError, IOError) as e:
+                print(f"[WARN] 加载API统计失败: {e}")
     
     def _save_stats(self):
         """保存统计数据"""
@@ -91,8 +91,8 @@ class CostController:
                     'daily_usage': self.daily_usage,
                     'last_reset': self.stats.last_reset
                 }, f, ensure_ascii=False, indent=2)
-        except:
-            pass
+        except IOError as e:
+            print(f"[WARN] 保存API统计失败: {e}")
     
     def can_call_api(self, estimated_tokens: int = 500) -> tuple:
         """检查是否可以调用API"""
@@ -152,6 +152,8 @@ class CostController:
 class ResponseCache:
     """响应缓存"""
     
+    MAX_CACHE_SIZE = 1000
+    
     def __init__(self, ttl_hours: int = 24):
         self.ttl_hours = ttl_hours
         self.cache = {}
@@ -164,7 +166,8 @@ class ResponseCache:
             try:
                 with open(self.cache_file, 'r', encoding='utf-8') as f:
                     self.cache = json.load(f)
-            except:
+            except (json.JSONDecodeError, IOError) as e:
+                print(f"[WARN] 加载缓存失败: {e}")
                 self.cache = {}
     
     def _save_cache(self):
@@ -172,8 +175,8 @@ class ResponseCache:
         try:
             with open(self.cache_file, 'w', encoding='utf-8') as f:
                 json.dump(self.cache, f, ensure_ascii=False, indent=2)
-        except:
-            pass
+        except IOError as e:
+            print(f"[WARN] 保存缓存失败: {e}")
     
     def _get_key(self, prompt: str, **kwargs) -> str:
         """生成缓存键"""
@@ -194,6 +197,13 @@ class ResponseCache:
     
     def set(self, prompt: str, response: str, **kwargs):
         """设置缓存"""
+        if len(self.cache) >= self.MAX_CACHE_SIZE:
+            self.clear_expired()
+            if len(self.cache) >= self.MAX_CACHE_SIZE:
+                oldest_key = min(self.cache.keys(), 
+                    key=lambda k: self.cache[k].get('timestamp', ''))
+                del self.cache[oldest_key]
+        
         key = self._get_key(prompt, **kwargs)
         self.cache[key] = {
             'response': response,

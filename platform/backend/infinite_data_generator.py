@@ -141,7 +141,7 @@ class TemplateEngine:
                 
                 if len(text) > 30:
                     variations.append(text)
-            except:
+            except (KeyError, IndexError, ValueError) as e:
                 pass
         
         return variations

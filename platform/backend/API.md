@@ -12,33 +12,24 @@
 
 ### 生成数据
 
-**POST** `/api/generate`
+**POST** `/generate`
 
 **请求体**:
 ```json
 {
     "domain": "人工智能",
     "count": 100,
-    "quality": "high",
-    "keywords": ["机器学习", "深度学习"]
+    "format": "json",
+    "mode": "hybrid",
+    "quality_mode": "standard"
 }
 ```
 
 **响应**:
 ```json
 {
-    "task_id": "task_20250222_123456",
-    "status": "success",
-    "count": 100,
-    "data": [
-        {
-            "id": 1,
-            "word": "机器学习",
-            "text": "机器学习是人工智能的核心技术...",
-            "quality_tier": "high",
-            "quality_score": 0.85
-        }
-    ]
+    "success": true,
+    "task_id": "20250222123456_abc12345"
 }
 ```
 
@@ -46,16 +37,21 @@
 
 ### 查询任务状态
 
-**GET** `/api/task/{task_id}`
+**GET** `/task/{task_id}`
 
 **响应**:
 ```json
 {
-    "task_id": "task_20250222_123456",
-    "status": "completed",
-    "progress": 100,
-    "count": 100,
-    "created_at": "2025-02-22T12:34:56"
+    "success": true,
+    "task": {
+        "id": "20250222123456_abc12345",
+        "status": "completed",
+        "progress": 100,
+        "total": 100,
+        "domain": "人工智能",
+        "quality_mode": "standard",
+        "created_at": "2025-02-22T12:34:56"
+    }
 }
 ```
 
@@ -65,26 +61,18 @@
 
 ### 获取支持领域
 
-**GET** `/api/domains`
+**GET** `/domains`
 
 **响应**:
 ```json
 {
-    "domains": ["人工智能", "劳动合同", "医疗", "金融"]
-}
-```
-
----
-
-### 获取领域关键词
-
-**GET** `/api/domains/{domain}/keywords`
-
-**响应**:
-```json
-{
-    "domain": "人工智能",
-    "keywords": ["机器学习", "深度学习", "神经网络", "自然语言处理", ...]
+    "success": true,
+    "domains": [
+        {"name": "人工智能", "keywords": 500},
+        {"name": "医疗", "keywords": 500},
+        {"name": "金融", "keywords": 500},
+        {"name": "劳动合同", "keywords": 500}
+    ]
 }
 ```
 
@@ -94,7 +82,7 @@
 
 ### 获取质量模式配置
 
-**GET** `/api/quality/modes`
+**GET** `/quality_modes`
 
 **响应**:
 ```json
@@ -350,8 +338,9 @@
 
 ## 请求限制
 
-| 模式 | 每日限制 | 每月限制 |
+| 角色 | 每日限制 | 每月限制 |
 |------|---------|---------|
-| 免费用户 | 100条 | 1000条 |
-| VIP用户 | 1000条 | 10000条 |
-| 企业用户 | 无限制 | 无限制 |
+| 体验版 (free) | 100条 | 1000条 |
+| 基础版 (standard) | 1万条 | 10万条 |
+| 专业版 (premium) | 10万条 | 100万条 |
+| 管理员/开发者 (admin/developer) | 100万条 | 1000万条 |

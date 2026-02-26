@@ -40,7 +40,7 @@ def handle_static_routes(handler, path, context):
             else:
                 handler._serve_file(static_path, 'application/octet-stream')
         else:
-            handler._send_json(404, {"error": "文件不存在"})
+            handler._send_json(404, {"success": False, "error": "文件不存在"})
         return True
     
     elif path == '/health':
@@ -57,7 +57,7 @@ def handle_static_routes(handler, path, context):
         if os.path.exists(openapi_path):
             handler._serve_file(openapi_path, 'application/json')
         else:
-            handler._send_json(404, {"error": "OpenAPI spec not found"})
+            handler._send_json(404, {"success": False, "error": "OpenAPI spec not found"})
         return True
     
     return None

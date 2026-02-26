@@ -14,6 +14,8 @@ from datetime import datetime, timedelta
 from enum import Enum
 import threading
 
+from password_validator import PasswordValidator
+
 try:
     import bcrypt
     BCRYPT_AVAILABLE = True
@@ -51,6 +53,7 @@ class Permission(Enum):
 
 ROLE_PERMISSIONS = {
     UserRole.ADMIN: [p for p in Permission],
+    UserRole.DEVELOPER: [p for p in Permission],
     UserRole.PREMIUM: [
         Permission.GENERATE_DATA,
         Permission.GENERATE_SEQUENCE,
@@ -88,16 +91,27 @@ QUALITY_LEVEL_PERMISSIONS = {
     "robustness_quality": Permission.ROBUSTNESS_QUALITY
 }
 
+QUALITY_MODE_PERMISSIONS = {
+    "standard": Permission.FREE_QUALITY,
+    "high": Permission.HIGH_QUALITY,
+    "ultra": Permission.HIGH_QUALITY,
+    "mixed": Permission.MEDIUM_QUALITY,
+    "free_trial": Permission.FREE_QUALITY
+}
+
 from pricing_config import ROLE_QUOTA_LIMITS, ROLE_OVERAGE_PRICES
 
 QUOTA_LIMITS = {
     UserRole.ADMIN: ROLE_QUOTA_LIMITS["admin"],
+    UserRole.DEVELOPER: ROLE_QUOTA_LIMITS["developer"],
     UserRole.PREMIUM: ROLE_QUOTA_LIMITS["premium"],
     UserRole.STANDARD: ROLE_QUOTA_LIMITS["standard"],
     UserRole.FREE: ROLE_QUOTA_LIMITS["free"]
 }
 
 OVERAGE_PRICES = {
+    UserRole.ADMIN: ROLE_OVERAGE_PRICES["admin"],
+    UserRole.DEVELOPER: ROLE_OVERAGE_PRICES["developer"],
     UserRole.PREMIUM: ROLE_OVERAGE_PRICES["premium"],
     UserRole.STANDARD: ROLE_OVERAGE_PRICES["standard"],
     UserRole.FREE: ROLE_OVERAGE_PRICES["free"]
@@ -231,17 +245,9 @@ class UserManager:
                     if u.get('phone') == phone:
                         return {"success": False, "error": "手机号已被注册"}
             
-            if len(password) < 8:
-                return {"success": False, "error": "密码长度至少8位"}
-            
-            if not re.search(r'[A-Z]', password):
-                return {"success": False, "error": "密码需包含大写字母"}
-            
-            if not re.search(r'[a-z]', password):
-                return {"success": False, "error": "密码需包含小写字母"}
-            
-            if not re.search(r'\d', password):
-                return {"success": False, "error": "密码需包含数字"}
+            pwd_result = PasswordValidator.validate_success_dict(password)
+            if not pwd_result["success"]:
+                return pwd_result
             
             invite_code_user = self._generate_invite_code(username)
             
@@ -434,18 +440,9 @@ class UserManager:
             if not result["success"]:
                 return {"success": False, "error": result.get("error", "验证码错误")}
             
-            import re
-            if len(new_password) < 8:
-                return {"success": False, "error": "密码长度至少8位"}
-            
-            if not re.search(r'[A-Z]', new_password):
-                return {"success": False, "error": "密码需包含大写字母"}
-            
-            if not re.search(r'[a-z]', new_password):
-                return {"success": False, "error": "密码需包含小写字母"}
-            
-            if not re.search(r'\d', new_password):
-                return {"success": False, "error": "密码需包含数字"}
+            pwd_result = PasswordValidator.validate_success_dict(new_password)
+            if not pwd_result["success"]:
+                return pwd_result
             
             user["password_hash"] = self._hash_password(new_password)
             user["login_attempts"] = 0
@@ -499,18 +496,19 @@ class UserManager:
     
     def validate_token(self, token):
         """验证令牌"""
-        if token not in self.sessions:
-            return None
-        
-        session = self.sessions[token]
-        expires_at = datetime.fromisoformat(session["expires_at"])
-        
-        if datetime.now() > expires_at:
-            del self.sessions[token]
-            self._save()
-            return None
-        
-        return self.users.get(session["username"])
+        with self.lock:
+            if token not in self.sessions:
+                return None
+            
+            session = self.sessions[token]
+            expires_at = datetime.fromisoformat(session["expires_at"])
+            
+            if datetime.now() > expires_at:
+                del self.sessions[token]
+                self._save()
+                return None
+            
+            return self.users.get(session["username"])
     
     def check_permission(self, username, permission):
         """检查权限"""
@@ -548,9 +546,10 @@ class UserManager:
         
         role_names = {
             UserRole.ADMIN: "管理员",
-            UserRole.PREMIUM: "高级用户",
-            UserRole.STANDARD: "标准用户",
-            UserRole.FREE: "免费用户"
+            UserRole.DEVELOPER: "开发者",
+            UserRole.PREMIUM: "专业版",
+            UserRole.STANDARD: "基础版",
+            UserRole.FREE: "体验版"
         }
         
         quality_names = {
@@ -745,7 +744,7 @@ class UserManager:
                 "remaining": remaining,
                 "percent": percent,
                 "warning_level": warning_level,
-                "overage_price": 0.08,
+                "overage_price": 0,
                 "invite_code": user.get("invite_code", ""),
                 "invite_count": user.get("invite_count", 0),
                 "invite_quota_earned": user.get("invite_quota_earned", 0),
@@ -770,7 +769,7 @@ class UserManager:
         elif monthly_percent >= 75:
             warning_level = "warning"
         
-        overage_price = OVERAGE_PRICES.get(role, 0.08)
+        overage_price = OVERAGE_PRICES.get(role, 0)
         
         return {
             "username": username,
@@ -795,10 +794,11 @@ class UserManager:
     
     def _get_plan_name(self, role):
         plan_names = {
-            UserRole.ADMIN: "企业版",
-            UserRole.PREMIUM: "企业版",
-            UserRole.STANDARD: "专业版",
-            UserRole.FREE: "基础版"
+            UserRole.ADMIN: "管理员",
+            UserRole.DEVELOPER: "开发者",
+            UserRole.PREMIUM: "专业版",
+            UserRole.STANDARD: "基础版",
+            UserRole.FREE: "体验版"
         }
         return plan_names.get(role, "免费版")
     
@@ -813,8 +813,9 @@ class UserManager:
             if not self._verify_password(old_password, user["password_hash"]):
                 return {"success": False, "error": "旧密码错误"}
             
-            if len(new_password) < 8:
-                return {"success": False, "error": "新密码长度至少8位"}
+            pwd_result = PasswordValidator.validate_success_dict(new_password)
+            if not pwd_result["success"]:
+                return pwd_result
             
             user["password_hash"] = self._hash_password(new_password)
             self._save()

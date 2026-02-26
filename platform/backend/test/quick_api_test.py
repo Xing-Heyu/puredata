@@ -51,7 +51,7 @@ except Exception as e:
 
 # 5. 测试领域列表
 try:
-    res = requests.get(f"{BASE_URL}/api/domains", timeout=5)
+    res = requests.get(f"{BASE_URL}/domains", timeout=5)
     print(f"[OK] 领域列表: {res.status_code}")
     if res.status_code == 200:
         domains = res.json().get('domains', [])
@@ -59,12 +59,15 @@ try:
 except Exception as e:
     print(f"[FAIL] 领域列表: {e}")
 
-# 6. 测试关键词列表
+# 6. 测试质量模式列表
 try:
-    res = requests.get(f"{BASE_URL}/api/keywords?domain=劳动合同", timeout=5)
-    print(f"[OK] 关键词列表: {res.status_code}")
+    res = requests.get(f"{BASE_URL}/quality_modes", timeout=5)
+    print(f"[OK] 质量模式列表: {res.status_code}")
+    if res.status_code == 200:
+        modes = res.json().get('modes', [])
+        print(f"  模式数量: {len(modes)}")
 except Exception as e:
-    print(f"[FAIL] 关键词列表: {e}")
+    print(f"[FAIL] 质量模式列表: {e}")
 
 print("="*60)
 print("测试完成")

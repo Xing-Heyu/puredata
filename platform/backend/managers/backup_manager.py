@@ -134,7 +134,7 @@ class BackupManager:
                             manifest = json.loads(zf.read('manifest.json'))
                         else:
                             manifest = {}
-                except:
+                except (zipfile.BadZipFile, json.JSONDecodeError, KeyError):
                     manifest = {}
                 
                 backups.append(BackupInfo(

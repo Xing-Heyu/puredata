@@ -357,11 +357,9 @@ class ColloquialNoiseGenerator:
             if random.random() < 0.5:
                 result = insertion + result
             else:
-                words = result.split()
-                if len(words) > 2:
-                    insert_pos = random.randint(1, len(words) - 1)
-                    words.insert(insert_pos, insertion)
-                    result = ' '.join(words)
+                if len(result) > 4:
+                    insert_pos = random.randint(2, len(result) - 2)
+                    result = result[:insert_pos] + insertion + result[insert_pos:]
             applied_noises.append(NoiseType.COLLOQUIAL_INSERT.value)
         
         if random.random() < intensity * 0.5:
@@ -449,7 +447,7 @@ class NoiseGenerator:
         self.punctuation = PunctuationNoiseGenerator()
     
     def generate_noisy_text(self, text_clean: str, domain: str = "人工智能",
-                           noise_level: int = 2) -> NoiseResult:
+                           noise_level: int = 2, advanced_config: Dict = None) -> NoiseResult:
         result = text_clean
         all_noises = []
         
@@ -461,31 +459,46 @@ class NoiseGenerator:
             4: 0.50,
         }
         
-        intensity = level_intensities.get(noise_level, 0.15)
+        if advanced_config:
+            intensity = advanced_config.get('intensity', 0.15)
+            enabled_types = advanced_config.get('types', {})
+            type_ratios = advanced_config.get('ratios', {})
+        else:
+            intensity = level_intensities.get(noise_level, 0.15)
+            enabled_types = None
+            type_ratios = None
         
         if intensity == 0:
             return NoiseResult(
                 text_clean=text_clean,
                 text_noisy=text_clean,
                 noise_types=[],
-                noise_level=0
+                noise_level=noise_level
             )
         
         noise_functions = [
-            (self.ocr.add_ocr_noise, {"domain": domain}),
-            (self.asr.add_asr_noise, {}),
-            (self.spelling.add_spelling_noise, {"domain": domain}),
-            (self.format.add_format_noise, {}),
-            (self.colloquial.add_colloquial_noise, {"domain": domain}),
-            (self.capitalization.add_capitalization_noise, {}),
-            (self.punctuation.add_punctuation_noise, {}),
+            ('ocr', self.ocr.add_ocr_noise, {"domain": domain}),
+            ('asr', self.asr.add_asr_noise, {}),
+            ('spelling', self.spelling.add_spelling_noise, {"domain": domain}),
+            ('format', self.format.add_format_noise, {}),
+            ('colloquial', self.colloquial.add_colloquial_noise, {"domain": domain}),
+            ('capitalization', self.capitalization.add_capitalization_noise, {}),
+            ('punctuation', self.punctuation.add_punctuation_noise, {}),
         ]
         
         random.shuffle(noise_functions)
         
-        for func, kwargs in noise_functions:
-            if random.random() < intensity:
-                result, noises = func(result, intensity=intensity, **kwargs)
+        for type_name, func, kwargs in noise_functions:
+            if enabled_types is not None:
+                if not enabled_types.get(type_name, True):
+                    continue
+                type_ratio = (type_ratios.get(type_name, 50) / 100) if type_ratios else 1.0
+                effective_intensity = intensity * type_ratio
+            else:
+                effective_intensity = intensity
+            
+            if random.random() < effective_intensity:
+                result, noises = func(result, intensity=effective_intensity, **kwargs)
                 all_noises.extend(noises)
         
         all_noises = list(set(all_noises))
@@ -497,13 +510,14 @@ class NoiseGenerator:
             noise_level=noise_level,
             noise_details={
                 "intensity": intensity,
-                "noise_count": len(all_noises)
+                "noise_count": len(all_noises),
+                "advanced_config": advanced_config is not None
             }
         )
     
     def generate_with_labels(self, text_clean: str, domain: str = "人工智能",
-                            noise_level: int = 2) -> Dict:
-        result = self.generate_noisy_text(text_clean, domain, noise_level)
+                            noise_level: int = 2, advanced_config: Dict = None) -> Dict:
+        result = self.generate_noisy_text(text_clean, domain, noise_level, advanced_config)
         
         return {
             "text_clean": result.text_clean,

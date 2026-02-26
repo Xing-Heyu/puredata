@@ -175,7 +175,7 @@ class DataQualityAnalyzer:
                 
                 try:
                     text.encode('utf-8')
-                except:
+                except UnicodeDecodeError:
                     is_valid = False
                 
                 if len(text) > self.MAX_TEXT_LENGTH:

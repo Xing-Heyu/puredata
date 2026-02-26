@@ -32,7 +32,7 @@ def handle_risk_routes(handler, path, method, body, context):
     if path == '/api/admin/anti_abuse/ip_info':
         token = handler._get_token_from_request()
         if not _is_admin(token):
-            handler._send_json(403, {"error": "权限不足"})
+            handler._send_json(403, {"success": False, "error": "权限不足"})
             return True
         
         target_ip = body.get('ip', client_ip)
@@ -50,12 +50,12 @@ def handle_risk_routes(handler, path, method, body, context):
     
     elif path == '/api/admin/anti_abuse/mark_suspicious':
         if method != 'POST':
-            handler._send_json(405, {"error": "Method not allowed"})
+            handler._send_json(405, {"success": False, "error": "Method not allowed"})
             return True
         
         token = handler._get_token_from_request()
         if not _is_admin(token):
-            handler._send_json(403, {"error": "权限不足"})
+            handler._send_json(403, {"success": False, "error": "权限不足"})
             return True
         
         target = body.get('target', '')
@@ -76,7 +76,7 @@ def handle_risk_routes(handler, path, method, body, context):
         if method == 'GET':
             token = handler._get_token_from_request()
             if not _is_admin(token):
-                handler._send_json(403, {"error": "权限不足"})
+                handler._send_json(403, {"success": False, "error": "权限不足"})
                 return True
             
             if ANTI_ABUSE_AVAILABLE and get_anti_abuse:
@@ -93,7 +93,7 @@ def handle_risk_routes(handler, path, method, body, context):
         elif method == 'POST':
             token = handler._get_token_from_request()
             if not _is_admin(token):
-                handler._send_json(403, {"error": "权限不足"})
+                handler._send_json(403, {"success": False, "error": "权限不足"})
                 return True
             
             target = body.get('target', '')
@@ -117,7 +117,7 @@ def handle_risk_routes(handler, path, method, body, context):
     elif path == '/api/admin/risk_control/dashboard':
         token = handler._get_token_from_request()
         if not _is_admin(token):
-            handler._send_json(403, {"error": "权限不足"})
+            handler._send_json(403, {"success": False, "error": "权限不足"})
             return True
         
         if RISK_CONTROL_AVAILABLE and get_risk_control:
@@ -133,12 +133,12 @@ def handle_risk_routes(handler, path, method, body, context):
     
     elif path == '/api/admin/risk_control/block':
         if method != 'POST':
-            handler._send_json(405, {"error": "Method not allowed"})
+            handler._send_json(405, {"success": False, "error": "Method not allowed"})
             return True
         
         token = handler._get_token_from_request()
         if not _is_admin(token):
-            handler._send_json(403, {"error": "权限不足"})
+            handler._send_json(403, {"success": False, "error": "权限不足"})
             return True
         
         target = body.get('target', '')
@@ -157,12 +157,12 @@ def handle_risk_routes(handler, path, method, body, context):
     
     elif path == '/api/admin/risk_control/unblock':
         if method != 'POST':
-            handler._send_json(405, {"error": "Method not allowed"})
+            handler._send_json(405, {"success": False, "error": "Method not allowed"})
             return True
         
         token = handler._get_token_from_request()
         if not _is_admin(token):
-            handler._send_json(403, {"error": "权限不足"})
+            handler._send_json(403, {"success": False, "error": "权限不足"})
             return True
         
         target = body.get('target', '')
@@ -181,7 +181,7 @@ def handle_risk_routes(handler, path, method, body, context):
     elif path == '/api/admin/risk_control/audit_logs':
         token = handler._get_token_from_request()
         if not _is_admin(token):
-            handler._send_json(403, {"error": "权限不足"})
+            handler._send_json(403, {"success": False, "error": "权限不足"})
             return True
         
         limit = body.get('limit', 100)
@@ -200,7 +200,7 @@ def handle_risk_routes(handler, path, method, body, context):
     elif path == '/api/admin/risk_control/cost_report':
         token = handler._get_token_from_request()
         if not _is_admin(token):
-            handler._send_json(403, {"error": "权限不足"})
+            handler._send_json(403, {"success": False, "error": "权限不足"})
             return True
         
         if RISK_CONTROL_AVAILABLE and get_risk_control:

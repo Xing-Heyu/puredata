@@ -102,9 +102,9 @@ class ConnectionPool:
             try:
                 conn.execute("SELECT 1")
                 return conn
-            except:
+            except sqlite3.Error:
                 return self._create_connection()
-        except:
+        except Exception:
             with self._lock:
                 if self._created < self.pool_size:
                     self._created += 1
@@ -114,11 +114,11 @@ class ConnectionPool:
     def return_connection(self, conn: sqlite3.Connection):
         try:
             self._pool.put_nowait(conn)
-        except:
+        except Exception as e:
             try:
                 conn.close()
-            except:
-                pass
+            except Exception as close_err:
+                print(f"[WARN] 关闭连接失败: {close_err}")
     
     @contextmanager
     def connection(self):
@@ -168,6 +168,50 @@ class SQLiteStorage:
         if column not in allowed_columns:
             raise ValueError(f"Invalid column name: {column} for table: {table}")
         return column
+    
+    def _validate_where(self, table: str, where: str) -> str:
+        """验证WHERE子句，防止SQL注入"""
+        import re
+        allowed_columns = self._get_table_columns(table)
+        
+        safe_pattern = re.compile(
+            r'^([a-zA-Z_][a-zA-Z0-9_]*)\s*(=|!=|<>|<|>|<=|>=|LIKE|IN|NOT IN|IS|IS NOT)\s*(\?|\([^)]+\))$',
+            re.IGNORECASE
+        )
+        
+        conditions = where.split(' AND ')
+        for condition in conditions:
+            condition = condition.strip()
+            match = safe_pattern.match(condition)
+            if not match:
+                raise ValueError(f"Invalid WHERE condition format: {condition}")
+            column = match.group(1)
+            if column not in allowed_columns:
+                raise ValueError(f"Invalid column in WHERE: {column}")
+        
+        return where
+    
+    def _validate_order_by(self, table: str, order_by: str) -> str:
+        """验证ORDER BY子句，防止SQL注入"""
+        import re
+        allowed_columns = self._get_table_columns(table)
+        
+        safe_pattern = re.compile(
+            r'^([a-zA-Z_][a-zA-Z0-9_]*)\s*(ASC|DESC)?$',
+            re.IGNORECASE
+        )
+        
+        parts = order_by.split(',')
+        for part in parts:
+            part = part.strip()
+            match = safe_pattern.match(part)
+            if not match:
+                raise ValueError(f"Invalid ORDER BY format: {part}")
+            column = match.group(1)
+            if column not in allowed_columns:
+                raise ValueError(f"Invalid column in ORDER BY: {column}")
+        
+        return order_by
     
     def _init_tables(self):
         with self.pool.connection() as conn:
@@ -337,7 +381,8 @@ class SQLiteStorage:
                     conn.execute(f"DELETE FROM {table} WHERE {key_column} = ?", (key,))
                     conn.commit()
                     return True
-                except:
+                except sqlite3.Error as e:
+                    print(f"[WARN] 删除记录失败: {e}")
                     return False
 
     def get_all(self, table: str, where: str = None, params: tuple = None,
@@ -345,10 +390,14 @@ class SQLiteStorage:
         self._validate_table(table)
         sql = f"SELECT * FROM {table}"
         if where:
+            self._validate_where(table, where)
             sql += f" WHERE {where}"
         if order_by:
+            self._validate_order_by(table, order_by)
             sql += f" ORDER BY {order_by}"
         if limit:
+            if not isinstance(limit, int) or limit < 0:
+                raise ValueError("limit must be a non-negative integer")
             sql += f" LIMIT {limit}"
         
         with self.rwlock.read():
@@ -360,6 +409,7 @@ class SQLiteStorage:
         self._validate_table(table)
         sql = f"SELECT COUNT(*) FROM {table}"
         if where:
+            self._validate_where(table, where)
             sql += f" WHERE {where}"
         
         with self.rwlock.read():
@@ -425,7 +475,7 @@ class SQLiteStorage:
                     try:
                         yield conn
                         conn.commit()
-                    except:
+                    except Exception:
                         conn.rollback()
                         raise
         return _transaction()
@@ -505,7 +555,7 @@ class StorageManager:
         if task and 'result' in task and task['result']:
             try:
                 task['result'] = json.loads(task['result'])
-            except:
+            except (json.JSONDecodeError, TypeError):
                 pass
         return task
     
@@ -543,14 +593,14 @@ def safe_json_loads(data: str, default: Any = None) -> Any:
         return default
     try:
         return json.loads(data)
-    except:
+    except (json.JSONDecodeError, TypeError):
         return default
 
 
 def safe_json_dumps(data: Any) -> str:
     try:
         return json.dumps(data, ensure_ascii=False)
-    except:
+    except (TypeError, ValueError):
         return "{}"
 
 

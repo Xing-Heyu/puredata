@@ -16,6 +16,8 @@ from datetime import datetime
 from collections import defaultdict
 import threading
 
+from password_validator import PasswordValidator
+
 class SecurityProtocol:
     """安全协议"""
     
@@ -181,19 +183,7 @@ class SecurityProtocol:
     
     def validate_password(self, password):
         """验证密码强度"""
-        if len(password) < 8:
-            return False, "密码长度至少8位"
-        
-        if not re.search(r'[A-Z]', password):
-            return False, "密码需要包含大写字母"
-        
-        if not re.search(r'[a-z]', password):
-            return False, "密码需要包含小写字母"
-        
-        if not re.search(r'[0-9]', password):
-            return False, "密码需要包含数字"
-        
-        return True, "密码强度合格"
+        return PasswordValidator.validate(password)
     
     def generate_csrf_token(self):
         """生成CSRF令牌"""
@@ -288,7 +278,7 @@ class SecurityProtocol:
             try:
                 json_str = base64.b64decode(encrypted.encode()).decode()
                 return json.loads(json_str)
-            except:
+            except (ValueError, UnicodeDecodeError, json.JSONDecodeError):
                 return None
         except Exception:
             return None

@@ -196,7 +196,7 @@ class MultiAngleAuditor:
             json_end = response.rfind("}") + 1
             if json_start >= 0 and json_end > json_start:
                 return json.loads(response[json_start:json_end])
-        except:
+        except (json.JSONDecodeError, ValueError) as e:
             pass
         return {"passed": True, "confidence": 0.5}
     

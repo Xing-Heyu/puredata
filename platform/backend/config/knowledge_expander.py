@@ -267,8 +267,8 @@ class WikipediaAPI:
             os.makedirs(os.path.dirname(self.cache_file), exist_ok=True)
             with open(self.cache_file, 'w', encoding='utf-8') as f:
                 json.dump(self.cache, f, ensure_ascii=False, indent=2)
-        except:
-            pass
+        except (IOError, OSError) as e:
+            print(f"[WARN] 保存知识库缓存失败: {e}")
     
     def get_summary(self, word: str, language: str = "zh") -> Optional[KnowledgeEntry]:
         """获取词条摘要"""

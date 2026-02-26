@@ -361,7 +361,7 @@ class DataQualityEvaluator:
                         try:
                             datetime.strptime(value[:10], '%Y-%m-%d')
                             time_valid += 1
-                        except:
+                        except ValueError:
                             pass
         
         if time_fields == 0:

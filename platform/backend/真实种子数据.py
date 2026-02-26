@@ -78,7 +78,7 @@ class RealWorldLogParser:
         """解析JSON日志"""
         try:
             return json.loads(log_line)
-        except:
+        except (json.JSONDecodeError, TypeError):
             return None
     
     @classmethod

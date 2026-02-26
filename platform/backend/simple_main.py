@@ -334,8 +334,17 @@ def clean_expired_data():
     except Exception as e:
         print(f"[清理] 清理失败: {e}")
 
-# 启动时清理一次
+def schedule_daily_cleanup():
+    """定时清理任务 - 每24小时执行一次"""
+    clean_expired_data()
+    timer = threading.Timer(24 * 60 * 60, schedule_daily_cleanup)
+    timer.daemon = True
+    timer.start()
+    print("[清理] 定时清理任务已启动，每24小时执行一次")
+
 clean_expired_data()
+
+schedule_daily_cleanup()
 
 # 用户行为序列生成器
 class UserBehaviorSequenceGenerator:
@@ -1977,7 +1986,7 @@ def generate_data_clean(domain, count, task_id, quality_mode="standard"):
     
     return data[:count]
 
-def generate_data_noisy(domain, count, task_id, noise_level=None):
+def generate_data_noisy(domain, count, task_id, noise_level=None, advanced_noise=None):
     keywords = DOMAINS.get(domain, DOMAINS["人工智能"])
     domain_templates = TEMPLATES.get(domain, TEMPLATES["人工智能"])
     data = []
@@ -2018,8 +2027,8 @@ def generate_data_noisy(domain, count, task_id, noise_level=None):
             actual_noise_level = random.choices([0, 1, 2, 3, 4], weights=[5, 20, 40, 25, 10])[0]
         
         ng = get_noise_generator()
-        if ng and actual_noise_level > 0:
-            noise_result = ng.generate_noisy_text(text_clean, domain, actual_noise_level)
+        if ng and (actual_noise_level > 0 or advanced_noise):
+            noise_result = ng.generate_noisy_text(text_clean, domain, actual_noise_level, advanced_noise)
             text_noisy = noise_result.text_noisy
             noise_types = noise_result.noise_types
         else:
@@ -2097,7 +2106,7 @@ def generate_data_noisy(domain, count, task_id, noise_level=None):
     
     return data[:count]
 
-def generate_data_hybrid(domain, count, task_id, noise_level=None):
+def generate_data_hybrid(domain, count, task_id, noise_level=None, advanced_noise=None):
     keywords = DOMAINS.get(domain, DOMAINS["人工智能"])
     domain_templates = TEMPLATES.get(domain, TEMPLATES["人工智能"])
     data = []
@@ -2203,8 +2212,8 @@ def generate_data_hybrid(domain, count, task_id, noise_level=None):
             actual_noise = random.choices([1, 2, 3, 4], weights=[20, 40, 30, 10])[0]
         
         ng = get_noise_generator()
-        if ng and actual_noise > 0:
-            noise_result = ng.generate_noisy_text(text, domain, actual_noise)
+        if ng and (actual_noise > 0 or advanced_noise):
+            noise_result = ng.generate_noisy_text(text, domain, actual_noise, advanced_noise)
             text = noise_result.text_noisy
             noise_types = noise_result.noise_types
         else:
@@ -2570,7 +2579,7 @@ def generate_data_streaming(domain, count, task_id, quality_mode="standard", out
                             if not domain_result["validation"]["passed"]:
                                 continue
                             final_score = domain_result["final_score"]
-                        except:
+                        except (ImportError, KeyError, TypeError):
                             final_score = check_result.score
                         
                         if final_score < min_quality_score:
@@ -2762,7 +2771,7 @@ class Handler(BaseHTTPRequestHandler):
             import traceback
             traceback.print_exc()
             try:
-                self._send_json(500, {"error": str(e)})
+                self._send_json(500, {"success": False, "error": str(e)})
             except Exception:
                 pass
     
@@ -2829,7 +2838,7 @@ class Handler(BaseHTTPRequestHandler):
                           '管理员配置.json', 'api_stats.json'}
         for protected in PROTECTED_FILES:
             if protected in path:
-                self._send_json(403, {"error": "Access denied"})
+                self._send_json(403, {"success": False, "error": "Access denied"})
                 return
         
         if ROUTES_AVAILABLE:
@@ -2874,7 +2883,7 @@ class Handler(BaseHTTPRequestHandler):
                 else:
                     self._serve_file(static_path, 'application/octet-stream')
             else:
-                self._send_json(404, {"error": "文件不存在"})
+                self._send_json(404, {"success": False, "error": "文件不存在"})
         elif path == '/health':
             self._send_json(200, {"status": "ok"})
         elif path == '/docs' or path == '/api/docs':
@@ -2884,12 +2893,12 @@ class Handler(BaseHTTPRequestHandler):
             if os.path.exists(openapi_path):
                 self._serve_file(openapi_path, 'application/json')
             else:
-                self._send_json(404, {"error": "OpenAPI spec not found"})
+                self._send_json(404, {"success": False, "error": "OpenAPI spec not found"})
         elif path == '/analyze':
             token = self._get_token_from_request()
             user = self._get_current_user(token)
             if not user:
-                self._send_json(401, {"error": "请先登录"})
+                self._send_json(401, {"success": False, "error": "请先登录"})
                 return
             
             content_length = int(self.headers.get('Content-Length', 0))
@@ -2897,7 +2906,7 @@ class Handler(BaseHTTPRequestHandler):
             data = body.get('data', [])
             
             if not data:
-                self._send_json(400, {"error": "请提供数据"})
+                self._send_json(400, {"success": False, "error": "请提供数据"})
                 return
             
             analysis = {
@@ -3070,12 +3079,12 @@ class Handler(BaseHTTPRequestHandler):
             self._send_json(200, {"tasks": list(tasks.values())})
         elif path.startswith('/task/'):
             task_id = path.split('/')[-1]
-            self._send_json(200, tasks.get(task_id, {"error": "not found"}))
+            self._send_json(200, tasks.get(task_id, {"success": False, "error": "not found"}))
         elif path.startswith('/download/'):
             token = self._get_token_from_request()
             user = user_manager.validate_token(token)
             if not user:
-                self._send_json(401, {"error": "请先登录"})
+                self._send_json(401, {"success": False, "error": "请先登录"})
                 return
             
             encoded_filename = path.split('/')[-1]
@@ -3097,14 +3106,14 @@ class Handler(BaseHTTPRequestHandler):
                         break
             
             if not user_owns_file:
-                self._send_json(403, {"error": "无权下载此文件"})
+                self._send_json(403, {"success": False, "error": "无权下载此文件"})
                 return
             
             filepath = os.path.join(OUTPUT_DIR, filename)
             if os.path.exists(filepath):
                 self._serve_file(filepath, 'application/octet-stream', filename)
             else:
-                self._send_json(404, {"error": "文件不存在", "path": filepath})
+                self._send_json(404, {"success": False, "error": "文件不存在", "path": filepath})
         elif path == '/api/user/info':
             token = self._get_token_from_request()
             user = user_manager.validate_token(token)
@@ -3179,7 +3188,7 @@ class Handler(BaseHTTPRequestHandler):
                 self.end_headers()
                 self.wfile.write(html.encode('utf-8'))
             else:
-                self._send_json(404, {"error": "页面不存在"})
+                self._send_json(404, {"success": False, "error": "页面不存在"})
         else:
             if ROUTES_AVAILABLE:
                 context = {
@@ -3199,7 +3208,7 @@ class Handler(BaseHTTPRequestHandler):
                 }
                 if handle_all_routes(self, path, 'GET', {}, context):
                     return
-            self._send_json(404, {"error": "未找到"})
+            self._send_json(404, {"success": False, "error": "未找到"})
     
     def do_POST(self):
         global tasks, stats
@@ -3436,7 +3445,7 @@ class Handler(BaseHTTPRequestHandler):
         elif path == '/api/admin/list':
             token = self._get_token_from_request()
             if not self._is_admin(token):
-                self._send_json(403, {"error": "权限不足"})
+                self._send_json(403, {"success": False, "error": "权限不足"})
                 return
             admins = admin_auth.list_admins()
             self._send_json(200, {"admins": admins})
@@ -3444,7 +3453,7 @@ class Handler(BaseHTTPRequestHandler):
         elif path == '/api/admin/add':
             token = self._get_token_from_request()
             if not self._is_admin(token):
-                self._send_json(403, {"error": "权限不足"})
+                self._send_json(403, {"success": False, "error": "权限不足"})
                 return
             length = int(self.headers.get('Content-Length', 0))
             body = json.loads(self.rfile.read(length).decode('utf-8'))
@@ -3458,7 +3467,7 @@ class Handler(BaseHTTPRequestHandler):
         elif path == '/api/admin/delete':
             token = self._get_token_from_request()
             if not self._is_admin(token):
-                self._send_json(403, {"error": "权限不足"})
+                self._send_json(403, {"success": False, "error": "权限不足"})
                 return
             length = int(self.headers.get('Content-Length', 0))
             body = json.loads(self.rfile.read(length).decode('utf-8'))
@@ -3468,7 +3477,7 @@ class Handler(BaseHTTPRequestHandler):
         elif path == '/api/admin/users':
             token = self._get_token_from_request()
             if not self._is_admin(token):
-                self._send_json(403, {"error": "权限不足", "message": "仅管理员可访问"})
+                self._send_json(403, {"success": False, "error": "权限不足", "message": "仅管理员可访问"})
                 return
             users_list = []
             for username, user in user_manager.users.items():
@@ -3484,7 +3493,7 @@ class Handler(BaseHTTPRequestHandler):
         elif path == '/api/admin/users/update':
             token = self._get_token_from_request()
             if not self._is_admin(token):
-                self._send_json(403, {"error": "权限不足", "message": "仅管理员可操作"})
+                self._send_json(403, {"success": False, "error": "权限不足", "message": "仅管理员可操作"})
                 return
             length = int(self.headers.get('Content-Length', 0))
             body = json.loads(self.rfile.read(length).decode('utf-8'))
@@ -3503,7 +3512,7 @@ class Handler(BaseHTTPRequestHandler):
         elif path == '/api/admin/users/delete':
             token = self._get_token_from_request()
             if not self._is_admin(token):
-                self._send_json(403, {"error": "权限不足", "message": "仅管理员可操作"})
+                self._send_json(403, {"success": False, "error": "权限不足", "message": "仅管理员可操作"})
                 return
             length = int(self.headers.get('Content-Length', 0))
             body = json.loads(self.rfile.read(length).decode('utf-8'))
@@ -3544,6 +3553,16 @@ class Handler(BaseHTTPRequestHandler):
                 mode = body.get('mode', 'hybrid')
                 noise_level = int(body.get('noise_level', 2))
                 quality_mode = body.get('quality_mode', 'standard')
+                advanced_noise = body.get('advanced_noise')
+                
+                if advanced_noise:
+                    if not user or user.get('role') not in ['premium', 'developer', 'admin']:
+                        self._send_json(403, {
+                            "success": False,
+                            "error": "权限不足",
+                            "message": "高级噪音配置仅限高级版/开发者版用户使用"
+                        })
+                        return
                 
                 if user and user.get('role') == 'free':
                     quality_mode = 'free_trial'
@@ -3587,12 +3606,13 @@ class Handler(BaseHTTPRequestHandler):
                         "total": count,
                         "mode": mode,
                         "noise_level": noise_level,
+                        "advanced_noise": advanced_noise,
                         "quality_mode": quality_mode,
                         "created_at": datetime.now().isoformat(),
                         "username": username
                     }
                 
-                thread = threading.Thread(target=self._run_task, args=(task_id, domain, count, format_type, mode, username, noise_level, quality_mode), daemon=True)
+                thread = threading.Thread(target=self._run_task, args=(task_id, domain, count, format_type, mode, username, noise_level, quality_mode, advanced_noise), daemon=True)
                 thread.start()
                 
                 if RISK_CONTROL_AVAILABLE:
@@ -3611,7 +3631,7 @@ class Handler(BaseHTTPRequestHandler):
                     rc = get_risk_control()
                     if rc:
                         rc.log_action("generate", None, client_ip, {"error": str(e)}, "failed")
-                self._send_json(500, {"error": str(e)})
+                self._send_json(500, {"success": False, "error": str(e)})
         
         elif path == '/api/generate/download':
             try:
@@ -3678,7 +3698,7 @@ class Handler(BaseHTTPRequestHandler):
                 })
             except Exception as e:
                 print(f"流式下载生成错误: {e}")
-                self._send_json(500, {"error": str(e)})
+                self._send_json(500, {"success": False, "error": str(e)})
         
         elif path == '/generate_sequence':
             length = int(self.headers.get('Content-Length', 0))
@@ -3755,7 +3775,7 @@ class Handler(BaseHTTPRequestHandler):
         elif path == '/api/admin/logs':
             token = self._get_token_from_request()
             if not self._is_admin(token):
-                self._send_json(403, {"error": "权限不足"})
+                self._send_json(403, {"success": False, "error": "权限不足"})
                 return
             op_logger = get_operation_logger()
             logs = op_logger.get_recent_logs(100) if op_logger else []
@@ -3765,7 +3785,7 @@ class Handler(BaseHTTPRequestHandler):
         elif path == '/api/admin/anti_abuse/ip_info':
             token = self._get_token_from_request()
             if not self._is_admin(token):
-                self._send_json(403, {"error": "权限不足"})
+                self._send_json(403, {"success": False, "error": "权限不足"})
                 return
             
             query = urlparse(self.path).query
@@ -3795,7 +3815,7 @@ class Handler(BaseHTTPRequestHandler):
         elif path == '/api/admin/anti_abuse/mark_suspicious':
             token = self._get_token_from_request()
             if not self._is_admin(token):
-                self._send_json(403, {"error": "权限不足"})
+                self._send_json(403, {"success": False, "error": "权限不足"})
                 return
             
             length = int(self.headers.get('Content-Length', 0))
@@ -3818,7 +3838,7 @@ class Handler(BaseHTTPRequestHandler):
         elif path == '/api/admin/anti_abuse/whitelist':
             token = self._get_token_from_request()
             if not self._is_admin(token):
-                self._send_json(403, {"error": "权限不足"})
+                self._send_json(403, {"success": False, "error": "权限不足"})
                 return
             
             length = int(self.headers.get('Content-Length', 0))
@@ -3845,7 +3865,7 @@ class Handler(BaseHTTPRequestHandler):
         elif path == '/api/admin/risk_control/dashboard':
             token = self._get_token_from_request()
             if not self._is_admin(token):
-                self._send_json(403, {"error": "权限不足"})
+                self._send_json(403, {"success": False, "error": "权限不足"})
                 return
             
             if RISK_CONTROL_AVAILABLE:
@@ -3861,7 +3881,7 @@ class Handler(BaseHTTPRequestHandler):
         elif path == '/api/admin/risk_control/block':
             token = self._get_token_from_request()
             if not self._is_admin(token):
-                self._send_json(403, {"error": "权限不足"})
+                self._send_json(403, {"success": False, "error": "权限不足"})
                 return
             
             length = int(self.headers.get('Content-Length', 0))
@@ -3883,7 +3903,7 @@ class Handler(BaseHTTPRequestHandler):
         elif path == '/api/admin/risk_control/unblock':
             token = self._get_token_from_request()
             if not self._is_admin(token):
-                self._send_json(403, {"error": "权限不足"})
+                self._send_json(403, {"success": False, "error": "权限不足"})
                 return
             
             length = int(self.headers.get('Content-Length', 0))
@@ -3903,7 +3923,7 @@ class Handler(BaseHTTPRequestHandler):
         elif path == '/api/admin/risk_control/audit_logs':
             token = self._get_token_from_request()
             if not self._is_admin(token):
-                self._send_json(403, {"error": "权限不足"})
+                self._send_json(403, {"success": False, "error": "权限不足"})
                 return
             
             query = urlparse(self.path).query
@@ -3926,7 +3946,7 @@ class Handler(BaseHTTPRequestHandler):
         elif path == '/api/admin/risk_control/cost_report':
             token = self._get_token_from_request()
             if not self._is_admin(token):
-                self._send_json(403, {"error": "权限不足"})
+                self._send_json(403, {"success": False, "error": "权限不足"})
                 return
             
             query = urlparse(self.path).query
@@ -3946,7 +3966,7 @@ class Handler(BaseHTTPRequestHandler):
         elif path == '/api/admin/docs':
             token = self._get_token_from_request()
             if not self._is_admin(token):
-                self._send_json(403, {"error": "权限不足", "message": "API文档仅供内部开发者查看"})
+                self._send_json(403, {"success": False, "error": "权限不足", "message": "API文档仅供内部开发者查看"})
                 return
             docs = {
                 "title": "PureData 内部API文档",
@@ -3978,7 +3998,7 @@ class Handler(BaseHTTPRequestHandler):
         elif path == '/api/cache/stats':
             token = self._get_token_from_request()
             if not self._is_admin(token):
-                self._send_json(403, {"error": "权限不足"})
+                self._send_json(403, {"success": False, "error": "权限不足"})
                 return
             cache = get_data_cache()
             stats = cache.get_stats() if cache else {}
@@ -3987,7 +4007,7 @@ class Handler(BaseHTTPRequestHandler):
         elif path == '/api/cache/clear':
             token = self._get_token_from_request()
             if not self._is_admin(token):
-                self._send_json(403, {"error": "权限不足"})
+                self._send_json(403, {"success": False, "error": "权限不足"})
                 return
             cache = get_data_cache()
             count = cache.clear_all() if cache else 0
@@ -3996,7 +4016,7 @@ class Handler(BaseHTTPRequestHandler):
         elif path == '/api/core_cache/stats':
             token = self._get_token_from_request()
             if not self._is_admin(token):
-                self._send_json(403, {"error": "权限不足"})
+                self._send_json(403, {"success": False, "error": "权限不足"})
                 return
             try:
                 from core.cache_impl import cache_manager, template_cache, domain_cache, keyword_cache, api_cache
@@ -4013,7 +4033,7 @@ class Handler(BaseHTTPRequestHandler):
         elif path == '/api/core_cache/invalidate':
             token = self._get_token_from_request()
             if not self._is_admin(token):
-                self._send_json(403, {"error": "权限不足"})
+                self._send_json(403, {"success": False, "error": "权限不足"})
                 return
             try:
                 length = int(self.headers.get('Content-Length', 0))
@@ -4080,7 +4100,7 @@ class Handler(BaseHTTPRequestHandler):
                 try:
                     length = int(self.headers.get('Content-Length', 0))
                     body = json.loads(self.rfile.read(length).decode('utf-8')) if length > 0 else {}
-                except:
+                except (json.JSONDecodeError, ValueError, UnicodeDecodeError):
                     body = {}
                 
                 context = {
@@ -4100,14 +4120,15 @@ class Handler(BaseHTTPRequestHandler):
                 }
                 if handle_all_routes(self, path, 'POST', body, context):
                     return
-            self._send_json(404, {"error": "未找到"})
+            self._send_json(404, {"success": False, "error": "未找到"})
     
-    def _run_task(self, task_id, domain, count, format_type, mode="hybrid", username=None, noise_level=2, quality_mode="standard"):
+    def _run_task(self, task_id, domain, count, format_type, mode="hybrid", username=None, noise_level=2, quality_mode="standard", advanced_noise=None):
         global tasks
         try:
             with task_lock:
                 tasks[task_id]["status"] = "processing"
-            print(f"[{task_id}] 开始生成: {domain}, {count}条, 模式: {mode}, 噪音等级: {noise_level}, 质量模式: {quality_mode}")
+            noise_info = f"噪音等级: {noise_level}" + (f" (高级配置)" if advanced_noise else "")
+            print(f"[{task_id}] 开始生成: {domain}, {count}条, 模式: {mode}, {noise_info}, 质量模式: {quality_mode}")
             
             start_time = time.time()
             
@@ -4164,7 +4185,8 @@ class Handler(BaseHTTPRequestHandler):
                     
                     print(f"[{task_id}] 处理第{batch_num}/{total_batches}批: {batch_count}条")
                     
-                    cache_params = {"domain": domain, "count": batch_count, "mode": mode, "batch": batch_idx, "noise_level": noise_level}
+                    cache_date_key = datetime.now().strftime("%Y%m%d")
+                    cache_params = {"domain": domain, "count": batch_count, "mode": mode, "batch": batch_idx, "noise_level": noise_level, "date": cache_date_key}
                     cached_data = None
                     cache = get_data_cache()
                     if cache:
@@ -4179,9 +4201,9 @@ class Handler(BaseHTTPRequestHandler):
                         if mode == "clean":
                             batch_data = generate_data_clean(domain, batch_count, f"{task_id}_b{batch_num}", quality_mode)
                         elif mode == "noisy":
-                            batch_data = generate_data_noisy(domain, batch_count, f"{task_id}_b{batch_num}", noise_level)
+                            batch_data = generate_data_noisy(domain, batch_count, f"{task_id}_b{batch_num}", noise_level, advanced_noise)
                         else:
-                            batch_data = generate_data_hybrid(domain, batch_count, f"{task_id}_b{batch_num}", noise_level)
+                            batch_data = generate_data_hybrid(domain, batch_count, f"{task_id}_b{batch_num}", noise_level, advanced_noise)
                         
                         if CACHE_AVAILABLE and batch_data:
                             cache = get_data_cache()
@@ -4223,9 +4245,9 @@ class Handler(BaseHTTPRequestHandler):
                         if mode == "clean":
                             supplement_data = generate_data_clean(domain, remaining, f"{task_id}_sup{supplement_attempts}", quality_mode)
                         elif mode == "noisy":
-                            supplement_data = generate_data_noisy(domain, remaining, f"{task_id}_sup{supplement_attempts}", noise_level)
+                            supplement_data = generate_data_noisy(domain, remaining, f"{task_id}_sup{supplement_attempts}", noise_level, advanced_noise)
                         else:
-                            supplement_data = generate_data_hybrid(domain, remaining, f"{task_id}_sup{supplement_attempts}", noise_level)
+                            supplement_data = generate_data_hybrid(domain, remaining, f"{task_id}_sup{supplement_attempts}", noise_level, advanced_noise)
                         
                         if supplement_data:
                             data.extend(supplement_data)
@@ -4475,7 +4497,7 @@ class Handler(BaseHTTPRequestHandler):
             self.end_headers()
             self.wfile.write(content)
         else:
-            self._send_json(404, {"error": "文件不存在"})
+            self._send_json(404, {"success": False, "error": "文件不存在"})
     
     def _serve_swagger_ui(self):
         """提供Swagger UI界面"""

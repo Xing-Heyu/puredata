@@ -13,6 +13,8 @@ import time
 from datetime import datetime, timedelta
 import threading
 
+from password_validator import PasswordValidator
+
 try:
     import bcrypt
     BCRYPT_AVAILABLE = True
@@ -213,27 +215,28 @@ class AdminAuthManager:
     
     def validate_token(self, token):
         """验证令牌"""
-        if token not in self.sessions:
+        with self.lock:
+            if token not in self.sessions:
+                return None
+            
+            session = self.sessions[token]
+            expires_at = datetime.fromisoformat(session["expires_at"])
+            
+            if datetime.now() > expires_at:
+                del self.sessions[token]
+                self._save_sessions()
+                return None
+            
+            admins = self.config.get("admins", [])
+            for admin in admins:
+                if admin.get("username") == session["username"]:
+                    return {
+                        "username": admin.get("username"),
+                        "email": admin.get("email", ""),
+                        "role": "admin"
+                    }
+            
             return None
-        
-        session = self.sessions[token]
-        expires_at = datetime.fromisoformat(session["expires_at"])
-        
-        if datetime.now() > expires_at:
-            del self.sessions[token]
-            self._save_sessions()
-            return None
-        
-        admins = self.config.get("admins", [])
-        for admin in admins:
-            if admin.get("username") == session["username"]:
-                return {
-                    "username": admin.get("username"),
-                    "email": admin.get("email", ""),
-                    "role": "admin"
-                }
-        
-        return None
     
     def change_password(self, username, old_password, new_password):
         """修改密码"""
@@ -245,8 +248,9 @@ class AdminAuthManager:
                     if not self._verify_password(old_password, admin.get("password_hash", "")):
                         return {"success": False, "error": "旧密码错误"}
                     
-                    if len(new_password) < 8:
-                        return {"success": False, "error": "新密码长度至少8位"}
+                    pwd_result = PasswordValidator.validate_success_dict(new_password)
+                    if not pwd_result["success"]:
+                        return pwd_result
                     
                     admin["password_hash"] = self._hash_password(new_password)
                     admin["password_changed_at"] = datetime.now().isoformat()
@@ -265,8 +269,9 @@ class AdminAuthManager:
                 if admin.get("username") == username:
                     return {"success": False, "error": "用户名已存在"}
             
-            if len(password) < 8:
-                return {"success": False, "error": "密码长度至少8位"}
+            pwd_result = PasswordValidator.validate_success_dict(password)
+            if not pwd_result["success"]:
+                return pwd_result
             
             admins.append({
                 "username": username,

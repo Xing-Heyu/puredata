@@ -174,8 +174,8 @@ class ProfessionalValidator:
         if SPECIALISTS_AVAILABLE:
             try:
                 self.specialists = get_all_specialists()
-            except:
-                pass
+            except ImportError as e:
+                print(f"[WARN] 加载专家模块失败: {e}")
         
         self.validation_stats = {
             "total_validated": 0,

@@ -59,10 +59,41 @@ def handle_generate_routes(handler, path, method, body, context):
                         return True
             
             domain = body.get('domain', '人工智能')
-            count = int(body.get('count', 100))
+            try:
+                count = int(body.get('count', 100))
+                if count < 1 or count > 100000:
+                    handler._send_json(400, {"success": False, "error": "生成数量必须在1-100000之间"})
+                    return True
+            except (ValueError, TypeError):
+                handler._send_json(400, {"success": False, "error": "生成数量必须是整数"})
+                return True
+            
             format_type = body.get('format', 'json')
             mode = body.get('mode', 'hybrid')
-            noise_level = int(body.get('noise_level', 2))
+            
+            try:
+                noise_level = int(body.get('noise_level', 2))
+                if noise_level < 0 or noise_level > 5:
+                    handler._send_json(400, {"success": False, "error": "噪声级别必须在0-5之间"})
+                    return True
+            except (ValueError, TypeError):
+                handler._send_json(400, {"success": False, "error": "噪声级别必须是整数"})
+                return True
+            
+            advanced_noise = body.get('advanced_noise')
+            if advanced_noise:
+                if not user or user.get('role') not in ['premium', 'developer', 'admin']:
+                    handler._send_json(403, {
+                        "success": False,
+                        "error": "权限不足",
+                        "message": "高级噪音配置仅限高级版/开发者版用户使用"
+                    })
+                    return True
+                
+                if advanced_noise.get('intensity', 0) < 0 or advanced_noise.get('intensity', 0) > 1:
+                    handler._send_json(400, {"success": False, "error": "噪音强度必须在0-1之间"})
+                    return True
+            
             quality_mode = body.get('quality_mode', 'standard')
             
             if user and user.get('role') == 'free':
@@ -70,6 +101,17 @@ def handle_generate_routes(handler, path, method, body, context):
             
             if quality_mode not in QUALITY_MODES:
                 quality_mode = 'standard'
+            
+            if user and user_manager:
+                from user_system import QUALITY_MODE_PERMISSIONS, Permission
+                required_permission = QUALITY_MODE_PERMISSIONS.get(quality_mode, Permission.FREE_QUALITY)
+                if not user_manager.check_permission(user['username'], required_permission):
+                    handler._send_json(403, {
+                        "success": False,
+                        "error": "权限不足",
+                        "message": f"您当前角色无法使用 {quality_mode} 质量模式，请升级套餐"
+                    })
+                    return True
             
             if RISK_CONTROL_AVAILABLE and get_risk_control and user:
                 rc = get_risk_control()
@@ -110,6 +152,7 @@ def handle_generate_routes(handler, path, method, body, context):
                         "total": count,
                         "mode": mode,
                         "noise_level": noise_level,
+                        "advanced_noise": advanced_noise,
                         "quality_mode": quality_mode,
                         "created_at": datetime.now().isoformat(),
                         "username": username
@@ -118,7 +161,7 @@ def handle_generate_routes(handler, path, method, body, context):
             if hasattr(handler, '_run_task'):
                 thread = threading.Thread(
                     target=handler._run_task,
-                    args=(task_id, domain, count, format_type, mode, username, noise_level, quality_mode),
+                    args=(task_id, domain, count, format_type, mode, username, noise_level, quality_mode, advanced_noise),
                     daemon=True
                 )
                 thread.start()

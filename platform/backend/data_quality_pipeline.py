@@ -1003,8 +1003,8 @@ class DataQualityPipeline:
                         item["quality_level"] = "high_quality"
                         item["_cads_generated"] = True
                         high_quality.append(item)
-            except:
-                pass
+            except Exception as e:
+                print(f"[WARN] CADS合成失败: {e}")
         
         result = high_quality + [item for item in medium_quality if item not in high_quality]
         

@@ -4,6 +4,11 @@
 """
 
 import re
+import sys
+import os
+
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from password_validator import PasswordValidator
 
 def handle_user_routes(handler, path, method, body, context):
     """
@@ -31,6 +36,10 @@ def handle_user_routes(handler, path, method, body, context):
         username = body.get('username', '')
         password = body.get('password', '')
         
+        if not username or len(username) > 50:
+            handler._send_json(400, {"success": False, "error": "用户名无效"})
+            return True
+        
         if not user_manager:
             handler._send_json(500, {"error": "用户系统不可用"})
             return True
@@ -56,6 +65,14 @@ def handle_user_routes(handler, path, method, body, context):
             password = body.get('password', '')
             account = body.get('account', body.get('email', ''))
             invite_code = body.get('invite_code')
+            
+            if not username or len(username) < 2 or len(username) > 50:
+                handler._send_json(400, {"success": False, "error": "用户名长度必须在2-50个字符之间"})
+                return True
+            
+            if not re.match(r'^[a-zA-Z0-9_\u4e00-\u9fa5]+$', username):
+                handler._send_json(400, {"success": False, "error": "用户名只能包含字母、数字、下划线和中文"})
+                return True
             
             is_phone = re.match(r'^1[3-9]\d{9}$', account)
             is_email = re.match(r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$', account)
@@ -95,25 +112,25 @@ def handle_user_routes(handler, path, method, body, context):
     elif path == '/api/user/info':
         token = handler._get_token_from_request()
         if not user_manager:
-            handler._send_json(500, {"error": "用户系统不可用"})
+            handler._send_json(500, {"success": False, "error": "用户系统不可用"})
             return True
         
         user = user_manager.validate_token(token)
         if user:
             handler._send_json(200, {"success": True, "user": user})
         else:
-            handler._send_json(401, {"error": "未登录"})
+            handler._send_json(401, {"success": False, "error": "未登录"})
         return True
     
     elif path == '/api/user/quota':
         token = handler._get_token_from_request()
         if not user_manager:
-            handler._send_json(500, {"error": "用户系统不可用"})
+            handler._send_json(500, {"success": False, "error": "用户系统不可用"})
             return True
         
         user = user_manager.validate_token(token)
         if not user:
-            handler._send_json(401, {"error": "未登录"})
+            handler._send_json(401, {"success": False, "error": "未登录"})
             return True
         
         quota_info = user_manager.get_quota_status(user['username'])
@@ -123,12 +140,12 @@ def handle_user_routes(handler, path, method, body, context):
     elif path == '/api/user/history':
         token = handler._get_token_from_request()
         if not user_manager:
-            handler._send_json(500, {"error": "用户系统不可用"})
+            handler._send_json(500, {"success": False, "error": "用户系统不可用"})
             return True
         
         user = user_manager.validate_token(token)
         if not user:
-            handler._send_json(401, {"error": "未登录"})
+            handler._send_json(401, {"success": False, "error": "未登录"})
             return True
         
         history = user.get('tasks_completed', [])
@@ -137,12 +154,12 @@ def handle_user_routes(handler, path, method, body, context):
     
     elif path == '/api/password/reset/request':
         if method != 'POST':
-            handler._send_json(405, {"error": "Method not allowed"})
+            handler._send_json(405, {"success": False, "error": "Method not allowed"})
             return True
         
         email = body.get('email', '')
         if not user_manager:
-            handler._send_json(500, {"error": "用户系统不可用"})
+            handler._send_json(500, {"success": False, "error": "用户系统不可用"})
             return True
         
         result = user_manager.request_password_reset(email)
@@ -151,7 +168,7 @@ def handle_user_routes(handler, path, method, body, context):
     
     elif path == '/api/password/reset':
         if method != 'POST':
-            handler._send_json(405, {"error": "Method not allowed"})
+            handler._send_json(405, {"success": False, "error": "Method not allowed"})
             return True
         
         email = body.get('email', '')
@@ -159,7 +176,7 @@ def handle_user_routes(handler, path, method, body, context):
         new_password = body.get('new_password', '')
         
         if not user_manager:
-            handler._send_json(500, {"error": "用户系统不可用"})
+            handler._send_json(500, {"success": False, "error": "用户系统不可用"})
             return True
         
         result = user_manager.reset_password(email, code, new_password)
@@ -168,7 +185,7 @@ def handle_user_routes(handler, path, method, body, context):
     
     elif path == '/api/send_verification':
         if method != 'POST':
-            handler._send_json(405, {"error": "Method not allowed"})
+            handler._send_json(405, {"success": False, "error": "Method not allowed"})
             return True
         
         target = body.get('target', body.get('email', ''))
@@ -186,7 +203,7 @@ def handle_user_routes(handler, path, method, body, context):
     
     elif path == '/api/verify_code':
         if method != 'POST':
-            handler._send_json(405, {"error": "Method not allowed"})
+            handler._send_json(405, {"success": False, "error": "Method not allowed"})
             return True
         
         target = body.get('target', '')
@@ -208,7 +225,7 @@ def handle_user_routes(handler, path, method, body, context):
     
     elif path == '/api/verify_email':
         if method != 'POST':
-            handler._send_json(405, {"error": "Method not allowed"})
+            handler._send_json(405, {"success": False, "error": "Method not allowed"})
             return True
         
         email = body.get('email', '')
@@ -228,26 +245,17 @@ def handle_user_routes(handler, path, method, body, context):
     
     elif path == '/api/password/check':
         if method != 'POST':
-            handler._send_json(405, {"error": "Method not allowed"})
+            handler._send_json(405, {"success": False, "error": "Method not allowed"})
             return True
         
         password = body.get('password', '')
-        
-        if len(password) < 8:
-            handler._send_json(200, {"valid": False, "message": "密码长度至少8位"})
-        elif not re.search(r'[A-Z]', password):
-            handler._send_json(200, {"valid": False, "message": "密码需包含大写字母"})
-        elif not re.search(r'[a-z]', password):
-            handler._send_json(200, {"valid": False, "message": "密码需包含小写字母"})
-        elif not re.search(r'\d', password):
-            handler._send_json(200, {"valid": False, "message": "密码需包含数字"})
-        else:
-            handler._send_json(200, {"valid": True, "message": "密码强度合格"})
+        result = PasswordValidator.validate_dict(password)
+        handler._send_json(200, result)
         return True
     
     elif path == '/api/otp/send':
         if method != 'POST':
-            handler._send_json(405, {"error": "Method not allowed"})
+            handler._send_json(405, {"success": False, "error": "Method not allowed"})
             return True
         
         target = body.get('target', '')
@@ -261,6 +269,17 @@ def handle_user_routes(handler, path, method, body, context):
             result = {"success": True, "message": "验证码已发送(演示模式)", "demo_code": "123456"}
         
         handler._send_json(200, result)
+        return True
+    
+    elif path == '/api/contact':
+        contact_info = {
+            "email": "support@puredata.ai",
+            "phone": "400-888-8888",
+            "wechat": "PureDataAI",
+            "address": "北京市海淀区中关村科技园",
+            "work_hours": "工作日 9:00-18:00"
+        }
+        handler._send_json(200, {"success": True, "contact": contact_info})
         return True
     
     return None

@@ -607,7 +607,7 @@
     </div>
     
     <script>
-        const API_BASE = 'http://localhost:8000';
+        const API_BASE = window.location.origin;
         let authToken = localStorage.getItem('admin_token') || '';
         
         function escapeHtml(text) {
@@ -762,8 +762,9 @@
                                       u.role === 'premium' ? 'badge-success' : 
                                       u.role === 'standard' ? 'badge-info' : 'badge-warning';
                     const roleText = u.role === 'admin' ? '管理员' : 
-                                     u.role === 'premium' ? '高级用户' : 
-                                     u.role === 'standard' ? '标准用户' : '免费用户';
+                                     u.role === 'developer' ? '开发者' : 
+                                     u.role === 'premium' ? '专业版' : 
+                                     u.role === 'standard' ? '基础版' : '体验版';
                     
                     html += `<tr>
                         <td>${escapeHtml(u.username)}</td>
@@ -905,7 +906,7 @@
                                 'Content-Type': 'application/json',
                                 'Authorization': 'Bearer ' + authToken
                             },
-                            body: JSON.stringify({ username, role })
+                            body: JSON.stringify({ username, updates: { role } })
                         });
                     }
                     return { success: true };
@@ -965,9 +966,9 @@
         }
         
         function editUserRole(username, currentRole) {
-            const roles = ['free', 'standard', 'premium'];
-            const roleNames = { free: '免费用户', standard: '标准用户', premium: '高级用户' };
-            const newRole = prompt(`选择新角色:\n- free: 免费用户\n- standard: 标准用户\n- premium: 高级用户\n\n当前角色: ${currentRole}\n请输入新角色:`, currentRole);
+            const roles = ['free', 'standard', 'premium', 'developer', 'admin'];
+            const roleNames = { free: '体验版', standard: '基础版', premium: '专业版', developer: '开发者', admin: '管理员' };
+            const newRole = prompt(`选择新角色:\n- free: 体验版\n- standard: 基础版\n- premium: 专业版\n- developer: 开发者\n- admin: 管理员\n\n当前角色: ${roleNames[currentRole] || currentRole}\n请输入新角色:`, currentRole);
             
             if (newRole && roles.includes(newRole) && newRole !== currentRole) {
                 fetch(API_BASE + '/api/admin/users/update', {
@@ -976,7 +977,7 @@
                         'Content-Type': 'application/json',
                         'Authorization': 'Bearer ' + authToken
                     },
-                    body: JSON.stringify({ username, role: newRole })
+                    body: JSON.stringify({ username, updates: { role: newRole } })
                 })
                 .then(r => r.json())
                 .then(data => {

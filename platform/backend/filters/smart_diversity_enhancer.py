@@ -89,8 +89,8 @@ class SmartDiversityEnhancer:
             os.makedirs(os.path.dirname(self.cache_file), exist_ok=True)
             with open(self.cache_file, 'w', encoding='utf-8') as f:
                 json.dump(self.cache, f, ensure_ascii=False, indent=2)
-        except:
-            pass
+        except (IOError, OSError) as e:
+            print(f"[WARN] 保存多样性缓存失败: {e}")
     
     def _get_cache_key(self, word: str, template_type: str) -> str:
         """生成缓存键"""

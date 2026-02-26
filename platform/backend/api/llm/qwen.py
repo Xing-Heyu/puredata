@@ -77,7 +77,7 @@ except ImportError:
                 if response.status_code == 200:
                     return response.output.text
             except Exception as e:
-                pass
+                print(f"[WARN] Qwen API调用失败: {e}")
             
             return self._local_fallback(prompt)
         

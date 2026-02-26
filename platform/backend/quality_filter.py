@@ -109,7 +109,7 @@ class QualityFilter:
                     suggestions.append("修正专业内容错误")
                     score *= 0.7
             except Exception as e:
-                pass
+                print(f"[WARN] 专业验证失败: {e}")
         
         if self._has_repetition(text):
             issues.append("存在重复内容")

@@ -15,6 +15,11 @@ from urllib.parse import urlparse
 class GenerationHandler:
     """数据生成处理器 - 处理数据生成相关请求"""
     
+    VALID_QUALITY_MODES = {'standard', 'high', 'ultra', 'mixed', 'free_trial'}
+    VALID_FORMATS = {'json', 'jsonl', 'csv'}
+    MAX_COUNT = 100000
+    MIN_COUNT = 1
+    
     def __init__(self, config, generators):
         self.config = config
         self.generators = generators
@@ -30,9 +35,25 @@ class GenerationHandler:
             body = json.loads(request_handler.rfile.read(length).decode('utf-8'))
             
             domain = body.get('domain', '人工智能')
-            count = int(body.get('count', 100))
+            if not domain or len(domain) > 100:
+                return {"success": False, "error": "领域名称无效（长度需在1-100字符之间）"}
+            
+            try:
+                count = int(body.get('count', 100))
+            except (ValueError, TypeError):
+                return {"success": False, "error": "生成数量必须是整数"}
+            
+            if count < self.MIN_COUNT or count > self.MAX_COUNT:
+                return {"success": False, "error": f"生成数量必须在{self.MIN_COUNT}-{self.MAX_COUNT}之间"}
+            
             quality_mode = body.get('quality_mode', 'standard')
+            if quality_mode not in self.VALID_QUALITY_MODES:
+                return {"success": False, "error": f"质量模式无效，有效值: {', '.join(self.VALID_QUALITY_MODES)}"}
+            
             format_type = body.get('format', 'json')
+            if format_type not in self.VALID_FORMATS:
+                return {"success": False, "error": f"格式无效，有效值: {', '.join(self.VALID_FORMATS)}"}
+            
             noise_level = body.get('noise_level')
             
             task_id = str(uuid.uuid4())[:8]
