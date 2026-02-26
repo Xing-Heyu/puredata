@@ -64,7 +64,7 @@ for domain in domains:
                 "verified": item.quality_score >= 0.80,
                 "provenance": {
                     "platform": "PureData",
-                    "version": "2.0.0",
+                    "version": "2.1.0",
                     "generated_at": datetime.now().isoformat(),
                     "license": "PureData-Commercial-1.0",
                     "license_url": "https://puredata.ai/license/commercial",

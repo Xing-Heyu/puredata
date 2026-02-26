@@ -4,7 +4,7 @@
 
 格式基于 [Keep a Changelog](https://keepachangelog.com/zh-CN/1.0.0/)。
 
-## [Unreleased]
+## [2.1.0] - 2026-02-26
 
 ### 新增
 - 大规模数据生成支持（最高1000万条）
@@ -24,12 +24,17 @@
 - 空异常捕获问题
 - SQL注入风险（添加列名验证）
 - XSS风险（添加HTML转义）
+- 管理员密码哈希从SHA256升级为bcrypt
+- 统一版本号到2.1.0
 
 ### 安全
 - 敏感信息不再输出到控制台
 - 加密算法从Base64升级为AES-256
 - 添加敏感文件访问保护
 - 生产环境强制要求设置密钥
+- .secret_key 添加到 .gitignore
+- 敏感数据文件添加到 .gitignore
+- 添加 cryptography 依赖声明
 
 ### 文档
 - 完善API文档

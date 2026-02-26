@@ -1434,6 +1434,143 @@
                     <p class="page-subtitle">配置参数，开始生成AI训练数据</p>
                 </div>
                 
+                <div style="display: flex; gap: 8px; margin-bottom: 20px; border-bottom: 1px solid var(--gray-200); padding-bottom: 12px;">
+                    <button @click="generateTab = 'text'" 
+                            :style="{ padding: '8px 16px', border: 'none', background: generateTab === 'text' ? 'var(--primary)' : 'transparent', color: generateTab === 'text' ? 'white' : 'var(--gray-600)', borderRadius: '6px', cursor: 'pointer', fontWeight: '500' }">
+                        📝 文本生成
+                    </button>
+                    <button @click="generateTab = 'image'" 
+                            :style="{ padding: '8px 16px', border: 'none', background: generateTab === 'image' ? 'var(--primary)' : 'transparent', color: generateTab === 'image' ? 'white' : 'var(--gray-600)', borderRadius: '6px', cursor: 'pointer', fontWeight: '500' }">
+                        🖼️ 图片生成
+                    </button>
+                    <button @click="generateTab = 'audio'" 
+                            :style="{ padding: '8px 16px', border: 'none', background: generateTab === 'audio' ? 'var(--primary)' : 'transparent', color: generateTab === 'audio' ? 'white' : 'var(--gray-600)', borderRadius: '6px', cursor: 'pointer', fontWeight: '500' }">
+                        🎵 音频生成
+                    </button>
+                </div>
+                
+                <div v-if="generateTab === 'image'" class="content-wrapper">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">🖼️ 图片生成</h3>
+                            <span style="font-size: 12px; color: var(--warning);">按张计费</span>
+                        </div>
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label class="form-label">文本来源</label>
+                                <select class="form-select" v-model="imageTextSource">
+                                    <option value="cache">使用缓存/历史文件（推荐，更快）</option>
+                                    <option value="generate">临时生成新文本</option>
+                                </select>
+                            </div>
+                            <div class="form-group" v-if="imageTextSource === 'generate'">
+                                <label class="form-label">领域</label>
+                                <select class="form-select" v-model="selectedDomain">
+                                    <option v-for="d in domains" :value="d">{{ d }}</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">图片数量</label>
+                                <input type="number" class="form-input" v-model.number="imageCount" min="1" max="100">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">图片风格</label>
+                                <select class="form-select" v-model="imageStyle">
+                                    <option value="realistic">写实风格（推荐）</option>
+                                    <option value="anime">动漫风格</option>
+                                    <option value="oil_painting">油画风格</option>
+                                    <option value="watercolor">水彩风格</option>
+                                    <option value="3d_render">3D渲染</option>
+                                    <option value="cyberpunk">赛博朋克</option>
+                                </select>
+                            </div>
+                            <div style="padding: 16px; background: var(--gray-50); border-radius: 8px; margin-bottom: 16px;">
+                                <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                                    <span>单价</span>
+                                    <span>¥1.99/张</span>
+                                </div>
+                                <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                                    <span>数量</span>
+                                    <span>{{ imageCount }}张</span>
+                                </div>
+                                <div style="border-top: 1px solid var(--gray-200); padding-top: 8px; display: flex; justify-content: space-between; font-weight: 600;">
+                                    <span>总计</span>
+                                    <span style="color: var(--primary);">¥{{ (imageCount * 1.99).toFixed(2) }}</span>
+                                </div>
+                                <div style="font-size: 12px; color: var(--gray-500); margin-top: 8px;">
+                                    余额：¥{{ userBalance.toFixed(2) }}
+                                </div>
+                            </div>
+                            <button class="btn btn-primary" style="width: 100%;" @click="startImageGenerate" :disabled="generating">
+                                {{ generating ? '生成中...' : '立即生成' }}
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div v-if="generateTab === 'audio'" class="content-wrapper">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">🎵 音频生成</h3>
+                            <span style="font-size: 12px; color: var(--warning);">按条计费</span>
+                        </div>
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label class="form-label">文本来源</label>
+                                <select class="form-select" v-model="audioTextSource">
+                                    <option value="cache">使用缓存/历史文件（推荐，更快）</option>
+                                    <option value="generate">临时生成新文本</option>
+                                </select>
+                            </div>
+                            <div class="form-group" v-if="audioTextSource === 'generate'">
+                                <label class="form-label">领域</label>
+                                <select class="form-select" v-model="selectedDomain">
+                                    <option v-for="d in domains" :value="d">{{ d }}</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">音频数量</label>
+                                <input type="number" class="form-input" v-model.number="audioCount" min="1" max="500">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">语音声线</label>
+                                <select class="form-select" v-model="voiceId">
+                                    <option value="Cherry">Cherry（女声，活泼可爱）</option>
+                                    <option value="Luna">Luna（女声，温柔甜美）</option>
+                                    <option value="Serena">Serena（女声，知性优雅）</option>
+                                    <option value="Thea">Thea（女声，清新自然）</option>
+                                    <option value="Bella">Bella（女声，俏皮灵动）</option>
+                                    <option value="Ethan">Ethan（男声，沉稳大气）</option>
+                                    <option value="Marcus">Marcus（男声，磁性低沉）</option>
+                                    <option value="Alex">Alex（男声，阳光活力）</option>
+                                </select>
+                            </div>
+                            <div style="padding: 16px; background: var(--gray-50); border-radius: 8px; margin-bottom: 16px;">
+                                <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                                    <span>单价</span>
+                                    <span>¥0.19/条</span>
+                                </div>
+                                <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                                    <span>数量</span>
+                                    <span>{{ audioCount }}条</span>
+                                </div>
+                                <div style="border-top: 1px solid var(--gray-200); padding-top: 8px; display: flex; justify-content: space-between; font-weight: 600;">
+                                    <span>总计</span>
+                                    <span style="color: var(--primary);">¥{{ (audioCount * 0.19).toFixed(2) }}</span>
+                                </div>
+                                <div style="font-size: 12px; color: var(--gray-500); margin-top: 8px;">
+                                    余额：¥{{ userBalance.toFixed(2) }}
+                                </div>
+                            </div>
+                            <button class="btn btn-primary" style="width: 100%;" @click="startAudioGenerate" :disabled="generating">
+                                {{ generating ? '生成中...' : '立即生成' }}
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div v-if="generateTab === 'text'" class="content-wrapper">
+                
                 <div v-if="quotaStatus" class="content-wrapper">
                     <div class="quota-card" :class="{ 'warning': quotaStatus.warning_level === 'warning', 'critical': quotaStatus.warning_level === 'critical' }" 
                          :style="quotaStatus.warning_level !== 'normal' ? 'border-color: var(--warning);' : ''">
@@ -1736,12 +1873,15 @@
                             <div class="form-group" v-if="outputType === 'audio' || outputType === 'multimodal'">
                                 <label class="form-label">语音声线</label>
                                 <select class="form-select" v-model="voiceId">
-                                    <optgroup label="Azure 中文声线">
-                                        <option value="zh-CN-XiaoxiaoNeural">晓晓（女声，自然亲切）</option>
-                                        <option value="zh-CN-YunxiNeural">云希（男声，阳光活力）</option>
-                                        <option value="zh-CN-YunyangNeural">云扬（男声，专业新闻）</option>
-                                        <option value="zh-CN-XiaoyiNeural">晓伊（女声，温柔甜美）</option>
-                                        <option value="zh-CN-YunjianNeural">云健（男声，沉稳大气）</option>
+                                    <optgroup label="千问TTS声线">
+                                        <option value="Cherry">Cherry（女声，活泼可爱）</option>
+                                        <option value="Luna">Luna（女声，温柔甜美）</option>
+                                        <option value="Serena">Serena（女声，知性优雅）</option>
+                                        <option value="Thea">Thea（女声，清新自然）</option>
+                                        <option value="Bella">Bella（女声，俏皮灵动）</option>
+                                        <option value="Ethan">Ethan（男声，沉稳大气）</option>
+                                        <option value="Marcus">Marcus（男声，磁性低沉）</option>
+                                        <option value="Alex">Alex（男声，阳光活力）</option>
                                     </optgroup>
                                 </select>
                             </div>
@@ -1859,6 +1999,7 @@
                             </table>
                         </div>
                     </div>
+                </div>
                 </div>
             </div>
             
@@ -2778,6 +2919,12 @@
                     format: 'jsonl',
                     mode: 'hybrid',
                     noiseLevel: '2',
+                    generateTab: 'text',
+                    imageTextSource: 'cache',
+                    audioTextSource: 'cache',
+                    imageCount: 10,
+                    audioCount: 100,
+                    userBalance: 0,
                     useAdvancedNoise: false,
                     advancedNoise: {
                         intensity: 15,
@@ -2807,7 +2954,7 @@
                     ],
                     outputType: 'text',
                     imageStyle: 'realistic',
-                    voiceId: 'zh-CN-XiaoxiaoNeural',
+                    voiceId: 'Cherry',
                     generating: false,
                     taskId: '',
                     taskStatus: '',
@@ -3182,6 +3329,64 @@
                         detail: detail,
                         ip: '***.***.***.' + Math.floor(Math.random() * 255)
                     });
+                },
+                async startImageGenerate() {
+                    if (!this.currentUser) {
+                        this.showLoginModal = true;
+                        return;
+                    }
+                    const cost = this.imageCount * 1.99;
+                    if (this.userBalance < cost) {
+                        this.showToast('余额不足，请充值', 'error');
+                        return;
+                    }
+                    this.generating = true;
+                    try {
+                        const token = localStorage.getItem('user_token');
+                        const res = await axios.post('/generate', {
+                            domain: this.selectedDomain,
+                            count: this.imageCount,
+                            format: 'json',
+                            mode: 'clean',
+                            output_type: 'image',
+                            image_style: this.imageStyle,
+                            text_source: this.imageTextSource
+                        }, { headers: { 'Authorization': 'Bearer ' + token } });
+                        this.taskId = res.data.task_id;
+                        this.pollTask();
+                    } catch (e) {
+                        this.generating = false;
+                        this.showToast('生成失败: ' + (e.response?.data?.error || e.message), 'error');
+                    }
+                },
+                async startAudioGenerate() {
+                    if (!this.currentUser) {
+                        this.showLoginModal = true;
+                        return;
+                    }
+                    const cost = this.audioCount * 0.19;
+                    if (this.userBalance < cost) {
+                        this.showToast('余额不足，请充值', 'error');
+                        return;
+                    }
+                    this.generating = true;
+                    try {
+                        const token = localStorage.getItem('user_token');
+                        const res = await axios.post('/generate', {
+                            domain: this.selectedDomain,
+                            count: this.audioCount,
+                            format: 'json',
+                            mode: 'clean',
+                            output_type: 'audio',
+                            voice_id: this.voiceId,
+                            text_source: this.audioTextSource
+                        }, { headers: { 'Authorization': 'Bearer ' + token } });
+                        this.taskId = res.data.task_id;
+                        this.pollTask();
+                    } catch (e) {
+                        this.generating = false;
+                        this.showToast('生成失败: ' + (e.response?.data?.error || e.message), 'error');
+                    }
                 },
                 async startGenerate() {
                     if (!this.currentUser) {

@@ -1,0 +1,232 @@
+[
+  {
+    "id": 1,
+    "word": "诊断",
+    "text": "诊断是医生根据患者症状、体征和检查结果判断疾病的过程。现代诊断技术包括影像诊断、实验室检验、基因检测等多种手段。",
+    "category": "医疗",
+    "source": "knowledge_base",
+    "confidence": 0.95,
+    "quality_score": 0.84,
+    "quality_tier": "high",
+    "timestamp": "2026-02-24T22:42:59.103748",
+    "verified": true,
+    "text_length": 56,
+    "quality_check": {
+      "passed": true,
+      "score": 0.843
+    },
+    "provenance": {
+      "platform": "PureData",
+      "generated_at": "2026-02-24T22:42:59.103751",
+      "batch_id": "medical_test_001",
+      "generator": "high_quality"
+    }
+  },
+  {
+    "id": 2,
+    "word": "治疗",
+    "text": "治疗是消除疾病、缓解症状、恢复健康的医疗行为。主要方式包括药物治疗、手术治疗、物理治疗、心理治疗等。",
+    "category": "医疗",
+    "source": "knowledge_base",
+    "confidence": 1.0,
+    "quality_score": 0.84,
+    "quality_tier": "high",
+    "timestamp": "2026-02-24T22:42:59.103878",
+    "verified": true,
+    "text_length": 50,
+    "quality_check": {
+      "passed": true,
+      "score": 0.843
+    },
+    "provenance": {
+      "platform": "PureData",
+      "generated_at": "2026-02-24T22:42:59.103880",
+      "batch_id": "medical_test_001",
+      "generator": "high_quality"
+    }
+  },
+  {
+    "id": 3,
+    "word": "药物",
+    "text": "药物是用于预防、治疗、诊断疾病的化学物质或生物制品。药物研发需要经过严格的临床前研究和临床试验。",
+    "category": "医疗",
+    "source": "knowledge_base",
+    "confidence": 0.85,
+    "quality_score": 0.79,
+    "quality_tier": "high",
+    "timestamp": "2026-02-24T22:42:59.103962",
+    "verified": true,
+    "text_length": 48,
+    "quality_check": {
+      "passed": true,
+      "score": 0.788
+    },
+    "provenance": {
+      "platform": "PureData",
+      "generated_at": "2026-02-24T22:42:59.103963",
+      "batch_id": "medical_test_001",
+      "generator": "high_quality"
+    }
+  },
+  {
+    "id": 4,
+    "word": "康复",
+    "text": "康复是帮助患者恢复功能、提高生活质量的过程。包括物理治疗、作业治疗、言语治疗等多种手段。",
+    "category": "医疗",
+    "source": "knowledge_base",
+    "confidence": 0.85,
+    "quality_score": 0.79,
+    "quality_tier": "high",
+    "timestamp": "2026-02-24T22:42:59.104150",
+    "verified": true,
+    "text_length": 44,
+    "quality_check": {
+      "passed": true,
+      "score": 0.788
+    },
+    "provenance": {
+      "platform": "PureData",
+      "generated_at": "2026-02-24T22:42:59.104151",
+      "batch_id": "medical_test_001",
+      "generator": "high_quality"
+    }
+  },
+  {
+    "id": 5,
+    "word": "影像",
+    "text": "医学影像是通过各种技术获取人体内部图像的诊断方法，包括X光、CT、MRI、超声等。影像诊断是现代医学的重要支柱。",
+    "category": "医疗",
+    "source": "knowledge_base",
+    "confidence": 0.95,
+    "quality_score": 0.96,
+    "quality_tier": "high",
+    "timestamp": "2026-02-24T22:42:59.106424",
+    "verified": true,
+    "text_length": 56,
+    "quality_check": {
+      "passed": true,
+      "score": 0.958
+    },
+    "provenance": {
+      "platform": "PureData",
+      "generated_at": "2026-02-24T22:42:59.106425",
+      "batch_id": "medical_test_001",
+      "generator": "high_quality"
+    }
+  },
+  {
+    "id": 6,
+    "word": "疫苗",
+    "text": "疫苗是预防传染病的生物制品，通过刺激机体产生免疫保护。疫苗研发需要严格的临床试验验证安全性和有效性。",
+    "category": "医疗",
+    "source": "knowledge_base",
+    "confidence": 0.95,
+    "quality_score": 0.83,
+    "quality_tier": "high",
+    "timestamp": "2026-02-24T22:42:59.107196",
+    "verified": true,
+    "text_length": 50,
+    "quality_check": {
+      "passed": true,
+      "score": 0.828
+    },
+    "provenance": {
+      "platform": "PureData",
+      "generated_at": "2026-02-24T22:42:59.107197",
+      "batch_id": "medical_test_001",
+      "generator": "high_quality"
+    }
+  },
+  {
+    "id": 7,
+    "word": "处方",
+    "text": "处方是医生开具的用药指导，包括药品名称、剂量、用法等信息。合理用药是保障医疗安全的重要环节。",
+    "category": "医疗",
+    "source": "knowledge_base",
+    "confidence": 0.9,
+    "quality_score": 0.79,
+    "quality_tier": "high",
+    "timestamp": "2026-02-24T22:42:59.107942",
+    "verified": true,
+    "text_length": 46,
+    "quality_check": {
+      "passed": true,
+      "score": 0.788
+    },
+    "provenance": {
+      "platform": "PureData",
+      "generated_at": "2026-02-24T22:42:59.107943",
+      "batch_id": "medical_test_001",
+      "generator": "high_quality"
+    }
+  },
+  {
+    "id": 8,
+    "word": "疫苗",
+    "text": "疫苗是预防传染病的生物制品，通过刺激机体产生免疫保护。疫苗研发需要严格的临床试验验证安全性和有效性。 该概念与康复、病历密切相关。",
+    "category": "医疗",
+    "source": "knowledge_base",
+    "confidence": 0.85,
+    "quality_score": 0.83,
+    "quality_tier": "medium",
+    "timestamp": "2026-02-24T22:42:59.124367",
+    "verified": true,
+    "text_length": 65,
+    "quality_check": {
+      "passed": true,
+      "score": 0.826
+    },
+    "provenance": {
+      "platform": "PureData",
+      "generated_at": "2026-02-24T22:42:59.124369",
+      "batch_id": "medical_test_001",
+      "generator": "normal"
+    }
+  },
+  {
+    "id": 9,
+    "word": "病历",
+    "text": "病历是记录患者诊疗过程的医疗文书，包括病史、检查、诊断、治疗等信息。电子病历系统提高了医疗信息化水平。",
+    "category": "医疗",
+    "source": "knowledge_base",
+    "confidence": 0.9,
+    "quality_score": 0.86,
+    "quality_tier": "medium",
+    "timestamp": "2026-02-24T22:42:59.125241",
+    "verified": true,
+    "text_length": 51,
+    "quality_check": {
+      "passed": true,
+      "score": 0.857
+    },
+    "provenance": {
+      "platform": "PureData",
+      "generated_at": "2026-02-24T22:42:59.125242",
+      "batch_id": "medical_test_001",
+      "generator": "normal"
+    }
+  },
+  {
+    "id": 10,
+    "word": "AI诊断",
+    "text": "诊断是医生根据患者症状、体征和检查结果判断疾病的过程。现代诊断技术包括影像诊断、实验室检验、基因检测等多种手段。 该概念与手术、药物密切相关。",
+    "category": "医疗",
+    "source": "knowledge_base",
+    "confidence": 0.75,
+    "quality_score": 0.9,
+    "quality_tier": "medium",
+    "timestamp": "2026-02-24T22:42:59.126188",
+    "verified": true,
+    "text_length": 71,
+    "quality_check": {
+      "passed": true,
+      "score": 0.9
+    },
+    "provenance": {
+      "platform": "PureData",
+      "generated_at": "2026-02-24T22:42:59.126189",
+      "batch_id": "medical_test_001",
+      "generator": "normal"
+    }
+  }
+]

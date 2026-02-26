@@ -26,6 +26,7 @@ class ImageProvider(Enum):
 
 
 class AudioProvider(Enum):
+    QWEN = "qwen"
     AZURE = "azure"
     ELEVENLABS = "elevenlabs"
 
@@ -33,11 +34,11 @@ class AudioProvider(Enum):
 @dataclass
 class MultimodalConfig:
     output_type: OutputType = OutputType.TEXT
-    image_provider: ImageProvider = ImageProvider.DALLE
-    audio_provider: AudioProvider = AudioProvider.AZURE
+    image_provider: ImageProvider = ImageProvider.WANXIANG
+    audio_provider: AudioProvider = AudioProvider.QWEN
     image_style: str = "realistic"
-    voice_id: str = "zh-CN-XiaoxiaoNeural"
-    image_size: str = "1024x1024"
+    voice_id: str = "Cherry"
+    image_size: str = "1024*1024"
     audio_rate: float = 1.0
 
 
@@ -97,6 +98,11 @@ class MultimodalConverter:
         self.image_generators = {}
         self.audio_generators = {}
         
+        dashscope_key = self.config.get("dashscope_api_key") or self.config.get("qianwen_api_key")
+        if dashscope_key:
+            self.image_generators[ImageProvider.WANXIANG] = WanxiangImageGenerator(dashscope_key)
+            self.audio_generators[AudioProvider.QWEN] = QwenTTSGenerator(dashscope_key)
+        
         if self.config.get("openai_api_key"):
             self.image_generators[ImageProvider.DALLE] = DALLEImageGenerator(self.config["openai_api_key"])
         
@@ -142,11 +148,19 @@ class MultimodalConverter:
             return {"image_error": f"Image provider {config.image_provider.value} not configured"}
         
         try:
-            result = await generator.generate(
-                prompt=prompt_data["prompt"],
-                negative_prompt=prompt_data["negative_prompt"],
-                size=config.image_size
-            )
+            if config.image_provider == ImageProvider.WANXIANG:
+                result = await generator.generate(
+                    prompt=prompt_data["prompt"],
+                    negative_prompt=prompt_data["negative_prompt"],
+                    size=config.image_size.replace("x", "*"),
+                    style=config.image_style
+                )
+            else:
+                result = await generator.generate(
+                    prompt=prompt_data["prompt"],
+                    negative_prompt=prompt_data["negative_prompt"],
+                    size=config.image_size
+                )
             return {
                 "image_url": result.get("image_url"),
                 "image_prompt": prompt_data["prompt"],
@@ -212,6 +226,131 @@ class DALLEImageGenerator:
             "model": "dall-e-3",
             "size": size
         }
+
+
+class WanxiangImageGenerator:
+    """通义万相图片生成器 - 使用wan2.6-t2i模型"""
+    
+    STYLE_MAP = {
+        "realistic": "写实风格，高清摄影",
+        "anime": "动漫风格，二次元",
+        "oil_painting": "油画风格，艺术画作",
+        "watercolor": "水彩风格，淡雅清新",
+        "3d_render": "3D渲染，立体效果",
+        "minimalist": "极简风格，简洁设计",
+        "cyberpunk": "赛博朋克风格，霓虹灯光",
+        "fantasy": "奇幻风格，梦幻场景"
+    }
+    
+    def __init__(self, api_key: str):
+        self.api_key = api_key
+        self.base_url = "https://dashscope.aliyuncs.com/api/v1/services/aigc/multimodal-generation/generation"
+    
+    async def generate(self, prompt: str, negative_prompt: str = None,
+                       size: str = "1024*1024", style: str = "realistic",
+                       n: int = 1) -> dict:
+        import httpx
+        
+        headers = {
+            "Authorization": f"Bearer {self.api_key}",
+            "Content-Type": "application/json"
+        }
+        
+        style_desc = self.STYLE_MAP.get(style, "")
+        full_prompt = f"{style_desc}，{prompt}" if style_desc else prompt
+        
+        payload = {
+            "model": "wan2.6-t2i",
+            "input": {
+                "messages": [
+                    {
+                        "role": "user",
+                        "content": [
+                            {
+                                "text": full_prompt
+                            }
+                        ]
+                    }
+                ]
+            },
+            "parameters": {
+                "negative_prompt": negative_prompt or "",
+                "prompt_extend": True,
+                "watermark": False,
+                "n": n,
+                "size": size
+            }
+        }
+        
+        async with httpx.AsyncClient(timeout=120.0) as client:
+            response = await client.post(self.base_url, headers=headers, json=payload)
+            result = response.json()
+            
+            if "output" in result and "choices" in result["output"]:
+                choices = result["output"]["choices"]
+                if choices and "message" in choices[0]:
+                    content = choices[0]["message"].get("content", [])
+                    if content and len(content) > 0:
+                        image_url = content[0].get("image", "")
+                        return {
+                            "image_url": image_url,
+                            "model": "wan2.6-t2i",
+                            "size": size
+                        }
+            
+            if "code" in result and result["code"] != "Success":
+                raise Exception(f"通义万相API错误: {result.get('message', result)}")
+            
+            raise Exception(f"通义万相API返回格式异常: {result}")
+
+
+class QwenTTSGenerator:
+    """阿里云千问TTS生成器 - 使用qwen3-tts-flash模型"""
+    
+    VOICES = {
+        "Cherry": "Cherry（女声，活泼可爱）",
+        "Ethan": "Ethan（男声，沉稳大气）",
+        "Luna": "Luna（女声，温柔甜美）",
+        "Marcus": "Marcus（男声，磁性低沉）",
+        "Serena": "Serena（女声，知性优雅）",
+        "Thea": "Thea（女声，清新自然）",
+        "Alex": "Alex（男声，阳光活力）",
+        "Bella": "Bella（女声，俏皮灵动）",
+    }
+    
+    def __init__(self, api_key: str):
+        self.api_key = api_key
+    
+    async def generate(self, text: str, voice_id: str = "Cherry") -> dict:
+        try:
+            import dashscope
+            from dashscope.audio.qwen_tts import SpeechSynthesizer
+        except ImportError:
+            raise Exception("dashscope SDK未安装，请运行: pip install dashscope>=1.23.1")
+        
+        dashscope.api_key = self.api_key
+        
+        response = SpeechSynthesizer.call(
+            model="qwen3-tts-flash",
+            api_key=self.api_key,
+            text=text,
+            voice=voice_id
+        )
+        
+        if response.status_code == 200:
+            audio_data = response.output_audio
+            
+            return {
+                "audio_data": audio_data,
+                "audio_base64": base64.b64encode(audio_data).decode('utf-8'),
+                "duration": round(len(text) / 150 * 60, 2),
+                "voice_id": voice_id,
+                "voice_name": self.VOICES.get(voice_id, voice_id),
+                "model": "qwen3-tts-flash",
+                "format": "mp3"
+            }
+        else:
+            raise Exception(f"千问TTS错误: {response.message}")
 
 
 class AzureTTSGenerator:
@@ -308,6 +447,8 @@ class ElevenLabsTTSGenerator:
 def get_multimodal_converter(config: Dict = None) -> MultimodalConverter:
     if config is None:
         config = {
+            "dashscope_api_key": os.getenv("DASHSCOPE_API_KEY") or os.getenv("QIANWEN_API_KEY"),
+            "qianwen_api_key": os.getenv("QIANWEN_API_KEY") or os.getenv("DASHSCOPE_API_KEY"),
             "openai_api_key": os.getenv("OPENAI_API_KEY"),
             "azure_speech_key": os.getenv("AZURE_SPEECH_KEY"),
             "azure_speech_region": os.getenv("AZURE_SPEECH_REGION", "eastasia"),

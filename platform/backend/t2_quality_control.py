@@ -168,6 +168,7 @@ class DiversityRule(QualityRule):
     description = "内容不重复"
     weight = 1.5
     
+    MAX_SEEN_HASHES = 50000
     seen_hashes = set()
     
     def check(self, item: Dict) -> Tuple[bool, List[str]]:
@@ -176,6 +177,9 @@ class DiversityRule(QualityRule):
         
         if content_hash in self.seen_hashes:
             return False, ["内容重复"]
+        self.seen_hashes.add(content_hash)
+        if len(self.seen_hashes) > self.MAX_SEEN_HASHES:
+            self.seen_hashes = set(list(self.seen_hashes)[-self.MAX_SEEN_HASHES // 2:])
         return True, []
     
     def fix(self, item: Dict) -> Dict:

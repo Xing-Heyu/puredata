@@ -3985,7 +3985,7 @@ class Handler(BaseHTTPRequestHandler):
                 return
             docs = {
                 "title": "PureData 内部API文档",
-                "version": "1.0.0",
+                "version": "2.1.0",
                 "endpoints": [
                     {"method": "POST", "path": "/generate", "desc": "生成数据", "auth": "用户"},
                     {"method": "POST", "path": "/api/keys/create", "desc": "创建API密钥", "auth": "用户"},

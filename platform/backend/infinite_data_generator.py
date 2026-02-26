@@ -150,6 +150,8 @@ class TemplateEngine:
 class HybridGenerator:
     """混合生成器 - 智能选择生成方式"""
     
+    MAX_SEEN_HASHES = 10000
+    
     def __init__(self, config: GenerationConfig = None):
         self.config = config or GenerationConfig()
         self.stats = GenerationStats()
@@ -174,6 +176,8 @@ class HybridGenerator:
             if h in self.seen_hashes:
                 return True
             self.seen_hashes.add(h)
+            if len(self.seen_hashes) > self.MAX_SEEN_HASHES:
+                self.seen_hashes = set(list(self.seen_hashes)[-self.MAX_SEEN_HASHES // 2:])
             return False
     
     def _generate_from_knowledge_base(self, keyword: str, domain: str) -> Optional[str]:

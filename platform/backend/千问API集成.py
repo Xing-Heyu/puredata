@@ -339,8 +339,15 @@ class QwenAPI:
                     result["success"] = True
                     self.cost_controller.record_fallback()
         
+        except (ConnectionError, TimeoutError, OSError) as e:
+            result["error"] = f"网络错误: {e}"
+            if self.config.fallback_to_local:
+                result["fallback"] = True
+                result["response"] = self._local_fallback(prompt)
+                result["success"] = True
+                self.cost_controller.record_fallback()
         except Exception as e:
-            result["error"] = str(e)
+            result["error"] = f"未知错误: {e}"
             if self.config.fallback_to_local:
                 result["fallback"] = True
                 result["response"] = self._local_fallback(prompt)

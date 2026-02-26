@@ -75,19 +75,23 @@ class AdminAuthManager:
             json.dump(self.sessions, f, ensure_ascii=False, indent=2)
     
     def _hash_password(self, password):
-        """密码哈希 - bcrypt优先，SHA256回退"""
-        if BCRYPT_AVAILABLE:
-            return bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt()).decode('utf-8')
-        return hashlib.sha256(password.encode()).hexdigest()
+        """密码哈希 - 强制使用bcrypt"""
+        if not BCRYPT_AVAILABLE:
+            raise RuntimeError("bcrypt库未安装，请运行: pip install bcrypt")
+        return bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt()).decode('utf-8')
     
     def _verify_password(self, password, password_hash):
-        """验证密码 - 支持bcrypt和SHA256"""
-        if BCRYPT_AVAILABLE and password_hash.startswith('$2b$'):
-            try:
-                return bcrypt.checkpw(password.encode('utf-8'), password_hash.encode('utf-8'))
-            except Exception:
-                return False
-        return password_hash == hashlib.sha256(password.encode()).hexdigest()
+        """验证密码 - 强制使用bcrypt，拒绝SHA256等不安全哈希"""
+        if not BCRYPT_AVAILABLE:
+            raise RuntimeError("bcrypt库未安装，请运行: pip install bcrypt")
+        
+        if not password_hash.startswith('$2b$'):
+            return False
+        
+        try:
+            return bcrypt.checkpw(password.encode('utf-8'), password_hash.encode('utf-8'))
+        except (ValueError, TypeError):
+            return False
     
     def _generate_password(self, length=16):
         """生成随机密码"""

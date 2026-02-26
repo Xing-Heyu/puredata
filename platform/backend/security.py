@@ -97,7 +97,13 @@ class SecurityProtocol:
             print(f"[审计日志] 保存失败: {e}")
     
     def _init_secret_key(self):
-        """初始化SECRET_KEY - 持久化存储"""
+        """初始化SECRET_KEY - 优先环境变量，其次文件存储"""
+        env_key = os.environ.get('SECRET_KEY') or os.environ.get('PUREDATA_SECRET_KEY')
+        
+        if env_key:
+            SecurityProtocol._SECRET_KEY = env_key
+            return
+        
         key_file = os.path.join(os.path.dirname(__file__), '.secret_key')
         
         if os.path.exists(key_file):
@@ -280,7 +286,7 @@ class SecurityProtocol:
                 return json.loads(json_str)
             except (ValueError, UnicodeDecodeError, json.JSONDecodeError):
                 return None
-        except Exception:
+        except (ValueError, json.JSONDecodeError, UnicodeDecodeError):
             return None
     
     def _get_or_create_secret_key(self):

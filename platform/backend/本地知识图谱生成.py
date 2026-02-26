@@ -384,7 +384,7 @@ class DualConstraintTaskSynthesizer:
                             result[key] = random.randint(start, end)
                         else:
                             result[key] = value
-                    except:
+                    except (ValueError, IndexError):
                         result[key] = value
                 else:
                     result[key] = value

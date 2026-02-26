@@ -46,7 +46,7 @@ class Config:
         self._config = {
             "app": {
                 "name": "DataGen Pro",
-                "version": "1.0.0",
+                "version": "2.1.0",
                 "debug": self._get_bool("DEBUG", False),
                 "host": self._get("HOST", "0.0.0.0"),
                 "port": self._get_int("PORT", 8000),

@@ -12,9 +12,11 @@ services:
       - ./backend/data:/app/backend/data
       - ./backend/outputs:/app/backend/outputs
       - ./backend/logs:/app/backend/logs
+      - ./backend/backups:/app/backend/backups
     environment:
       - PYTHONUNBUFFERED=1
       - TZ=Asia/Shanghai
+      - DASHSCOPE_API_KEY=${DASHSCOPE_API_KEY:-}
       - QWEN_API_KEY=${QWEN_API_KEY:-}
       - SECRET_KEY=${SECRET_KEY:?SECRET_KEY must be set in production}
     restart: unless-stopped

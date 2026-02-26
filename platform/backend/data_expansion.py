@@ -669,7 +669,7 @@ class DataExpansionEngine:
             
             try:
                 text = template.format(word=keyword, domain=domain)
-            except:
+            except (KeyError, ValueError):
                 text = self.template_expander.generate_dynamic_template(domain, keyword)
             
             text_hash = hashlib.md5(text.encode()).hexdigest()[:8]

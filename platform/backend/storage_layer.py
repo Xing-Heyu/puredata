@@ -104,7 +104,7 @@ class ConnectionPool:
                 return conn
             except sqlite3.Error:
                 return self._create_connection()
-        except Exception:
+        except queue.Empty:
             with self._lock:
                 if self._created < self.pool_size:
                     self._created += 1
@@ -364,7 +364,7 @@ class SQLiteStorage:
                     conn.execute(sql, values + update_values)
                     conn.commit()
                     return True
-                except Exception as e:
+                except sqlite3.Error as e:
                     print(f"[SQLite] set error: {e}")
                     return False
     

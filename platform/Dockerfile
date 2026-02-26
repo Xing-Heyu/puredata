@@ -2,8 +2,8 @@
 FROM python:3.11-slim
 
 LABEL maintainer="PureData Team"
-LABEL version="2.0.0"
-LABEL description="AI Training Data Generation Platform"
+LABEL version="2.1.0"
+LABEL description="AI Training Data Generation Platform - 支持文本/图片/音频多模态生成"
 
 WORKDIR /app
 
@@ -23,7 +23,9 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY backend/ ./backend/
 COPY frontend/ ./frontend/
 
-RUN mkdir -p /app/backend/data /app/backend/logs /app/backend/cache /app/backend/outputs /app/backend/keywords /app/backend/domain_configs /app/backend/domain_templates
+RUN mkdir -p /app/backend/data /app/backend/logs /app/backend/cache /app/backend/outputs \
+    /app/backend/backups /app/backend/images /app/backend/audio \
+    /app/backend/keywords /app/backend/domain_configs /app/backend/domain_templates
 
 EXPOSE 8000
 

@@ -79,7 +79,7 @@ class SmartDiversityEnhancer:
             try:
                 with open(self.cache_file, 'r', encoding='utf-8') as f:
                     return json.load(f)
-            except:
+            except (FileNotFoundError, json.JSONDecodeError, PermissionError, OSError):
                 return {}
         return {}
     
