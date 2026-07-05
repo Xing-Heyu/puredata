@@ -44,7 +44,7 @@ def get_all_specialists() -> dict:
 
 def list_domains() -> list:
     """列出所有支持的领域"""
-    return ["人工智能", "医疗", "金融", "劳动合同", "交通驾驶]
+    return ["人工智能", "医疗", "金融", "劳动合同", "交通驾驶"]
 
 __all__ = [
     "DomainSpecialist",

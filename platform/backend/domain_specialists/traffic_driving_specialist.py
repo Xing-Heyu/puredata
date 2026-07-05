@@ -195,6 +195,39 @@ class TrafficDrivingSpecialist(DomainSpecialist):
             "quality_score": round(random.uniform(0.85, 0.98), 2)
         }
     
+    def _load_knowledge(self) -> Dict[str, Any]:
+        return {
+            "speed_limits": {
+                "城市道路": (0, 80),
+                "高速公路": (60, 120),
+                "山区道路": (20, 60),
+                "乡村道路": (30, 70),
+            },
+            "adas_performance": {
+                "ACC自适应巡航": "保持安全车距",
+                "LKA车道保持": "防止车道偏离",
+                "AEB自动紧急制动": "避免或减轻碰撞",
+                "FCW前向碰撞预警": "提前警告碰撞风险",
+                "LDW车道偏离预警": "检测无意识车道偏离",
+                "BSD盲区监测": "监控后方盲区车辆",
+                "DMS驾驶员监测": "检测驾驶员疲劳状态",
+                "APA自动泊车": "自动完成泊车操作",
+            },
+            "scenario_types": ["emergency", "daily", "adas", "highway", "urban", "mountain", "autonomous"],
+        }
+
+    def _generate_single(self, index: int, quality: str) -> Optional[Dict]:
+        scenario_type = random.choice(self.knowledge.get("scenario_types", ["emergency", "daily", "adas"]))
+        scenario = self.generate_scenario(scenario_type)
+        return {
+            "id": index,
+            "domain": "交通驾驶",
+            "type": scenario_type,
+            "content": scenario.get("content", ""),
+            "entities": scenario.get("entities", {}),
+            "quality_score": scenario.get("quality_score", 0.8),
+        }
+
     def validate_content(self, content: str) -> Dict[str, Any]:
         """验证内容的专业正确性"""
         forbidden_pairs = self._load_forbidden_pairs()
