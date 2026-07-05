@@ -20,13 +20,18 @@ import json
 from pathlib import Path
 from typing import Any, Optional
 
+_BACKEND_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+_DATA_DIR = os.path.join(_BACKEND_DIR, 'data')
+_OUTPUT_DIR = os.path.join(_BACKEND_DIR, 'outputs')
+_LOGS_DIR = os.path.join(_BACKEND_DIR, 'logs')
+
 class Config:
     """配置管理类"""
     
     _instance = None
     _config = {}
     _env_prefix = "DATAGENPRO_"
-    _config_file = "config.json"
+    _config_file = os.path.join(_BACKEND_DIR, 'config.json')
     
     def __new__(cls):
         if cls._instance is None:
@@ -45,8 +50,8 @@ class Config:
     def _load_config(self):
         self._config = {
             "app": {
-                "name": "DataGen Pro",
-                "version": "2.1.0",
+                "name": "PureData",
+                "version": "2.2.0",
                 "debug": self._get_bool("DEBUG", False),
                 "host": self._get("HOST", "0.0.0.0"),
                 "port": self._get_int("PORT", 8000),
@@ -57,7 +62,7 @@ class Config:
                 "password_min_length": self._get_int("PASSWORD_MIN_LENGTH", 6),
             },
             "database": {
-                "url": self._get("DATABASE_URL", "sqlite:///./data/datagenpro.db"),
+                "url": self._get("DATABASE_URL", f"sqlite:///{os.path.join(_DATA_DIR, 'datagenpro.db')}"),
             },
             "redis": {
                 "url": self._get("REDIS_URL", ""),
@@ -69,7 +74,7 @@ class Config:
             },
             "generation": {
                 "max_batch_size": self._get_int("MAX_BATCH_SIZE", 1000),
-                "default_output_dir": self._get("DEFAULT_OUTPUT_DIR", "./outputs"),
+                "default_output_dir": self._get("DEFAULT_OUTPUT_DIR", _OUTPUT_DIR),
                 "max_workers": self._get_int("MAX_WORKERS", 4),
                 "max_retries": self._get_int("MAX_RETRIES", 3),
                 "checkpoint_interval": self._get_int("CHECKPOINT_INTERVAL", 10),
@@ -78,12 +83,14 @@ class Config:
             "quota": {
                 "free_daily": self._get_int("FREE_DAILY_QUOTA", 100),
                 "free_monthly": self._get_int("FREE_MONTHLY_QUOTA", 1000),
-                "vip_daily": self._get_int("VIP_DAILY_QUOTA", 1000),
-                "vip_monthly": self._get_int("VIP_MONTHLY_QUOTA", 10000),
+                "standard_daily": self._get_int("STANDARD_DAILY_QUOTA", 10000),
+                "standard_monthly": self._get_int("STANDARD_MONTHLY_QUOTA", 100000),
+                "premium_daily": self._get_int("PREMIUM_DAILY_QUOTA", 100000),
+                "premium_monthly": self._get_int("PREMIUM_MONTHLY_QUOTA", 1000000),
             },
             "logging": {
                 "level": self._get("LOG_LEVEL", "INFO"),
-                "file": self._get("LOG_FILE", "logs/datagenpro.log"),
+                "file": self._get("LOG_FILE", os.path.join(_LOGS_DIR, 'datagenpro.log')),
             },
         }
     
@@ -175,7 +182,7 @@ class Config:
     
     @property
     def app_name(self) -> str:
-        return self.get("app.name", "DataGen Pro")
+        return self.get("app.name", "PureData")
     
     @property
     def version(self) -> str:
@@ -187,7 +194,7 @@ class Config:
     
     @property
     def database_url(self) -> str:
-        return self.get("database.url", "sqlite:///./data/datagenpro.db")
+        return self.get("database.url", f"sqlite:///{os.path.join(_DATA_DIR, 'datagenpro.db')}")
     
     @property
     def redis_url(self) -> Optional[str]:
@@ -203,7 +210,7 @@ class Config:
     
     @property
     def output_dir(self) -> str:
-        return self.get("generation.default_output_dir", "./outputs")
+        return self.get("generation.default_output_dir", _OUTPUT_DIR)
     
     @property
     def max_workers(self) -> int:

@@ -7,16 +7,12 @@
 
 import functools
 import traceback
-import logging
 from datetime import datetime
 from typing import Callable, Any, Optional, Dict, List
 from enum import Enum
 
-logging.basicConfig(
-    level=logging.INFO,
-    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
-)
-logger = logging.getLogger('DataGenPro')
+from core.logger_impl import get_logger
+logger = get_logger('ErrorHandler')
 
 class ErrorCode(Enum):
     SUCCESS = 0

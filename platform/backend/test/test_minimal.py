@@ -121,17 +121,7 @@ except Exception as e:
     print(f"[FAIL] 验证码系统异常: {e}")
     exit(1)
 
-# ============ 第8步：测试租户系统 ============
-print("\n[8/10] 测试租户系统...")
-
-try:
-    from tenant_manager import tenant_manager, TenantPlan
-    print(f"[OK] 租户系统加载成功")
-except Exception as e:
-    print(f"[FAIL] 租户系统异常: {e}")
-    exit(1)
-
-# ============ 第9步：测试配置系统 ============
+# ============ 第8步：测试配置系统 ============
 print("\n[9/10] 测试配置系统...")
 
 try:
@@ -213,27 +203,6 @@ try:
     print(f"[OK] 任务队列加载成功")
 except Exception as e:
     print(f"[FAIL] 任务队列异常: {e}")
-
-# ============ 额外测试：支付管理 ============
-print("\n[额外6] 测试支付管理...")
-
-try:
-    from payment_manager import PaymentManager
-    pm = PaymentManager()
-    print(f"[OK] 支付管理加载成功")
-except Exception as e:
-    print(f"[FAIL] 支付管理异常: {e}")
-
-# ============ 额外测试：监控服务 ============
-print("\n[额外7] 测试监控服务...")
-
-try:
-    from monitor_service import MonitorService
-    print(f"[OK] 监控服务加载成功")
-except ImportError as e:
-    print(f"[SKIP] 监控服务缺少依赖: {e}")
-except Exception as e:
-    print(f"[FAIL] 监控服务异常: {e}")
 
 # ============ 额外测试：错误处理 ============
 print("\n[额外8] 测试错误处理...")
@@ -447,7 +416,7 @@ except Exception as e:
 print("\n[子目录4] 测试handlers模块...")
 
 try:
-    from handlers import AuthHandler, GenerationHandler
+    from handlers import GenerationHandler
     print(f"[OK] handlers模块加载成功")
 except Exception as e:
     print(f"[FAIL] handlers模块异常: {e}")

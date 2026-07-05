@@ -91,6 +91,7 @@ task_queue.json
 task_states.json
 
 # API and cache
+api_keys.json
 api_stats.json
 api_cost.json
 api_cache.json

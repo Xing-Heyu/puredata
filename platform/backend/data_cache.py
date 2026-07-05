@@ -28,7 +28,7 @@ class DataCache:
     
     def __init__(self):
         self.memory_cache: OrderedDict = OrderedDict()
-        self.lock = threading.Lock()
+        self.lock = threading.RLock()
         self.cache_stats = {
             "hits": 0,
             "misses": 0,

@@ -2,24 +2,19 @@
 # -*- coding: utf-8 -*-
 """
 服务层 - 懒加载入口
-业务服务：用户、认证、任务、租户、支付、监控、备份等
+业务服务：任务、备份等
 
 使用方式：
-    from service import UserService, AuthService, TaskService
+    from service import TaskService
 """
 
 __all__ = [
-    'UserService', 'AuthService', 'TaskService',
-    'TenantService', 'PaymentService', 'MonitorService', 'BackupService',
+    'TaskService',
+    'BackupService',
 ]
 
 _lazy_modules = {
-    'UserService': ('.user_service', 'UserService'),
-    'AuthService': ('.auth_service', 'AuthService'),
     'TaskService': ('.task_service', 'TaskService'),
-    'TenantService': ('.tenant_service', 'TenantService'),
-    'PaymentService': ('.payment_service', 'PaymentService'),
-    'MonitorService': ('.monitor_service', 'MonitorService'),
     'BackupService': ('.backup_service', 'BackupService'),
 }
 

@@ -3,7 +3,7 @@
   "info": {
     "title": "PureData API",
     "description": "AI训练数据生成平台 - 高性能数据生成服务\n\n## 核心功能\n- **多领域数据生成**：人工智能、医疗、金融、劳动合同、法律、教育、电商、科技\n- **质量门控系统**：高质量(≥0.85)、中等质量(0.70-0.85)、低质量(<0.70)\n- **智能去重**：MinHash近似去重\n- **数据血缘追溯**：完整的数据来源追踪\n- **异常检测**：自动检测和修复数据异常\n- **Calibrated Mixup增强**：提升低分样本质量\n\n## 认证方式\n- 用户认证：Bearer Token 或 Cookie\n- 管理员认证：独立的Token系统\n\n## 成本说明\n- 知识库数据：免费\n- API生成数据：约0.3元/百万token（qwen-turbo）",
-    "version": "2.1.0",
+    "version": "2.2.0",
     "contact": {
       "name": "PureData Team",
       "email": "support@puredata.ai"
@@ -45,7 +45,7 @@
                   "type": "object",
                   "properties": {
                     "status": {"type": "string", "example": "ok"},
-                    "version": {"type": "string", "example": "2.1.0"},
+                    "version": {"type": "string", "example": "2.2.0"},
                     "uptime": {"type": "integer", "description": "运行时间(秒)"}
                   }
                 }

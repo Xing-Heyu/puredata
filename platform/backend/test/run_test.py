@@ -8,20 +8,9 @@ print("="*60)
 print("全链路测试 - 生成旅游数据")
 print("="*60)
 
-print("\n[步骤1] 登录")
-login_data = {"username": "test_fullchain", "password": "Test123456"}
-res = requests.post(f"{BASE_URL}/api/login", json=login_data)
-if res.status_code == 200 and res.json().get('success'):
-    token = res.json().get('token')
-    print(f"[OK] 登录成功，Token: {token[:30]}...")
-else:
-    print("[WARN] 登录失败，尝试注册...")
-    token = None
-
-print("\n[步骤2] 生成30条纯净数据")
-headers = {"Authorization": f"Bearer {token}"} if token else {}
+print("\n[步骤1] 生成30条纯净数据")
 payload = {"domain": "旅游", "count": 30, "format": "json", "mode": "clean", "noise_level": 0, "quality_mode": "standard"}
-res = requests.post(f"{BASE_URL}/generate", json=payload, headers=headers)
+res = requests.post(f"{BASE_URL}/generate", json=payload)
 if res.status_code == 200:
     task_id = res.json().get('task_id')
     print(f"[OK] 任务创建成功，Task ID: {task_id}")
@@ -30,7 +19,7 @@ else:
     task_id = None
 
 if task_id:
-    print("\n[步骤3] 轮询任务状态...")
+    print("\n[步骤2] 轮询任务状态...")
     for i in range(60):
         res = requests.get(f"{BASE_URL}/task/{task_id}")
         task = res.json()

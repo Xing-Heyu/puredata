@@ -33,14 +33,7 @@ CONFIG = {
     "cache_db": "cache.db",
     "dedup_db": "dedup.db",
     "output_dir": "./output",
-    "default_format": "json",
-    
-    # 千问API配置
-    "qianwen_api": {
-        "url": "https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions",
-        "model": "qwen-plus",
-        "env_key": "QIANWEN_API_KEY"
-    }
+    "default_format": "json"
 }
 
 # ============ 领域配置 ============
@@ -131,7 +124,7 @@ FREE_APIS = [
     }
 ]
 
-# 第二层：千问API（已配置）
+# 第二层：LLM API（可选，需自行配置 API Key）
 # 第三层：本地生成器
 # 第四层：智能体辅助（在运行时调用）
 
@@ -214,27 +207,58 @@ def call_free_api(word, api_info):
         pass
     return None
 
-# ============ 第二层：千问API ============
+# ============ 第二层：LLM API（可选，需自行配置 API Key）============
 
-def call_qianwen_api(word, domain):
-    """调用千问API"""
-    api_key = os.environ.get(CONFIG["qianwen_api"]["env_key"], '')
+LLM_CONFIG = {
+    "model": "qwen-plus",
+    "api_key_env": "LLM_API_KEY",
+    "base_url_env": "LLM_BASE_URL",
+    "base_url_default": "https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions"
+}
+
+def _load_json_config(config_path="config.json"):
+    """从 config.json 加载 LLM 配置（覆盖默认值）"""
+    try:
+        if os.path.exists(config_path):
+            with open(config_path, 'r', encoding='utf-8') as f:
+                cfg = json.load(f)
+            llm_cfg = cfg.get("llm", {})
+            if llm_cfg.get("model"):
+                LLM_CONFIG["model"] = llm_cfg["model"]
+            if llm_cfg.get("api_key_env"):
+                LLM_CONFIG["api_key_env"] = llm_cfg["api_key_env"]
+            if llm_cfg.get("base_url_env"):
+                LLM_CONFIG["base_url_env"] = llm_cfg["base_url_env"]
+            if llm_cfg.get("base_url_default"):
+                LLM_CONFIG["base_url_default"] = llm_cfg["base_url_default"]
+    except:
+        pass
+
+_load_json_config()
+
+def call_llm_api(word, domain):
+    """调用 LLM API（仅当用户配置了 API Key 时才生效）"""
+    api_key = os.environ.get(LLM_CONFIG["api_key_env"], '')
     if not api_key:
         return None
     
+    base_url = os.environ.get(LLM_CONFIG["base_url_env"], LLM_CONFIG["base_url_default"])
+    model = LLM_CONFIG["model"]
+    
     try:
-        prompt = f"请用一句话解释{domain}领域中'{word}'的含义，不超过50字。"
+        prompt = f"请用一句话解释{domain}领域中'{word}'的含义，不超过50字。只输出解释内容。"
         data = json.dumps({
-            "model": CONFIG["qianwen_api"]["model"],
+            "model": model,
             "messages": [{"role": "user", "content": prompt}]
         }).encode('utf-8')
         
         req = urllib.request.Request(
-            CONFIG["qianwen_api"]["url"],
+            base_url,
             data=data,
             headers={
                 'Authorization': f'Bearer {api_key}',
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'User-Agent': 'Mozilla/5.0'
             }
         )
         
@@ -258,7 +282,7 @@ def local_generator(word, domain):
     ]
     return random.choice(templates)
 
-# ============ 第四层：智能体辅助 ============
+# ============ 第三层：智能体辅助 ============
 
 def agent_assisted_generation(word, domain):
     """智能体辅助生成（预留接口）"""
@@ -299,19 +323,19 @@ def get_definition(word, domain):
             set_cache(word, {"definition": definition}, api["name"])
             return definition, api["name"]
     
-    # 第二层：千问API
-    definition = call_qianwen_api(word, domain)
+    # 第二层：LLM API（可选，需自行配 Key）
+    definition = call_llm_api(word, domain)
     if definition:
-        set_cache(word, {"definition": definition}, "qianwen")
-        return definition, "qianwen"
+        set_cache(word, {"definition": definition}, "llm")
+        return definition, "llm"
     
-    # 第四层：智能体辅助
+    # 第三层：智能体辅助
     definition = agent_assisted_generation(word, domain)
     if definition:
         set_cache(word, {"definition": definition}, "agent")
         return definition, "agent"
     
-    # 第三层：本地生成器
+    # 第四层：本地生成器
     definition = local_generator(word, domain)
     set_cache(word, {"definition": definition}, "local")
     return definition, "local"
@@ -339,7 +363,7 @@ def generate_data(domain, count, format_type="json"):
     print("正在并行获取定义...")
     definitions = get_definition_parallel(keywords, domain, max_workers=10)
     
-    stats = {"free_api": 0, "qianwen": 0, "local": 0, "cache": 0}
+    stats = {"free_api": 0, "local": 0, "cache": 0}
     
     data = []
     per_keyword = max(1, count // len(keywords))
@@ -425,17 +449,6 @@ def main():
     # 初始化
     init_db()
     
-    # 加载环境变量
-    env_path = os.path.join(os.path.dirname(__file__), '.env')
-    if os.path.exists(env_path):
-        with open(env_path, 'r', encoding='utf-8') as f:
-            for line in f:
-                line = line.strip()
-                if line and not line.startswith('#') and '=' in line:
-                    key, value = line.split('=', 1)
-                    if not os.environ.get(key.strip()):
-                        os.environ[key.strip()] = value.strip()
-    
     if args.list_types:
         print("\n可用领域类型:")
         for name, config in DOMAINS.items():
@@ -459,7 +472,8 @@ def main():
         print(f"  缓存条目: {cache_count}")
         print(f"  去重记录: {dedup_count}")
         print(f"  可用领域: {len(DOMAINS)}")
-        print(f"  千问API: {'已配置' if os.environ.get('QIANWEN_API_KEY') else '未配置'}")
+        print(f"  免费API: {len(FREE_APIS)} 个")
+        print(f"  LLM API: {'已配置' if os.environ.get(LLM_CONFIG['api_key_env']) else '未配置 (可选)'}")
         return
     
     if not args.type:

@@ -1,0 +1,148 @@
+{
+    "domain": "交通驾驶",
+    "version": "v1.0",
+    "last_update": "2026-02-27",
+    "description": "交通驾驶场景数据生成配置 - 智能驾驶训练数据",
+    
+    "knowledge": {
+        "突发场景": {
+            "鬼探头": {
+                "correct_rules": [
+                    "描述行人或非机动车突然从盲区冲出的场景",
+                    "包含时间、地点、速度、距离等关键信息",
+                    "描述驾驶员的反应和操作"
+                ],
+                "common_errors": {
+                    "light": ["缺少环境描述"],
+                    "medium": ["反应时间不合理"],
+                    "severe": ["场景逻辑错误"]
+                },
+                "fusion_templates": [
+                    "在{location}行驶时，突然有{object}从{direction}冲出，距离约{distance}米，驾驶员{action}",
+                    "{time}在{road_type}，{speed}km/h行驶，{object}鬼探头式出现，{response}"
+                ]
+            },
+            "紧急刹车": {
+                "correct_rules": [
+                    "描述紧急刹车的触发原因",
+                    "包含刹车距离、速度变化等信息",
+                    "描述周围车辆和行人的反应"
+                ],
+                "fusion_templates": [
+                    "在{location}以{speed}km/h行驶时，发现{hazard}，紧急制动，刹车距离约{distance}米",
+                    "{time}在{road_type}，前车突然{action}，触发AEB系统，{result}"
+                ]
+            },
+            "山洪泥石流": {
+                "correct_rules": [
+                    "描述自然灾害发生的征兆和过程",
+                    "包含逃生路线和避险措施",
+                    "描述车辆和人员的安全状态"
+                ],
+                "fusion_templates": [
+                    "在{mountain_road}行驶时，发现{sign}，{disaster}即将发生，{escape_route}",
+                    "{time}{location}发生{disaster}，车辆{status}，驾驶员{action}"
+                ]
+            }
+        },
+        "驾驶场景": {
+            "城市道路": {
+                "correct_rules": [
+                    "描述城市道路的典型场景",
+                    "包含交通参与者、信号灯、标志等",
+                    "描述驾驶决策和操作"
+                ],
+                "fusion_templates": [
+                    "在{city_area}的{road_type}上，{traffic_condition}，驾驶员{action}",
+                    "{time}经过{intersection_type}，信号灯{status}，{surrounding_vehicles}，{decision}"
+                ]
+            },
+            "高速公路": {
+                "correct_rules": [
+                    "描述高速公路驾驶特点",
+                    "包含车速、车道、服务区等信息",
+                    "描述超车、变道、进出匝道等操作"
+                ],
+                "fusion_templates": [
+                    "在{highway_name}以{speed}km/h行驶，{lane_position}，{traffic_status}",
+                    "{time}从{entry}进入高速，行驶{distance}公里后，在{exit}下高速"
+                ]
+            },
+            "山区道路": {
+                "correct_rules": [
+                    "描述山区道路特点",
+                    "包含弯道、坡度、路况等信息",
+                    "描述特殊天气和路况应对"
+                ],
+                "fusion_templates": [
+                    "在{mountain_area}的{road_type}上，{gradient}坡度，{curve}弯道，{road_condition}",
+                    "{time}行驶在{elevation}海拔山区，{weather}，能见度{visibility}米"
+                ]
+            }
+        },
+        "车辆系统": {
+            "ADAS功能": {
+                "correct_rules": [
+                    "描述ADAS系统的工作原理",
+                    "包含传感器、算法、决策逻辑",
+                    "描述系统响应和人工干预"
+                ],
+                "fusion_templates": [
+                    "{adas_system}检测到{hazard_type}，在{distance}米处触发{action}",
+                    "车辆配备{sensor_list}，{adas_function}在{scenario}下{performance}"
+                ]
+            },
+            "自动驾驶": {
+                "correct_rules": [
+                    "描述自动驾驶系统行为",
+                    "包含感知、决策、控制模块",
+                    "描述人机交互和接管场景"
+                ],
+                "fusion_templates": [
+                    "L{level}自动驾驶在{scenario}下，系统{action}，{confidence}置信度",
+                    "{time}在{location}，自动驾驶系统{decision}，{reason}，驾驶员{response}"
+                ]
+            }
+        }
+    },
+    
+    "domain_border": {
+        "core_domain": ["驾驶场景", "交通安全", "智能驾驶", "车辆系统"],
+        "related_domain": ["交通法规", "汽车工程", "人工智能", "物联网"],
+        "irrelevant_domain": ["医疗诊断", "金融投资", "法律诉讼", "教育教学"],
+        "border_examples": [
+            {
+                "keyword": "碰撞测试",
+                "belongs_to": ["车辆安全测试", "汽车工程"],
+                "not_belongs_to": ["实际驾驶场景"]
+            },
+            {
+                "keyword": "交通法规",
+                "belongs_to": ["驾驶培训", "违章处理"],
+                "not_belongs_to": ["车辆技术细节"]
+            }
+        ]
+    },
+    
+    "terminology": {
+        "传感器": ["摄像头", "激光雷达", "毫米波雷达", "超声波", "IMU", "GPS"],
+        "ADAS": ["ACC", "LKA", "AEB", "FCW", "LDW", "BSD", "TSR", "DMS"],
+        "场景": ["鬼探头", "加塞", "追尾", "闯红灯", "逆行", "违停"],
+        "环境": ["白天", "夜晚", "雨天", "雪天", "雾天", "逆光", "隧道"]
+    },
+    
+    "scenario_templates": {
+        "紧急避险": [
+            "在{location}行驶时，突然发现{hazard}，距离{distance}米，驾驶员紧急{action}，避免了事故",
+            "{time}在{road}，{object}突然{behavior}，触发{adas}系统，车辆自动{response}"
+        ],
+        "日常驾驶": [
+            "{time}从{start}出发，经{route}到达{destination}，全程{distance}公里，耗时{duration}",
+            "在{road_type}行驶，{traffic_condition}，平均车速{speed}km/h，油耗{consumption}L/100km"
+        ],
+        "特殊天气": [
+            "{weather}天气下在{road}行驶，能见度{visibility}米，路面{condition}，车速降至{speed}km/h",
+            "{time}遇到{weather}，开启{light_mode}，{adas_status}，安全行驶至{destination}"
+        ]
+    }
+}

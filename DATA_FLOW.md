@@ -5,37 +5,62 @@
 │                           PureData 数据生成完整流程                               │
 └─────────────────────────────────────────────────────────────────────────────────┘
 
-用户请求 (domain, count, quality_mode)
+用户请求 (domain, count, quality_mode, output_type)
     │
     ▼
 ┌─────────────────────────────────────────────────────────────────────────────────┐
-│  simple_main.py: generate_data_clean()                                          │
-│  入口函数 - 根据质量模式配置流水线                                                 │
+│  simple_main.py: _run_task()                                                  │
+│  统一任务入口 - 根据 output_type 分发到不同生成器                                  │
 └─────────────────────────────────────────────────────────────────────────────────┘
     │
     ▼
 ┌─────────────────────────────────────────────────────────────────────────────────┐
-│  PipelineConfig (质量模式配置)                                                   │
+│  GeneratorRouter (统一生成调度器)                                                │
+│  根据 output_type 分发到对应生成器                                               │
 │                                                                                  │
-│  ┌──────────────┬──────────────┬──────────────┬──────────────┐                  │
-│  │   standard   │    high      │   ultra      │   mixed      │                  │
-│  │   50%高质量  │   80%高质量  │   95%高质量  │   自定义      │                  │
-│  └──────────────┴──────────────┴──────────────┴──────────────┘                  │
-│                                                                                  │
-│  + enable_modules: ["cads", "diversity", ...]  ← 自定义模块启用                  │
-│  + auto_enhance: True                          ← 自动质量提升                    │
+│  ┌──────────────┬──────────────┬──────────────┬──────────────┐                │
+│  │ text         │ knowledge_graph │ event_chain │ literature │                │
+│  │ (原有)       │ (新增)         │ (新增)       │ (新增)     │                │
+│  │              │               │              │            │                │
+│  │ generate_    │ knowledge_    │ event_chain_ │ literature_ │                │
+│  │ data_*()    │ graph_*.py   │ generator.py │ generator.py│                │
+│  └──────────────┴──────────────┴──────────────┴──────────────┘                │
 └─────────────────────────────────────────────────────────────────────────────────┘
     │
     ▼
 ┌─────────────────────────────────────────────────────────────────────────────────┐
-│  HighQualityGenerator (数据生成)                                                 │
-│  ├─ 调用 千问API集成.py (QwenAPI)                                               │
-│  └─ 三层知识来源：知识库 → API → 模板兜底                                         │
+│                           统一质量管道 QualityPipeline                           │
+│                           (所有输出类型都经过此管道)                               │
 └─────────────────────────────────────────────────────────────────────────────────┘
+    │
+    ├──[基本质量管道]──▶ 格式验证 + 长度检查 + 空值检查
+    │                     (所有类型)
+    │
+    ├──[逻辑验证管道]──▶ 根据 output_type 选择验证器
+    │                     │
+    │                     ├── EventChainValidator (事件链)
+    │                     │   ├─ 评级变化一致性
+    │                     │   ├─ 传导方向一致性
+    │                     │   ├─ 结果与影响匹配
+    │                     │   └─ 资金流向与涨跌匹配
+    │                     │
+    │                     ├── KnowledgeGraphValidator (知识图谱)
+    │                     │   ├─ 实体非空检查
+    │                     │   ├─ 关系有效性
+    │                     │   └─ 头尾不相同
+    │                     │
+    │                     └── LiteratureValidator (文献)
+    │                         ├─ 标题非空
+    │                         ├─ 内容长度
+    │                         └─ 章节结构
+    │
+    └──[自动修复]──▶ 检测到逻辑问题自动修复
+                     
+    (文本/图片/音频 额外经过)
     │
     ▼
 ┌─────────────────────────────────────────────────────────────────────────────────┐
-│                           DataQualityPipeline                                    │
+│                           DataQualityPipeline (仅文本)                          │
 │                           数据质量流水线                                          │
 └─────────────────────────────────────────────────────────────────────────────────┘
     │
@@ -97,11 +122,32 @@
     │
     └──[智能增强]──▶ 自动质量提升 [auto_enhance=True时]
                     └─ 检测质量不足时自动启用额外模块
+    
+    (多模态类型额外经过)
     │
+    ▼
+┌─────────────────────────────────────────────────────────────────────────────────┐
+│                           multimodal_converter.py                               │
+│                           多模态转换                                             │
+└─────────────────────────────────────────────────────────────────────────────────┘
+    │
+    ├──[图片生成]──▶ 并发5个, 间隔4秒
+    │                 │
+    │                 └──▶ ImageValidator (千问VL验证)
+    │                     └─ 验证图片是否符合实际
+    │
+    └──[音频生成]──▶ 并发10个, 间隔2秒
+    
     ▼
 ┌─────────────────────────────────────────────────────────────────────────────────┐
 │                           输出数据结构                                           │
 └─────────────────────────────────────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────────────────────────┐
+│                      输出类型对应数据结构                                         │
+└─────────────────────────────────────────────────────────────────────────────────┘
+
+1. 纯文本 (text)
 {
     "id": 1,
     "word": "深度学习",
@@ -109,16 +155,39 @@
     "category": "人工智能",
     "source": "knowledge_base | qianwen_api | template_fallback",
     "quality_score": 0.85,
-    "quality_level": "high_quality",
-    "pipeline_quality_score": 0.88,
-    "pipeline_quality_level": "high_quality",
-    "provenance": {
-        "platform": "PureData",
-        "version": "3.0.0",
-        "quality_mode": "high",
-        "generated_at": "2026-02-22T...",
-        "stages_passed": ["t2_control", "professional_validation", ...]
-    }
+    "quality_level": "high_quality"
+}
+
+2. 知识图谱 (knowledge_graph)
+{
+    "head": "深度学习",
+    "relation": "属于",
+    "tail": "人工智能",
+    "confidence": 0.92,
+    "source": "api_generated"
+}
+
+3. 事件因果链 (event_chain)
+{
+    "chain_id": "金融_ESG→股价_20260301_001",
+    "domain": "金融",
+    "source_event": "监管处罚",
+    "transmission_path": ["ESG评级下调", "机构减持", "股价下跌"],
+    "final_result": "股价持续走弱",
+    "chain": "监管处罚 → ESG评级下调 → 机构减持 → 股价下跌",
+    "confidence": 0.89,
+    "event_type": "ESG事件",
+    "validation": {"passed": true, "issues": []}
+}
+
+4. 专业文献 (literature)
+{
+    "title": "深度学习在图像识别中的应用研究",
+    "domain": "人工智能",
+    "content": "摘要：...",
+    "sections": ["摘要", "引言", "方法", "实验", "结论"],
+    "word_count": 2500,
+    "validation": {"passed": true, "issues": []}
 }
 
 
@@ -145,20 +214,9 @@ DASGen分布对齐        │    ❌    │   ❌   │   ✅   │  ❌   │ d
 本地知识图谱           │    ❌    │   ❌   │   ✅   │  ❌   │ knowledge
 FAC特征覆盖           │    ❌    │   ❌   │   ✅   │  ❌   │ fac
 ─────────────────────┼─────────┼────────┼────────┼───────┼────────────
+逻辑验证管道           │    ✅    │   ✅   │   ✅   │  ✅   │     - (新增)
 目标高质量比例         │   50%   │   80%  │   95%  │  70%  │ 自定义
 最低质量分数           │   0.70  │  0.80  │  0.85  │ 0.75  │ 自定义
-
-
-┌─────────────────────────────────────────────────────────────────────────────────┐
-│                           用户等级与质量模式权限                                   │
-└─────────────────────────────────────────────────────────────────────────────────┘
-
-用户等级     │ 可用质量模式                        │ 套餐价格
-────────────┼────────────────────────────────────┼─────────────────
-FREE        │ standard                           │ 免费（1000条）
-STANDARD    │ standard, high                     │ ¥999/月起
-PREMIUM     │ standard, high, ultra              │ ¥24,999/月起
-ADMIN       │ 全部模式 + enable_modules           │ 管理员
 
 
 ┌─────────────────────────────────────────────────────────────────────────────────┐
@@ -167,18 +225,23 @@ ADMIN       │ 全部模式 + enable_modules           │ 管理员
 
 simple_main.py (主入口)
     │
-    ├──▶ user_system.py (用户系统)
-    ├──▶ tenant_manager.py (租户管理)
-    ├──▶ payment_manager.py (支付管理)
+    ├──▶ GeneratorRouter (统一调度器) [新增]
+    │       │
+    │       ├──▶ generate_data_*() (文本生成)
+    │       │
+    │       ├──▶ knowledge_graph_generator.py (知识图谱) [新增]
+    │       │
+    │       ├──▶ event_chain_generator.py (事件链) [新增]
+    │       │
+    │       └──▶ knowledge_graph_generator.py (文献) [新增]
     │
-    ├──▶ high_quality_generator.py (高质量生成器)
-    │       └──▶ 千问API集成.py (API调用 + 成本控制)
-    │               ├── QwenAPI
-    │               ├── CostController
-    │               ├── ResponseCache
-    │               └── HybridDataGenerator
+    ├──▶ QualityPipeline (统一质量管道) [新增]
+    │       │
+    │       ├──▶ validators/event_chain_validator.py [新增]
+    │       ├──▶ validators/knowledge_graph_validator.py [新增]
+    │       └──▶ validators/literature_validator.py [新增]
     │
-    └──▶ data_quality_pipeline.py (质量流水线)
+    └──▶ data_quality_pipeline.py (质量流水线 - 仅文本)
             │
             ├──▶ filters/quality_gate.py
             ├──▶ filters/deduplication_system.py
@@ -197,4 +260,41 @@ simple_main.py (主入口)
                     ├── 本地知识图谱生成.py
                     ├── FAC特征覆盖合成.py
                     └── 失败数据回收.py
-```
+
+
+┌─────────────────────────────────────────────────────────────────────────────────┐
+│                           新增模块说明                                           │
+└─────────────────────────────────────────────────────────────────────────────────┘
+
+GeneratorRouter (统一生成调度器)
+    职责: 根据 output_type 分发到不同生成器
+    位置: platform/backend/generator_router.py
+
+QualityPipeline (统一质量管道)
+    职责: 整合基本质量验证和逻辑验证
+    位置: platform/backend/quality_pipeline.py
+
+EventChainValidator (事件链验证器)
+    职责: 验证事件链逻辑一致性
+    规则:
+        - 评级变化一致性 (负面事件→评级下调)
+        - 传导方向一致性 (负面→负面结果)
+        - 结果与影响匹配 (下跌vs反弹)
+        - 资金流向与涨跌匹配 (净流入→上涨)
+    位置: platform/backend/validators/event_chain_validator.py
+
+KnowledgeGraphValidator (知识图谱验证器)
+    职责: 验证知识图谱三元组有效性
+    规则:
+        - 实体非空
+        - 关系有效
+        - 头尾不相同
+    位置: platform/backend/validators/knowledge_graph_validator.py
+
+LiteratureValidator (文献验证器)
+    职责: 验证文献完整性
+    规则:
+        - 标题非空
+        - 内容长度≥100字符
+        - 包含必要章节
+    位置: platform/backend/validators/literature_validator.py

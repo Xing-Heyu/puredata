@@ -1,193 +1,195 @@
-# 数据清洗Skill使用指南
+# 垂直领域训练数据生成系统
 
-本指南将帮助您使用「字典核心+合规清洗」数据清洗Skill，实现高效、合规的数据处理。
+开箱即用的训练数据生成工具，帮你快速产出高质量的领域训练语料。
 
-## 功能特点
+## 做什么的？
 
-- **极简、零难度**：以字典/字典列表为唯一数据载体，操作简单
-- **多格式支持**：支持JSON、CSV、文本文件格式
-- **核心清洗功能**：
-  - 去重（移除重复记录）
-  - 去空格（去除字符串前后空格）
-  - 空值处理（统一处理空值）
-  - 日期标准化（将不同格式日期转换为ISO 8601格式）
-  - 字段筛选（只保留指定字段）
-- **合规导向**：不复制原始数据，仅进行加工整理
-- **自动运行**：支持命令行调用，可集成到自动化工作流
+一句话：**输入一个领域名称，输出几百上千条结构化的训练数据。**
 
-## 安装要求
-
-- Python 3.6+
-- 无额外依赖库，仅使用Python标准库
-
-## 使用方法
-
-### 基本用法
-
-```bash
-python main.py -i <输入文件> -o <输出文件> -f <格式> [选项]
-```
-
-### 命令行参数
-
-| 参数 | 简写 | 说明 |
-|------|------|------|
-| --input | -i | 输入文件路径（必填） |
-| --output | -o | 输出文件路径（必填） |
-| --format | -f | 输入文件格式，可选值：json, csv, txt（必填） |
-| --remove-duplicates | -d | 移除重复项 |
-| --trim-spaces | -t | 去除空格 |
-| --handle-null | -n | 处理空值 |
-| --normalize-dates | -nd | 标准化日期格式 |
-| --fields | -fs | 指定需要保留的字段列表 |
-
-### 示例
-
-#### 1. 清洗CSV文件（全功能）
-
-```bash
-python main.py -i example.csv -o cleaned_example.csv -f csv -d -t -n -nd
-```
-
-#### 2. 清洗JSON文件（仅去重和去空格）
-
-```bash
-python main.py -i data.json -o cleaned_data.json -f json -d -t
-```
-
-#### 3. 清洗文本文件（指定保留字段）
-
-```bash
-python main.py -i data.txt -o cleaned_data.txt -f txt -fs name email age
-```
-
-## 文件格式说明
-
-### 1. JSON格式
-
-支持标准JSON格式，可处理字典或字典列表：
+比如你说"人工智能"，它就自动从免费词典 API 查到 "machine learning"、"deep learning" 等术语的定义，然后套上模板生成各种句式变体：
 
 ```json
-// 字典格式
-{
-  "name": "Alice",
-  "age": "25",
-  "email": "alice@example.com"
-}
-
-// 字典列表格式
-[
-  {
-    "name": "Alice",
-    "age": "25",
-    "email": "alice@example.com"
-  },
-  {
-    "name": "Bob",
-    "age": "30",
-    "email": "bob@example.com"
-  }
-]
+{ "word": "machine learning", "text": "Machine learning is a subset of AI that enables systems to learn from experience." }
+{ "word": "machine learning", "text": "The term machine learning refers to a subset of AI that enables systems to learn from experience." }
+{ "word": "deep learning", "text": "Deep learning means a class of ML algorithms using multiple layers to extract features." }
 ```
 
-### 2. CSV格式
+## 哪些场景用得上？
 
-标准CSV格式，第一行为表头：
+| 场景 | 用法 |
+|------|------|
+| **SFT / 指令微调** | 批量生成领域术语的解释语料，喂给模型做微调 |
+| **知识图谱构建** | 按领域生成 `{实体, 定义, 来源}` 三元组 |
+| **RAG 知识库** | 快速搭建垂直领域的 FAQ / 词典库 |
+| **教育教学** | 生成学科术语表、概念解释卡片 |
+| **数据增强** | 已有少量数据时，生成同义变体扩充数据集 |
 
-```csv
-name,age,email
-Alice,25,alice@example.com
-Bob,30,bob@example.com
-```
+## 怎么用？
 
-### 3. 文本格式
-
-每行一条记录，格式为`key1=value1,key2=value2`：
-
-```txt
-name=Alice,age=25,email=alice@example.com
-name=Bob,age=30,email=bob@example.com
-```
-
-## 输出格式
-
-- **JSON**：保持输入的JSON结构，添加`processed_at`字段
-- **CSV**：保持CSV格式，添加`processed_at`列
-- **文本**：保持文本格式，添加`processed_at=时间戳`字段
-
-## 示例
-
-### 输入示例（CSV）
-
-```csv
-name,age,email,date_joined
-Alice, 25, alice@example.com,2023-01-01
-Bob,30,bob@example.com,2023/02/01
-Alice, 25, alice@example.com,2023-01-01
-Charlie,,charlie@example.com,2023年03月01日
-David,35, david@example.com,2023-04-01 10:30:00
-```
-
-### 输出示例（CSV）
-
-```csv
-age,date_joined,email,name,processed_at
-25,2023-01-01T00:00:00,alice@example.com,Alice,2026-02-17T21:00:24.857137
-30,2023-02-01T00:00:00,bob@example.com,Bob,2026-02-17T21:00:24.857475
-,2023-03-01T00:00:00,charlie@example.com,Charlie,2026-02-17T21:00:24.857813
-35,2023-04-01T10:30:00,david@example.com,David,2026-02-17T21:00:24.857980
-```
-
-## 合规说明
-
-- **数据处理原则**：本工具仅对数据进行加工、整理、重构，不复制原始数据
-- **保留内容**：仅保留核心字段与结构，输出全新结构化数据
-- **适用场景**：符合大厂及各类项目的合规需求
-
-## 集成与扩展
-
-### 集成到自动化工作流
+### 1. 列出可用的领域
 
 ```bash
-# 示例：在shell脚本中使用
-python /path/to/data-cleaner/main.py -i input.csv -o output.csv -f csv -d -t -n -nd
-
-# 示例：在Python代码中调用
-from main import main
-import sys
-
-sys.argv = [
-    'main.py',
-    '-i', 'input.csv',
-    '-o', 'output.csv',
-    '-f', 'csv',
-    '-d', '-t', '-n', '-nd'
-]
-main()
+python generate.py --list-types
 ```
 
-### 功能扩展
+输出：
+```
+可用领域类型:
+  - 人工智能: 28 个关键词
+  - 劳动合同: 17 个关键词
+  - 医疗: 15 个关键词
+  - 金融: 15 个关键词
+```
 
-如需扩展功能，可修改以下文件：
+### 2. 生成数据
 
-- `utils/cleaner.py`：添加新的清洗规则
-- `utils/input_handler.py`：支持新的输入格式
-- `utils/output_handler.py`：支持新的输出格式
+```bash
+# 生成 100 条人工智能领域数据，JSON 格式
+python generate.py --type 人工智能 --count 100
 
-## 故障排除
+# 指定输出文件
+python generate.py --type 金融 --count 500 --format csv --output finance_data.csv
 
-### 常见问题
+# 生成文本格式
+python generate.py --type 劳动合同 --count 50 --format txt
+```
 
-1. **文件不存在**：确保输入文件路径正确
-2. **格式错误**：确保输入文件格式符合要求
-3. **编码错误**：确保输入文件使用UTF-8编码
+### 3. 查看系统状态
 
-### 错误信息
+```bash
+python generate.py --stats
+```
 
-- `不支持的数据类型`：输入数据不是字典或字典列表
-- `不支持的文件格式`：指定的文件格式不受支持
-- `文件不存在`：输入文件路径不存在
+## 工作原理
+
+四层数据来源，自动降级兜底：
+
+```
+第一层：免费词典 API（Free Dictionary / Wiktionary）
+   ↓ 失败
+第二层：LLM API（可选，需自行配 Key，支持千问/DeepSeek/OpenAI 等）
+   ↓ 失败或未配置
+第三层：智能体辅助（预留扩展接口）
+   ↓ 失败
+第四层：本地模板生成（100% 可用）
+```
+
+- **缓存机制**：查过的定义存入 SQLite，30 天内无需重复请求
+- **去重**：MD5 哈希去重，不会产出重复数据
+- **并行获取**：ThreadPoolExecutor 并发请求，10 倍加速
+
+> **关于 LLM API**：如果不配置，英文领域靠免费词典已经够用；中文领域建议配一个 Key（千问/DeepSeek 都行），数据质量会明显更好。配置方法见下方"配置 LLM API"。
+
+## 配置 LLM API（可选）
+
+如果你有千问、DeepSeek 或 OpenAI 的 API Key，配一下就能让中文数据质量翻倍。不配也能用，零影响。
+
+### 方式一：环境变量（推荐）
+
+```bash
+# Linux / Mac
+export LLM_API_KEY="你的Key"
+export LLM_BASE_URL="https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions"
+
+# Windows PowerShell
+$env:LLM_API_KEY="你的Key"
+$env:LLM_BASE_URL="https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions"
+```
+
+### 方式二：.env 文件
+
+```bash
+cp .env.example .env
+# 编辑 .env，填入你的 Key
+```
+
+### 支持的接口
+
+任何 OpenAI 兼容 API 都可以，只需设置 `LLM_BASE_URL`：
+
+| 服务 | base_url |
+|------|----------|
+| 阿里百炼（千问） | `https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions` |
+| DeepSeek | `https://api.deepseek.com/v1/chat/completions` |
+| OpenAI | `https://api.openai.com/v1/chat/completions` |
+| 本地 Ollama | `http://localhost:11434/v1/chat/completions` |
+
+模型名可在 [config.json](config.json) 的 `llm.model` 中修改。
+
+## 自定义领域
+
+打开 [generate.py](generate.py)，找到 `DOMAINS` 字典，按格式添加你的领域：
+
+```python
+DOMAINS = {
+    "你的领域": {
+        "keywords": ["术语1", "术语2", "术语3"],
+        "templates": [
+            "{word}是指{definition}。",
+            "关于{word}，你可以理解为{definition}。",
+            "{word}：{definition}"
+        ]
+    }
+}
+```
+
+模板变量：`{word}` = 关键词，`{definition}` = 查到的定义，`{domain}` = 领域名。
+
+## 批量生成
+
+批量处理多个领域：
+
+```bash
+python batch_generator.py --domains 人工智能,医疗,金融 --count 200
+```
+
+或通过配置文件：
+
+```bash
+python batch_generator.py --config batch_config.json
+```
+
+## 附加功能：数据清洗
+
+`main.py` + `utils/` 提供数据清洗工具，支持去重、去空格、空值处理、日期标准化：
+
+```bash
+python main.py -i example.csv -o cleaned.csv -f csv -d -t -n -nd
+```
+
+## 依赖
+
+- Python 3.6+
+- 纯标准库，零额外依赖
+- 免费 API 需要网络连接（失败会自动降级到本地生成）
+
+## 项目结构
+
+```
+├── generate.py           # 核心：训练数据生成 CLI
+├── main.py               # 数据清洗工具
+├── main_v5.py            # v5.0 增强版（模板管理 + 毒性检测）
+├── batch_generator.py    # 批量生成器
+├── batch_config.json     # 批量生成配置示例
+├── config.json           # 全局配置
+├── batch_run.py          # 快速批量运行脚本
+├── quick_test.py         # 快速测试
+├── utils/                # 工具模块
+│   ├── cleaner.py        # 数据清洗规则
+│   ├── data_generator.py # 数据生成核心
+│   ├── dictionary_api.py # 词典 API 封装
+│   ├── domain_manager.py # 领域管理
+│   ├── input_handler.py  # 输入格式处理
+│   ├── output_handler.py # 输出格式处理
+│   └── topic_generator.py
+├── domains/              # 领域配置文件
+├── dicts/                # 字典数据
+├── templates/            # 模板文件
+├── training_data.json    # 示例输出（5 条 demo）
+├── example.csv           # 清洗示例输入
+└── cleaned_example.csv   # 清洗示例输出
+```
 
 ## 许可证
 
-本项目采用MIT许可证，详见LICENSE文件。
+MIT License - 随便用，完全开源。

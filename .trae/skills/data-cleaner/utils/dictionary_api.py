@@ -41,9 +41,7 @@ class DictionaryAPI:
             'example': {
                 'name': '示例字典',
                 'base_url': 'https://api.example.com/dictionary',
-                'params': {
-                    'api_key': 'your_api_key'
-                },
+                'params': {},
                 'headers': {
                     'Content-Type': 'application/json'
                 }

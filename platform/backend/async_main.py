@@ -1,17 +1,39 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-PureData - FastAPI 异步入口
+PureData - FastAPI 异步HTTP服务器（高性能版）
 提供更高性能的异步 HTTP 服务
 
-使用方式:
-    uvicorn async_main:app --host 0.0.0.0 --port 8000 --workers 4
-    
-或直接运行:
-    python async_main.py
+服务类型：
+    异步非阻塞HTTP服务器，基于 FastAPI + uvicorn
 
-同步服务器（原有）
-    python simple_main.py
+适用场景：
+    - 生产环境部署
+    - 高并发请求场景
+    - 需要自动API文档的场景
+    - 需要后台任务处理的场景
+
+启动方式：
+    方式1 - 直接运行：
+        python async_main.py
+    
+    方式2 - uvicorn命令（推荐生产环境）：
+        uvicorn async_main:app --host 0.0.0.0 --port 8000 --workers 4
+    
+    方式3 - 开发模式（热重载）：
+        uvicorn async_main:app --host 0.0.0.0 --port 8000 --reload
+
+访问地址：
+    - 前台：http://localhost:8000
+    - API文档：http://localhost:8000/docs
+    - ReDoc文档：http://localhost:8000/redoc
+
+与同步版本的区别：
+    - 同步版本（simple_main.py）：开发测试、简单部署
+    - 异步版本（async_main.py）：生产环境、高并发场景
+
+依赖安装：
+    pip install fastapi uvicorn python-multipart
 """
 
 import os
@@ -20,29 +42,33 @@ import json
 import asyncio
 import time
 from datetime import datetime
-from typing import Optional, Dict, Any, List
+from typing import Optional, Dict, Any
 from pathlib import Path
 
-try:
-    from fastapi import FastAPI, HTTPException, Depends, BackgroundTasks, Request
-    from fastapi.middleware.cors import CORSMiddleware
-    from fastapi.responses import StreamingResponse, JSONResponse, FileResponse
-    from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
-    from pydantic import BaseModel, Field
-    import uvicorn
-    FASTAPI_AVAILABLE = True
-except ImportError:
-    FASTAPI_AVAILABLE = False
+from core.exception_handler import module_loader
+
+fastapi_module = module_loader.load('fastapi', [
+    'FastAPI', 'HTTPException', 'BackgroundTasks'
+])
+if not fastapi_module:
     print("[ERROR] FastAPI 未安装，请运行: pip install fastapi uvicorn")
     sys.exit(1)
+
+from fastapi import FastAPI, HTTPException, BackgroundTasks
+from fastapi.middleware.cors import CORSMiddleware
+from pydantic import BaseModel, Field
+import uvicorn
 
 BACKEND_DIR = Path(__file__).parent.absolute()
 sys.path.insert(0, str(BACKEND_DIR))
 
+START_TIME = time.time()
+VERSION = "2.2.0"
+
 app = FastAPI(
     title="PureData API",
     description="AI 训练数据生成平台 - 异步版本",
-    version="2.1.0",
+    version="2.2.0",
     docs_url="/docs",
     redoc_url="/redoc"
 )
@@ -55,30 +81,8 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-security = HTTPBearer(auto_error=False)
-
 tasks: Dict[str, Dict] = {}
 task_lock = asyncio.Lock()
-
-user_manager = None
-admin_auth = None
-
-
-def init_modules():
-    global user_manager, admin_auth
-    
-    try:
-        from user_system import UserManager
-        user_manager = UserManager()
-    except Exception as e:
-        print(f"[WARN] 用户系统初始化失败: {e}")
-    
-    try:
-        from 管理员认证 import AdminAuthManager
-        admin_auth = AdminAuthManager()
-    except Exception as e:
-        print(f"[WARN] 管理员认证初始化失败: {e}")
-
 
 class GenerateRequest(BaseModel):
     domain: str = Field(default="人工智能", description="生成领域")
@@ -87,30 +91,8 @@ class GenerateRequest(BaseModel):
     format: str = Field(default="json", description="输出格式")
     callback_url: Optional[str] = Field(default=None, description="回调URL")
 
-
-class LoginRequest(BaseModel):
-    username: str
-    password: str
-
-
-class RegisterRequest(BaseModel):
-    username: str
-    password: str
-    email: str
-
-
-async def get_current_user(credentials: HTTPAuthorizationCredentials = Depends(security)) -> Optional[Dict]:
-    if not credentials or not user_manager:
-        return None
-    
-    token = credentials.credentials
-    user = user_manager.validate_token(token)
-    return user
-
-
 @app.on_event("startup")
 async def startup_event():
-    init_modules()
     print("[OK] PureData 异步服务已启动")
 
 
@@ -123,7 +105,7 @@ async def shutdown_event():
 async def root():
     return {
         "name": "PureData",
-        "version": "2.1.0",
+        "version": "2.2.0",
         "status": "running",
         "docs": "/docs"
     }
@@ -131,10 +113,11 @@ async def root():
 
 @app.get("/health")
 async def health_check():
+    uptime = int(time.time() - START_TIME)
     return {
-        "status": "healthy",
-        "timestamp": datetime.now().isoformat(),
-        "tasks_count": len(tasks)
+        "status": "ok",
+        "version": VERSION,
+        "uptime": uptime
     }
 
 
@@ -166,8 +149,7 @@ async def get_quality_modes():
 @app.post("/generate")
 async def generate_data(
     request: GenerateRequest,
-    background_tasks: BackgroundTasks,
-    user: Optional[Dict] = Depends(get_current_user)
+    background_tasks: BackgroundTasks
 ):
     import secrets
     task_id = secrets.token_urlsafe(16)
@@ -263,63 +245,6 @@ async def get_task_status(task_id: str):
 async def list_tasks():
     async with task_lock:
         return {"tasks": list(tasks.values())}
-
-
-@app.post("/api/user/login")
-async def user_login(request: LoginRequest):
-    if not user_manager:
-        raise HTTPException(status_code=500, detail="用户系统不可用")
-    
-    result = user_manager.login(request.username, request.password)
-    if not result.get("success"):
-        raise HTTPException(status_code=401, detail=result.get("error", "登录失败"))
-    
-    return result
-
-
-@app.post("/api/user/register")
-async def user_register(request: RegisterRequest):
-    if not user_manager:
-        raise HTTPException(status_code=500, detail="用户系统不可用")
-    
-    result = user_manager.register(
-        username=request.username,
-        password=request.password,
-        email=request.email
-    )
-    
-    if not result.get("success"):
-        raise HTTPException(status_code=400, detail=result.get("error", "注册失败"))
-    
-    return result
-
-
-@app.post("/api/admin/login")
-async def admin_login(request: LoginRequest):
-    if not admin_auth:
-        raise HTTPException(status_code=500, detail="管理员系统不可用")
-    
-    result = admin_auth.login(request.username, request.password)
-    if not result.get("success"):
-        raise HTTPException(status_code=401, detail=result.get("error", "登录失败"))
-    
-    return result
-
-
-@app.get("/api/admin/users")
-async def admin_list_users(credentials: HTTPAuthorizationCredentials = Depends(security)):
-    if not admin_auth:
-        raise HTTPException(status_code=500, detail="管理员系统不可用")
-    
-    token = credentials.credentials
-    admin = admin_auth.validate_token(token)
-    if not admin:
-        raise HTTPException(status_code=401, detail="无效的管理员令牌")
-    
-    if not user_manager:
-        return {"users": []}
-    
-    return {"users": user_manager.list_users()}
 
 
 def run_server():

@@ -2,7 +2,7 @@
 FROM python:3.11-slim
 
 LABEL maintainer="PureData Team"
-LABEL version="2.1.0"
+LABEL version="2.2.0"
 LABEL description="AI Training Data Generation Platform - 支持文本/图片/音频多模态生成"
 
 WORKDIR /app

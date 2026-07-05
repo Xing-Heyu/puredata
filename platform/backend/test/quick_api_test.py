@@ -23,17 +23,7 @@ try:
 except Exception as e:
     print(f"[FAIL] 健康检查: {e}")
 
-# 3. 测试登录
-try:
-    res = requests.post(f"{BASE_URL}/api/login", json={
-        "username": "test",
-        "password": "test123"
-    }, timeout=5)
-    print(f"[OK] 登录: {res.status_code}")
-except Exception as e:
-    print(f"[FAIL] 登录: {e}")
-
-# 4. 测试生成数据
+# 3. 测试生成数据
 try:
     res = requests.post(f"{BASE_URL}/generate", json={
         "domain": "劳动合同",
@@ -49,7 +39,7 @@ try:
 except Exception as e:
     print(f"[FAIL] 生成数据: {e}")
 
-# 5. 测试领域列表
+# 4. 测试领域列表
 try:
     res = requests.get(f"{BASE_URL}/domains", timeout=5)
     print(f"[OK] 领域列表: {res.status_code}")
@@ -59,7 +49,7 @@ try:
 except Exception as e:
     print(f"[FAIL] 领域列表: {e}")
 
-# 6. 测试质量模式列表
+# 5. 测试质量模式列表
 try:
     res = requests.get(f"{BASE_URL}/quality_modes", timeout=5)
     print(f"[OK] 质量模式列表: {res.status_code}")

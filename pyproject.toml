@@ -1,0 +1,66 @@
+[project]
+name = "puredata-platform"
+version = "2.2.0"
+description = "AI Training Data Generation Platform"
+requires-python = ">=3.10"
+
+[tool.black]
+line-length = 120
+target-version = ['py310', 'py311']
+exclude = '''
+/(
+    \.git
+    | \.venv
+    | __pycache__
+    | \.eggs
+    | \.tox
+    | build
+    | dist
+)/
+'''
+
+[tool.isort]
+profile = "black"
+line_length = 120
+skip = [".git", ".venv", "__pycache__"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests", "platform/backend/test"]
+python_files = ["test_*.py"]
+python_functions = ["test_*"]
+addopts = "-v --tb=short"
+filterwarnings = [
+    "ignore::DeprecationWarning",
+]
+
+[tool.coverage.run]
+source = ["platform/backend"]
+omit = [
+    "*/test/*",
+    "*/tests/*",
+    "*/__pycache__/*",
+    "*/venv/*",
+]
+branch = true
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "def __repr__",
+    "raise AssertionError",
+    "raise NotImplementedError",
+    "if __name__ == .__main__.:",
+    "if TYPE_CHECKING:",
+]
+fail_under = 0
+show_missing = true
+
+[tool.coverage.html]
+directory = "htmlcov"
+
+[tool.coverage.xml]
+output = "coverage.xml"
+
+[tool.flake8]
+max-line-length = 120
+exclude = [".git", "__pycache__", "venv", ".venv", "build", "dist"]

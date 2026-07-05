@@ -21,6 +21,11 @@ from dataclasses import dataclass, field
 from datetime import datetime
 from collections import defaultdict
 import math
+import urllib.request
+import urllib.parse
+import urllib.error
+import ssl
+import re
 
 
 @dataclass
@@ -731,6 +736,275 @@ class ZeroCostDataGenerator:
         }
 
 
+class KGRepoSearch:
+    """
+    联网搜索开源可商用知识图谱库 - 可选功能
+    
+    优先联网搜索，搜索失败则使用内置推荐列表。
+    不影响核心离线生成功能。
+    """
+    
+    # 内置：已知的开源可商用知识图谱库（许可证均为 Apache 2.0 / MIT / BSD 等宽松协议）
+    BUILTIN_KG_REPOS = [
+        {
+            "name": "Neo4j Community Edition",
+            "url": "https://github.com/neo4j/neo4j",
+            "license": "GPLv3 (Community), 商用需企业版",
+            "language": "Java",
+            "description": "最流行的图数据库，Cypher查询语言，社区版可免费用于非GPL项目",
+            "stars": "13k+",
+            "commercial_friendly": "conditional"
+        },
+        {
+            "name": "JanusGraph",
+            "url": "https://github.com/JanusGraph/janusgraph",
+            "license": "Apache 2.0",
+            "language": "Java",
+            "description": "Linux基金会下的分布式图数据库，支持HBase/Cassandra/BerkeleyDB后端",
+            "stars": "5k+",
+            "commercial_friendly": True
+        },
+        {
+            "name": "ArangoDB",
+            "url": "https://github.com/arangodb/arangodb",
+            "license": "Apache 2.0 (Community)",
+            "language": "C++",
+            "description": "多模型数据库（图+文档+键值），AQL查询语言",
+            "stars": "14k+",
+            "commercial_friendly": True
+        },
+        {
+            "name": "Dgraph",
+            "url": "https://github.com/dgraph-io/dgraph",
+            "license": "Apache 2.0",
+            "language": "Go",
+            "description": "原生GraphQL图数据库，分布式、高性能、支持ACID事务",
+            "stars": "20k+",
+            "commercial_friendly": True
+        },
+        {
+            "name": "NebulaGraph",
+            "url": "https://github.com/vesoft-inc/nebula",
+            "license": "Apache 2.0",
+            "language": "C++",
+            "description": "国产开源的分布式图数据库，高性能、水平扩展，支持openCypher",
+            "stars": "10k+",
+            "commercial_friendly": True
+        },
+        {
+            "name": "Apache TinkerPop / Gremlin",
+            "url": "https://github.com/apache/tinkerpop",
+            "license": "Apache 2.0",
+            "language": "Java",
+            "description": "图计算框架标准，Gremlin图遍历语言，生态广泛",
+            "stars": "2k+",
+            "commercial_friendly": True
+        },
+        {
+            "name": "NetworkX",
+            "url": "https://github.com/networkx/networkx",
+            "license": "BSD-3-Clause",
+            "language": "Python",
+            "description": "Python图分析库，轻量级，适合研究和原型开发",
+            "stars": "15k+",
+            "commercial_friendly": True
+        },
+        {
+            "name": "PyTorch Geometric (PyG)",
+            "url": "https://github.com/pyg-team/pytorch_geometric",
+            "license": "MIT",
+            "language": "Python",
+            "description": "图神经网络框架，基于PyTorch，适合GNN研究和应用",
+            "stars": "22k+",
+            "commercial_friendly": True
+        },
+        {
+            "name": "igraph",
+            "url": "https://github.com/igraph/igraph",
+            "license": "GPLv2",
+            "language": "C / R / Python",
+            "description": "高效的图分析库，支持大规模网络分析",
+            "stars": "1k+",
+            "commercial_friendly": "conditional"
+        },
+        {
+            "name": "OrientDB",
+            "url": "https://github.com/orientechnologies/orientdb",
+            "license": "Apache 2.0",
+            "language": "Java",
+            "description": "多模型数据库，图+文档，支持SQL扩展语法",
+            "stars": "4k+",
+            "commercial_friendly": True
+        },
+    ]
+    
+    @staticmethod
+    def _try_web_search(query: str, timeout: float = 3.0) -> Optional[str]:
+        """
+        尝试联网搜索（使用 DuckDuckGo Lite，无需API key）
+        失败返回 None，不影响主流程
+        """
+        try:
+            encoded_query = urllib.parse.quote(query)
+            url = f"https://lite.duckduckgo.com/lite/?q={encoded_query}"
+            
+            # 忽略 SSL 验证问题（内网环境兼容）
+            ctx = ssl.create_default_context()
+            
+            req = urllib.request.Request(
+                url,
+                headers={
+                    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
+                }
+            )
+            
+            with urllib.request.urlopen(req, timeout=timeout, context=ctx) as resp:
+                html = resp.read().decode("utf-8", errors="ignore")
+                return html
+        except Exception:
+            return None
+    
+    @staticmethod
+    def _parse_duckduckgo_results(html: str, max_results: int = 10) -> List[Dict]:
+        """解析 DuckDuckGo Lite 搜索结果"""
+        results = []
+        
+        # 提取链接和标题
+        link_pattern = re.compile(
+            r'<a[^>]*class="result-link"[^>]*href="([^"]*)"[^>]*>(.*?)</a>',
+            re.DOTALL
+        )
+        snippet_pattern = re.compile(
+            r'<td[^>]*class="result-snippet"[^>]*>(.*?)</td>',
+            re.DOTALL
+        )
+        
+        links = link_pattern.findall(html)
+        snippets = snippet_pattern.findall(html)
+        
+        for i, (href, title) in enumerate(links[:max_results]):
+            title_clean = re.sub(r'<[^>]+>', '', title).strip()
+            snippet_clean = ""
+            if i < len(snippets):
+                snippet_clean = re.sub(r'<[^>]+>', '', snippets[i]).strip()
+            
+            results.append({
+                "title": title_clean,
+                "url": href,
+                "snippet": snippet_clean[:300]
+            })
+        
+        return results
+    
+    @classmethod
+    def search_kg_libraries(cls, use_web: bool = True, timeout: float = 3.0) -> Dict:
+        """
+        搜索开源可商用的知识图谱库
+        
+        Args:
+            use_web: 是否尝试联网搜索
+            timeout: 联网超时秒数
+        
+        Returns:
+            {"web_results": [...], "builtin_results": [...], "source": "web"|"builtin"}
+        """
+        result = {
+            "web_results": [],
+            "builtin_results": cls.BUILTIN_KG_REPOS,
+            "source": "builtin"
+        }
+        
+        if use_web:
+            queries = [
+                "open source knowledge graph database commercial Apache license",
+                "开源知识图谱 图数据库 可商用 Apache",
+            ]
+            
+            all_web = []
+            for query in queries:
+                html = cls._try_web_search(query, timeout=timeout)
+                if html:
+                    parsed = cls._parse_duckduckgo_results(html, max_results=5)
+                    all_web.extend(parsed)
+            
+            if all_web:
+                # 去重
+                seen = set()
+                unique = []
+                for item in all_web:
+                    if item["url"] not in seen:
+                        seen.add(item["url"])
+                        unique.append(item)
+                
+                result["web_results"] = unique
+                result["source"] = "web"
+        
+        return result
+    
+    @classmethod
+    def recommend(cls, use_web: bool = True) -> List[Dict]:
+        """
+        推荐最适合商用的知识图谱库
+        联网获取的排在前面，内置列表作为补充
+        """
+        search_result = cls.search_kg_libraries(use_web=use_web)
+        
+        recommendations = []
+        
+        # 联网结果
+        if search_result["web_results"]:
+            for item in search_result["web_results"]:
+                recommendations.append({
+                    "name": item["title"],
+                    "url": item["url"],
+                    "description": item["snippet"],
+                    "source": "web",
+                    "commercial_friendly": "需自行验证许可证"
+                })
+        
+        # 内置推荐
+        for repo in search_result["builtin_results"]:
+            repo["source"] = "builtin"
+            recommendations.append(repo)
+        
+        return recommendations
+    
+    @classmethod
+    def print_recommendations(cls, use_web: bool = True):
+        """打印推荐列表"""
+        print("\n" + "=" * 60)
+        print("开源可商用知识图谱库推荐")
+        print("=" * 60)
+        
+        recs = cls.recommend(use_web=use_web)
+        
+        web_count = sum(1 for r in recs if r.get("source") == "web")
+        builtin_count = sum(1 for r in recs if r.get("source") == "builtin")
+        
+        print(f"\n  联网搜索: {web_count} 条 | 内置推荐: {builtin_count} 条\n")
+        
+        for i, repo in enumerate(recs, 1):
+            source_tag = "[网]" if repo.get("source") == "web" else "[内置]"
+            name = repo.get("name", "未知")
+            license_info = repo.get("license", "")
+            desc = repo.get("description", "")
+            url = repo.get("url", "")
+            lang = repo.get("language", "")
+            
+            print(f"  {i}. {source_tag} {name}")
+            if lang:
+                print(f"     语言: {lang}")
+            if license_info:
+                print(f"     许可证: {license_info}")
+            if desc:
+                print(f"     简介: {desc}")
+            if url:
+                print(f"     链接: {url}")
+            print()
+        
+        print("=" * 60)
+
+
 if __name__ == "__main__":
     print("=" * 60)
     print("本地知识图谱+任务合成测试 - REDSearcher")
@@ -771,6 +1045,13 @@ if __name__ == "__main__":
         unexpected = item.get('unexpected') or {}
         unexpected_type = unexpected.get('type', '无') if isinstance(unexpected, dict) else '无'
         print(f"  [{item['action']}] -> {item['target']} (意外: {unexpected_type})")
+    
+    print("\n[6] 联网搜索开源知识图谱库（可选）:")
+    try:
+        KGRepoSearch.print_recommendations(use_web=True)
+    except Exception as e:
+        print(f"  联网搜索跳过 ({e})，使用内置推荐:")
+        KGRepoSearch.print_recommendations(use_web=False)
     
     print("\n" + "=" * 60)
     print("测试完成! 完全离线，零API成本")

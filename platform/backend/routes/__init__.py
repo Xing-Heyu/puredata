@@ -4,25 +4,19 @@
 """
 
 from .generate_routes import handle_generate_routes
-from .user_routes import handle_user_routes
-from .admin_routes import handle_admin_routes
-from .payment_routes import handle_payment_request
-from .monitor_routes import handle_monitor_request
 from .cache_routes import handle_cache_request
 from .static_routes import handle_static_routes
-from .analytics_routes import handle_analytics_routes
-from .risk_routes import handle_risk_routes
+from .download_routes import handle_download_routes
+from .batch_routes import handle_batch_routes
+from .academic_routes import handle_academic_routes
 
 __all__ = [
     'handle_generate_routes',
-    'handle_user_routes', 
-    'handle_admin_routes',
-    'handle_payment_request',
-    'handle_monitor_request',
     'handle_cache_request',
     'handle_static_routes',
-    'handle_analytics_routes',
-    'handle_risk_routes',
+    'handle_download_routes',
+    'handle_batch_routes',
+    'handle_academic_routes',
     'handle_all_routes',
     'handle_all_get_routes',
     'handle_all_post_routes'
@@ -35,12 +29,9 @@ def handle_all_get_routes(handler, path, context):
     handlers = [
         lambda h, p, m, b, c: handle_static_routes(h, p, c),
         handle_generate_routes,
-        handle_user_routes,
-        handle_admin_routes,
-        handle_monitor_request,
         handle_cache_request,
-        handle_analytics_routes,
-        handle_risk_routes,
+        lambda h, p, m, b, c: handle_download_routes(h, p, c),
+        lambda h, p, m, b, c: handle_academic_routes(h, p, c),
     ]
     
     for handle_func in handlers:
@@ -58,13 +49,8 @@ def handle_all_post_routes(handler, path, body, context):
     
     handlers = [
         ('generate', handle_generate_routes),
-        ('user', handle_user_routes),
-        ('admin', handle_admin_routes),
-        ('payment', handle_payment_request),
-        ('monitor', handle_monitor_request),
         ('cache', handle_cache_request),
-        ('analytics', handle_analytics_routes),
-        ('risk', handle_risk_routes),
+        ('batch', lambda h, p, m, b, c: handle_batch_routes(h, p, c)),
     ]
     
     for name, handle_func in handlers:

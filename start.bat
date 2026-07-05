@@ -1,23 +1,33 @@
 @echo off
 chcp 65001 >nul
-title PureData
+title PureData - AI Data Generation Platform
 
 cls
-echo ================================================
-echo PureData 数据生成平台
-echo ================================================
 echo.
-echo 访问: http://localhost:8000
-echo 账号: admin / admin123
+echo ================================================================
+echo          PureData - AI Data Generation Platform
+echo                       v2.2.0
+echo ================================================================
 echo.
-echo ================================================
+echo   Frontend: http://localhost:8000
+echo   Backend:  http://localhost:8000/admin
+echo   Account:  admin / PureData@2026
+echo.
+echo ================================================================
 echo.
 
 cd /d "%~dp0platform\backend"
+
+echo [%time%] Starting server...
+echo.
+
 python simple_main.py
 
 if %errorlevel% neq 0 (
     echo.
-    echo 启动失败，请检查错误信息
+    echo ================================================================
+    echo [ERROR] Startup failed, please check the error message
+    echo ================================================================
+    echo.
     pause
 )

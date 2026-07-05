@@ -20,7 +20,7 @@ def main():
     """主函数"""
     import argparse
     
-    parser = argparse.ArgumentParser(description='DataGen Pro - AI训练数据生成器')
+    parser = argparse.ArgumentParser(description='PureData - AI训练数据生成器')
     parser.add_argument('--domain', '-d', type=str, default='人工智能',
                         choices=list(DOMAINS.keys()), help='领域')
     parser.add_argument('--count', '-c', type=int, default=100, help='生成数量')
@@ -33,7 +33,7 @@ def main():
     args = parser.parse_args()
     
     if args.server:
-        print(f"[DataGen Pro] 启动HTTP服务: http://0.0.0.0:{args.port}")
+        print(f"[PureData] 启动HTTP服务: http://0.0.0.0:{args.port}")
         import simple_main
         simple_main.main()
     else:
@@ -41,7 +41,7 @@ def main():
         import json
         from datetime import datetime
         
-        print(f"[DataGen Pro] 开始生成数据")
+        print(f"[PureData] 开始生成数据")
         print(f"  领域: {args.domain}")
         print(f"  数量: {args.count}")
         print(f"  质量: {args.quality}")
@@ -54,10 +54,10 @@ def main():
             output_file = os.path.join(args.output, f"{args.domain}_{task_id}.json")
             with open(output_file, 'w', encoding='utf-8') as f:
                 json.dump(result, f, ensure_ascii=False, indent=2)
-            print(f"[DataGen Pro] 生成完成: {len(result)}条数据")
-            print(f"[DataGen Pro] 输出文件: {output_file}")
+            print(f"[PureData] 生成完成: {len(result)}条数据")
+            print(f"[PureData] 输出文件: {output_file}")
         else:
-            print("[DataGen Pro] 生成失败")
+            print("[PureData] 生成失败")
 
 if __name__ == "__main__":
     main()

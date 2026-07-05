@@ -6,11 +6,7 @@ def handle_cache_request(handler, path, method, body, context):
     """处理缓存相关请求"""
     import json
     
-    admin_auth = context.get('admin_auth')
     get_data_cache = context.get('get_data_cache')
-    
-    def _is_admin(token):
-        return admin_auth.validate_token(token) is not None if admin_auth else False
     
     if path == '/api/cache/stats':
         cache = get_data_cache()
@@ -22,20 +18,12 @@ def handle_cache_request(handler, path, method, body, context):
         return True
     
     elif path == '/api/cache/clear':
-        token = handler._get_token_from_request()
-        if not _is_admin(token):
-            handler._send_json(403, {"success": False, "error": "权限不足"})
-            return True
         cache = get_data_cache()
         count = cache.clear_all() if cache else 0
         handler._send_json(200, {"success": True, "cleared": count})
         return True
     
     elif path == '/api/core_cache/stats':
-        token = handler._get_token_from_request()
-        if not _is_admin(token):
-            handler._send_json(403, {"success": False, "error": "权限不足"})
-            return True
         try:
             from core.cache_impl import cache_manager, template_cache, domain_cache, keyword_cache, api_cache
             stats = {
@@ -50,10 +38,6 @@ def handle_cache_request(handler, path, method, body, context):
         return True
     
     elif path == '/api/core_cache/invalidate':
-        token = handler._get_token_from_request()
-        if not _is_admin(token):
-            handler._send_json(403, {"success": False, "error": "权限不足"})
-            return True
         try:
             domain = body.get('domain')
             cache_type = body.get('cache_type')

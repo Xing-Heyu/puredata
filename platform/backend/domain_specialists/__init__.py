@@ -3,7 +3,7 @@
 """
 领域专精化模块
 每个垂直领域的专业数据生成器
-只保留核心领域：人工智能、医疗、金融、劳动合同
+支持领域：人工智能、医疗、金融、劳动合同、交通驾驶
 """
 
 from .base_specialist import DomainSpecialist
@@ -11,16 +11,24 @@ from .ai_specialist import AISpecialist
 from .labor_specialist import LaborSpecialist
 from .medical_specialist import MedicalSpecialist
 from .finance_specialist import FinanceSpecialist
+from .traffic_driving_specialist import TrafficDrivingSpecialist
+from .ecommerce_specialist import EcommerceSpecialist
+from .education_specialist import EducationSpecialist
+from .legal_specialist import LegalSpecialist
+from .tech_specialist import TechSpecialist
 
 SPECIALISTS = {
     "人工智能": AISpecialist,
     "ai": AISpecialist,
-    "劳动合同": LaborSpecialist,
-    "labor": LaborSpecialist,
     "医疗": MedicalSpecialist,
     "medical": MedicalSpecialist,
     "金融": FinanceSpecialist,
     "finance": FinanceSpecialist,
+    "劳动合同": LaborSpecialist,
+    "labor": LaborSpecialist,
+    "交通驾驶": TrafficDrivingSpecialist,
+    "traffic": TrafficDrivingSpecialist,
+    "driving": TrafficDrivingSpecialist,
 }
 
 def get_specialist(domain: str) -> DomainSpecialist:
@@ -36,7 +44,7 @@ def get_all_specialists() -> dict:
 
 def list_domains() -> list:
     """列出所有支持的领域"""
-    return ["人工智能", "医疗", "金融", "劳动合同"]
+    return ["人工智能", "医疗", "金融", "劳动合同", "交通驾驶]
 
 __all__ = [
     "DomainSpecialist",
@@ -44,6 +52,7 @@ __all__ = [
     "LaborSpecialist",
     "MedicalSpecialist",
     "FinanceSpecialist",
+    "TrafficDrivingSpecialist",
     "get_specialist",
     "get_all_specialists",
     "list_domains",

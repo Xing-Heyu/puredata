@@ -3,10 +3,13 @@
   "synonym_path": "./synonyms.json",
   "template_path": "./templates.json",
   "fuzzy_threshold": 80,
-  "qianwen": {
+  "llm": {
+    "enabled": true,
+    "provider": "openai_compatible",
     "model": "qwen-plus",
-    "api_key_env": "QIANWEN_API_KEY",
-    "base_url": "https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions"
+    "api_key_env": "LLM_API_KEY",
+    "base_url_env": "LLM_BASE_URL",
+    "base_url_default": "https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions"
   },
   "cache_enabled": true,
   "cache_expire_days": 30,

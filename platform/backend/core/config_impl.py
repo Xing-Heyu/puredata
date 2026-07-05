@@ -9,13 +9,17 @@ import os
 import json
 from typing import Any, Optional
 
+_BACKEND_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+_DATA_DIR = os.path.join(_BACKEND_DIR, 'data')
+_OUTPUT_DIR = os.path.join(_BACKEND_DIR, 'outputs')
+
 class Config:
     """配置管理类"""
     
     _instance = None
     _config = {}
     _env_prefix = "DATAGENPRO_"
-    _config_file = "config.json"
+    _config_file = os.path.join(_BACKEND_DIR, 'config.json')
     
     def __new__(cls):
         if cls._instance is None:
@@ -34,8 +38,8 @@ class Config:
     def _load_config(self):
         self._config = {
             "app": {
-                "name": "DataGen Pro",
-                "version": "2.1.0",
+                "name": "PureData",
+                "version": "2.2.0",
                 "debug": self._get_bool("DEBUG", False),
                 "host": self._get("HOST", "0.0.0.0"),
                 "port": self._get_int("PORT", 8000),
@@ -45,7 +49,7 @@ class Config:
                 "token_expire_hours": self._get_int("TOKEN_EXPIRE_HOURS", 24),
             },
             "database": {
-                "url": self._get("DATABASE_URL", "sqlite:///./data/datagenpro.db"),
+                "url": self._get("DATABASE_URL", f"sqlite:///{os.path.join(_DATA_DIR, 'datagenpro.db')}"),
             },
             "redis": {
                 "url": self._get("REDIS_URL", ""),
@@ -56,7 +60,7 @@ class Config:
             },
             "generation": {
                 "max_batch_size": self._get_int("MAX_BATCH_SIZE", 1000),
-                "default_output_dir": self._get("DEFAULT_OUTPUT_DIR", "./outputs"),
+                "default_output_dir": self._get("DEFAULT_OUTPUT_DIR", _OUTPUT_DIR),
                 "max_workers": self._get_int("MAX_WORKERS", 4),
                 "max_retries": self._get_int("MAX_RETRIES", 3),
             },

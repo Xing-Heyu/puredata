@@ -1,10 +1,9 @@
-# DataGen Pro - API文档
+# PureData - API文档
 
 ## 基础信息
 
 - **基础URL**: `http://localhost:8000`
 - **内容类型**: `application/json`
-- **认证方式**: Bearer Token（登录后获取）
 
 ---
 
@@ -110,185 +109,6 @@
 
 ---
 
-## 用户API
-
-### 用户注册
-
-**POST** `/api/register`
-
-**请求体**:
-```json
-{
-    "username": "user123",
-    "email": "user@example.com",
-    "password": "Password123"
-}
-```
-
-**注意**：密码需包含大小写字母和数字，至少8位。
-
----
-
-### 用户登录
-
-**POST** `/api/login`
-
-**请求体**:
-```json
-{
-    "username": "user123",
-    "password": "Password123"
-}
-```
-
-**响应**:
-```json
-{
-    "token": "eyJhbGciOiJIUzI1NiIs...",
-    "user": {
-        "id": "user_1",
-        "username": "user123",
-        "role": "user"
-    }
-}
-```
-
----
-
-### 密码重置
-
-**POST** `/api/password/reset`
-
-**请求体**:
-```json
-{
-    "email": "user@example.com",
-    "code": "123456",
-    "new_password": "NewPassword123"
-}
-```
-
-**响应**:
-```json
-{
-    "success": true,
-    "message": "密码重置成功，请重新登录"
-}
-```
-
----
-
-### 发送验证码
-
-**POST** `/api/otp/send`
-
-**请求体**:
-```json
-{
-    "target": "user@example.com",
-    "type": "email"
-}
-```
-
-**响应**:
-```json
-{
-    "success": true,
-    "message": "验证码已发送"
-}
-```
-
----
-
-### 获取用户信息
-
-**GET** `/api/user/info`
-
-**请求头**: `Authorization: Bearer {token}`
-
-**响应**:
-```json
-{
-    "username": "user123",
-    "email": "user@example.com",
-    "role": "user",
-    "quota": {
-        "daily": 100,
-        "monthly": 1000,
-        "used_daily": 10,
-        "used_monthly": 100
-    }
-}
-```
-
----
-
-## 管理员API
-
-### 管理员登录
-
-**POST** `/api/admin/login`
-
-**请求体**:
-```json
-{
-    "username": "admin",
-    "password": "AdminPassword123"
-}
-```
-
-**响应**:
-```json
-{
-    "success": true,
-    "token": "admin_token_xxx"
-}
-```
-
----
-
-### 获取用户列表
-
-**GET** `/api/admin/users`
-
-**请求头**: `Authorization: Bearer {admin_token}`
-
-**响应**:
-```json
-{
-    "users": [
-        {
-            "username": "user1",
-            "email": "user1@example.com",
-            "role": "user",
-            "created_at": "2025-01-01T00:00:00"
-        }
-    ]
-}
-```
-
----
-
-### 更新用户角色
-
-**POST** `/api/admin/users/update`
-
-**请求头**: `Authorization: Bearer {admin_token}`
-
-**请求体**:
-```json
-{
-    "username": "user1",
-    "updates": {
-        "role": "premium"
-    }
-}
-```
-
-**注意**: 所有管理员POST操作需要CSRF Token，通过请求体 `_csrf` 或请求头 `X-CSRF-Token` 传递。
-
----
-
 ## 健康检查
 
 ### 服务状态
@@ -299,8 +119,112 @@
 ```json
 {
     "status": "ok",
-    "version": "2.0.0",
+    "version": "1.0.0",
     "uptime": 3600
+}
+```
+
+---
+
+## 下载API
+
+### 下载文件
+
+**GET** `/download/{filename}`
+
+**说明**: 下载生成的数据文件。
+
+**响应**: 文件流
+
+---
+
+## 批量任务API
+
+### 流式下载生成
+
+**POST** `/api/generate/download`
+
+**请求体**:
+```json
+{
+    "domain": "人工智能",
+    "count": 10000,
+    "format": "jsonl",
+    "quality_mode": "standard"
+}
+```
+
+**响应**:
+```json
+{
+    "success": true,
+    "task_id": "abc123",
+    "message": "已开始生成 10000 条数据，完成后可直接下载"
+}
+```
+
+---
+
+### 批量生成任务
+
+**POST** `/api/batch/generate`
+
+**请求体**:
+```json
+{
+    "tasks": [
+        {"domain": "人工智能", "count": 100},
+        {"domain": "医疗", "count": 200}
+    ]
+}
+```
+
+**响应**:
+```json
+{
+    "success": true,
+    "results": [
+        {"success": true, "task_id": "task_1"},
+        {"success": true, "task_id": "task_2"}
+    ],
+    "total": 2
+}
+```
+
+---
+
+## 学术验证API
+
+### 获取学术验证状态
+
+**GET** `/api/academic_validation`
+
+**响应**:
+```json
+{
+    "success": true,
+    "status": "active",
+    "papers_count": 10
+}
+```
+
+---
+
+### 获取论文链接
+
+**GET** `/api/paper_links`
+
+**响应**:
+```json
+{
+    "success": true,
+    "papers": [
+        {
+            "title": "论文标题",
+            "url": "https://...",
+            "doi": "10.xxx/xxx"
+        }
+    ]
 }
 ```
 
@@ -314,8 +238,7 @@
 {
     "error": {
         "code": "INVALID_DOMAIN",
-        "message": "不支持的领域: xxx",
-        "details": {}
+        "message": "不支持的领域: xxx"
     }
 }
 ```
@@ -329,18 +252,5 @@
 | 200 | 成功 |
 | 201 | 创建成功 |
 | 400 | 请求参数错误 |
-| 401 | 未授权 |
-| 403 | 禁止访问 |
 | 404 | 资源不存在 |
 | 500 | 服务器内部错误 |
-
----
-
-## 请求限制
-
-| 角色 | 每日限制 | 每月限制 |
-|------|---------|---------|
-| 体验版 (free) | 100条 | 1000条 |
-| 基础版 (standard) | 1万条 | 10万条 |
-| 专业版 (premium) | 10万条 | 100万条 |
-| 管理员/开发者 (admin/developer) | 100万条 | 1000万条 |

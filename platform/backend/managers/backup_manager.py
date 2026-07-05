@@ -91,7 +91,7 @@ class BackupManager:
                 "created_at": datetime.now().isoformat(),
                 "type": backup_type,
                 "description": description,
-                "version": "2.1.0",
+                "version": "2.2.0",
             }
             zf.writestr('manifest.json', json.dumps(manifest, indent=2))
         

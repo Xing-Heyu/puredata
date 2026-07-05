@@ -42,15 +42,7 @@ DICT_APIS = {
         "url": "https://owlbot.info/api/v4/dictionary/{word}",
         "parse": "owlbot",
         "lang": "en",
-        "enabled": True,
-        "headers": {"Authorization": "Token "}  # 可选，无token也能用
-    },
-    "wordnik": {
-        "name": "Wordnik",
-        "url": "https://api.wordnik.com/v4/word.json/{word}/definitions?limit=1&includeRelated=false&useCanonical=false&includeTags=false&api_key=",
-        "parse": "wordnik",
-        "lang": "en",
-        "enabled": False  # 需要免费API Key
+        "enabled": True
     },
     # 中文词典
     "wiktionary_zh": {
@@ -69,12 +61,13 @@ DICT_APIS = {
     }
 }
 
-# 千问API配置
-QIANWEN_API = {
-    "url": "https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions",
+# ============ LLM API配置（可选，需自行配 Key）============
+
+LLM_CONFIG = {
     "model": "qwen-plus",
-    "env_key": "QIANWEN_API_KEY",
-    "enabled": True
+    "api_key_env": "LLM_API_KEY",
+    "base_url_env": "LLM_BASE_URL",
+    "base_url": "https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions"
 }
 
 # ============ 配置 ============
@@ -188,14 +181,12 @@ CONFIG = {
 class Stats:
     def __init__(self):
         self.sources = {}
-        self.api_calls = {"dict": 0, "qianwen": 0}
+        self.api_calls = {"dict": 0}
         self.start_time = time.time()
     
     def add(self, source):
         self.sources[source] = self.sources.get(source, 0) + 1
-        if source == 'qianwen_api':
-            self.api_calls["qianwen"] += 1
-        elif source not in ['cache', 'local_dict', 'generated']:
+        if source not in ['cache', 'local_dict', 'generated']:
             self.api_calls["dict"] += 1
     
     def report(self):
@@ -209,21 +200,6 @@ class Stats:
 stats = Stats()
 
 # ============ 数据库管理 ============
-
-def load_env():
-    env_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), '.env')
-    if os.path.exists(env_path):
-        with open(env_path, 'r', encoding='utf-8') as f:
-            for line in f:
-                line = line.strip()
-                if line and not line.startswith('#') and '=' in line:
-                    key, value = line.split('=', 1)
-                    key = key.strip()
-                    value = value.strip()
-                    if key and value and not os.environ.get(key):
-                        os.environ[key] = value
-
-load_env()
 
 def init_databases(db_path, dedup_path):
     conn = sqlite3.connect(db_path)
@@ -350,13 +326,14 @@ def call_owlbot_api(word):
         pass
     return None
 
-def call_qianwen_api(word, topic):
-    """千问API"""
-    api_key = os.environ.get(QIANWEN_API["env_key"], '')
+def call_llm_api(word, topic):
+    """LLM API（仅当用户配置了 API Key 时才生效）"""
+    api_key = os.environ.get(LLM_CONFIG["api_key_env"], '')
     if not api_key:
         return None
     
-    model = os.environ.get('QIANWEN_MODEL', QIANWEN_API["model"])
+    base_url = os.environ.get(LLM_CONFIG["base_url_env"], LLM_CONFIG["base_url"])
+    model = LLM_CONFIG["model"]
     
     try:
         prompt = f"请用一句话解释{topic}领域中'{word}'的含义，不超过50字。只输出解释内容。"
@@ -366,7 +343,7 @@ def call_qianwen_api(word, topic):
         }).encode('utf-8')
         
         req = urllib.request.Request(
-            QIANWEN_API["url"],
+            base_url,
             data=data,
             headers={
                 'Authorization': f'Bearer {api_key}',
@@ -382,7 +359,7 @@ def call_qianwen_api(word, topic):
                 "word": word,
                 "definition": definition,
                 "synonyms": [],
-                "source": "qianwen_api"
+                "source": "llm"
             }
     except:
         pass
@@ -420,12 +397,11 @@ def get_word_data(word, topic, db_path):
         set_cache(db_path, word, data, "wiktionary_zh")
         return data
     
-    # 5. 千问API
-    if QIANWEN_API["enabled"]:
-        data = call_qianwen_api(word, topic)
-        if data:
-            set_cache(db_path, word, data, "qianwen_api")
-            return data
+    # 5. LLM API（可选，需自行配 Key）
+    data = call_llm_api(word, topic)
+    if data:
+        set_cache(db_path, word, data, "llm")
+        return data
     
     # 兜底
     return {
@@ -575,7 +551,6 @@ def main():
         print(f'  {k}: {v}')
     print(f'\nAPI调用:')
     print(f'  词典API: {report["api_calls"]["dict"]} 次')
-    print(f'  千问API: {report["api_calls"]["qianwen"]} 次')
     print(f'  耗时: {report["elapsed_time"]}')
     print(f'\n输出: {output_path}')
     print(f'{"="*60}\n')

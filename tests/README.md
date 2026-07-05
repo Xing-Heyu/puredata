@@ -25,12 +25,9 @@
 | test_generate.py | 生成测试 |
 | test_hash.py | 哈希测试 |
 | test_keywords.py | 关键词测试 |
-| test_login.py | 登录测试 |
-| test_login_speed.py | 登录速度测试 |
 | test_quality.py | 质量测试 |
 | test_quick.py | 快速测试 |
 | test_quota.py | 配额测试 |
-| test_simple_login.py | 简单登录测试 |
 | test_system.py | 系统测试 |
 | verify_output.py | 输出验证 |
 
@@ -57,9 +54,6 @@
 ## 使用方法
 
 ```bash
-# 运行单个测试
-python tests/test_login.py
-
 # 运行快速测试
 python tests/test_quick.py
 ```
@@ -67,5 +61,5 @@ python tests/test_quick.py
 ## 注意事项
 
 - 这些文件是开发调试过程中创建的临时文件
-- 部分测试可能需要配置环境变量或API密钥
+- 部分测试可能需要配置环境变量
 - 临时数据文件仅供参考，不应用于生产环境

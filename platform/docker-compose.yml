@@ -16,9 +16,35 @@ services:
     environment:
       - PYTHONUNBUFFERED=1
       - TZ=Asia/Shanghai
+      # 必需环境变量
       - DASHSCOPE_API_KEY=${DASHSCOPE_API_KEY:-}
       - QWEN_API_KEY=${QWEN_API_KEY:-}
       - SECRET_KEY=${SECRET_KEY:?SECRET_KEY must be set in production}
+      - ADMIN_TOKEN=${ADMIN_TOKEN:?ADMIN_TOKEN must be set in production}
+      # 可选环境变量
+      - DATAGEN_SECRET_KEY=${DATAGEN_SECRET_KEY:-}
+      - SESSION_TIMEOUT=${SESSION_TIMEOUT:-3600}
+      - TOKEN_EXPIRE_HOURS=${TOKEN_EXPIRE_HOURS:-24}
+      - EMAIL_PROVIDER=${EMAIL_PROVIDER:-mock}
+      - SMS_PROVIDER=${SMS_PROVIDER:-mock}
+      - LOG_LEVEL=${LOG_LEVEL:-INFO}
+      - MAX_CONCURRENT_TASKS=${MAX_CONCURRENT_TASKS:-10}
+      - FREE_DAILY_QUOTA=${FREE_DAILY_QUOTA:-100}
+      - FREE_MONTHLY_QUOTA=${FREE_MONTHLY_QUOTA:-1000}
+      # 订阅配额配置
+      - STANDARD_DAILY_QUOTA=${STANDARD_DAILY_QUOTA:-10000}
+      - STANDARD_MONTHLY_QUOTA=${STANDARD_MONTHLY_QUOTA:-100000}
+      - PREMIUM_DAILY_QUOTA=${PREMIUM_DAILY_QUOTA:-100000}
+      - PREMIUM_MONTHLY_QUOTA=${PREMIUM_MONTHLY_QUOTA:-1000000}
+      # 多模态服务配置（可选）
+      - OPENAI_API_KEY=${OPENAI_API_KEY:-}
+      - AZURE_SPEECH_KEY=${AZURE_SPEECH_KEY:-}
+      - AZURE_SPEECH_REGION=${AZURE_SPEECH_REGION:-}
+      - ELEVENLABS_API_KEY=${ELEVENLABS_API_KEY:-}
+      # 监控告警配置
+      - ALERT_EMAILS=${ALERT_EMAILS:-}
+      - WEBHOOK_URL=${WEBHOOK_URL:-}
+      - WEBHOOK_TOKEN=${WEBHOOK_TOKEN:-}
     restart: unless-stopped
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
